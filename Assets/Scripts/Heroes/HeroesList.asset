@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 774db3a17b1e41a4f8e5dad2db620a20, type: 3}
+  m_Name: HeroesList
+  m_EditorClassIdentifier: 
+  heroes:
+  - name: Warrior
+    heroObj: {fileID: 7844657559637295967, guid: 47330c57ae6beb84daf0e45226726940, type: 3}
+    heroStats: {fileID: 11400000, guid: d705cd97d5ddd07409e012bd1e15496b, type: 2}
+  - name: Archer
+    heroObj: {fileID: 5906921059932401283, guid: abfaab04aa36367448ffe63643918f7c, type: 3}
+    heroStats: {fileID: 11400000, guid: cabae99bf2a81514b86e357458654659, type: 2}
+  - name: Wizard
+    heroObj: {fileID: 2082200968623842368, guid: 028da5768e3ed6e4699fa5c0acd80d2e, type: 3}
+    heroStats: {fileID: 11400000, guid: 058ea5683e5993046b6c07bf65899298, type: 2}
