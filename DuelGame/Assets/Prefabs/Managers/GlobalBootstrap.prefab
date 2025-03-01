@@ -1,0 +1,54 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &4242219749359485948
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1889859558795621437}
+  - component: {fileID: 4349970948220936211}
+  m_Layer: 0
+  m_Name: GlobalBootstrap
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1889859558795621437
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4242219749359485948}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.73003906, y: -2.2449582, z: -19.875872}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4349970948220936211
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4242219749359485948}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 06f43b12ec12469419c51269d30257e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _battleManager: {fileID: 4835823048362792523, guid: 5f20abc2649e1a541b784345a2da91ff, type: 3}
+  _gameStateUIManager: {fileID: 6312908173180973703, guid: 9678c922aa9d6814893047a2621f85db, type: 3}
+  _uIManager: {fileID: 4124523974320894084, guid: ff9724b7983507f4eb84576316c9b9c8, type: 3}
+  _dataManager: {fileID: 3699797813642681382, guid: 9c44eb11f60d6ee4fbd35d44a3b4594f, type: 3}
+  _corutineManager: {fileID: 7157599359055113296, guid: 791f30dea85177b40819038f084ac6bb, type: 3}
+  _buffsManager: {fileID: 3125290179814019367, guid: d464773ed54d2de4aae408eabf11d4f4, type: 3}
+  _heroes: {fileID: 11400000, guid: 1e6ef223c9d9df3438f7180a27ac0f6e, type: 2}
+  _buffs: {fileID: 11400000, guid: c5488a34a5ef23844a75141283b6c44f, type: 2}
