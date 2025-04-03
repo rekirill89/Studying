@@ -138,6 +138,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8650630691557828949}
+  - {fileID: 8469181966021108271}
   - {fileID: 6223042051960504611}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -204,7 +205,7 @@ CapsuleCollider2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_LayerOverridePriority: 0
+  m_LayerOverridePriority: 1
   m_ForceSendLayers:
     serializedVersion: 2
     m_Bits: 4294967295
@@ -354,6 +355,52 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &4840041798298699035
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8469181966021108271}
+  - component: {fileID: 8746036578522772225}
+  m_Layer: 0
+  m_Name: BuffObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8469181966021108271
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4840041798298699035}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 2923602720629034912}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8746036578522772225
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4840041798298699035}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50a4c6c5e238d18468a1ef8c2d9c093e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hero: {fileID: 7161436639040551281}
+  _chosenBuffEnum: 1
 --- !u!1 &4923490167297993817
 GameObject:
   m_ObjectHideFlags: 0
@@ -477,10 +524,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8c529d853fe59f44b8912d4b2931ffd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buffSprite: {fileID: 7245378120778937794}
-  hero: {fileID: 7161436639040551281}
-  damageTextPrefab: {fileID: 784887742528018441, guid: 80af0163d9438de4babdfe2fc5639466, type: 3}
-  damageTextPosition: {fileID: 4209336789553303854}
+  _buffSprite: {fileID: 7245378120778937794}
+  _hero: {fileID: 7161436639040551281}
+  _damageTextPrefab: {fileID: 784887742528018441, guid: 80af0163d9438de4babdfe2fc5639466, type: 3}
+  _damageTextPosition: {fileID: 4209336789553303854}
   healthBar: {fileID: 7553659005817879070}
 --- !u!1 &8030313673908744708
 GameObject:

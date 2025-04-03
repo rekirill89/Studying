@@ -91,6 +91,52 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &3788982106889203235
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7906625202863775106}
+  - component: {fileID: 3193003095196282983}
+  m_Layer: 0
+  m_Name: BuffObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7906625202863775106
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3788982106889203235}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 179013301321807122}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3193003095196282983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3788982106889203235}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 50a4c6c5e238d18468a1ef8c2d9c093e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hero: {fileID: 5987343880543959481}
+  _chosenBuffEnum: 2
 --- !u!1 &4142338164780225967
 GameObject:
   m_ObjectHideFlags: 0
@@ -385,10 +431,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97544288aa018f14cac97f376017b3a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buffSprite: {fileID: 6008214211721556806}
-  hero: {fileID: 5987343880543959481}
-  damageTextPrefab: {fileID: 784887742528018441, guid: 80af0163d9438de4babdfe2fc5639466, type: 3}
-  damageTextPosition: {fileID: 1965683097859340373}
+  _buffSprite: {fileID: 6008214211721556806}
+  _hero: {fileID: 5987343880543959481}
+  _damageTextPrefab: {fileID: 784887742528018441, guid: 80af0163d9438de4babdfe2fc5639466, type: 3}
+  _damageTextPosition: {fileID: 1965683097859340373}
   healthBar: {fileID: 39969889242051207}
 --- !u!1 &7844657559637295967
 GameObject:
@@ -424,6 +470,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7701965062432976702}
+  - {fileID: 7906625202863775106}
   - {fileID: 7912512364147047503}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -517,7 +564,7 @@ CapsuleCollider2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_LayerOverridePriority: 0
+  m_LayerOverridePriority: 1
   m_ForceSendLayers:
     serializedVersion: 2
     m_Bits: 4294967295

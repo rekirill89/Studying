@@ -8,6 +8,7 @@ namespace DuelGame
         private readonly Queue<T> _pool = new Queue<T>();
         private readonly T _prefab;
         private readonly Transform _parent;
+        
         public ObjectPool(T prefab, int initSize, Transform parent = null)
         {
             _prefab = prefab;
@@ -23,7 +24,6 @@ namespace DuelGame
 
         public T Get()
         {
-            //Debug.Log("Get " + _pool.Count);
             if(_pool.Count == 0)
             {
                 Debug.Log("If invoked");
@@ -38,7 +38,6 @@ namespace DuelGame
         
         public void ReturnToPool(T obj)
         {
-            //Debug.Log("Return " + _pool.Count);
             obj.transform.SetParent(_parent);    
             obj.gameObject.SetActive(false);            
             _pool.Enqueue(obj);

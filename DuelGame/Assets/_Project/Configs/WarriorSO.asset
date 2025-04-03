@@ -15,5 +15,5 @@ MonoBehaviour:
   heroName: Warrior
   health: 120
   damage: 20
-  armor: 2
-  attackRate: 4
+  armor: 4
+  attackRate: 3

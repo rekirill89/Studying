@@ -4,8 +4,11 @@ namespace DuelGame
 {
     public class BattleManagerFacade : MonoBehaviour
     {
-        [SerializeField] public Transform firstPlayerTrans;
-        [SerializeField] public Transform secondPlayerTrans;    
+        public HeroEnum firstHero;
+        public HeroEnum secondHero;
+        
+        public Transform firstPlayerTrans;
+        public Transform secondPlayerTrans;    
     }
 }
 

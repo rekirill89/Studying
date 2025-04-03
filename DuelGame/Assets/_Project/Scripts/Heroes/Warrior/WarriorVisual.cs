@@ -12,13 +12,8 @@ namespace DuelGame
         {
             base.Awake();
 
-            _warrior = hero as Warrior;
+            _warrior = _hero as Warrior;
         }
-        private void Start()
-        {
-            SubscribeToEvents();
-        }
-        
         
         public void TurnOnCollAnim()
         {

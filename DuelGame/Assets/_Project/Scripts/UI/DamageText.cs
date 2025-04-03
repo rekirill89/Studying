@@ -4,6 +4,7 @@ using UnityEngine;
 
 namespace DuelGame
 {
+    [RequireComponent(typeof(TextMeshProUGUI))]
     public class DamageText : MonoBehaviour
     {
         public delegate void ReturnToPool(DamageText selfDamageText);

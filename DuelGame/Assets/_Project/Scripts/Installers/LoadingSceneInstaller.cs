@@ -7,7 +7,7 @@ namespace  DuelGame
     {
         public override void InstallBindings()
         {
-            Container.Bind<IInitializable>().To<NextSceneLoader>().AsCached().NonLazy();
+            Container.BindInterfacesTo<NextSceneLoader>().AsCached();
         }
     }   
 }

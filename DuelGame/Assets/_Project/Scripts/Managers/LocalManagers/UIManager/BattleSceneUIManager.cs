@@ -10,6 +10,7 @@ namespace DuelGame
     {
         public event Action OnGameStartButtonPressed;
         public event Action OnGameContinueButtonPressed;
+        public event Action OnGameRestartButtonPressed;
 
         // Start
         private GameObject _startPanel;
@@ -23,68 +24,51 @@ namespace DuelGame
         // Reload
         private Button _reloadSceneButton;
 
-
-        public BattleSceneUIManager(BattleSceneUIManagerFacade facade)
+        public BattleSceneUIManager(
+            StartPanelFacade startPanelFacade, 
+            RestartPanelFacade restartPanelFacade,
+            ContinuePanelFacade continuePanelFacade,
+            ReloadButtonFacade reloadButtonFacade)
         {
-            InitializeStateUIElements(facade);
-        }
-
-        public void BattleFinished(Players playerWhoLost)
-        {
-            Action t = playerWhoLost == Players.Player1 ? () => GameFinishPanel() : () => GameContinuePanel();
-            t.Invoke();
-        }
-        public void GameStartPanel()
-        {
-            Debug.Log("Game initialized");
-            _startPanel.SetActive(true);
+            InitializeStateUIElements(startPanelFacade, restartPanelFacade, continuePanelFacade, reloadButtonFacade);
         }
         
-        
-        private void GameContinuePanel()
+        public void SetVisibleStartPanel(bool isVisible)
         {
-            _continuePanel.SetActive(true);
-        }   
-        
-        private void GameFinishPanel()
-        {
-            _restartPanel.SetActive(true);
+            _startPanel.SetActive(isVisible);
         }
 
-        private void StartGame()
+        public void SetVisibleContinuePanel(bool isVisible)
         {
-            OnGameStartButtonPressed?.Invoke();
-            _startPanel.SetActive(false);
-        }   
-        
-        private void ContinueGame()
-        {
-            _continuePanel.SetActive(false);
-            OnGameContinueButtonPressed?.Invoke();
-        }
-        
-        private void RestartGame()
-        {
-            SceneManager.LoadScene("BattleScene");
+            _continuePanel.SetActive(isVisible);
         }
 
-        private void InitializeStateUIElements(BattleSceneUIManagerFacade facade)
+        public void SetVisibleRestartPanel(bool isVisible)
         {
-            _startPanel = facade.startPanel;
-            _startButton = facade.startButton;
+            _restartPanel.SetActive(isVisible);
+        }
 
-            _restartPanel = facade.restartPanel;
-            _restartButton = facade.restartButton;
+        private void InitializeStateUIElements(
+            StartPanelFacade startPanelFacade, 
+            RestartPanelFacade restartPanelFacade,
+            ContinuePanelFacade continuePanelFacade,
+            ReloadButtonFacade reloadButtonFacade)
+        {
+            _startPanel = startPanelFacade.startPanel;
+            _startButton = startPanelFacade.startButton;
 
-            _continuePanel = facade.continuePanel;
-            _continueButton = facade.continueButton;
+            _restartPanel = restartPanelFacade.restartPanel;
+            _restartButton = restartPanelFacade.restartButton;
 
-            _reloadSceneButton = facade.reloadSceneButton;
+            _continuePanel = continuePanelFacade.continuePanel;
+            _continueButton = continuePanelFacade.continueButton;
 
-            _startButton.onClick.AddListener(StartGame);
-            _restartButton.onClick.AddListener(RestartGame);
-            _continueButton.onClick.AddListener(ContinueGame);
-            _reloadSceneButton.onClick.AddListener(RestartGame);
+            _reloadSceneButton = reloadButtonFacade.reloadSceneButton;
+
+            _startButton.onClick.AddListener(() => OnGameStartButtonPressed?.Invoke());
+            _restartButton.onClick.AddListener(() => OnGameRestartButtonPressed?.Invoke());
+            _continueButton.onClick.AddListener(() => OnGameContinueButtonPressed?.Invoke());
+            _reloadSceneButton.onClick.AddListener(() => OnGameRestartButtonPressed?.Invoke());
         }
     }       
 }

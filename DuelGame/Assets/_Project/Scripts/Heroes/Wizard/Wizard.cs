@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 namespace DuelGame
 {
+    [RequireComponent(typeof(BoxCollider2D))]
+    [RequireComponent(typeof(CapsuleCollider2D))]
     public class Wizard : BaseHero
     {
         public event Action OnAttackEnded;
@@ -15,6 +17,7 @@ namespace DuelGame
         private WaitForSeconds _attackIntervalTimer;
 
         private CapsuleCollider2D _attackCollider;
+        
         private void Awake()
         {
             _attackCollider = GetComponent<CapsuleCollider2D>();
@@ -22,17 +25,6 @@ namespace DuelGame
 
             _attackIntervalTimer = new WaitForSeconds(_attackInterval);
         }
-        private void Start()
-        {
-            StartHandler();
-        }
-        private void Update()
-        {
-            if (!_isAttackable) 
-                return;
-            Attack();
-        }
-        
         
         public void TurnOnColl()
         {
@@ -45,10 +37,12 @@ namespace DuelGame
             _attackCollider.enabled = false;
         }     
         
-        
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (_attackCollider.enabled && collision.TryGetComponent<BaseHero>(out BaseHero hero) && collision.gameObject != gameObject)
+            if (_attackCollider.enabled && 
+                collision.TryGetComponent<BaseHero>(out BaseHero hero) && 
+                collision.gameObject != gameObject && 
+                collision.layerOverridePriority == PLAYER_LAYER)
             {
                 Debug.Log("Entered");
                 StartCoroutine(PeriodicalDamage(hero));
@@ -68,6 +62,7 @@ namespace DuelGame
             }
 
             hero.TakeHit(this.hero.damage, BuffEnum.DecreaseDamage);
+            InvokeApplyBuffToEnemy(hero);
             TurnOffColl();
             _isAttackable = true;
             OnAttackEnded?.Invoke();

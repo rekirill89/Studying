@@ -411,6 +411,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 120506983}
   m_CullTransparentMesh: 1
+--- !u!1 &273240684
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 273240685}
+  - component: {fileID: 273240686}
+  m_Layer: 0
+  m_Name: StartPanelFacade
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &273240685
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273240684}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1062192203}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &273240686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 273240684}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ad2fb6acc37b344dafee48400c3c535, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  startPanel: {fileID: 1650147704}
+  startButton: {fileID: 1537309968}
 --- !u!1 &276011709
 GameObject:
   m_ObjectHideFlags: 0
@@ -1224,6 +1270,51 @@ Transform:
   - {fileID: 513751246}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &665580534
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 665580535}
+  - component: {fileID: 665580536}
+  m_Layer: 0
+  m_Name: ReloadButtonFacade
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &665580535
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 665580534}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1062192203}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &665580536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 665580534}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd5f0fbc76d47174e8387b1580ecc637, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  reloadSceneButton: {fileID: 481557461}
 --- !u!1 &734122376
 GameObject:
   m_ObjectHideFlags: 0
@@ -1406,6 +1497,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6a221023338a8948873166da0beb6de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  firstHero: 1
+  secondHero: 3
   firstPlayerTrans: {fileID: 1447077191}
   secondPlayerTrans: {fileID: 513751246}
 --- !u!1 &829815218
@@ -1520,6 +1613,52 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 900768942}
   m_CullTransparentMesh: 1
+--- !u!1 &924474578
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 924474579}
+  - component: {fileID: 924474580}
+  m_Layer: 0
+  m_Name: RestartPanelFacade
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &924474579
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 924474578}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 8.290186, y: -0.12080622, z: 0.0023841858}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1062192203}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &924474580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 924474578}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bed797d4657a30243b5d2ac9d5cbfea7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  restartPanel: {fileID: 569522855}
+  restartButton: {fileID: 120506985}
 --- !u!1 &1040976104
 GameObject:
   m_ObjectHideFlags: 0
@@ -1613,9 +1752,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1062192203}
-  - component: {fileID: 1062192204}
   m_Layer: 0
-  m_Name: UIFacade
+  m_Name: UIFacades
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1633,28 +1771,13 @@ Transform:
   m_LocalPosition: {x: -8.290186, y: 0.12080622, z: -0.0023841858}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 273240685}
+  - {fileID: 924474579}
+  - {fileID: 1865122032}
+  - {fileID: 665580535}
   m_Father: {fileID: 49313887}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1062192204
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1062192202}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f77b64156b1c06b4ea6eeca44bff328a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  startPanel: {fileID: 1650147704}
-  startButton: {fileID: 1537309968}
-  restartPanel: {fileID: 569522855}
-  restartButton: {fileID: 120506985}
-  continuePanel: {fileID: 900768942}
-  continueButton: {fileID: 1567580865}
-  reloadSceneButton: {fileID: 481557461}
 --- !u!1 &1078082593
 GameObject:
   m_ObjectHideFlags: 0
@@ -2059,8 +2182,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df3dfb6da4638f1429a55e3ec095e110, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  battleFacade: {fileID: 796281392}
-  uiFacade: {fileID: 1062192204}
+  _battleFacade: {fileID: 796281392}
+  _startPanelFacade: {fileID: 273240686}
+  _restartPanelFacade: {fileID: 924474580}
+  _continuePanelFacade: {fileID: 1865122033}
+  _reloadButtonFacade: {fileID: 665580536}
 --- !u!114 &1489952811
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2581,6 +2707,52 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1865122031
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1865122032}
+  - component: {fileID: 1865122033}
+  m_Layer: 0
+  m_Name: ContinuePanelFacade
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1865122032
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1865122031}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1062192203}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1865122033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1865122031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8c22f2eacfd5f74ca2113367645629e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  continuePanel: {fileID: 900768942}
+  continueButton: {fileID: 1567580865}
 --- !u!1 &1877547280
 GameObject:
   m_ObjectHideFlags: 0
@@ -3039,12 +3211,12 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1489952812}
-  - {fileID: 1595413089}
   - {fileID: 1281562648}
   - {fileID: 1040976106}
   - {fileID: 526791241}
-  - {fileID: 647108562}
   - {fileID: 49313887}
+  - {fileID: 1595413089}
+  - {fileID: 647108562}
   - {fileID: 1994212374}
   - {fileID: 609189228}
   - {fileID: 2082514013}

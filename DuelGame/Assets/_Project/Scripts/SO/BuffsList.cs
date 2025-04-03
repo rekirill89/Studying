@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace DuelGame
 {
@@ -16,8 +17,7 @@ namespace DuelGame
         [field: SerializeField] public string name { get; set; }
         [field: SerializeField] public GameObject entityObj { get; set; }
         public SpriteRenderer sp;
-        //public Buff buffScript;
-        public BuffEnum buff;
+        public BuffEnum buffEnum;
      }
 
     public enum BuffEnum

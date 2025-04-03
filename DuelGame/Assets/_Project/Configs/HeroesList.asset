@@ -17,11 +17,14 @@ MonoBehaviour:
     <entityObj>k__BackingField: {fileID: 7844657559637295967, guid: 47330c57ae6beb84daf0e45226726940, type: 3}
     heroStats: {fileID: 11400000, guid: d705cd97d5ddd07409e012bd1e15496b, type: 2}
     heroScript: {fileID: 5987343880543959481, guid: 47330c57ae6beb84daf0e45226726940, type: 3}
+    heroEnum: 1
   - <name>k__BackingField: Archer
     <entityObj>k__BackingField: {fileID: 5906921059932401283, guid: abfaab04aa36367448ffe63643918f7c, type: 3}
     heroStats: {fileID: 11400000, guid: cabae99bf2a81514b86e357458654659, type: 2}
     heroScript: {fileID: 6849903626034991598, guid: abfaab04aa36367448ffe63643918f7c, type: 3}
+    heroEnum: 0
   - <name>k__BackingField: Wizard
     <entityObj>k__BackingField: {fileID: 2082200968623842368, guid: 028da5768e3ed6e4699fa5c0acd80d2e, type: 3}
     heroStats: {fileID: 11400000, guid: 058ea5683e5993046b6c07bf65899298, type: 2}
     heroScript: {fileID: 7161436639040551281, guid: 028da5768e3ed6e4699fa5c0acd80d2e, type: 3}
+    heroEnum: 2

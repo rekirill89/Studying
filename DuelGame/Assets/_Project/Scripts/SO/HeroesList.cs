@@ -13,11 +13,10 @@ namespace DuelGame
         {
             return Instantiate(listOfEntities.First(x => x.name == name).heroStats);
         }
-        
-        public GameObject GetRandomHero()
+
+        public EntryHero GetHeroEntityByEnum(HeroEnum heroEnum)
         {
-            int roll = Random.Range(0, listOfEntities.Count);
-            return listOfEntities[roll].entityObj;
+            return listOfEntities.First(x => x.heroEnum == heroEnum);
         }
     }    
     [System.Serializable]
@@ -28,6 +27,7 @@ namespace DuelGame
         
         public HeroStats heroStats;
         public BaseHero heroScript;
+        public HeroEnum heroEnum;
     }
 
 }

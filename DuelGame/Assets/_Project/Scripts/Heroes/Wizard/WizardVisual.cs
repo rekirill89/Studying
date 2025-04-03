@@ -15,32 +15,44 @@ namespace DuelGame
         {
             base.Awake();
 
-            _wizard = hero as Wizard;
+            _wizard = _hero as Wizard;
         }
+              
+        private void Update()
+        {
+            AttackAnim();
+        }
+  
+        /*
+        private void Start()
+        {
+            SubscribeToEvents();
+        }*/
         
         protected override void SubscribeToEvents()
         {
             _wizard.OnAttack += WizzardAttackStarted;
             _wizard.OnAttackEnded += WizzardAttackEnded;
 
-            hero.OnTakeDamage += ShowDamageText;
-            hero.OnTakeHit += HeroTakeHit;
-            hero.OnDeath += HeroDeath;
-            hero.OnHealthChanged += ChangeHealthBar;
+            _hero.OnTakeDamage += ShowDamageText;
+            _hero.OnTakeHit += HeroTakeHit;
+            _hero.OnDeath += HeroDeath;
+            _hero.OnHealthChanged += ChangeHealthBar;
 
-
-            hero.OnBuffAplied += HeroBuffAplied;
+            _hero.OnBuffApplied += HeroBuffApplied;
         }
-
         
-        private void Update()
+        protected override void UnsubscribeFromEvents()
         {
-            AttackAnim();
-        }
+            _wizard.OnAttack -= WizzardAttackStarted;
+            _wizard.OnAttackEnded -= WizzardAttackEnded;
 
-        private void Start()
-        {
-            SubscribeToEvents();
+            _hero.OnTakeDamage -= ShowDamageText;
+            _hero.OnTakeHit -= HeroTakeHit;
+            _hero.OnDeath -= HeroDeath;
+            _hero.OnHealthChanged -= ChangeHealthBar;
+
+            _hero.OnBuffApplied -= HeroBuffApplied;
         }
 
         private void WizzardAttackStarted()
@@ -48,6 +60,7 @@ namespace DuelGame
             _attacking = true;
             _wizard.TurnOnColl();
         }
+        
         private void WizzardAttackEnded()
         {
             _attacking = false;

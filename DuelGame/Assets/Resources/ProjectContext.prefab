@@ -74,6 +74,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a03fd7a0ac0955544a3512a59e2c15c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buffs: {fileID: 11400000, guid: c5488a34a5ef23844a75141283b6c44f, type: 2}
-  heroes: {fileID: 11400000, guid: 1e6ef223c9d9df3438f7180a27ac0f6e, type: 2}
-  corutineManager: {fileID: 7157599359055113296, guid: 791f30dea85177b40819038f084ac6bb, type: 3}
+  _buffs: {fileID: 11400000, guid: c5488a34a5ef23844a75141283b6c44f, type: 2}
+  _heroes: {fileID: 11400000, guid: 1e6ef223c9d9df3438f7180a27ac0f6e, type: 2}

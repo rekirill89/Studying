@@ -16,12 +16,12 @@ MonoBehaviour:
   - <name>k__BackingField: Poison
     <entityObj>k__BackingField: {fileID: 4673309774099930632, guid: 2cd4abc16e4bb0642a253b41ae4ecac8, type: 3}
     sp: {fileID: 8066890019116493907, guid: 2cd4abc16e4bb0642a253b41ae4ecac8, type: 3}
-    buff: 0
+    buffEnum: 0
   - <name>k__BackingField: Stun
     <entityObj>k__BackingField: {fileID: 8835305586828914791, guid: 22fd02e04d8a427428444725c721cd60, type: 3}
     sp: {fileID: 9309584704241263, guid: 22fd02e04d8a427428444725c721cd60, type: 3}
-    buff: 2
+    buffEnum: 2
   - <name>k__BackingField: Decrease damage
     <entityObj>k__BackingField: {fileID: 2181520432081338729, guid: 108a2f04d3e026e4380afb4b4bb60da1, type: 3}
     sp: {fileID: 5122082211512280928, guid: 108a2f04d3e026e4380afb4b4bb60da1, type: 3}
-    buff: 1
+    buffEnum: 1

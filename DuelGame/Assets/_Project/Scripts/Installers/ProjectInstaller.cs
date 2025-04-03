@@ -6,23 +6,20 @@ namespace DuelGame
 {
     public class ProjectInstaller : MonoInstaller
     {
-        [SerializeField] private BuffsList buffs;
-        [SerializeField] private HeroesList heroes;
-        //[SerializeField] private CorutineManager corutineManager;
+        [SerializeField] private BuffsList _buffs;
+        [SerializeField] private HeroesList _heroes;
 
         public override void InstallBindings()
         {
             Debug.Log("Project installer created");
 
-            var buffsList = Instantiate(this.buffs);
-            var heroesList = Instantiate(this.heroes);
-            //var corutineManager = Instantiate(this.corutineManager);
+            var buffsList = Instantiate(this._buffs);
+            var heroesList = Instantiate(this._heroes);
 
             Container.Bind<BuffsList>().FromInstance(buffsList).AsSingle();
             Container.Bind<HeroesList>().FromInstance(heroesList).AsSingle();
 
             Container.Bind<EntityFactory>().AsSingle();
-            //Container.Bind<CorutineManager>().FromInstance(corutineManager).AsSingle();
         }
     }
 }
