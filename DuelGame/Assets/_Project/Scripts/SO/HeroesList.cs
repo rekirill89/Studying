@@ -1,33 +1,34 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace DuelGame
 {
     [CreateAssetMenu(fileName = "HeroesList", menuName = "Scriptable Objects/HeroesList")]
     public class HeroesList : EntityListScriptable<EntryHero>
     {
-        [field:SerializeField] public override List<EntryHero> listOfEntities { get; set; } = new List<EntryHero>();
+        [field:SerializeField] public override List<EntryHero> ListOfEntities { get; set; } = new List<EntryHero>();
 
         public HeroStats GetHeroStatsByName(string name)
         {
-            return Instantiate(listOfEntities.First(x => x.name == name).heroStats);
+            return Instantiate(ListOfEntities.First(x => x.Name == name).HeroStats);
         }
 
         public EntryHero GetHeroEntityByEnum(HeroEnum heroEnum)
         {
-            return listOfEntities.First(x => x.heroEnum == heroEnum);
+            return ListOfEntities.First(x => x.HeroEnum == heroEnum);
         }
     }    
     [System.Serializable]
     public class EntryHero : INamedObject
     {
-        [field: SerializeField] public string name { get; set; }
-        [field: SerializeField] public GameObject entityObj { get; set; }
+        [field: SerializeField] public string Name { get; set; }
+        [field: SerializeField] public GameObject EntityObj { get; set; }
         
-        public HeroStats heroStats;
-        public BaseHero heroScript;
-        public HeroEnum heroEnum;
+        public HeroStats HeroStats;
+        public BaseHero HeroScript;
+        public HeroEnum HeroEnum;
     }
 
 }

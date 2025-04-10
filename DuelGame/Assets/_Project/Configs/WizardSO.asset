@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f71685515cbf9db4b8758acb702cb799, type: 3}
   m_Name: WizardSO
   m_EditorClassIdentifier: 
-  heroName: Wizard
-  health: 105
-  damage: 5
-  armor: 1
-  attackRate: 7
+  HeroName: Wizard
+  Health: 105
+  Damage: 5
+  Armor: 1
+  AttackRate: 6

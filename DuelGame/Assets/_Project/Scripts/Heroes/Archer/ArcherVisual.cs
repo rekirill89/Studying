@@ -13,7 +13,7 @@ namespace DuelGame
         {
             base.Awake();
 
-            _archer = _hero as Archer;
+            _archer = Hero as Archer;
         }   
         
         public void SpawnArrowInAnim()

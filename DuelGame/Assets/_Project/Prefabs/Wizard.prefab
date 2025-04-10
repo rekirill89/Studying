@@ -114,7 +114,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2923602720629034912}
   - component: {fileID: 5265020864572709638}
-  - component: {fileID: 8794937584944905396}
   - component: {fileID: 6612354056205882462}
   - component: {fileID: 7161436639040551281}
   m_Layer: 0
@@ -188,43 +187,6 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.32736367, y: 0.47027305}
   m_EdgeRadius: 0
---- !u!70 &8794937584944905396
-CapsuleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2082200968623842368}
-  m_Enabled: 0
-  serializedVersion: 3
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 1
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_CompositeOperation: 0
-  m_CompositeOrder: 0
-  m_Offset: {x: 1.3222972, y: -0.051125575}
-  m_Size: {x: 2.1358662, y: 0.07523258}
-  m_Direction: 1
 --- !u!50 &6612354056205882462
 Rigidbody2D:
   serializedVersion: 5
@@ -524,11 +486,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8c529d853fe59f44b8912d4b2931ffd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _buffSprite: {fileID: 7245378120778937794}
-  _hero: {fileID: 7161436639040551281}
-  _damageTextPrefab: {fileID: 784887742528018441, guid: 80af0163d9438de4babdfe2fc5639466, type: 3}
-  _damageTextPosition: {fileID: 4209336789553303854}
-  healthBar: {fileID: 7553659005817879070}
+  BuffSprite: {fileID: 7245378120778937794}
+  Hero: {fileID: 7161436639040551281}
+  DamageTextPrefab: {fileID: 784887742528018441, guid: 80af0163d9438de4babdfe2fc5639466, type: 3}
+  DamageTextPosition: {fileID: 4209336789553303854}
+  HealthBar: {fileID: 7553659005817879070}
 --- !u!1 &8030313673908744708
 GameObject:
   m_ObjectHideFlags: 0

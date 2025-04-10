@@ -11,48 +11,55 @@ namespace DuelGame
     [RequireComponent(typeof(Animator))]
     public abstract class BaseHeroVisual : MonoBehaviour
     {
-        [SerializeField] protected SpriteRenderer _buffSprite;
-        [SerializeField] protected BaseHero _hero;
+        [SerializeField] protected SpriteRenderer BuffSprite;
+        [SerializeField] protected BaseHero Hero;
 
-        [SerializeField] protected DamageText _damageTextPrefab;
-        [SerializeField] protected Transform _damageTextPosition;
+        [SerializeField] protected DamageText DamageTextPrefab;
+        [SerializeField] protected Transform DamageTextPosition;
 
-        public Image healthBar;
+        public Image HealthBar;
 
-        protected Animator _animator;
+        protected Animator Animator;
+        protected const string ATTACK = "Attack";
         
         private CancellationTokenSource _cts;
-
         private ObjectPool<DamageText> _damageTextPool;
-        private int _initSizeOfPool = 8;
-        private float _currenBuffDuration = 0;
 
-        protected const string ATTACK = "Attack";
+        private readonly int _initSizeOfPool = 8;
+        private float _currenBuffDuration = 0;
+        
         private const string HIT = "Hit";
         private const string DEATH = "Death";
-
-
+        
         protected virtual void Awake()
         {
-            _animator = GetComponent<Animator>();
-            _damageTextPool = new ObjectPool<DamageText>(_damageTextPrefab, _initSizeOfPool);
-            _cts = new CancellationTokenSource();
+            Animator = GetComponent<Animator>();
+            _damageTextPool = new ObjectPool<DamageText>(DamageTextPrefab, _initSizeOfPool);
         }
 
         private void Start()
         {
-            healthBar.fillAmount = 1f;
+            _cts = new CancellationTokenSource();
+            HealthBar.fillAmount = 1f;
             SubscribeToEvents();
+        }
+        
+        private void OnDestroy()
+        {
+            UnsubscribeFromEvents();
+            _cts.Cancel();
+            /*_cts?.Dispose();
+            _cts = null;*/
         }
         
         protected void HeroDeath(Players _)
         { 
-            _animator.SetTrigger(DEATH);
+            Animator.SetTrigger(DEATH);
         }
         
         protected void HeroTakeHit(Players __)
         {
-            _animator.SetTrigger(HIT);
+            Animator.SetTrigger(HIT);
         }
         
         protected void ShowDamageText(float damage)
@@ -62,75 +69,81 @@ namespace DuelGame
             var x = _damageTextPool.Get();
             x.Initialize(damage, _damageTextPool.ReturnToPool);
 
-            x.transform.SetParent(_damageTextPosition);
+            x.transform.SetParent(DamageTextPosition);
             x.transform.localPosition = new Vector2(0, 0);
         }
 
         protected virtual void SubscribeToEvents()
         {
-            _hero.OnTakeHit += HeroTakeHit;
-            _hero.OnTakeDamage += ShowDamageText;
-            _hero.OnHealthChanged += ChangeHealthBar;
+            Hero.OnTakeHit += HeroTakeHit;
+            Hero.OnTakeDamage += ShowDamageText;
+            Hero.OnHealthChanged += ChangeHealthBar;
+            Hero.OnPlayerStop += StopAllTasks;
 
-            _hero.OnDeath += HeroDeath;
-            _hero.OnBuffApplied += HeroBuffApplied;
+            Hero.OnDeath += HeroDeath;
+            Hero.OnBuffApplied += HeroBuffApplied;
 
-            _hero.OnAttack += HeroAttack;
+            Hero.OnAttack += HeroAttack;
         }
 
         protected virtual void UnsubscribeFromEvents()
         {
-            _hero.OnTakeHit -= HeroTakeHit;
-            _hero.OnTakeDamage -= ShowDamageText;
-            _hero.OnHealthChanged -= ChangeHealthBar;
+            Hero.OnTakeHit -= HeroTakeHit;
+            Hero.OnTakeDamage -= ShowDamageText;
+            Hero.OnHealthChanged -= ChangeHealthBar;
+            Hero.OnPlayerStop -= StopAllTasks;
             
-            _hero.OnDeath -= HeroDeath;
-            _hero.OnBuffApplied -= HeroBuffApplied;
+            Hero.OnDeath -= HeroDeath;
+            Hero.OnBuffApplied -= HeroBuffApplied;
             
-            _hero.OnAttack -= HeroAttack;
+            Hero.OnAttack -= HeroAttack;
+        }
 
+        protected void StopAllTasks()
+        {
+            _cts.Cancel();
         }
         
         protected void ChangeHealthBar(float currentHealth, float maxHealth)
         {
-            healthBar.fillAmount = currentHealth / maxHealth;
+            HealthBar.fillAmount = currentHealth / maxHealth;
         }
             
         protected void HeroBuffApplied(Sprite buffSprite, float duration)
         {
-            var task = SpawnBuffSprite(buffSprite, duration);
+            SpawnBuffSprite(buffSprite, duration).Forget();
         }
         
         private async UniTask SpawnBuffSprite(Sprite sp, float duration)
         {
-            if (_buffSprite.enabled && _buffSprite.sprite == sp && !_cts.IsCancellationRequested)
+            try
             {
-                _currenBuffDuration += duration;
-                return;
+                _currenBuffDuration = duration;
+                BuffSprite.enabled = true;
+                BuffSprite.sprite = sp;
+
+                float step = 0.1f;
+                while (_currenBuffDuration > 0 && !_cts.Token.IsCancellationRequested)
+                {
+                    _currenBuffDuration -= step;
+                    await UniTask.Delay(TimeSpan.FromSeconds(step), cancellationToken: _cts.Token);
+                }
+                BuffSprite.enabled = false;
             }
-            
-            _currenBuffDuration = duration;
-            _buffSprite.enabled = true;
-            _buffSprite.sprite = sp;
-            
-            float step = 0.1f;
-            while (_currenBuffDuration > 0 && !_cts.Token.IsCancellationRequested)
+            catch (OperationCanceledException)
             {
-                _currenBuffDuration -= step;
-                await UniTask.Delay(TimeSpan.FromSeconds(step), cancellationToken: _cts.Token);
+                BuffSprite.enabled = false;
             }
-            _buffSprite.enabled = false;
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
         
         private void HeroAttack()
         {
-            _animator.SetTrigger(ATTACK);
-        }
-
-        private void OnDestroy()
-        {
-            UnsubscribeFromEvents();
-            _cts.Cancel();
+            Animator.SetTrigger(ATTACK);
         }
     }
 }

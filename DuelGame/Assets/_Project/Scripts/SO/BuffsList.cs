@@ -8,16 +8,16 @@ namespace DuelGame
     [CreateAssetMenu(fileName = "BuffsList", menuName = "Scriptable Objects/BuffsList")]
     public class BuffsList : EntityListScriptable<EntryBuff>
     {
-        [field:SerializeField] public override List<EntryBuff> listOfEntities { get; set; } = new List<EntryBuff>();
+        [field:SerializeField] public override List<EntryBuff> ListOfEntities { get; set; } = new List<EntryBuff>();
     }        
 
     [System.Serializable]
      public class EntryBuff : INamedObject
      {
-        [field: SerializeField] public string name { get; set; }
-        [field: SerializeField] public GameObject entityObj { get; set; }
-        public SpriteRenderer sp;
-        public BuffEnum buffEnum;
+        [field: SerializeField] public string Name { get; set; }
+        [field: SerializeField] public GameObject EntityObj { get; set; }
+        public SpriteRenderer Sp;
+        public BuffEnum BuffEnum;
      }
 
     public enum BuffEnum

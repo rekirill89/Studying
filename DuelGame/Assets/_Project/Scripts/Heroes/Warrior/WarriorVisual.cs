@@ -12,17 +12,12 @@ namespace DuelGame
         {
             base.Awake();
 
-            _warrior = _hero as Warrior;
+            _warrior = Hero as Warrior;
         }
-        
-        public void TurnOnCollAnim()
+
+        public void DamageEnemy()
         {
-            _warrior.TurnOnColl();
-        }
-        
-        public void TurnOffCollAnim()
-        {
-            _warrior.TurnOffColl();
+            _warrior.DamageEnemy();
         }
     }
 }

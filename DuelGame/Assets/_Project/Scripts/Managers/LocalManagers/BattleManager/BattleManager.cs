@@ -17,96 +17,64 @@ namespace DuelGame
 
         private readonly BattleStateModel _battleStateModel;
         
-        private readonly HeroEnum _firstHero;
-        private readonly HeroEnum _secondHero;
+        private readonly float _attackDelayP1;
+        private readonly float _attackDelayP2;
         
-        private readonly Transform _firstPlayerTrans;
-        private readonly Transform _secondPlayerTrans;
-
-        private readonly EntityFactory _entityFactory;
+        private readonly HeroesService _heroesService;
+        private BattleHeroesController _battleHeroesController;
         
-        public BattleManager(EntityFactory entityFactory, BattleStateModel battleStateModel, BattleManagerFacade facade)
+        public BattleManager(BattleStateModel battleStateModel, HeroesService heroesService, BattleSettingsFacade facade)
         {
-            _entityFactory = entityFactory;
+            _heroesService = heroesService;
 
-            _firstHero = facade.firstHero;
-            _secondHero = facade.secondHero;
-            
-            _firstPlayerTrans = facade.firstPlayerTrans;
-            _secondPlayerTrans = facade.secondPlayerTrans;
+            _attackDelayP1 = facade.BattleConfig.AttackDelayP1;
+            _attackDelayP2 = facade.BattleConfig.AttackDelayP2;
             
             _battleStateModel = battleStateModel;
 
             Debug.Log("Battle Manager created");
         }
+               
+        public void Dispose()
+        {
+            _battleHeroesController?.StopAllTasks();
+            _heroesService?.DestroyHeroes();
+        }
         
         public void RunBattle()
         {
-            if (_battleStateModel.currentBattleState == BattleState.NotStarted)
-                _battleStateModel.SetState(BattleState.Started);;
+            if (_battleStateModel.CurrentBattleState == BattleState.NotStarted)
+                _battleStateModel.SetState(BattleState.Started);
 
-            float player1Timer = 2f;
-            float player2Timer = 3f;
+            var (player1, player2) = _heroesService.SpawnHeroes(FinishBattle);
             
-            _battleStateModel.player1 = PlayerInitializeHandler(_firstPlayerTrans, Players.Player1, player1Timer, _firstHero);
-            _battleStateModel.player2 = PlayerInitializeHandler(_secondPlayerTrans, Players.Player2, player2Timer, _secondHero);
+            _battleHeroesController?.StopAllTasks();
+            _battleHeroesController = new BattleHeroesController(player1, Players.Player1, player2, Players.Player2);
+            
+            _battleHeroesController.DelayPlayersAttack(_attackDelayP1, _attackDelayP2);
+            
+            player1.SetEnemy(player2);
+            player2.SetEnemy(player1);
 
-            OnPlayersSpawned?.Invoke(_battleStateModel.currentBattleState);
+            OnPlayersSpawned?.Invoke(_battleStateModel.CurrentBattleState);
         }
 
         public void ContinueBattle()
         {
             _battleStateModel.SetState(BattleState.Continued);
-            DestroyPlayers();
+            
+            _heroesService.DestroyHeroes();
             RunBattle();
         }
         
         private void FinishBattle(Players playerWhoLost)
         {
             _battleStateModel.SetState(BattleState.Finished);
-            ChangeAttackStatusToPlayers(false);
+            
+            _battleHeroesController.ChangeAttackStatusToPlayers(false);
             OnBattleFinish?.Invoke(playerWhoLost);
         }
-        
-        private void DestroyPlayers()
-        {
-            Object.Destroy(_battleStateModel.player1.gameObject);
-            Object.Destroy(_battleStateModel.player2.gameObject);
-        }
-
-        private void ChangeAttackStatusToPlayers(bool isAttackable)
-        {
-            _battleStateModel.player1.ChangeAttackStatus(isAttackable);
-            _battleStateModel.player2.ChangeAttackStatus(isAttackable);
-        }
-
-        private BaseHero PlayerInitializeHandler(Transform trans, Players player, float timerForAttack, HeroEnum heroEnum)
-        {
-            BaseHero hero = heroEnum == HeroEnum.Random
-                ? _entityFactory.SpawnRandomHero(trans)
-                : _entityFactory.SpawnHeroByEnum(trans, heroEnum);
-            
-            hero.SetPlayerID(player);
-
-            hero.OnDeath += FinishBattle;
-
-            var y = LetPlayerAttackInSeconds(hero, timerForAttack);
-            return hero;
-        }
-
-        private async UniTask LetPlayerAttackInSeconds(BaseHero hero, float timeToAttack)
-        {
-            await UniTask.Delay(TimeSpan.FromSeconds(timeToAttack));
-            hero.ChangeAttackStatus(true);
-        }  
-        
-        public void Dispose()
-        {
-             _battleStateModel.player1.OnDeath -= FinishBattle;
-             _battleStateModel.player2.OnDeath -= FinishBattle;
-             if(_battleStateModel.player1 != null || _battleStateModel.player2 != null)
-                 DestroyPlayers();
-        }
+ 
     }
 
     public enum HeroEnum

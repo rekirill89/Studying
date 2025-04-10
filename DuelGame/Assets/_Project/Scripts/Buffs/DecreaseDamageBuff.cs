@@ -10,26 +10,38 @@ namespace DuelGame
     {
         private readonly CancellationToken _token;
         private readonly float _decreaseDamageMultiplier = 3f;
+        private const float DECREASE_DAMAGE_BUFF_DURATION = 5f;
         
-        public DecreaseDamageBuff(CancellationToken token) :base(5)
+        public DecreaseDamageBuff(CancellationToken token) :base(DECREASE_DAMAGE_BUFF_DURATION)
         {
             _token = token;
-            buffEnum = BuffEnum.DecreaseDamage;
+            BuffEnum = BuffEnum.DecreaseDamage;
         }
         
-        public override async UniTask Execute(BaseHero target)
+        public override async UniTask Execute(BaseHero target, Sprite sprite)
         {
-            var defaultDamage = target.hero.damage;
-            target.hero.damage = defaultDamage - (defaultDamage / _decreaseDamageMultiplier);
-
             try
             {
-                await UniTask.Delay(TimeSpan.FromSeconds(buffDuration), cancellationToken: _token);
+                await base.Execute(target, sprite);
+            
+                var defaultDamage = target.Hero.Damage;
+                target.Hero.Damage = defaultDamage - (defaultDamage / _decreaseDamageMultiplier);
+
+                try
+                {
+                    await UniTask.Delay(TimeSpan.FromSeconds(BuffDuration), cancellationToken: _token);
+                }
+                finally
+                {
+                    target.Hero.Damage = defaultDamage;
+                }
             }
-            finally
+            catch (Exception e)
             {
-                target.hero.damage = defaultDamage;
+                Console.WriteLine(e);
+                throw;
             }
+            
         }
     }
 }

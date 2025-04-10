@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f71685515cbf9db4b8758acb702cb799, type: 3}
   m_Name: ArcherSO
   m_EditorClassIdentifier: 
-  heroName: Archer
-  health: 90
-  damage: 25
-  armor: 1
-  attackRate: 4
+  HeroName: Archer
+  Health: 95
+  Damage: 25
+  Armor: 1
+  AttackRate: 3

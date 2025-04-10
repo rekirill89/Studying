@@ -54,16 +54,16 @@ namespace DuelGame
             ContinuePanelFacade continuePanelFacade,
             ReloadButtonFacade reloadButtonFacade)
         {
-            _startPanel = startPanelFacade.startPanel;
-            _startButton = startPanelFacade.startButton;
+            _startPanel = startPanelFacade.StartPanel;
+            _startButton = startPanelFacade.StartButton;
 
-            _restartPanel = restartPanelFacade.restartPanel;
-            _restartButton = restartPanelFacade.restartButton;
+            _restartPanel = restartPanelFacade.RestartPanel;
+            _restartButton = restartPanelFacade.RestartButton;
 
-            _continuePanel = continuePanelFacade.continuePanel;
-            _continueButton = continuePanelFacade.continueButton;
+            _continuePanel = continuePanelFacade.ContinuePanel;
+            _continueButton = continuePanelFacade.ContinueButton;
 
-            _reloadSceneButton = reloadButtonFacade.reloadSceneButton;
+            _reloadSceneButton = reloadButtonFacade.ReloadSceneButton;
 
             _startButton.onClick.AddListener(() => OnGameStartButtonPressed?.Invoke());
             _restartButton.onClick.AddListener(() => OnGameRestartButtonPressed?.Invoke());

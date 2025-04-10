@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -6,15 +7,26 @@ namespace DuelGame
 {
     public class StunBuff : Buff
     {
-        public StunBuff() : base(4)
+        private const float STUN_BUFF_DURATION = 4f;
+
+        public StunBuff() : base(STUN_BUFF_DURATION)
         {
-            buffEnum = BuffEnum.Stun;
+            BuffEnum = BuffEnum.Stun;
         }
         
-        public override async UniTask Execute(BaseHero hero)
+        public override async UniTask Execute(BaseHero target, Sprite sprite)
         {
-            hero.GetStunned(buffDuration);
-            await UniTask.Yield();
+            await base.Execute(target, sprite);
+            try
+            {
+                target.GetStunned(BuffDuration);
+                await UniTask.Yield();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
         }
     }
 }

@@ -13,23 +13,20 @@ namespace DuelGame
         [SerializeField] private Arrow _arrow;
         
         private const float ANGLE = 180;
+        
         private void Awake()
         {
-            _bodyCollider = GetComponent<BoxCollider2D>();
+            BodyCollider = GetComponent<BoxCollider2D>();
         }
         
         public void SpawnArrow()
         {
             var x = Instantiate(_arrow, _arrowTrans.position, Quaternion.identity);
             
-            
-            if (_player == Players.Player2)
+            if (Player == Players.Player2)
                 x.transform.eulerAngles = new Vector3(0, 0, ANGLE);
            
-            x.Initialize(
-                hero.damage, 
-                _player,
-                InvokeApplyBuffToEnemy);
+            x.Initialize(Player, DamageEnemy);
         }
     }
 }

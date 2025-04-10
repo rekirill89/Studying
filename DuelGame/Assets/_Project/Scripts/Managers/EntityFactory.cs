@@ -6,7 +6,6 @@ namespace DuelGame
     {
         private readonly HeroesList _heroes; 
         private readonly BuffsList _buffsList; 
-
         
         public EntityFactory(HeroesList heroes, BuffsList buffsList)
         {
@@ -17,16 +16,16 @@ namespace DuelGame
         public BaseHero SpawnRandomHero(Transform trans)
         {
             var entity = _heroes.GetRandomEntity();
-            var x = Object.Instantiate(entity.heroScript, trans);
-            x.Initialize(entity.heroStats, _buffsList);
+            var x = Object.Instantiate(entity.HeroScript, trans);
+            x.Initialize(entity.HeroStats, _buffsList);
             return x;
         }
 
         public BaseHero SpawnHeroByEnum(Transform trans, HeroEnum heroEnum)
         {
             var entity = _heroes.GetHeroEntityByEnum(heroEnum);
-            var x = Object.Instantiate(entity.heroScript, trans);
-            x.Initialize(entity.heroStats, _buffsList);
+            var x = Object.Instantiate(entity.HeroScript, trans);
+            x.Initialize(entity.HeroStats, _buffsList);
             return x;
         }
     }

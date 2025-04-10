@@ -9,11 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f71685515cbf9db4b8758acb702cb799, type: 3}
-  m_Name: WarriorSO
+  m_Script: {fileID: 11500000, guid: 56196ee21c3c8394185e39278787ebf4, type: 3}
+  m_Name: BattleConfig
   m_EditorClassIdentifier: 
-  HeroName: Warrior
-  Health: 120
-  Damage: 20
-  Armor: 3
-  AttackRate: 3
+  <AttackDelayP1>k__BackingField: 2
+  <AttackDelayP2>k__BackingField: 3
+  <FirstHero>k__BackingField: 3
+  <SecondHero>k__BackingField: 3

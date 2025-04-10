@@ -7,12 +7,11 @@ using UnityEngine.UI;
 
 namespace DuelGame
 {
+    public delegate void PlayerDeath(Players player);
     public abstract class BaseHero : MonoBehaviour
     {
         public delegate void PlayerTakeHit(Players players);
         public delegate void TakeDamage(float damage);
-        public delegate void PlayerDeath(Players player);
-        public delegate void PlayerGotBuff(BuffEnum buff, BaseHero player);
         public delegate void ApplyBuff(Sprite sprite, float duration);
         public delegate void PlayerHealthChanged(float currentHealth, float maxHealth);
         public delegate void ApplyBuffToEnemy(BaseHero hero);
@@ -23,66 +22,71 @@ namespace DuelGame
         public event PlayerHealthChanged OnHealthChanged;
         public event ApplyBuffToEnemy OnApplyBuffToEnemy;
         public event Action OnAttack;
-
         public event ApplyBuff OnBuffApplied;
+        public event Action OnPlayerStop;
+
+        public HeroStats Hero { get; private set; }
+        public BuffsList BuffList { get; private set; }
         
-        public bool isDead { get; protected set; } = false;
-        public HeroStats hero { get; private set; }
-        public BuffsList buffList { get; private set; }
-        public UniTask currentBuffTask;
+        protected BaseHero EnemyHero;
+        protected Players Player = default;
+        protected BoxCollider2D BodyCollider;
         
-        protected Players _player = default;
-        protected BoxCollider2D _bodyCollider;
-        protected bool _isAttackable = false;
+        protected bool IsAttackable = false;
+        protected CancellationTokenSource Cts;
         
-        protected const int PLAYER_LAYER = 0;
+        private bool isDead { get; set; } = false;
         private const float ARMOR_COEFFICIENT = 0.1f;
-        
         private float _currenStunDuration = 0;
-        private CancellationTokenSource _cts;
-        private UniTask _attackTask;
         private float _currentHealth = 0;
-
-
-
+        
         private void Start()
         {
             StartHandler();
             Attack();
         }
         
+        private void OnDestroy()
+        {
+            Cts.Cancel();
+        }
+        
         public void Initialize(HeroStats hero, BuffsList buffs)
         {
-            this.hero = Instantiate(hero);
-            buffList = buffs;
+            this.Hero = Instantiate(hero);
+            BuffList = buffs;
         }
         
         public void ChangeAttackStatus(bool isAttackable)
         {
-            _isAttackable = isAttackable;
+            IsAttackable = isAttackable;
         }
         
         public void ChangeCurrentHealth(float damage)
         {
+            if(isDead)
+                return;
+
             _currentHealth -= damage;
             OnTakeDamage?.Invoke(damage);
-            OnHealthChanged?.Invoke(_currentHealth, hero.health);
+            OnHealthChanged?.Invoke(_currentHealth, Hero.Health);
             
             CheckDeath();
         }
         
         public void GetStunned(float stunDuration)
         {
-            var x = GetStunnedUntilTime(stunDuration);
+            GetStunnedUntilTime(stunDuration).Forget();
         }
         
-        public void TakeHit(float damage, BuffEnum buffGot = BuffEnum.None)
+        public void TakeHit(float damage)
         {
-            float realDamage = (damage - (damage * (hero.armor * ARMOR_COEFFICIENT)));
-            OnTakeHit?.Invoke(_player);
+            if(isDead)
+                return;
+            
+            float realDamage = (damage - (damage * (Hero.Armor * ARMOR_COEFFICIENT)));
+            OnTakeHit?.Invoke(Player);
             ChangeCurrentHealth(realDamage);
-
-            Debug.Log(buffGot);
         }
         
         public void BuffAppliedInvoke(Sprite buffSprite, float buffDuration)
@@ -92,7 +96,24 @@ namespace DuelGame
         
         public void SetPlayerID(Players player)
         {
-            this._player = player;
+            this.Player = player;
+        }
+
+        public void SetEnemy(BaseHero enemy)
+        {
+            EnemyHero = enemy;
+        }
+
+        public virtual void DamageEnemy()
+        {
+            EnemyHero.TakeHit(Hero.Damage);
+            InvokeApplyBuffToEnemy(EnemyHero);
+        }
+
+        public void StopAllTasks()
+        {
+            Cts.Cancel();
+            OnPlayerStop?.Invoke();
         }
 
         protected void InvokeApplyBuffToEnemy(BaseHero hero)
@@ -102,52 +123,70 @@ namespace DuelGame
         
         private void StartHandler()
         {
-            _currentHealth = hero.health;
-            
-            _cts = new CancellationTokenSource();
+            Cts = new CancellationTokenSource();
+            _currentHealth = Hero.Health;
         }
         
         private void Attack()
         {
-            _attackTask = AttackTimer();
+            AttackTimer().Forget();
         }
 
         private async UniTask AttackTimer()
         {
-            while (!_cts.IsCancellationRequested)
+            try
             {
-                if (!_isAttackable || _currenStunDuration > 0)
+                while (!Cts.IsCancellationRequested)
                 {
-                    await UniTask.DelayFrame(1);
-                    continue;
+                    if (!IsAttackable || _currenStunDuration > 0)
+                    {
+                        await UniTask.DelayFrame(1);
+                        continue;
+                    }
+
+                    OnAttack?.Invoke();
+
+                    await UniTask.Delay(TimeSpan.FromSeconds(Hero.AttackRate), cancellationToken: Cts.Token);
                 }
-                OnAttack?.Invoke();
-                                
-                await UniTask.Delay(TimeSpan.FromSeconds(hero.attackRate), cancellationToken: _cts.Token);
             }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+            
         }
 
         private async UniTask GetStunnedUntilTime(float stunDuration)
         {
-            if (_currenStunDuration > 0)
+            try
             {
-                _currenStunDuration += stunDuration;
-                return;
+                if (_currenStunDuration > 0)
+                {
+                    _currenStunDuration += stunDuration;
+                    return;
+                }
+            
+                _currenStunDuration = stunDuration;
+            
+                float step = 0.1f;
+                while (_currenStunDuration > 0 && !Cts.IsCancellationRequested)
+                {
+                    _currenStunDuration -= step;
+                    _currenStunDuration = Mathf.Clamp(_currenStunDuration, 0, stunDuration);
+                    await UniTask.Delay(TimeSpan.FromSeconds(step), cancellationToken:Cts.Token);
+                }
             }
-            
-            _currenStunDuration = stunDuration;
-            
-            float step = 0.1f;
-            while (_currenStunDuration > 0)
+            catch (Exception e)
             {
-                _currenStunDuration -= step;
-                await UniTask.Delay(TimeSpan.FromSeconds(step));
+                Console.WriteLine(e);
+                throw;
             }
         }
         
         private void TurnOffBodyCollider()
         {
-            _bodyCollider.enabled = false;
+            BodyCollider.enabled = false;
         }
         
         private void CheckDeath()
@@ -156,16 +195,12 @@ namespace DuelGame
             {
                 isDead = true;
                 
-                OnDeath?.Invoke(_player);
+                OnDeath?.Invoke(Player);
                 TurnOffBodyCollider();
             }
         }
-
-        private void OnDestroy()
-        {
-            _cts.Cancel();
-        }
     }
+    
     public enum Players
     {
         Player1,

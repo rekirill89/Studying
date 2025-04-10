@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -31,27 +32,31 @@ namespace DuelGame
 
         private void Start()
         {
-            _buffsEntities = _hero.buffList;
+            _buffsEntities = _hero.BuffList;
 
             _hero.OnApplyBuffToEnemy += ExecuteBuffToEnemy;
+            _hero.OnPlayerStop += StopBuffTask;
+        }
+        
+        private void OnDestroy()
+        {
+            _hero.OnPlayerStop -= StopBuffTask;
+            _hero.OnApplyBuffToEnemy -= ExecuteBuffToEnemy;
+            _cts?.Cancel();
+            _cts?.Dispose();
+            _cts = null;
+        }
+
+        private void StopBuffTask()
+        {
+            _cts.Cancel();
         }
 
         private void ExecuteBuffToEnemy(BaseHero hero)
         {
             Buff buff = _buffsDictionary[_chosenBuffEnum]();
             
-            hero.currentBuffTask = buff.Execute(hero);
-            hero.BuffAppliedInvoke(
-                _buffsEntities.listOfEntities.First(
-                    x => x.buffEnum == buff.buffEnum).sp.sprite, 
-                buff.buffDuration);
-
-        }
-
-        private void OnDestroy()
-        {
-            _hero.OnApplyBuffToEnemy -= ExecuteBuffToEnemy;
-            _cts.Cancel();
+            buff.Execute(hero, _buffsEntities.ListOfEntities.First(x => x.BuffEnum == buff.BuffEnum).Sp.sprite).Forget();
         }
     }
 }

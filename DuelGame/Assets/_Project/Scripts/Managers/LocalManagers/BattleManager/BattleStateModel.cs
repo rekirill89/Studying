@@ -4,14 +4,11 @@ namespace DuelGame
 {
     public class BattleStateModel
     {
-        public BattleState currentBattleState { get; private set; } = BattleState.NotStarted;
-        
-        public BaseHero player1 { get;  set; }
-        public BaseHero player2 { get;  set; }
+        public BattleState CurrentBattleState { get; private set; } = BattleState.NotStarted;
 
         public void SetState(BattleState newState)
         {
-            currentBattleState = newState;
+            CurrentBattleState = newState;
         }
     }
     

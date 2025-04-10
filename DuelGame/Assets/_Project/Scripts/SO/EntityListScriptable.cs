@@ -6,27 +6,27 @@ namespace DuelGame
 {
     public abstract class EntityListScriptable<T> : ScriptableObject where T : class, INamedObject
     {
-        public abstract List<T> listOfEntities { get; set; }
+        public abstract List<T> ListOfEntities { get; set; }
 
         public GameObject GetEntityObjByName(string name)
         {
-            return listOfEntities.First(x => x.name == name).entityObj;
+            return ListOfEntities.First(x => x.Name == name).EntityObj;
         }
         
         public T GetEntityByName(string name)
         {
-            return listOfEntities.First(x => x.name == name);
+            return ListOfEntities.First(x => x.Name == name);
         }
         
         public T GetRandomEntity()
         {
-            return listOfEntities[Random.Range(0, listOfEntities.Count)];
+            return ListOfEntities[Random.Range(0, ListOfEntities.Count)];
         }
     }
     public interface INamedObject
     {
-        public string name { get; set; }
-        public GameObject entityObj { get; set; }
+        public string Name { get; set; }
+        public GameObject EntityObj { get; set; }
     }
 }
 

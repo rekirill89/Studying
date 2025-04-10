@@ -8,68 +8,62 @@ namespace DuelGame
     public class WizardVisual : BaseHeroVisual
     {
         private Wizard _wizard;
-
         private bool _attacking = false;
 
         protected override void Awake()
         {
             base.Awake();
 
-            _wizard = _hero as Wizard;
+            _wizard = Hero as Wizard;
         }
               
         private void Update()
         {
             AttackAnim();
         }
-  
-        /*
-        private void Start()
-        {
-            SubscribeToEvents();
-        }*/
         
         protected override void SubscribeToEvents()
         {
-            _wizard.OnAttack += WizzardAttackStarted;
-            _wizard.OnAttackEnded += WizzardAttackEnded;
+            _wizard.OnAttack += WizardAttackStartedAnim;
+            _wizard.OnAttackEnded += WizardAttackEndAnim;
+            Hero.OnPlayerStop += StopAllTasks;
 
-            _hero.OnTakeDamage += ShowDamageText;
-            _hero.OnTakeHit += HeroTakeHit;
-            _hero.OnDeath += HeroDeath;
-            _hero.OnHealthChanged += ChangeHealthBar;
+            Hero.OnTakeDamage += ShowDamageText;
+            Hero.OnTakeHit += HeroTakeHit;
+            Hero.OnDeath += HeroDeath;
+            Hero.OnHealthChanged += ChangeHealthBar;
 
-            _hero.OnBuffApplied += HeroBuffApplied;
+            Hero.OnBuffApplied += HeroBuffApplied;
         }
         
         protected override void UnsubscribeFromEvents()
         {
-            _wizard.OnAttack -= WizzardAttackStarted;
-            _wizard.OnAttackEnded -= WizzardAttackEnded;
+            _wizard.OnAttack -= WizardAttackStartedAnim;
+            _wizard.OnAttackEnded -= WizardAttackEndAnim;
+            Hero.OnPlayerStop -= StopAllTasks;
 
-            _hero.OnTakeDamage -= ShowDamageText;
-            _hero.OnTakeHit -= HeroTakeHit;
-            _hero.OnDeath -= HeroDeath;
-            _hero.OnHealthChanged -= ChangeHealthBar;
+            Hero.OnTakeDamage -= ShowDamageText;
+            Hero.OnTakeHit -= HeroTakeHit;
+            Hero.OnDeath -= HeroDeath;
+            Hero.OnHealthChanged -= ChangeHealthBar;
 
-            _hero.OnBuffApplied -= HeroBuffApplied;
+            Hero.OnBuffApplied -= HeroBuffApplied;
         }
 
-        private void WizzardAttackStarted()
+        private void WizardAttackStartedAnim()
         {
             _attacking = true;
-            _wizard.TurnOnColl();
+            _wizard.DamageEnemy();
         }
         
-        private void WizzardAttackEnded()
+        private void WizardAttackEndAnim()
         {
             _attacking = false;
-            _wizard.TurnOffColl();
         }
 
         private void AttackAnim()
         {
-            _animator.SetBool(ATTACK, _attacking);
+            Animator.SetBool(ATTACK, _attacking);
         }
     }
 }

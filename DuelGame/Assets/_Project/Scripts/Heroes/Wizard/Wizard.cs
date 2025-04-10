@@ -1,73 +1,60 @@
 using System;
 using System.Collections;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace DuelGame
 {
     [RequireComponent(typeof(BoxCollider2D))]
-    [RequireComponent(typeof(CapsuleCollider2D))]
     public class Wizard : BaseHero
     {
         public event Action OnAttackEnded;
-
+        
         private readonly float _attackDuration = 2.1f;
         private readonly float _attackInterval = 0.3f;
-
-        private WaitForSeconds _attackIntervalTimer;
-
-        private CapsuleCollider2D _attackCollider;
+        private readonly float _attackIntervalTimer = 0.25f;
         
         private void Awake()
         {
-            _attackCollider = GetComponent<CapsuleCollider2D>();
-            _bodyCollider = GetComponent<BoxCollider2D>();
+            BodyCollider = GetComponent<BoxCollider2D>();
+        }
 
-            _attackIntervalTimer = new WaitForSeconds(_attackInterval);
+        public override void DamageEnemy()
+        {
+            StartTickableDamage(EnemyHero).Forget();
         }
-        
-        public void TurnOnColl()
+
+        private async UniTask StartTickableDamage(BaseHero hero)
         {
-            _attackCollider.enabled = false;
-            _attackCollider.enabled = true;
-        }
-        
-        public void TurnOffColl()
-        {
-            _attackCollider.enabled = false;
-        }     
-        
-        private void OnTriggerEnter2D(Collider2D collision)
-        {
-            if (_attackCollider.enabled && 
-                collision.TryGetComponent<BaseHero>(out BaseHero hero) && 
-                collision.gameObject != gameObject && 
-                collision.layerOverridePriority == PLAYER_LAYER)
+            try
             {
-                Debug.Log("Entered");
-                StartCoroutine(PeriodicalDamage(hero));
+                float currentAttackDuration = 0;
+                IsAttackable = false;
+                while (currentAttackDuration < _attackDuration && !Cts.IsCancellationRequested)
+                {
+                    hero.TakeHit(this.Hero.Damage);
+                    currentAttackDuration += _attackInterval;
+
+                    await UniTask.Delay(TimeSpan.FromSeconds(_attackIntervalTimer), cancellationToken: Cts.Token);
+                }
+
+                hero.TakeHit(this.Hero.Damage);
+                InvokeApplyBuffToEnemy(hero);
+                IsAttackable = true;
+                OnAttackEnded?.Invoke();
+            }            
+            catch (OperationCanceledException)
+            {
+                IsAttackable = false;
+                OnAttackEnded?.Invoke();
             }
-        }
-        
-        private IEnumerator PeriodicalDamage(BaseHero hero)
-        {
-            float currentAttackDuration = 0;
-            _isAttackable = false;
-            while (currentAttackDuration < _attackDuration)
-            {            
-                hero.TakeHit(this.hero.damage);
-                currentAttackDuration += _attackInterval;
-
-                yield return _attackIntervalTimer;
+            catch (Exception e)
+            {
+                Debug.LogException(e);
+                throw;
             }
 
-            hero.TakeHit(this.hero.damage, BuffEnum.DecreaseDamage);
-            InvokeApplyBuffToEnemy(hero);
-            TurnOffColl();
-            _isAttackable = true;
-            OnAttackEnded?.Invoke();
-
-            yield return null;
         }
     }
 }

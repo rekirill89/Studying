@@ -20,6 +20,7 @@ namespace DuelGame
             Container.Bind<HeroesList>().FromInstance(heroesList).AsSingle();
 
             Container.Bind<EntityFactory>().AsSingle();
+            Container.Bind<SceneLoaderManager>().AsSingle();
         }
     }
 }

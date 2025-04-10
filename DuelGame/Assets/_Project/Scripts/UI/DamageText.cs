@@ -9,17 +9,16 @@ namespace DuelGame
     {
         public delegate void ReturnToPool(DamageText selfDamageText);
         
+        private ReturnToPool _returnToPool;
+                
         private TextMeshProUGUI _damageText;
-
+        
         private readonly float _defaultTimer = 2f;
         private readonly Color _defaultColor = new Color(1, 0.35f, 0.35f, 1);
         private readonly float _defaultAlphaInterval = 0.005f;
         private float _timer = 0;
         private float _alphaInterval = 0;
-
         private bool _isEnabled;
-
-        private ReturnToPool _returnToPool;
         
         private void Awake()
         {
@@ -50,18 +49,19 @@ namespace DuelGame
                 _returnToPool?.Invoke(this);
             }
         }
-
+        
+        private void OnDisable()
+        {
+            _isEnabled = false;
+        }
+        
         public void Initialize(float damage, ReturnToPool returnToPool)
         {
             _damageText.text = (-damage).ToString();
 
             _returnToPool = returnToPool;
         }
-        
-        private void OnDisable()
-        {
-            _isEnabled = false;
-        }
+
     }
 }
 

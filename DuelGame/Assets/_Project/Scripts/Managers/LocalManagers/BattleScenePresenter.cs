@@ -9,11 +9,13 @@ namespace DuelGame
     {
         private readonly BattleManager _localBattleManager;
         private readonly BattleSceneUIManager _localUIManager;
+        private readonly SceneLoaderManager _sceneLoaderManager;
         
-        public BattleScenePresenter(BattleManager localBattleManager, BattleSceneUIManager localUIManager)
+        public BattleScenePresenter(BattleManager localBattleManager, BattleSceneUIManager localUIManager, SceneLoaderManager sceneLoaderManager)
         {
             _localBattleManager = localBattleManager;
             _localUIManager = localUIManager;
+            _sceneLoaderManager = sceneLoaderManager;
             
             _localUIManager.OnGameStartButtonPressed += StartGame;
             _localUIManager.OnGameContinueButtonPressed += ContinueGameController;
@@ -28,6 +30,16 @@ namespace DuelGame
             _localUIManager.SetVisibleStartPanel(true);
         }
 
+        public void Dispose()
+        {
+            _localUIManager.OnGameStartButtonPressed -= StartGame;
+            _localUIManager.OnGameContinueButtonPressed -= ContinueGameController;
+            _localUIManager.OnGameRestartButtonPressed -= RestartGame;
+            
+            _localBattleManager.OnPlayersSpawned -= PlayersSpawned;
+            _localBattleManager.OnBattleFinish -= FinishBattleController;
+        }
+        
         private void StartGame()
         {
             _localBattleManager.RunBattle();
@@ -35,8 +47,7 @@ namespace DuelGame
         
         private void RestartGame()
         {
-            SceneManager.LoadScene("BattleScene");
-
+            _sceneLoaderManager.LoadBattleScene();
         }    
         
         private void ContinueGameController()
@@ -58,17 +69,6 @@ namespace DuelGame
                 _localUIManager.SetVisibleStartPanel(false);
             else if (state == BattleState.Continued)
                 _localUIManager.SetVisibleContinuePanel(false);
-        }
-
-
-        public void Dispose()
-        {
-            _localUIManager.OnGameStartButtonPressed -= StartGame;
-            _localUIManager.OnGameContinueButtonPressed -= ContinueGameController;
-            _localUIManager.OnGameRestartButtonPressed -= RestartGame;
-            
-            _localBattleManager.OnPlayersSpawned -= PlayersSpawned;
-            _localBattleManager.OnBattleFinish -= FinishBattleController;
         }
     }
 }

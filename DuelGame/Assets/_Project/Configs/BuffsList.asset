@@ -12,16 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8e4d45007f0700468cb839bb5e4ee55, type: 3}
   m_Name: BuffsList
   m_EditorClassIdentifier: 
-  <listOfEntities>k__BackingField:
-  - <name>k__BackingField: Poison
-    <entityObj>k__BackingField: {fileID: 4673309774099930632, guid: 2cd4abc16e4bb0642a253b41ae4ecac8, type: 3}
-    sp: {fileID: 8066890019116493907, guid: 2cd4abc16e4bb0642a253b41ae4ecac8, type: 3}
-    buffEnum: 0
-  - <name>k__BackingField: Stun
-    <entityObj>k__BackingField: {fileID: 8835305586828914791, guid: 22fd02e04d8a427428444725c721cd60, type: 3}
-    sp: {fileID: 9309584704241263, guid: 22fd02e04d8a427428444725c721cd60, type: 3}
-    buffEnum: 2
-  - <name>k__BackingField: Decrease damage
-    <entityObj>k__BackingField: {fileID: 2181520432081338729, guid: 108a2f04d3e026e4380afb4b4bb60da1, type: 3}
-    sp: {fileID: 5122082211512280928, guid: 108a2f04d3e026e4380afb4b4bb60da1, type: 3}
-    buffEnum: 1
+  <ListOfEntities>k__BackingField:
+  - <Name>k__BackingField: Poison
+    <EntityObj>k__BackingField: {fileID: 4673309774099930632, guid: 2cd4abc16e4bb0642a253b41ae4ecac8, type: 3}
+    Sp: {fileID: 8066890019116493907, guid: 2cd4abc16e4bb0642a253b41ae4ecac8, type: 3}
+    BuffEnum: 0
+  - <Name>k__BackingField: DecreaseDamage
+    <EntityObj>k__BackingField: {fileID: 2181520432081338729, guid: 108a2f04d3e026e4380afb4b4bb60da1, type: 3}
+    Sp: {fileID: 5122082211512280928, guid: 108a2f04d3e026e4380afb4b4bb60da1, type: 3}
+    BuffEnum: 1
+  - <Name>k__BackingField: Stun
+    <EntityObj>k__BackingField: {fileID: 8835305586828914791, guid: 22fd02e04d8a427428444725c721cd60, type: 3}
+    Sp: {fileID: 9309584704241263, guid: 22fd02e04d8a427428444725c721cd60, type: 3}
+    BuffEnum: 2
