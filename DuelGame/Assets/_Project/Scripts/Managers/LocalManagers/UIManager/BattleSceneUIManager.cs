@@ -23,15 +23,6 @@ namespace DuelGame
         private Button _continueButton;
         // Reload
         private Button _reloadSceneButton;
-
-        public BattleSceneUIManager(
-            StartPanelFacade startPanelFacade, 
-            RestartPanelFacade restartPanelFacade,
-            ContinuePanelFacade continuePanelFacade,
-            ReloadButtonFacade reloadButtonFacade)
-        {
-            InitializeStateUIElements(startPanelFacade, restartPanelFacade, continuePanelFacade, reloadButtonFacade);
-        }
         
         public void SetVisibleStartPanel(bool isVisible)
         {
@@ -48,22 +39,18 @@ namespace DuelGame
             _restartPanel.SetActive(isVisible);
         }
 
-        private void InitializeStateUIElements(
-            StartPanelFacade startPanelFacade, 
-            RestartPanelFacade restartPanelFacade,
-            ContinuePanelFacade continuePanelFacade,
-            ReloadButtonFacade reloadButtonFacade)
+        public void InitializeStateUIElements(ScreenCanvasFacade screenCanvasFacade, HUDCanvasFacade hudCanvasFacade)
         {
-            _startPanel = startPanelFacade.StartPanel;
-            _startButton = startPanelFacade.StartButton;
+            _startPanel = screenCanvasFacade.StartPanelFacade.StartPanel;
+            _startButton = screenCanvasFacade.StartPanelFacade.StartButton;
 
-            _restartPanel = restartPanelFacade.RestartPanel;
-            _restartButton = restartPanelFacade.RestartButton;
+            _restartPanel = screenCanvasFacade.RestartPanelFacade.RestartPanel;
+            _restartButton = screenCanvasFacade.RestartPanelFacade.RestartButton;
 
-            _continuePanel = continuePanelFacade.ContinuePanel;
-            _continueButton = continuePanelFacade.ContinueButton;
+            _continuePanel = screenCanvasFacade.ContinuePanelFacade.ContinuePanel;
+            _continueButton = screenCanvasFacade.ContinuePanelFacade.ContinueButton;
 
-            _reloadSceneButton = reloadButtonFacade.ReloadSceneButton;
+            _reloadSceneButton = hudCanvasFacade.ReloadButtonFacade.ReloadSceneButton;
 
             _startButton.onClick.AddListener(() => OnGameStartButtonPressed?.Invoke());
             _restartButton.onClick.AddListener(() => OnGameRestartButtonPressed?.Invoke());

@@ -11,11 +11,14 @@ namespace DuelGame
         private readonly BattleSceneUIManager _localUIManager;
         private readonly SceneLoaderManager _sceneLoaderManager;
         
-        public BattleScenePresenter(BattleManager localBattleManager, BattleSceneUIManager localUIManager, SceneLoaderManager sceneLoaderManager)
+        private readonly UIFactory _uiFactory;
+        
+        public BattleScenePresenter(BattleManager localBattleManager, BattleSceneUIManager localUIManager, SceneLoaderManager sceneLoaderManager, UIFactory uiFactory)
         {
             _localBattleManager = localBattleManager;
             _localUIManager = localUIManager;
             _sceneLoaderManager = sceneLoaderManager;
+            _uiFactory = uiFactory;
             
             _localUIManager.OnGameStartButtonPressed += StartGame;
             _localUIManager.OnGameContinueButtonPressed += ContinueGameController;
@@ -27,7 +30,11 @@ namespace DuelGame
 
         public void Initialize()
         {
+            _localUIManager.InitializeStateUIElements(_uiFactory.CreateScreenCanvas(), _uiFactory.CreateHUDCanvas());
+            
             _localUIManager.SetVisibleStartPanel(true);
+            _localUIManager.SetVisibleContinuePanel(false);
+            _localUIManager.SetVisibleRestartPanel(false);
         }
 
         public void Dispose()
