@@ -48,8 +48,6 @@ namespace DuelGame
         {
             UnsubscribeFromEvents();
             _cts.Cancel();
-            /*_cts?.Dispose();
-            _cts = null;*/
         }
         
         protected void HeroDeath(Players _)
@@ -64,7 +62,7 @@ namespace DuelGame
         
         protected void ShowDamageText(float damage)
         {
-            Debug.Log("Trrigered");
+            Debug.Log("Triggered");
 
             var x = _damageTextPool.Get();
             x.Initialize(damage, _damageTextPool.ReturnToPool);
@@ -132,7 +130,8 @@ namespace DuelGame
             }
             catch (OperationCanceledException)
             {
-                BuffSprite.enabled = false;
+                if(BuffSprite != null) 
+                    BuffSprite.enabled = false;
             }
             catch (Exception e)
             {

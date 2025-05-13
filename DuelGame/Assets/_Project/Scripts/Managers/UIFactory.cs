@@ -4,25 +4,49 @@ namespace DuelGame
 {
     public class UIFactory
     {
-        private readonly HUDCanvasFacade _hudCanvasFacade;
-        private readonly ScreenCanvasFacade _screenCanvasFacade;
-        private readonly Transform _canvasParent;
+        private StartPanelView _startPanelView;
+        private ContinuePanelView _continuePanelView;
+        private RestartPanelView _restartPanelView;
+        private ReloadButtonView _reloadButtonView;
+        
+        private readonly Transform _screenCanvasParent;
+        private readonly Transform _hudCanvasParent;
 
-        public UIFactory(HUDCanvasFacade hudCanvasFacade, ScreenCanvasFacade screenCanvasFacade, Transform canvasParent)
-        {
-            _hudCanvasFacade = hudCanvasFacade;
-            _screenCanvasFacade = screenCanvasFacade;
-            _canvasParent = canvasParent;
+        public UIFactory(
+            Transform screenCanvasParent,
+            Transform hudCanvasParent,
+            StartPanelView startPanelView,
+            ContinuePanelView continuePanelView,
+            RestartPanelView restartPanelView,
+            ReloadButtonView reloadButtonView)
+        { 
+            _startPanelView = startPanelView;
+            _continuePanelView = continuePanelView;
+            _restartPanelView = restartPanelView;
+            _reloadButtonView = reloadButtonView;
+            
+            _screenCanvasParent = screenCanvasParent;
+            _hudCanvasParent = hudCanvasParent;
         }
 
-        public HUDCanvasFacade CreateHUDCanvas()
+        public StartPanelView CreateStartPanelView()
         {
-            return Object.Instantiate(_hudCanvasFacade, _canvasParent);
+            return Object.Instantiate(_startPanelView, _screenCanvasParent);
         }
 
-        public ScreenCanvasFacade CreateScreenCanvas()
+        public ContinuePanelView CreateContinuePanelView()
         {
-            return Object.Instantiate(_screenCanvasFacade, _canvasParent);
+            return Object.Instantiate(_continuePanelView, _screenCanvasParent);
+        }
+
+        public RestartPanelView CreateRestartPanelView()
+        {
+            return Object.Instantiate(_restartPanelView, _screenCanvasParent);
+        }
+
+        public ReloadButtonView CreateReloadButtonView()
+        {
+            return Object.Instantiate(_reloadButtonView, _hudCanvasParent);
         }
     }
 }

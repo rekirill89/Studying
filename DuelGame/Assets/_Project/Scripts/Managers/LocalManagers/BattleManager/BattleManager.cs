@@ -7,13 +7,14 @@ using Zenject;
 
 namespace DuelGame
 {
-    public class BattleManager : IDisposable
+    public class BattleManager : IDisposable, IInitializable
     {
-        public delegate void BattleFinish(Players playerWhoWon);
+        public delegate void BattleFinish(Players playerWhoLost);
         public delegate void PlayerSpawned(BattleState battleState);
         
         public event BattleFinish OnBattleFinish;
         public event PlayerSpawned OnPlayersSpawned;
+        public event Action OnBattleReady;
 
         private readonly BattleStateModel _battleStateModel;
         
@@ -34,7 +35,12 @@ namespace DuelGame
 
             Debug.Log("Battle Manager created");
         }
-               
+        
+        public void Initialize()
+        {
+            OnBattleReady?.Invoke();
+        }
+        
         public void Dispose()
         {
             _battleHeroesController?.StopAllTasks();
@@ -74,7 +80,6 @@ namespace DuelGame
             _battleHeroesController.ChangeAttackStatusToPlayers(false);
             OnBattleFinish?.Invoke(playerWhoLost);
         }
- 
     }
 
     public enum HeroEnum

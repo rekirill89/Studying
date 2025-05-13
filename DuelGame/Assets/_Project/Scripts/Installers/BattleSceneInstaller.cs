@@ -8,26 +8,32 @@ namespace DuelGame
     {        
         [SerializeField] private BattleSettingsFacade _battleFacade;
         
-        [SerializeField] private HUDCanvasFacade _hudCanvasFacade;
-        [SerializeField] private ScreenCanvasFacade _screenCanvasFacade;
-        [SerializeField] private Transform _canvasParent;
-        private void OnDestroy()
-        {
-            Debug.Log("Battle scene installer destroyed");
-        }
+        [SerializeField] private Transform _screenCanvasParent;
+        [SerializeField] private Transform _hudCanvasParent;
+        
+        [SerializeField] private StartPanelView _startPanelView;
+        [SerializeField] private ContinuePanelView _continuePanelView;
+        [SerializeField] private RestartPanelView _restartPanelView;
+        [SerializeField] private ReloadButtonView _reloadButtonView;
         
         public override void InstallBindings()
         {
             Debug.Log("Battle scene installer created");
-            Container.BindInterfacesAndSelfTo<UIFactory>().AsSingle().WithArguments(_hudCanvasFacade, _screenCanvasFacade, _canvasParent);
+            Container.BindInterfacesAndSelfTo<SceneLoaderManager>().AsSingle();
+            Container.BindInterfacesAndSelfTo<UIFactory>().AsSingle().WithArguments(
+                _screenCanvasParent,
+                _hudCanvasParent,
+                _startPanelView,
+                _continuePanelView,
+                _restartPanelView,
+                _reloadButtonView);
+            
             Container.BindInterfacesAndSelfTo<BattleStateModel>().AsSingle();
             Container.BindInterfacesAndSelfTo<HeroesService>().AsSingle().WithArguments(_battleFacade);
             Container.BindInterfacesAndSelfTo<BattleManager>().AsSingle().WithArguments(_battleFacade);
-            Container.BindInterfacesAndSelfTo<BattleSceneUIManager>().AsSingle();
 
-            Container.BindInterfacesAndSelfTo<BattleScenePresenter>().AsCached();
+            Container.BindInterfacesAndSelfTo<MediatorPresentation>().AsSingle();
         }
-
     }
 }
 
