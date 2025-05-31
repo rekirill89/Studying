@@ -1,9 +1,10 @@
 using System;
 using UnityEngine;
+using Zenject;
 
 namespace DuelGame
 {
-    public class ContinuePanelPresenter :IDisposable
+    public class ContinuePanelPresenter : IDisposable
     {
         private readonly BattleManager _battleManagerModel;
         private readonly ContinuePanelView _continuePanelView;
@@ -12,19 +13,27 @@ namespace DuelGame
         {
             _battleManagerModel = battleManager;
             _continuePanelView = continuePanelView;
-
+            
             _continuePanelView.OnButtonClicked += _battleManagerModel.ContinueBattle;
             _battleManagerModel.OnBattleFinish += ShowView;
             _battleManagerModel.OnPlayersSpawned += HideView;
         }
-
+        
         public void Dispose()
         {
             _continuePanelView.OnButtonClicked -= _battleManagerModel.ContinueBattle;
             _battleManagerModel.OnBattleFinish -= ShowView;
             _battleManagerModel.OnPlayersSpawned -= HideView;
         }
-        
+
+        public void ShowView(Players playerWhoLost)
+        {
+            if (playerWhoLost == Players.Player2)
+            {
+                _continuePanelView.Show();
+            }
+        }
+
         private void HideView(BattleState battleState)
         {
             if (battleState == BattleState.Continued)
@@ -32,13 +41,7 @@ namespace DuelGame
                 _continuePanelView.Hide();
             }
         }
-        
-        private void ShowView(Players playerWhoLost)
-        {
-            if (playerWhoLost == Players.Player2)
-            {
-                _continuePanelView.Show();
-            }
-        }
-    }   
+
+
+    }
 }

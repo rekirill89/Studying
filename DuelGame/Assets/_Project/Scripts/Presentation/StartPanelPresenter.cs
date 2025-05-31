@@ -1,5 +1,6 @@
 using System;
 using UnityEngine;
+using Zenject;
 
 namespace DuelGame
 {
@@ -12,7 +13,7 @@ namespace DuelGame
         {
             _battleManagerModel = battleManager;
             _startPanelView = startPanelView;
-
+            
             _startPanelView.OnButtonClicked += _battleManagerModel.RunBattle;
             _battleManagerModel.OnPlayersSpawned += HideView;
         }
@@ -22,6 +23,11 @@ namespace DuelGame
             _startPanelView.OnButtonClicked -= _battleManagerModel.RunBattle;
             _battleManagerModel.OnPlayersSpawned -= HideView;
         }
+
+        public void ShowView()
+        {
+            _startPanelView.Show();    
+        }
         
         private void HideView(BattleState battleState)
         {
@@ -30,5 +36,6 @@ namespace DuelGame
                 _startPanelView.Hide();
             }
         }
+
     }   
 }

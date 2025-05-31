@@ -7,7 +7,7 @@ namespace DuelGame
         private StartPanelView _startPanelView;
         private ContinuePanelView _continuePanelView;
         private RestartPanelView _restartPanelView;
-        private ReloadButtonView _reloadButtonView;
+        private ReloadPanelView _reloadButtonView;
         
         private readonly Transform _screenCanvasParent;
         private readonly Transform _hudCanvasParent;
@@ -18,7 +18,7 @@ namespace DuelGame
             StartPanelView startPanelView,
             ContinuePanelView continuePanelView,
             RestartPanelView restartPanelView,
-            ReloadButtonView reloadButtonView)
+            ReloadPanelView reloadButtonView)
         { 
             _startPanelView = startPanelView;
             _continuePanelView = continuePanelView;
@@ -44,7 +44,7 @@ namespace DuelGame
             return Object.Instantiate(_restartPanelView, _screenCanvasParent);
         }
 
-        public ReloadButtonView CreateReloadButtonView()
+        public ReloadPanelView CreateReloadButtonView()
         {
             return Object.Instantiate(_reloadButtonView, _hudCanvasParent);
         }

@@ -215,7 +215,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
+  m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -1171,7 +1171,7 @@ MonoBehaviour:
   _startPanelView: {fileID: 1106553793753749160, guid: 9fd27eb9768dba44a9b67d7775885313, type: 3}
   _continuePanelView: {fileID: 5353470584365876216, guid: 4b57adb1955113e429c03d4bfc1b4c18, type: 3}
   _restartPanelView: {fileID: 1427756985908044506, guid: 25686a083adf5344892c5db270f22f7d, type: 3}
-  _reloadButtonView: {fileID: -9173783512088456833, guid: e70c62f40efc147468c7ac9eb59c080f, type: 3}
+  _reloadPanelView: {fileID: 2502882583676369657, guid: 043ac425ca8104a4f9ef2276ad99ecfd, type: 3}
 --- !u!114 &1489952811
 MonoBehaviour:
   m_ObjectHideFlags: 0

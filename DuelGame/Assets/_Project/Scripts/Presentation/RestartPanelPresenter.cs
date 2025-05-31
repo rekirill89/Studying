@@ -1,9 +1,10 @@
 using System;
 using UnityEngine;
+using Zenject;
 
 namespace DuelGame
 {
-    public class RestartPanelPresenter : IDisposable
+    public class RestartPanelPresenter :IDisposable
     {
         private readonly BattleManager _battleManagerModel;
         private readonly RestartPanelView _restartPanelView;
@@ -14,7 +15,7 @@ namespace DuelGame
             _battleManagerModel = battleManager;
             _restartPanelView = restartPanelView;
             _sceneLoaderManager = sceneLoaderManager;
-
+            
             _restartPanelView.OnButtonClicked += _sceneLoaderManager.LoadBattleScene;
             _battleManagerModel.OnBattleFinish += ShowView;
         }
@@ -25,12 +26,13 @@ namespace DuelGame
             _battleManagerModel.OnBattleFinish -= ShowView;
         }
 
-        private void ShowView(Players playerWhoLost)
+        public void ShowView(Players playerWhoLost)
         {
             if (playerWhoLost == Players.Player1)
             {
                 _restartPanelView.Show();
             }
         }
+
     }   
 }

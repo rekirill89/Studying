@@ -6,18 +6,18 @@ namespace DuelGame
 {
     public class MediatorPresentation : IDisposable
     {
-        private readonly DiContainer _container;
+        private readonly IInstantiator _iInstantiator;
         private readonly UIFactory _uiFactory;
         private readonly BattleManager _battleManagerModel;
         
         private StartPanelPresenter _startPanelPresenter;
         private ContinuePanelPresenter _continuePanelPresenter;
         private RestartPanelPresenter _restartPanelPresenter;
-        private ReloadButtonPresenter _reloadButtonPresenter;
+        private ReloadPanelPresenter _reloadPanelPresenter;
 
-        public MediatorPresentation(DiContainer container, UIFactory uiFactory, BattleManager battleManagerModel)
+        public MediatorPresentation(IInstantiator iInstantiator, UIFactory uiFactory, BattleManager battleManagerModel)
         {
-            _container = container;
+            _iInstantiator = iInstantiator;
             _uiFactory = uiFactory;
             _battleManagerModel = battleManagerModel;
 
@@ -34,47 +34,59 @@ namespace DuelGame
         private void BattleReadyHandler()
         {
             TryCreateStartPanel();
-            TryCreateReloadButton();
+            TryCreateReloadPanel();
         }
 
         private void BattleFinishHandler(Players playerWhoLost)
         {
             if (playerWhoLost == Players.Player2)
             {
-                TryCreateContinuePanel();
+                TryCreateContinuePanel(playerWhoLost);
             }
             else
             {
-                TryCreateRestartPanel();
+                TryCreateRestartPanel(playerWhoLost);
             }
         }
         
         private void TryCreateStartPanel()
         {
-            _startPanelPresenter ??= _container.Instantiate<StartPanelPresenter>(
-                new object[] { _uiFactory.CreateStartPanelView() }
-            );
+            if (_startPanelPresenter != null) 
+                return;
+            
+            _startPanelPresenter = _iInstantiator.Instantiate<StartPanelPresenter>(
+                new object[] { _uiFactory.CreateStartPanelView() });
+            _startPanelPresenter.ShowView();
         }
         
-        private void TryCreateRestartPanel()
+        private void TryCreateRestartPanel(Players playerWhoLost)
         {
-            _restartPanelPresenter ??= _container.Instantiate<RestartPanelPresenter>(
-                new object[] { _uiFactory.CreateRestartPanelView() }
-            );
+            if (_restartPanelPresenter != null)
+                return;
+            
+            _restartPanelPresenter = _iInstantiator.Instantiate<RestartPanelPresenter>(
+                new object[] { _uiFactory.CreateRestartPanelView() });
+            _restartPanelPresenter.ShowView(playerWhoLost);
         }
         
-        private void TryCreateContinuePanel()
+        private void TryCreateContinuePanel(Players playerWhoLost)
         {
-            _continuePanelPresenter ??= _container.Instantiate<ContinuePanelPresenter>(
-                new object[] { _uiFactory.CreateContinuePanelView() }
-            );
+            if (_continuePanelPresenter != null)
+                return;
+            
+            _continuePanelPresenter = _iInstantiator.Instantiate<ContinuePanelPresenter>(
+                new object[] { _uiFactory.CreateContinuePanelView() });
+            _continuePanelPresenter.ShowView(playerWhoLost);
         }
         
-        private void TryCreateReloadButton()
+        private void TryCreateReloadPanel()
         {
-            _reloadButtonPresenter ??= _container.Instantiate<ReloadButtonPresenter>(
-                new object[] { _uiFactory.CreateReloadButtonView() }
-            );
+            if (_reloadPanelPresenter != null)
+                return;
+            
+            _reloadPanelPresenter = _iInstantiator.Instantiate<ReloadPanelPresenter>(
+                new object[] { _uiFactory.CreateReloadButtonView() });
+            _reloadPanelPresenter.ShowView();
         }
     }   
 }

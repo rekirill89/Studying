@@ -14,7 +14,7 @@ namespace DuelGame
         [SerializeField] private StartPanelView _startPanelView;
         [SerializeField] private ContinuePanelView _continuePanelView;
         [SerializeField] private RestartPanelView _restartPanelView;
-        [SerializeField] private ReloadButtonView _reloadButtonView;
+        [SerializeField] private ReloadPanelView _reloadPanelView;
         
         public override void InstallBindings()
         {
@@ -26,7 +26,7 @@ namespace DuelGame
                 _startPanelView,
                 _continuePanelView,
                 _restartPanelView,
-                _reloadButtonView);
+                _reloadPanelView);
             
             Container.BindInterfacesAndSelfTo<BattleStateModel>().AsSingle();
             Container.BindInterfacesAndSelfTo<HeroesService>().AsSingle().WithArguments(_battleFacade);
