@@ -29,4 +29,3 @@ namespace DuelGame
         public GameObject EntityObj { get; set; }
     }
 }
-

@@ -41,7 +41,5 @@ namespace DuelGame
                 _continuePanelView.Hide();
             }
         }
-
-
     }
 }

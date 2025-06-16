@@ -6,15 +6,14 @@ namespace DuelGame
 {
     public class HeroesService : IDisposable
     {        
-        private PlayerDeath _onPlayerDeath ;
-        
-        private BaseHero _player1;
-        private BaseHero _player2;
-
         private readonly PlayerSettings _player1Settings = new PlayerSettings();
         private readonly PlayerSettings _player2Settings = new PlayerSettings();
         
         private readonly EntityFactory _entityFactory;
+        
+        private PlayerDeath _onPlayerDeath ;
+        private BaseHero _player1;
+        private BaseHero _player2;
 
         public HeroesService(EntityFactory entityFactory, BattleSettingsFacade facade)
         {

@@ -12,4 +12,3 @@ namespace DuelGame
         [field: SerializeField] public HeroEnum SecondHero {get; private set;}
     }
 }
-

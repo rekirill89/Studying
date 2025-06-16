@@ -36,6 +36,5 @@ namespace DuelGame
                 _startPanelView.Hide();
             }
         }
-
     }   
 }

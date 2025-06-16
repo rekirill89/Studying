@@ -12,5 +12,4 @@ namespace DuelGame
             SceneManager.LoadScene(BATTLE_SCENE);
         }
     }
-   
 }

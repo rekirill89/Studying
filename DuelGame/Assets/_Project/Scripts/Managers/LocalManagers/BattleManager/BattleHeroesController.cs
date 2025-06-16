@@ -36,25 +36,17 @@ namespace DuelGame
             LetPlayerAttackInSeconds(_player2, timerP2).Forget();
         }
         
-        private async UniTask LetPlayerAttackInSeconds(BaseHero hero, float timeToAttack)
-        {
-            try
-            {
-                await UniTask.Delay(TimeSpan.FromSeconds(timeToAttack), cancellationToken: _cts.Token);
-                hero.ChangeAttackStatus(true);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-        }
-
         public void StopAllTasks()
         {
             _cts.Cancel();
             /*_cts.Dispose();
             _cts = null;*/
+        }
+        
+        private async UniTask LetPlayerAttackInSeconds(BaseHero hero, float timeToAttack)
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(timeToAttack), cancellationToken: _cts.Token);
+            hero.ChangeAttackStatus(true);
         }
     }   
 }

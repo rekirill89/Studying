@@ -14,4 +14,3 @@ namespace DuelGame
         public float AttackRate;
     }
 }
-

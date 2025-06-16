@@ -20,9 +20,5 @@ namespace DuelGame
         {
             _archer.SpawnArrow();
         } 
-        
-
-
     }
 }
-

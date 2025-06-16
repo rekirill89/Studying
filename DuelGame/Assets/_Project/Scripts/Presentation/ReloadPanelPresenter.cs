@@ -28,6 +28,5 @@ namespace DuelGame
         {
             _reloadPanelView.Show();
         }
-
     }
 }

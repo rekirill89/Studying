@@ -17,21 +17,8 @@ namespace DuelGame
         
         public virtual UniTask Execute(BaseHero target, Sprite sprite)
         {
-            try
-            {
-                target.BuffAppliedInvoke(sprite, BuffDuration);
-                return UniTask.CompletedTask;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
+            target.BuffAppliedInvoke(sprite, BuffDuration);
+            return UniTask.CompletedTask;
         }
-        
-
-
-        
     }
 }
-

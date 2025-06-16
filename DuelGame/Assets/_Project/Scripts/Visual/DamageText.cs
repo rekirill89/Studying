@@ -2,6 +2,8 @@ using System;
 using TMPro;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.Events;
+using UnityEngine.Serialization;
 
 namespace DuelGame
 {
@@ -14,10 +16,9 @@ namespace DuelGame
         
         [SerializeField] private Color _defaultColor = new Color(1, 0.35f, 0.35f, 1);
         [SerializeField] private Vector2 _startPosition = new Vector2(0, 0);
-
-        public delegate void ReturnToPool(DamageText selfDamageText);
-        private ReturnToPool _returnToPool;
-                
+        
+        public UnityEvent<DamageText> OnComplete; 
+        
         private TextMeshProUGUI _damageText;
         
         private Tween _moveTween;
@@ -32,12 +33,11 @@ namespace DuelGame
         {
             _moveTween?.Kill();
             _fadeTween?.Kill();
+            OnComplete.RemoveAllListeners();
         }
         
-        public void Initialize(float damage, ReturnToPool returnToPool)
+        public void Initialize(float damage)
         {            
-            _returnToPool = returnToPool;
-            
             _damageText.transform.position = _startPosition;
             _damageText.text = (-damage).ToString();
             _damageText.color = _defaultColor;
@@ -48,8 +48,7 @@ namespace DuelGame
             
             _fadeTween = _damageText
                 .DOFade(_alphaTarget, _lifeTime)
-                .OnComplete(() => _returnToPool?.Invoke(this));
+                .OnComplete(() => OnComplete?.Invoke(this));
         }
     }
 }
-

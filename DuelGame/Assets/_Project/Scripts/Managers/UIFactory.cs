@@ -3,14 +3,14 @@ using UnityEngine;
 namespace DuelGame
 {
     public class UIFactory
-    {
+    {        
+        private readonly Transform _screenCanvasParent;
+        private readonly Transform _hudCanvasParent;
+
         private StartPanelView _startPanelView;
         private ContinuePanelView _continuePanelView;
         private RestartPanelView _restartPanelView;
         private ReloadPanelView _reloadButtonView;
-        
-        private readonly Transform _screenCanvasParent;
-        private readonly Transform _hudCanvasParent;
 
         public UIFactory(
             Transform screenCanvasParent,
@@ -50,4 +50,3 @@ namespace DuelGame
         }
     }
 }
-

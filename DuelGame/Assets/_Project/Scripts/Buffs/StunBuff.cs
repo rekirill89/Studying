@@ -17,17 +17,9 @@ namespace DuelGame
         public override async UniTask Execute(BaseHero target, Sprite sprite)
         {
             await base.Execute(target, sprite);
-            try
-            {
-                target.GetStunned(BuffDuration);
-                await UniTask.Yield();
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
+            
+            target.GetStunned(BuffDuration);
+            await UniTask.Yield();
         }
     }
 }
-

@@ -30,5 +30,4 @@ namespace DuelGame
         public BaseHero HeroScript;
         public HeroEnum HeroEnum;
     }
-
 }

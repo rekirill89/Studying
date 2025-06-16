@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
@@ -18,18 +19,20 @@ namespace DuelGame
         [SerializeField] protected Transform DamageTextPosition;
 
         public Image HealthBar;
-
-        protected Animator Animator;
+        
         protected const string ATTACK = "Attack";
+        protected Animator Animator;
+        
+        private const string HIT = "Hit";
+        private const string DEATH = "Death";   
+        
+        private readonly List<DamageText> _activeDamageTexts = new List<DamageText>();
+        private readonly int _initSizeOfPool = 8;
+        
+        private float _currenBuffDuration = 0;
         
         private CancellationTokenSource _cts;
         private ObjectPool<DamageText> _damageTextPool;
-
-        private readonly int _initSizeOfPool = 8;
-        private float _currenBuffDuration = 0;
-        
-        private const string HIT = "Hit";
-        private const string DEATH = "Death";
         
         protected virtual void Awake()
         {
@@ -47,6 +50,8 @@ namespace DuelGame
         private void OnDestroy()
         {
             UnsubscribeFromEvents();
+            foreach (var damageText in _activeDamageTexts)
+                damageText.OnComplete.RemoveListener(HideDamageText);
             _cts.Cancel();
         }
         
@@ -65,8 +70,11 @@ namespace DuelGame
             Debug.Log("Triggered");
 
             var x = _damageTextPool.Get();
-            x.Initialize(damage, _damageTextPool.ReturnToPool);
-
+            
+            _activeDamageTexts.Add(x);
+            
+            x.OnComplete.AddListener(HideDamageText);
+            x.Initialize(damage);
             x.transform.SetParent(DamageTextPosition);
             x.transform.localPosition = new Vector2(0, 0);
         }
@@ -114,36 +122,29 @@ namespace DuelGame
         
         private async UniTask SpawnBuffSprite(Sprite sp, float duration)
         {
-            try
-            {
-                _currenBuffDuration = duration;
-                BuffSprite.enabled = true;
-                BuffSprite.sprite = sp;
+            _currenBuffDuration = duration;
+            BuffSprite.enabled = true;
+            BuffSprite.sprite = sp;
 
-                float step = 0.1f;
-                while (_currenBuffDuration > 0 && !_cts.Token.IsCancellationRequested)
-                {
-                    _currenBuffDuration -= step;
-                    await UniTask.Delay(TimeSpan.FromSeconds(step), cancellationToken: _cts.Token);
-                }
-                BuffSprite.enabled = false;
-            }
-            catch (OperationCanceledException)
+            float step = 0.1f;
+            while (_currenBuffDuration > 0 && !_cts.Token.IsCancellationRequested)
             {
-                if(BuffSprite != null) 
-                    BuffSprite.enabled = false;
+                _currenBuffDuration -= step;
+                await UniTask.Delay(TimeSpan.FromSeconds(step), cancellationToken: _cts.Token);
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
+            BuffSprite.enabled = false;
         }
         
+        private void HideDamageText(DamageText damageText)
+        {
+            _damageTextPool.ReturnToPool(damageText);
+            damageText.OnComplete.RemoveListener(HideDamageText);
+            _activeDamageTexts.Remove(damageText);
+        }
+
         private void HeroAttack()
         {
             Animator.SetTrigger(ATTACK);
         }
     }
 }
-

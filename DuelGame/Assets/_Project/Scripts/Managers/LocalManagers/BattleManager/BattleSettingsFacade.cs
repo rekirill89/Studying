@@ -11,4 +11,3 @@ namespace DuelGame
         public Transform SecondPlayerTrans;    
     }
 }
-

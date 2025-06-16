@@ -27,35 +27,20 @@ namespace DuelGame
 
         private async UniTask StartTickableDamage(BaseHero hero)
         {
-            try
+            float currentAttackDuration = 0;
+            IsAttackable = false;
+            while (currentAttackDuration < _attackDuration && !Cts.IsCancellationRequested)
             {
-                float currentAttackDuration = 0;
-                IsAttackable = false;
-                while (currentAttackDuration < _attackDuration && !Cts.IsCancellationRequested)
-                {
-                    hero.TakeHit(this.Hero.Damage);
-                    currentAttackDuration += _attackInterval;
-
-                    await UniTask.Delay(TimeSpan.FromSeconds(_attackIntervalTimer), cancellationToken: Cts.Token);
-                }
-
                 hero.TakeHit(this.Hero.Damage);
-                InvokeApplyBuffToEnemy(hero);
-                IsAttackable = true;
-                OnAttackEnded?.Invoke();
-            }            
-            catch (OperationCanceledException)
-            {
-                IsAttackable = false;
-                OnAttackEnded?.Invoke();
-            }
-            catch (Exception e)
-            {
-                Debug.LogException(e);
-                throw;
+                currentAttackDuration += _attackInterval;
+
+                await UniTask.Delay(TimeSpan.FromSeconds(_attackIntervalTimer), cancellationToken: Cts.Token);
             }
 
+            hero.TakeHit(this.Hero.Damage);
+            InvokeApplyBuffToEnemy(hero);
+            IsAttackable = true;
+            OnAttackEnded?.Invoke();
         }
     }
 }
-

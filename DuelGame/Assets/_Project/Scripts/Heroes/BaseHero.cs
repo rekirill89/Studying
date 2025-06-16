@@ -35,8 +35,8 @@ namespace DuelGame
         protected bool IsAttackable = false;
         protected CancellationTokenSource Cts;
         
-        private bool isDead { get; set; } = false;
         private const float ARMOR_COEFFICIENT = 0.1f;
+        private bool isDead { get; set; } = false;
         private float _currenStunDuration = 0;
         private float _currentHealth = 0;
         
@@ -134,53 +134,36 @@ namespace DuelGame
 
         private async UniTask AttackTimer()
         {
-            try
+            while (!Cts.IsCancellationRequested)
             {
-                while (!Cts.IsCancellationRequested)
+                if (!IsAttackable || _currenStunDuration > 0)
                 {
-                    if (!IsAttackable || _currenStunDuration > 0)
-                    {
-                        await UniTask.DelayFrame(1);
-                        continue;
-                    }
-
-                    OnAttack?.Invoke();
-
-                    await UniTask.Delay(TimeSpan.FromSeconds(Hero.AttackRate), cancellationToken: Cts.Token);
+                    await UniTask.DelayFrame(1, cancellationToken: Cts.Token);
+                    continue;
                 }
+
+                OnAttack?.Invoke();
+
+                await UniTask.Delay(TimeSpan.FromSeconds(Hero.AttackRate), cancellationToken: Cts.Token);
             }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-                throw;
-            }
-            
         }
 
         private async UniTask GetStunnedUntilTime(float stunDuration)
         {
-            try
+            if (_currenStunDuration > 0)
             {
-                if (_currenStunDuration > 0)
-                {
-                    _currenStunDuration += stunDuration;
-                    return;
-                }
-            
-                _currenStunDuration = stunDuration;
-            
-                float step = 0.1f;
-                while (_currenStunDuration > 0 && !Cts.IsCancellationRequested)
-                {
-                    _currenStunDuration -= step;
-                    _currenStunDuration = Mathf.Clamp(_currenStunDuration, 0, stunDuration);
-                    await UniTask.Delay(TimeSpan.FromSeconds(step), cancellationToken:Cts.Token);
-                }
+                _currenStunDuration += stunDuration;
+                return;
             }
-            catch (Exception e)
+        
+            _currenStunDuration = stunDuration;
+        
+            float step = 0.1f;
+            while (_currenStunDuration > 0 && !Cts.IsCancellationRequested)
             {
-                Console.WriteLine(e);
-                throw;
+                _currenStunDuration -= step;
+                _currenStunDuration = Mathf.Clamp(_currenStunDuration, 0, stunDuration);
+                await UniTask.Delay(TimeSpan.FromSeconds(step), cancellationToken:Cts.Token);
             }
         }
         
@@ -207,4 +190,3 @@ namespace DuelGame
         Player2
     }
 }
-
