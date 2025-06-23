@@ -26,11 +26,11 @@ namespace DuelGame
             _currenBuffDuration = 0;
         }
         
-        public override async UniTask Execute(BaseHero target, Sprite sprite)
+        public override async UniTask Execute(BaseHero target/*, Sprite sprite*/)
         {
             await UniTask.Delay(TimeSpan.FromSeconds(_startDelay), cancellationToken: _token);
         
-            await base.Execute(target, sprite);
+            await base.Execute(target/*, sprite*/);
 
             var intervalTimer = TimeSpan.FromSeconds(_tickInterval);
             while (_currenBuffDuration < BuffDuration && !_token.IsCancellationRequested)

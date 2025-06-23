@@ -14,9 +14,9 @@ namespace DuelGame
             BuffEnum = BuffEnum.Stun;
         }
         
-        public override async UniTask Execute(BaseHero target, Sprite sprite)
+        public override async UniTask Execute(BaseHero target/*, Sprite sprite*/)
         {
-            await base.Execute(target, sprite);
+            await base.Execute(target/*, sprite*/);
             
             target.GetStunned(BuffDuration);
             await UniTask.Yield();

@@ -6,17 +6,17 @@ namespace DuelGame
 {
     public class BootstrapEntryPoint : IInitializable
     {
-        private readonly SceneLoaderManager _sceneLoaderManager;
+        private readonly SceneLoaderService _sceneLoaderService;
         
-        public BootstrapEntryPoint(SceneLoaderManager sceneLoaderManager)
+        public BootstrapEntryPoint(SceneLoaderService sceneLoaderService)
         {
-            _sceneLoaderManager = sceneLoaderManager;
+            _sceneLoaderService = sceneLoaderService;
         }
         
         public void Initialize()
         {
             Debug.Log("Loading next scene...");
-            _sceneLoaderManager.LoadBattleScene();
+            _sceneLoaderService.LoadBattleScene();
         }
     }
 }

@@ -7,7 +7,7 @@ namespace DuelGame
     public class StartPanelPresenter : IDisposable
     {
         private readonly BattleManager _battleManagerModel;
-        private readonly StartPanelView _startPanelView;
+        private readonly BaseOneButtonPanelView _startPanelView;
 
         public StartPanelPresenter(BattleManager battleManager, StartPanelView startPanelView)
         {

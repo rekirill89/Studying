@@ -8,16 +8,16 @@ namespace DuelGame
     public abstract class Buff
     {
         public BuffEnum BuffEnum {get; protected set;}
-        protected float BuffDuration {get; private set;}
+        public float BuffDuration {get; private set;}
         
         protected Buff(float buffDuration)
         {
-            this.BuffDuration = buffDuration;
+            BuffDuration = buffDuration;
         }
         
-        public virtual UniTask Execute(BaseHero target, Sprite sprite)
+        public virtual UniTask Execute(BaseHero target/*, Sprite sprite*/)
         {
-            target.BuffAppliedInvoke(sprite, BuffDuration);
+            //target.BuffAppliedInvoke(/*sprite, */BuffDuration);
             return UniTask.CompletedTask;
         }
     }

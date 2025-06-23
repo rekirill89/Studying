@@ -17,7 +17,7 @@ namespace DuelGame
         [SerializeField] private Color _defaultColor = new Color(1, 0.35f, 0.35f, 1);
         [SerializeField] private Vector2 _startPosition = new Vector2(0, 0);
         
-        public UnityEvent<DamageText> OnComplete; 
+        public event Action<DamageText> OnComplete; 
         
         private TextMeshProUGUI _damageText;
         
@@ -33,7 +33,7 @@ namespace DuelGame
         {
             _moveTween?.Kill();
             _fadeTween?.Kill();
-            OnComplete.RemoveAllListeners();
+            //OnComplete.RemoveAllListeners();
         }
         
         public void Initialize(float damage)

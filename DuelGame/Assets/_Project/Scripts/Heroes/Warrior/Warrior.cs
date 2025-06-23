@@ -8,6 +8,8 @@ namespace DuelGame
     [RequireComponent(typeof(BoxCollider2D))]
     public class Warrior : BaseHero
     {
+        public override HeroEnum heroEnum { get; } = HeroEnum.Warrior;
+
         private readonly float _stunChance = 0.4f;
 
         private void Awake()
@@ -22,7 +24,7 @@ namespace DuelGame
             {
                 InvokeApplyBuffToEnemy(EnemyHero);
             }                
-            EnemyHero.TakeHit(this.Hero.Damage);
+            EnemyHero.TakeHit(Hero.Damage);
         }
     }
 }

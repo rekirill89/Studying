@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 namespace DuelGame
 {
-    public class SceneLoaderManager
+    public class SceneLoaderService
     {
         private const string BATTLE_SCENE = "BattleScene";
         

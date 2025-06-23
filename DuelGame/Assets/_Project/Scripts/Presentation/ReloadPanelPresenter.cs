@@ -5,22 +5,22 @@ namespace DuelGame
 {
     public class ReloadPanelPresenter : IDisposable
     {
-        private readonly ReloadPanelView _reloadPanelView;
-        private readonly SceneLoaderManager _sceneLoaderManager;
+        private readonly BaseOneButtonPanelView _reloadPanelView;
+        private readonly SceneLoaderService _sceneLoaderService;
 
         public ReloadPanelPresenter(
             ReloadPanelView reloadPanelView,
-            SceneLoaderManager sceneLoaderManager)
+            SceneLoaderService sceneLoaderService)
         {
             _reloadPanelView = reloadPanelView;
-            _sceneLoaderManager = sceneLoaderManager;
+            _sceneLoaderService = sceneLoaderService;
             
-            _reloadPanelView.OnButtonClicked += _sceneLoaderManager.LoadBattleScene;
+            _reloadPanelView.OnButtonClicked += _sceneLoaderService.LoadBattleScene;
         }
                 
         public void Dispose()
         {
-            _reloadPanelView.OnButtonClicked -= _sceneLoaderManager.LoadBattleScene;
+            _reloadPanelView.OnButtonClicked -= _sceneLoaderService.LoadBattleScene;
 
         }
         

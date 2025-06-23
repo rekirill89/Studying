@@ -7,7 +7,7 @@ namespace DuelGame
     public class ContinuePanelPresenter : IDisposable
     {
         private readonly BattleManager _battleManagerModel;
-        private readonly ContinuePanelView _continuePanelView;
+        private readonly BaseOneButtonPanelView _continuePanelView;
 
         public ContinuePanelPresenter(BattleManager battleManager, ContinuePanelView continuePanelView)
         {

@@ -4,26 +4,27 @@ using Object = UnityEngine.Object;
 
 namespace DuelGame
 {
-    public class HeroesService : IDisposable
-    {        
+    public class HeroesLifecycleController : IDisposable
+    {
+        public BaseHero Player1 {get; private set;}
+        public BaseHero Player2 {get; private set;}
+        
         private readonly PlayerSettings _player1Settings = new PlayerSettings();
-        private readonly PlayerSettings _player2Settings = new PlayerSettings();
+        private readonly PlayerSettings _player2Settings  = new PlayerSettings();
         
         private readonly EntityFactory _entityFactory;
         
         private PlayerDeath _onPlayerDeath ;
-        private BaseHero _player1;
-        private BaseHero _player2;
 
-        public HeroesService(EntityFactory entityFactory, BattleSettingsFacade facade)
+        public HeroesLifecycleController(EntityFactory entityFactory, BattleSessionContext battleSessionContext)
         {
             _entityFactory = entityFactory;
             
-            _player1Settings.spawnTransform = facade.FirstPlayerTrans;
-            _player1Settings.heroEnum = facade.BattleConfig.FirstHero;
+            _player1Settings.spawnTransform = battleSessionContext.FirstPlayerTrans;
+            _player1Settings.heroEnum = battleSessionContext.BattleData.Player1;
             
-            _player2Settings.spawnTransform = facade.SecondPlayerTrans;
-            _player2Settings.heroEnum = facade.BattleConfig.SecondHero;
+            _player2Settings.spawnTransform = battleSessionContext.SecondPlayerTrans;
+            _player2Settings.heroEnum = battleSessionContext.BattleData.Player2;
         }
         
         public void Dispose()
@@ -35,24 +36,24 @@ namespace DuelGame
         {
             _onPlayerDeath = onPlayerDeath;
             
-            _player1 = CreateHero(_player1Settings.spawnTransform, _player1Settings.heroEnum);
-            _player2 = CreateHero(_player2Settings.spawnTransform, _player2Settings.heroEnum);
+            Player1 = CreateHero(_player1Settings.spawnTransform, _player1Settings.heroEnum);
+            Player2 = CreateHero(_player2Settings.spawnTransform, _player2Settings.heroEnum);
             
-            return (_player1, _player2);
+            return (Player1, Player2);
         }
 
         public void DestroyHeroes()
         {
-            if (_player1 != null)
+            if (Player1 != null)
             {
-                _player1.OnDeath -= StopPlayers;
-                Object.Destroy(_player1.gameObject);
+                Player1.OnDeath -= StopPlayers;
+                Object.Destroy(Player1.gameObject);
             }
 
-            if (_player2 != null)
+            if (Player2 != null)
             {
-                _player2.OnDeath -= StopPlayers;
-                Object.Destroy(_player2.gameObject);
+                Player2.OnDeath -= StopPlayers;
+                Object.Destroy(Player2.gameObject);
             }
         }
 
@@ -68,8 +69,8 @@ namespace DuelGame
 
         private void StopPlayers(Players playerWhoLost)
         {
-            _player1.StopAllTasks();
-            _player2.StopAllTasks();
+            Player1.StopAllTasks();
+            Player2.StopAllTasks();
             _onPlayerDeath?.Invoke(playerWhoLost);
         }
     }

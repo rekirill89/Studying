@@ -11,28 +11,27 @@ namespace DuelGame
         [SerializeField] private Transform _screenCanvasParent;
         [SerializeField] private Transform _hudCanvasParent;
         
-        [SerializeField] private StartPanelView _startPanelView;
-        [SerializeField] private ContinuePanelView _continuePanelView;
-        [SerializeField] private RestartPanelView _restartPanelView;
-        [SerializeField] private ReloadPanelView _reloadPanelView;
+        [SerializeField] private Panels _panels;
         
         public override void InstallBindings()
         {
             Debug.Log("Battle scene installer created");
-            Container.BindInterfacesAndSelfTo<SceneLoaderManager>().AsSingle();
+            Container.BindInterfacesAndSelfTo<SceneLoaderService>().AsSingle();
             Container.BindInterfacesAndSelfTo<UIFactory>().AsSingle().WithArguments(
                 _screenCanvasParent,
                 _hudCanvasParent,
-                _startPanelView,
-                _continuePanelView,
-                _restartPanelView,
-                _reloadPanelView);
+                _panels);
             
-            Container.BindInterfacesAndSelfTo<BattleStateModel>().AsSingle();
-            Container.BindInterfacesAndSelfTo<HeroesService>().AsSingle().WithArguments(_battleFacade);
-            Container.BindInterfacesAndSelfTo<BattleManager>().AsSingle().WithArguments(_battleFacade);
+            Container.BindInterfacesAndSelfTo<BattleStateModel>().AsSingle();            
+            Container.BindInterfacesAndSelfTo<BattleSessionContext>().AsSingle().WithArguments(_battleFacade);
+            Container.BindInterfacesAndSelfTo<HeroesLifecycleController>().AsSingle();
+            Container.BindInterfacesAndSelfTo<BattleManager>().AsSingle();
+            Container.BindInterfacesAndSelfTo<BattleDataController>().AsSingle();
 
+            
             Container.BindInterfacesAndSelfTo<MediatorPresentation>().AsSingle();
+            
+
         }
     }
 }

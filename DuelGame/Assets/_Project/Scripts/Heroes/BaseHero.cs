@@ -12,22 +12,23 @@ namespace DuelGame
     {
         public delegate void PlayerTakeHit(Players players);
         public delegate void TakeDamage(float damage);
-        public delegate void ApplyBuff(Sprite sprite, float duration);
         public delegate void PlayerHealthChanged(float currentHealth, float maxHealth);
         public delegate void ApplyBuffToEnemy(BaseHero hero);
+        public delegate void ReceiveBuff(BuffEnum buffEnum);
         
         public event PlayerTakeHit OnTakeHit;
         public event TakeDamage OnTakeDamage;
         public event PlayerDeath OnDeath;
         public event PlayerHealthChanged OnHealthChanged;
-        public event ApplyBuffToEnemy OnApplyBuffToEnemy;
         public event Action OnAttack;
-        public event ApplyBuff OnBuffApplied;
         public event Action OnPlayerStop;
+        public event ReceiveBuff OnReceiveBuff;        
+        public event ApplyBuffToEnemy OnApplyBuffToEnemy;
 
         public HeroStats Hero { get; private set; }
         public BuffsList BuffList { get; private set; }
-        
+        public abstract HeroEnum heroEnum { get; }// = HeroEnum.None;
+
         protected BaseHero EnemyHero;
         protected Players Player = default;
         protected BoxCollider2D BodyCollider;
@@ -53,7 +54,7 @@ namespace DuelGame
         
         public void Initialize(HeroStats hero, BuffsList buffs)
         {
-            this.Hero = Instantiate(hero);
+            Hero = Instantiate(hero);
             BuffList = buffs;
         }
         
@@ -78,6 +79,11 @@ namespace DuelGame
         {
             GetStunnedUntilTime(stunDuration).Forget();
         }
+
+        public void BuffReceivedInvoke(BuffEnum buffEnum)
+        {
+            OnReceiveBuff?.Invoke(buffEnum);
+        }
         
         public void TakeHit(float damage)
         {
@@ -89,14 +95,9 @@ namespace DuelGame
             ChangeCurrentHealth(realDamage);
         }
         
-        public void BuffAppliedInvoke(Sprite buffSprite, float buffDuration)
-        {
-            OnBuffApplied?.Invoke(buffSprite, buffDuration);
-        }
-        
         public void SetPlayerID(Players player)
         {
-            this.Player = player;
+            Player = player;
         }
 
         public void SetEnemy(BaseHero enemy)
@@ -187,6 +188,7 @@ namespace DuelGame
     public enum Players
     {
         Player1,
-        Player2
+        Player2,
+        None
     }
 }

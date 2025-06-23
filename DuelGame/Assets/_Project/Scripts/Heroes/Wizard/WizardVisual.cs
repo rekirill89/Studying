@@ -33,7 +33,7 @@ namespace DuelGame
             Hero.OnDeath += HeroDeath;
             Hero.OnHealthChanged += ChangeHealthBar;
 
-            Hero.OnBuffApplied += HeroBuffApplied;
+            //Hero.OnBuffApplied += HeroBuffApplied;
         }
         
         protected override void UnsubscribeFromEvents()
@@ -47,7 +47,7 @@ namespace DuelGame
             Hero.OnDeath -= HeroDeath;
             Hero.OnHealthChanged -= ChangeHealthBar;
 
-            Hero.OnBuffApplied -= HeroBuffApplied;
+            //Hero.OnBuffApplied -= HeroBuffApplied;
         }
 
         private void WizardAttackStartedAnim()

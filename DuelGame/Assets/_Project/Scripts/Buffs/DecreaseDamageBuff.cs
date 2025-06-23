@@ -20,9 +20,9 @@ namespace DuelGame
             BuffEnum = BuffEnum.DecreaseDamage;
         }
         
-        public override async UniTask Execute(BaseHero target, Sprite sprite)
+        public override async UniTask Execute(BaseHero target/*, Sprite sprite*/)
         {
-            await base.Execute(target, sprite);
+            await base.Execute(target/*, sprite*/);
         
             var defaultDamage = target.Hero.Damage;
             target.Hero.Damage = defaultDamage - (defaultDamage / _decreaseDamageMultiplier);

@@ -5,17 +5,12 @@ using UnityEngine.UI;
 
 namespace DuelGame
 {
-    public class BasePanelView : MonoBehaviour
+    public class BaseOneButtonPanelView : BasePanelView
     {
-        [SerializeField] protected GameObject Root;
         [SerializeField] protected Button Button;
                 
         public event Action OnButtonClicked;
         
-        public void Show() => Root.SetActive(true);
-        
-        public void Hide() => Root.SetActive(false);
-    
         private void Awake()
         {
             Button.onClick.AddListener(OnButtonClickedHandler);

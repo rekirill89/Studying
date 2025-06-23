@@ -14,6 +14,8 @@ namespace DuelGame
         private ContinuePanelPresenter _continuePanelPresenter;
         private RestartPanelPresenter _restartPanelPresenter;
         private ReloadPanelPresenter _reloadPanelPresenter;
+        private SavePanelPresenter _savePanelPresenter;
+        private LoadPanelPresenter _loadPanelPresenter;
 
         public MediatorPresentation(IInstantiator iInstantiator, UIFactory uiFactory, BattleManager battleManagerModel)
         {
@@ -22,71 +24,73 @@ namespace DuelGame
             _battleManagerModel = battleManagerModel;
 
             _battleManagerModel.OnBattleReady += BattleReadyHandler;
+            _battleManagerModel.OnPlayersSpawned += PlayerSpawnedHandler;
             _battleManagerModel.OnBattleFinish += BattleFinishHandler;
         }
         
         public void Dispose()
         {
             _battleManagerModel.OnBattleReady -= BattleReadyHandler;
+            _battleManagerModel.OnPlayersSpawned -= PlayerSpawnedHandler;
             _battleManagerModel.OnBattleFinish -= BattleFinishHandler;
         }
 
         private void BattleReadyHandler()
         {
-            TryCreateStartPanel();
-            TryCreateReloadPanel();
+            TryCreatePanel(
+                ref _startPanelPresenter,
+                () => _uiFactory.CreateStartPanelView(),
+                presenter => presenter.ShowView());
+            TryCreatePanel(
+                ref _reloadPanelPresenter,
+                () => _uiFactory.CreateReloadPanelView(),
+                presenter => presenter.ShowView());
+        }
+
+        private void PlayerSpawnedHandler(BattleState _)
+        {
+            TryCreatePanel(
+                ref _savePanelPresenter,
+                () => _uiFactory.CreateSavePanelView(),
+                presenter => presenter.ShowView());
         }
 
         private void BattleFinishHandler(Players playerWhoLost)
         {
             if (playerWhoLost == Players.Player2)
             {
-                TryCreateContinuePanel(playerWhoLost);
+                TryCreatePanel(
+                    ref _continuePanelPresenter, 
+                    () => _uiFactory.CreateContinuePanelView(),
+                    presenter => presenter.ShowView(playerWhoLost));
             }
             else
             {
-                TryCreateRestartPanel(playerWhoLost);
+                TryCreatePanel(
+                    ref _restartPanelPresenter, 
+                    () => _uiFactory.CreateRestartPanelView(),
+                    presenter => presenter.ShowView(playerWhoLost));
             }
+            
+            TryCreatePanel(
+                ref _loadPanelPresenter,
+                () => _uiFactory.CreateLoadPanelView(),
+                presenter => presenter.ShowView(playerWhoLost));
         }
         
-        private void TryCreateStartPanel()
+        private void TryCreatePanel<TPresenter, TView>(
+            ref TPresenter presenter,
+            Func<TView> createView,
+            Action<TPresenter> showView)
+            where TPresenter : class
+            where TView : class
         {
-            if (_startPanelPresenter != null) 
+            if(presenter != null)
                 return;
             
-            _startPanelPresenter = _iInstantiator.Instantiate<StartPanelPresenter>(
-                new object[] { _uiFactory.CreateStartPanelView() });
-            _startPanelPresenter.ShowView();
-        }
-        
-        private void TryCreateRestartPanel(Players playerWhoLost)
-        {
-            if (_restartPanelPresenter != null)
-                return;
-            
-            _restartPanelPresenter = _iInstantiator.Instantiate<RestartPanelPresenter>(
-                new object[] { _uiFactory.CreateRestartPanelView() });
-            _restartPanelPresenter.ShowView(playerWhoLost);
-        }
-        
-        private void TryCreateContinuePanel(Players playerWhoLost)
-        {
-            if (_continuePanelPresenter != null)
-                return;
-            
-            _continuePanelPresenter = _iInstantiator.Instantiate<ContinuePanelPresenter>(
-                new object[] { _uiFactory.CreateContinuePanelView() });
-            _continuePanelPresenter.ShowView(playerWhoLost);
-        }
-        
-        private void TryCreateReloadPanel()
-        {
-            if (_reloadPanelPresenter != null)
-                return;
-            
-            _reloadPanelPresenter = _iInstantiator.Instantiate<ReloadPanelPresenter>(
-                new object[] { _uiFactory.CreateReloadButtonView() });
-            _reloadPanelPresenter.ShowView();
+            presenter = _iInstantiator.Instantiate<TPresenter>(
+                new object[] { createView() });
+            showView(presenter);
         }
     }   
 }

@@ -3,7 +3,8 @@ using System.Collections;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using Cysharp.Threading.Tasks;
-using Zenject;
+using Unity.VisualScripting;
+using IInitializable = Zenject.IInitializable;
 
 namespace DuelGame
 {
@@ -21,15 +22,18 @@ namespace DuelGame
         private readonly float _attackDelayP1;
         private readonly float _attackDelayP2;
         
-        private readonly HeroesService _heroesService;
-        private BattleHeroesController _battleHeroesController;
+        private readonly HeroesLifecycleController _heroesLifecycleController;
+        private HeroesCombatController _heroesCombatController;
         
-        public BattleManager(BattleStateModel battleStateModel, HeroesService heroesService, BattleSettingsFacade facade)
+        public BattleManager(
+            BattleStateModel battleStateModel, 
+            HeroesLifecycleController heroesLifecycleController, 
+            BattleSessionContext battleSessionContext)
         {
-            _heroesService = heroesService;
+            _heroesLifecycleController = heroesLifecycleController;
 
-            _attackDelayP1 = facade.BattleConfig.AttackDelayP1;
-            _attackDelayP2 = facade.BattleConfig.AttackDelayP2;
+            _attackDelayP1 = battleSessionContext.AttackDelayP1;
+            _attackDelayP2 = battleSessionContext.AttackDelayP2;
             
             _battleStateModel = battleStateModel;
 
@@ -43,8 +47,8 @@ namespace DuelGame
         
         public void Dispose()
         {
-            _battleHeroesController?.StopAllTasks();
-            _heroesService?.DestroyHeroes();
+            _heroesCombatController?.StopAllTasks();
+            _heroesLifecycleController?.DestroyHeroes();
         }
         
         public void RunBattle()
@@ -52,12 +56,12 @@ namespace DuelGame
             if (_battleStateModel.CurrentBattleState == BattleState.NotStarted)
                 _battleStateModel.SetState(BattleState.Started);
 
-            var (player1, player2) = _heroesService.SpawnHeroes(FinishBattle);
+            var (player1, player2) = _heroesLifecycleController.SpawnHeroes(FinishBattle);
             
-            _battleHeroesController?.StopAllTasks();
-            _battleHeroesController = new BattleHeroesController(player1, Players.Player1, player2, Players.Player2);
+            _heroesCombatController?.StopAllTasks();
+            _heroesCombatController = new HeroesCombatController(player1, Players.Player1, player2, Players.Player2);
             
-            _battleHeroesController.DelayPlayersAttack(_attackDelayP1, _attackDelayP2);
+            _heroesCombatController.DelayPlayersAttack(_attackDelayP1, _attackDelayP2);
             
             player1.SetEnemy(player2);
             player2.SetEnemy(player1);
@@ -69,24 +73,36 @@ namespace DuelGame
         {
             _battleStateModel.SetState(BattleState.Continued);
             
-            _heroesService.DestroyHeroes();
+            _heroesLifecycleController.DestroyHeroes();
             RunBattle();
+        }
+
+        public BattleData CollectBattleData(Players playerWhoWon = Players.None)
+        {
+            return new BattleData()
+            {
+                Player1 = _heroesLifecycleController.Player1.heroEnum,
+                Player2 = _heroesLifecycleController.Player2.heroEnum,
+                
+                PlayerWhoWon = playerWhoWon
+            };
         }
         
         private void FinishBattle(Players playerWhoLost)
         {
             _battleStateModel.SetState(BattleState.Finished);
             
-            _battleHeroesController.ChangeAttackStatusToPlayers(false);
+            _heroesCombatController.ChangeAttackStatusToPlayers(false);
             OnBattleFinish?.Invoke(playerWhoLost);
         }
     }
-
+    
     public enum HeroEnum
     {
         Archer,
         Warrior,
         Wizard,
-        Random
+        Random,
+        None
     }
 }

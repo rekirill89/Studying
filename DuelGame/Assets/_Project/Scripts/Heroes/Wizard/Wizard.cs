@@ -10,7 +10,9 @@ namespace DuelGame
     public class Wizard : BaseHero
     {
         public event Action OnAttackEnded;
-        
+
+        public override HeroEnum heroEnum { get; } = HeroEnum.Wizard;
+
         private readonly float _attackDuration = 2.1f;
         private readonly float _attackInterval = 0.3f;
         private readonly float _attackIntervalTimer = 0.25f;
@@ -31,13 +33,13 @@ namespace DuelGame
             IsAttackable = false;
             while (currentAttackDuration < _attackDuration && !Cts.IsCancellationRequested)
             {
-                hero.TakeHit(this.Hero.Damage);
+                hero.TakeHit(Hero.Damage);
                 currentAttackDuration += _attackInterval;
 
                 await UniTask.Delay(TimeSpan.FromSeconds(_attackIntervalTimer), cancellationToken: Cts.Token);
             }
 
-            hero.TakeHit(this.Hero.Damage);
+            hero.TakeHit(Hero.Damage);
             InvokeApplyBuffToEnemy(hero);
             IsAttackable = true;
             OnAttackEnded?.Invoke();

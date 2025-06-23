@@ -29,7 +29,7 @@ namespace DuelGame
         private readonly List<DamageText> _activeDamageTexts = new List<DamageText>();
         private readonly int _initSizeOfPool = 8;
         
-        private float _currenBuffDuration = 0;
+        //private float _currenBuffDuration = 0;
         
         private CancellationTokenSource _cts;
         private ObjectPool<DamageText> _damageTextPool;
@@ -51,7 +51,7 @@ namespace DuelGame
         {
             UnsubscribeFromEvents();
             foreach (var damageText in _activeDamageTexts)
-                damageText.OnComplete.RemoveListener(HideDamageText);
+                damageText.OnComplete -= HideDamageText;
             _cts.Cancel();
         }
         
@@ -67,13 +67,13 @@ namespace DuelGame
         
         protected void ShowDamageText(float damage)
         {
-            Debug.Log("Triggered");
+            //Debug.Log("Triggered");
 
             var x = _damageTextPool.Get();
             
             _activeDamageTexts.Add(x);
             
-            x.OnComplete.AddListener(HideDamageText);
+            x.OnComplete += HideDamageText;
             x.Initialize(damage);
             x.transform.SetParent(DamageTextPosition);
             x.transform.localPosition = new Vector2(0, 0);
@@ -87,7 +87,7 @@ namespace DuelGame
             Hero.OnPlayerStop += StopAllTasks;
 
             Hero.OnDeath += HeroDeath;
-            Hero.OnBuffApplied += HeroBuffApplied;
+            //Hero.OnBuffApplied += HeroBuffApplied;
 
             Hero.OnAttack += HeroAttack;
         }
@@ -100,7 +100,7 @@ namespace DuelGame
             Hero.OnPlayerStop -= StopAllTasks;
             
             Hero.OnDeath -= HeroDeath;
-            Hero.OnBuffApplied -= HeroBuffApplied;
+            //Hero.OnBuffApplied -= HeroBuffApplied;
             
             Hero.OnAttack -= HeroAttack;
         }
@@ -115,7 +115,7 @@ namespace DuelGame
             HealthBar.fillAmount = currentHealth / maxHealth;
         }
             
-        protected void HeroBuffApplied(Sprite buffSprite, float duration)
+        /*protected void HeroBuffApplied(Sprite buffSprite, float duration)
         {
             SpawnBuffSprite(buffSprite, duration).Forget();
         }
@@ -133,12 +133,12 @@ namespace DuelGame
                 await UniTask.Delay(TimeSpan.FromSeconds(step), cancellationToken: _cts.Token);
             }
             BuffSprite.enabled = false;
-        }
+        }*/
         
         private void HideDamageText(DamageText damageText)
         {
             _damageTextPool.ReturnToPool(damageText);
-            damageText.OnComplete.RemoveListener(HideDamageText);
+            damageText.OnComplete -= HideDamageText;
             _activeDamageTexts.Remove(damageText);
         }
 

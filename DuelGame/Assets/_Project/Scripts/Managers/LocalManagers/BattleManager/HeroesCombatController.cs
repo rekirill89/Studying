@@ -6,14 +6,14 @@ using UnityEngine;
 
 namespace DuelGame
 {
-    public class BattleHeroesController
+    public class HeroesCombatController
     {
         private readonly CancellationTokenSource _cts;
         
         private readonly BaseHero _player1;
         private readonly BaseHero _player2;
 
-        public BattleHeroesController(BaseHero player1, Players player1ID, BaseHero player2, Players player2ID)
+        public HeroesCombatController(BaseHero player1, Players player1ID, BaseHero player2, Players player2ID)
         {
             _player1 = player1;
             _player2 = player2;
@@ -39,8 +39,6 @@ namespace DuelGame
         public void StopAllTasks()
         {
             _cts.Cancel();
-            /*_cts.Dispose();
-            _cts = null;*/
         }
         
         private async UniTask LetPlayerAttackInSeconds(BaseHero hero, float timeToAttack)

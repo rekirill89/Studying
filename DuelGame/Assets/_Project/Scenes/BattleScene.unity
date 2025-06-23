@@ -1168,10 +1168,7 @@ MonoBehaviour:
   _battleFacade: {fileID: 796281392}
   _screenCanvasParent: {fileID: 176138962}
   _hudCanvasParent: {fileID: 723722646}
-  _startPanelView: {fileID: 1106553793753749160, guid: 9fd27eb9768dba44a9b67d7775885313, type: 3}
-  _continuePanelView: {fileID: 5353470584365876216, guid: 4b57adb1955113e429c03d4bfc1b4c18, type: 3}
-  _restartPanelView: {fileID: 1427756985908044506, guid: 25686a083adf5344892c5db270f22f7d, type: 3}
-  _reloadPanelView: {fileID: 2502882583676369657, guid: 043ac425ca8104a4f9ef2276ad99ecfd, type: 3}
+  _panels: {fileID: 614242345667476667, guid: aff68e255f69e284fb5557fadb803e4b, type: 3}
 --- !u!114 &1489952811
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -4,19 +4,22 @@ using Zenject;
 
 namespace DuelGame
 {
-    public class RestartPanelPresenter :IDisposable
+    public class RestartPanelPresenter : IDisposable
     {
         private readonly BattleManager _battleManagerModel;
-        private readonly RestartPanelView _restartPanelView;
-        private readonly SceneLoaderManager _sceneLoaderManager;
+        private readonly BaseOneButtonPanelView _restartPanelView;
+        private readonly SceneLoaderService _sceneLoaderService;
 
-        public RestartPanelPresenter(BattleManager battleManager, SceneLoaderManager sceneLoaderManager, RestartPanelView restartPanelView)
+        public RestartPanelPresenter(
+            BattleManager battleManager, 
+            SceneLoaderService sceneLoaderService, 
+            RestartPanelView restartPanelView)
         {
             _battleManagerModel = battleManager;
             _restartPanelView = restartPanelView;
-            _sceneLoaderManager = sceneLoaderManager;
+            _sceneLoaderService = sceneLoaderService;
             
-            _restartPanelView.OnButtonClicked += _sceneLoaderManager.LoadBattleScene;
+            _restartPanelView.OnButtonClicked += _sceneLoaderService.LoadBattleScene;
             _battleManagerModel.OnBattleFinish += ShowView;
         }
         
