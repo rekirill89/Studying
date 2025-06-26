@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Zenject;
 
@@ -9,19 +10,30 @@ namespace DuelGame
         private readonly IInstantiator _iInstantiator;
         private readonly UIFactory _uiFactory;
         private readonly BattleManager _battleManagerModel;
-        
+        private readonly Dictionary<Type, Action<Players?>> _presenters;
+
         private StartPanelPresenter _startPanelPresenter;
         private ContinuePanelPresenter _continuePanelPresenter;
         private RestartPanelPresenter _restartPanelPresenter;
         private ReloadPanelPresenter _reloadPanelPresenter;
         private SavePanelPresenter _savePanelPresenter;
         private LoadPanelPresenter _loadPanelPresenter;
-
+        
         public MediatorPresentation(IInstantiator iInstantiator, UIFactory uiFactory, BattleManager battleManagerModel)
         {
             _iInstantiator = iInstantiator;
             _uiFactory = uiFactory;
             _battleManagerModel = battleManagerModel;
+            
+            _presenters = new Dictionary<Type, Action<Players?>>()
+            {
+                {typeof(StartPanelPresenter), _ => _startPanelPresenter?.ShowView()},
+                {typeof(ReloadPanelPresenter), _ => _reloadPanelPresenter?.ShowView()},                
+                {typeof(SavePanelPresenter), _ => _savePanelPresenter?.ShowView()},
+                {typeof(RestartPanelPresenter), playerWhoLost => _restartPanelPresenter?.ShowView(playerWhoLost)},
+                {typeof(ContinuePanelPresenter), playerWhoLost => _continuePanelPresenter?.ShowView(playerWhoLost)},
+                {typeof(LoadPanelPresenter), playerWhoLost => _loadPanelPresenter?.ShowView(playerWhoLost)},
+            };
 
             _battleManagerModel.OnBattleReady += BattleReadyHandler;
             _battleManagerModel.OnPlayersSpawned += PlayerSpawnedHandler;
@@ -37,60 +49,39 @@ namespace DuelGame
 
         private void BattleReadyHandler()
         {
-            TryCreatePanel(
-                ref _startPanelPresenter,
-                () => _uiFactory.CreateStartPanelView(),
-                presenter => presenter.ShowView());
-            TryCreatePanel(
-                ref _reloadPanelPresenter,
-                () => _uiFactory.CreateReloadPanelView(),
-                presenter => presenter.ShowView());
+            TryCreatePanel1(ref _startPanelPresenter, null);
+            
+            TryCreatePanel1(ref _reloadPanelPresenter, null);
         }
 
         private void PlayerSpawnedHandler(BattleState _)
         {
-            TryCreatePanel(
-                ref _savePanelPresenter,
-                () => _uiFactory.CreateSavePanelView(),
-                presenter => presenter.ShowView());
+            TryCreatePanel1(ref _savePanelPresenter, null);
         }
 
-        private void BattleFinishHandler(Players playerWhoLost)
+        private void BattleFinishHandler(Players? playerWhoLost)
         {
             if (playerWhoLost == Players.Player2)
             {
-                TryCreatePanel(
-                    ref _continuePanelPresenter, 
-                    () => _uiFactory.CreateContinuePanelView(),
-                    presenter => presenter.ShowView(playerWhoLost));
+                TryCreatePanel1(ref _continuePanelPresenter, playerWhoLost);
             }
             else
             {
-                TryCreatePanel(
-                    ref _restartPanelPresenter, 
-                    () => _uiFactory.CreateRestartPanelView(),
-                    presenter => presenter.ShowView(playerWhoLost));
+                TryCreatePanel1(ref _restartPanelPresenter, playerWhoLost);
             }
             
-            TryCreatePanel(
-                ref _loadPanelPresenter,
-                () => _uiFactory.CreateLoadPanelView(),
-                presenter => presenter.ShowView(playerWhoLost));
+            TryCreatePanel1(ref _loadPanelPresenter, playerWhoLost);
         }
         
-        private void TryCreatePanel<TPresenter, TView>(
+        private void TryCreatePanel1<TPresenter>(
             ref TPresenter presenter,
-            Func<TView> createView,
-            Action<TPresenter> showView)
-            where TPresenter : class
-            where TView : class
+            Players? playerWhoLost) 
+            where TPresenter : IPresenter
         {
-            if(presenter != null)
-                return;
-            
             presenter = _iInstantiator.Instantiate<TPresenter>(
-                new object[] { createView() });
-            showView(presenter);
+                new object[] { _uiFactory.CreatePanelView(typeof(TPresenter)) });
+            
+            _presenters[typeof(TPresenter)].Invoke(playerWhoLost);
         }
     }   
 }

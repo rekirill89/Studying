@@ -1,63 +1,38 @@
+using System;
+using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace DuelGame
 {
     public class UIFactory
     {        
-        private readonly Transform _screenCanvasParent;
-        private readonly Transform _hudCanvasParent;
-
-        private readonly StartPanelView _startPanelView;
-        private readonly ContinuePanelView _continuePanelView;
-        private readonly RestartPanelView _restartPanelView;
-        private readonly ReloadPanelView _reloadPanelView;
-        private readonly SavePanelView _savePanelView;
-        private readonly LoadPanelView _loadPanelView;
+        private readonly Dictionary<Type, (BasePanelView ViewPrefab, Transform Parent)> _presentersView;
 
         public UIFactory(
             Transform screenCanvasParent,
             Transform hudCanvasParent,
             Panels panels)
         { 
-            _startPanelView = panels.StartPanelView;
-            _continuePanelView = panels.ContinuePanelView;
-            _restartPanelView = panels.RestartPanelView;
-            _reloadPanelView = panels.ReloadPanelView;
-            _savePanelView = panels.SavePanelView;
-            _loadPanelView = panels.LoadPanelView;
+
+            _presentersView = new Dictionary<Type, (BasePanelView, Transform)>()
+            {
+                {typeof(ContinuePanelPresenter), (panels.ContinuePanelView, screenCanvasParent)},
+                {typeof(StartPanelPresenter), (panels.StartPanelView, screenCanvasParent)},
+                {typeof(RestartPanelPresenter), (panels.RestartPanelView, screenCanvasParent)},
+                {typeof(SavePanelPresenter), (panels.SavePanelView, screenCanvasParent)},
+                {typeof(LoadPanelPresenter), (panels.LoadPanelView, screenCanvasParent)},
+                {typeof(ReloadPanelPresenter), (panels.ReloadPanelView, hudCanvasParent)}
+            };
+        }
+
+        public BasePanelView CreatePanelView(Type type)
+        {
+            if (!_presentersView.ContainsKey(type))
+                Debug.LogError($"No view for type {type}");
             
-            _screenCanvasParent = screenCanvasParent;
-            _hudCanvasParent = hudCanvasParent;
-        }
-
-        public StartPanelView CreateStartPanelView()
-        {
-            return Object.Instantiate(_startPanelView, _screenCanvasParent);
-        }
-
-        public ContinuePanelView CreateContinuePanelView()
-        {
-            return Object.Instantiate(_continuePanelView, _screenCanvasParent);
-        }
-
-        public RestartPanelView CreateRestartPanelView()
-        {
-            return Object.Instantiate(_restartPanelView, _screenCanvasParent);
-        }
-        
-        public SavePanelView CreateSavePanelView()
-        {
-            return Object.Instantiate(_savePanelView, _screenCanvasParent);
-        }
-        
-        public LoadPanelView CreateLoadPanelView()
-        {
-            return Object.Instantiate(_loadPanelView, _screenCanvasParent);
-        }
-        
-        public ReloadPanelView CreateReloadPanelView()
-        {
-            return Object.Instantiate(_reloadPanelView, _hudCanvasParent);
+            return Object.Instantiate(_presentersView[type].ViewPrefab,  _presentersView[type].Parent);
         }
     }
 }

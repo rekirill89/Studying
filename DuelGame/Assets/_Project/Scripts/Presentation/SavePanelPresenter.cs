@@ -2,7 +2,7 @@
 
 namespace DuelGame
 {
-    public class SavePanelPresenter : IDisposable
+    public class SavePanelPresenter : IDisposable, IPresenter
     {
         private readonly BattleManager _battleManagerModel;
         private readonly BattleDataController _battleDataController;
@@ -39,7 +39,7 @@ namespace DuelGame
             _savePanelView.Show();
         }
         
-        private void HideView(Players _)
+        private void HideView(Players? _)
         {
             _savePanelView.Hide();
         }

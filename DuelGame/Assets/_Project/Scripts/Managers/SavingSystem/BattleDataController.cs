@@ -6,8 +6,8 @@ namespace DuelGame
 {
     public class BattleDataController : IDisposable
     {
-        private static string SAVE_AUTO = "Auto save";
-        private static string SAVE_MANUAL = "Manual save";
+        /*private static string SAVE_AUTO = "Auto save";
+        private static string SAVE_MANUAL = "Manual save";*/
         
         private readonly SaveService _saveService;
         private readonly BattleManager _battleManager;
@@ -35,12 +35,12 @@ namespace DuelGame
         
         public void ManualSaveBattleData()
         {
-            _saveService.SaveData(SAVE_MANUAL, _battleManager.CollectBattleData());
+            _saveService.SaveData(_battleManager.CollectBattleData(), SaveType.Manual);
         }
 
         public void LoadManualSaveBattleData()
         {
-            var battleData = _saveService.LoadData<BattleData>(SAVE_MANUAL);
+            var battleData = _saveService.LoadData(SaveType.Manual);
             
             _battleDataCache.SetBattleData(battleData);
             _battleDataCache.ChangeLoadingStatus(true);
@@ -50,7 +50,7 @@ namespace DuelGame
 
         public void LoadAutoSaveBattleData()
         {
-            var battleData = _saveService.LoadData<BattleData>(SAVE_AUTO);
+            var battleData = _saveService.LoadData(SaveType.Auto);
             
             _battleDataCache.SetBattleData(battleData);
             _battleDataCache.ChangeLoadingStatus(true);
@@ -58,12 +58,12 @@ namespace DuelGame
             _sceneLoaderService.LoadBattleScene();
         }
         
-        private void AutoSaveBattleData(Players playerWhoLost)
+        private void AutoSaveBattleData(Players? playerWhoLost)
         {
             var x = _battleManager.CollectBattleData(playerWhoLost);
             Debug.Log(x.Player1 + " " + x.Player2 + " " + x.PlayerWhoWon);
             
-            _saveService.SaveData(SAVE_AUTO, x);
+            _saveService.SaveData(x, SaveType.Auto);
         }
     }
     
@@ -72,6 +72,6 @@ namespace DuelGame
         public HeroEnum Player1;
         public HeroEnum Player2;
 
-        public Players PlayerWhoWon = Players.None;
+        public Players? PlayerWhoWon = Players.None;
     }
 }

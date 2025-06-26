@@ -4,7 +4,7 @@ using Zenject;
 
 namespace DuelGame
 {
-    public class StartPanelPresenter : IDisposable
+    public class StartPanelPresenter : IDisposable, IPresenter
     {
         private readonly BattleManager _battleManagerModel;
         private readonly BaseOneButtonPanelView _startPanelView;

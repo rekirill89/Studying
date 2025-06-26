@@ -4,7 +4,7 @@ using Zenject;
 
 namespace DuelGame
 {
-    public class ContinuePanelPresenter : IDisposable
+    public class ContinuePanelPresenter : IDisposable, IPresenter
     {
         private readonly BattleManager _battleManagerModel;
         private readonly BaseOneButtonPanelView _continuePanelView;
@@ -26,7 +26,7 @@ namespace DuelGame
             _battleManagerModel.OnPlayersSpawned -= HideView;
         }
 
-        public void ShowView(Players playerWhoLost)
+        public void ShowView(Players? playerWhoLost)
         {
             if (playerWhoLost == Players.Player2)
             {

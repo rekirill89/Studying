@@ -2,7 +2,7 @@
 
 namespace DuelGame
 {
-    public class LoadPanelPresenter : IDisposable
+    public class LoadPanelPresenter : IDisposable, IPresenter
     {
         private readonly BattleManager _battleManager;
         private readonly BattleDataController _battleDataController;
@@ -28,7 +28,7 @@ namespace DuelGame
             _loadPanelView.LoadManualSaveButton.OnClick -= _battleDataController.LoadManualSaveBattleData;
         }
         
-        public void ShowView(Players _)
+        public void ShowView(Players? _)
         {
             _loadPanelView.Show();
         }

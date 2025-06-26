@@ -10,7 +10,7 @@ namespace DuelGame
 {
     public class BattleManager : IDisposable, IInitializable
     {
-        public delegate void BattleFinish(Players playerWhoLost);
+        public delegate void BattleFinish(Players? playerWhoLost);
         public delegate void PlayerSpawned(BattleState battleState);
         
         public event BattleFinish OnBattleFinish;
@@ -77,7 +77,7 @@ namespace DuelGame
             RunBattle();
         }
 
-        public BattleData CollectBattleData(Players playerWhoWon = Players.None)
+        public BattleData CollectBattleData(Players? playerWhoWon = null)
         {
             return new BattleData()
             {
