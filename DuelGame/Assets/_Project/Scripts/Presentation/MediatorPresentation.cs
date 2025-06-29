@@ -49,31 +49,31 @@ namespace DuelGame
 
         private void BattleReadyHandler()
         {
-            TryCreatePanel1(ref _startPanelPresenter, null);
+            TryCreatePanel(ref _startPanelPresenter, null);
             
-            TryCreatePanel1(ref _reloadPanelPresenter, null);
+            TryCreatePanel(ref _reloadPanelPresenter, null);
         }
 
         private void PlayerSpawnedHandler(BattleState _)
         {
-            TryCreatePanel1(ref _savePanelPresenter, null);
+            TryCreatePanel(ref _savePanelPresenter, null);
         }
 
         private void BattleFinishHandler(Players? playerWhoLost)
         {
             if (playerWhoLost == Players.Player2)
             {
-                TryCreatePanel1(ref _continuePanelPresenter, playerWhoLost);
+                TryCreatePanel(ref _continuePanelPresenter, playerWhoLost);
             }
             else
             {
-                TryCreatePanel1(ref _restartPanelPresenter, playerWhoLost);
+                TryCreatePanel(ref _restartPanelPresenter, playerWhoLost);
             }
             
-            TryCreatePanel1(ref _loadPanelPresenter, playerWhoLost);
+            TryCreatePanel(ref _loadPanelPresenter, playerWhoLost);
         }
         
-        private void TryCreatePanel1<TPresenter>(
+        private void TryCreatePanel<TPresenter>(
             ref TPresenter presenter,
             Players? playerWhoLost) 
             where TPresenter : IPresenter
