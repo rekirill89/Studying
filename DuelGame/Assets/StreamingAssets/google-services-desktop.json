@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "979403055131",
+    "project_id": "duel-game-id",
+    "storage_bucket": "duel-game-id.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:979403055131:android:5937eefd4001610281d8be",
+        "android_client_info": {
+          "package_name": "com.DefaultCompany.DuelGame"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCck6MfWeq-d7d6eLFokGCI4m9S_BUPw14"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

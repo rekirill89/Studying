@@ -16,13 +16,14 @@ namespace DuelGame
         public event BattleFinish OnBattleFinish;
         public event PlayerSpawned OnPlayersSpawned;
         public event Action OnBattleReady;
-
+        
+        public HeroesLifecycleController HeroesLifecycleController { get; }
+        
         private readonly BattleStateModel _battleStateModel;
         
         private readonly float _attackDelayP1;
         private readonly float _attackDelayP2;
-        
-        private readonly HeroesLifecycleController _heroesLifecycleController;
+
         private HeroesCombatController _heroesCombatController;
         
         public BattleManager(
@@ -30,7 +31,7 @@ namespace DuelGame
             HeroesLifecycleController heroesLifecycleController, 
             BattleSessionContext battleSessionContext)
         {
-            _heroesLifecycleController = heroesLifecycleController;
+            HeroesLifecycleController = heroesLifecycleController;
 
             _attackDelayP1 = battleSessionContext.AttackDelayP1;
             _attackDelayP2 = battleSessionContext.AttackDelayP2;
@@ -48,7 +49,7 @@ namespace DuelGame
         public void Dispose()
         {
             _heroesCombatController?.StopAllTasks();
-            _heroesLifecycleController?.DestroyHeroes();
+            HeroesLifecycleController?.DestroyHeroes();
         }
         
         public void RunBattle()
@@ -56,7 +57,7 @@ namespace DuelGame
             if (_battleStateModel.CurrentBattleState == BattleState.NotStarted)
                 _battleStateModel.SetState(BattleState.Started);
 
-            var (player1, player2) = _heroesLifecycleController.SpawnHeroes(FinishBattle);
+            var (player1, player2) = HeroesLifecycleController.SpawnHeroes(FinishBattle);
             
             _heroesCombatController?.StopAllTasks();
             _heroesCombatController = new HeroesCombatController(player1, Players.Player1, player2, Players.Player2);
@@ -73,7 +74,7 @@ namespace DuelGame
         {
             _battleStateModel.SetState(BattleState.Continued);
             
-            _heroesLifecycleController.DestroyHeroes();
+            HeroesLifecycleController.DestroyHeroes();
             RunBattle();
         }
 
@@ -81,8 +82,8 @@ namespace DuelGame
         {
             return new BattleData()
             {
-                Player1 = _heroesLifecycleController.Player1.heroEnum,
-                Player2 = _heroesLifecycleController.Player2.heroEnum,
+                Player1 = HeroesLifecycleController.Player1.heroEnum,
+                Player2 = HeroesLifecycleController.Player2.heroEnum,
                 
                 PlayerWhoWon = playerWhoWon
             };

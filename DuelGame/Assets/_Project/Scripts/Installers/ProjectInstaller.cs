@@ -1,4 +1,6 @@
-using UnityEditor.Overlays;
+//using UnityEditor.Overlays;
+
+using Firebase.Analytics;
 using UnityEngine;
 using UnityEngine.Serialization;
 using Zenject;
@@ -17,12 +19,14 @@ namespace DuelGame
             var buffsList = Instantiate(_buffs);
             var heroesList = Instantiate(_heroes);
 
+            Container.BindInterfacesAndSelfTo<FireBaseInit>().AsSingle();
+            Container.Bind<AnalyticService>().AsSingle();
+            
             Container.Bind<BuffsList>().FromInstance(buffsList).AsSingle();
             Container.Bind<HeroesList>().FromInstance(heroesList).AsSingle();
 
             Container.Bind<EntityFactory>().AsSingle();
             Container.Bind<SceneLoaderService>().AsSingle();
-            
             Container.Bind<SaveService>().AsSingle();
             Container.Bind<BattleDataCache>().AsSingle();
         }
