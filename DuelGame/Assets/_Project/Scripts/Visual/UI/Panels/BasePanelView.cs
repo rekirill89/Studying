@@ -1,13 +1,14 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace DuelGame
 {
     public class BasePanelView : MonoBehaviour
     {
-        [SerializeField] protected GameObject Root;
+        [SerializeField] private GameObject _root;
         
-        public void Show() => Root.SetActive(true);
+        public void Show() => _root.SetActive(true);
         
-        public void Hide() => Root.SetActive(false);
+        public void Hide() => _root.SetActive(false);
     }
 }

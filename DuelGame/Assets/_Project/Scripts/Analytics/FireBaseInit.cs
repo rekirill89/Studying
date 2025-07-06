@@ -6,9 +6,9 @@ using Zenject;
 
 namespace DuelGame
 {
-    public class FireBaseInit: IInitializable
+    public class FireBaseInit
     {
-        public void Initialize()
+        public FireBaseInit()
         {
             FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task => {
                 if (task.Result == DependencyStatus.Available) {

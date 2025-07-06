@@ -1,26 +1,45 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace DuelGame
 {
-    public class BattleSessionContext
+    public class BattleSessionContext : IDisposable
     {
-        public BattleData BattleData {get;}
+        public event Action OnSessionReady;
         
+        public BattleData BattleData {get; private set; }
         public float AttackDelayP1 {get; private set;}
         public float AttackDelayP2 {get; private set;}
         
         public Transform FirstPlayerTrans {get; private set;}
         public Transform SecondPlayerTrans {get; private set;}
+
+        private readonly BattleSettingsFacade _facade;
+        private readonly BattleSceneAssetsLoader _battleSceneAssetsLoader;
+        private readonly BattleDataCache _battleDataCache;
         
-        public BattleSessionContext(BattleDataCache battleDataCache, BattleSettingsFacade facade)
+        public BattleSessionContext(BattleDataCache battleDataCache, BattleSceneAssetsLoader battleSceneAssetsLoader)
+        {
+            _battleDataCache = battleDataCache;
+            _battleSceneAssetsLoader = battleSceneAssetsLoader;
+
+            _battleSceneAssetsLoader.OnBattleSceneAssetsPrepared += Init;
+        }
+
+        public void Dispose()
+        {
+            _battleSceneAssetsLoader.OnBattleSceneAssetsPrepared -= Init;
+        }
+        
+        private void Init(BattleSettingsFacade facade, Panels _)
         {
             FirstPlayerTrans = facade.FirstPlayerTrans;
             SecondPlayerTrans = facade.SecondPlayerTrans;
-
+            
             AttackDelayP1 = facade.BattleConfig.AttackDelayP1;
             AttackDelayP2 = facade.BattleConfig.AttackDelayP2;
 
-            var battleData = battleDataCache.ConsumeBattleData();
+            var battleData = _battleDataCache.ConsumeBattleData();
             
             if (battleData == null)
             {
@@ -34,6 +53,7 @@ namespace DuelGame
             {
                 BattleData = battleData;
             }
+            OnSessionReady?.Invoke();
         }
     }
 }

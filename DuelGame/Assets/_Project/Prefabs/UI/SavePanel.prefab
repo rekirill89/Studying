@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a965dba27ff47c5b1851898f6330560, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Root: {fileID: 892281494166122669}
+  _root: {fileID: 892281494166122669}
   Button: {fileID: 8467878831749758302}
 --- !u!1 &2894130222506536143
 GameObject:

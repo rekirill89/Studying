@@ -5,7 +5,7 @@ using UnityEngine.Rendering.UI;
 
 namespace DuelGame
 {
-    public class AnalyticService
+    public class AnalyticService : IAnalyticService
     {
         private static string BATTLE_STARTED = "battle_started";
         private static string BATTLE_FINISHED = "battle_finished";
@@ -23,9 +23,9 @@ namespace DuelGame
         public void LogBattleFinished(int arrowsCount, int swordSwingsCount, int wizardFireCastCount)
         {
             Debug.Log("Battle finished:\n" +
-                      $"\tArrows count:  {arrowsCount}" +
-                      $"\tSword swings count: {swordSwingsCount}" +
-                      $"\tWizard fire cast count: {wizardFireCastCount}");
+                      $"\tArrows count:  {arrowsCount} " +
+                      $"\tSword swings count: {swordSwingsCount} " +
+                      $"\tWizard fire cast count: {wizardFireCastCount} ");
             
             FirebaseAnalytics.LogEvent(
                 BATTLE_FINISHED, 
@@ -33,7 +33,7 @@ namespace DuelGame
                 new Parameter("Sword swings count", swordSwingsCount),
                 new Parameter("Wizard fire cast count", wizardFireCastCount));
         }
-
+        
         public void LogArrowFired()
         {
             Debug.Log("Arrow Fired");

@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.Serialization;
 
 namespace DuelGame
@@ -10,11 +12,16 @@ namespace DuelGame
     {
         [field:SerializeField] public override List<EntryHero> ListOfEntities { get; set; } = new List<EntryHero>();
 
-        public HeroStats GetHeroStatsByName(string name)
+        public async Task Init(ILocalAssetLoader assetLoader)
         {
-            return Instantiate(ListOfEntities.First(x => x.Name == name).HeroStats);
+            foreach (var hero in ListOfEntities)
+            {
+                var heroScript = await assetLoader.LoadAsset<GameObject>(hero.HeroScriptRef);
+                
+                hero.HeroStats = await assetLoader.LoadAsset<HeroStats>(hero.HeroStatsRef);
+                hero.HeroScript = heroScript.GetComponent<BaseHero>();
+            }
         }
-
         public EntryHero GetHeroEntityByEnum(HeroEnum heroEnum)
         {
             return ListOfEntities.First(x => x.HeroEnum == heroEnum);
@@ -23,11 +30,10 @@ namespace DuelGame
     [System.Serializable]
     public class EntryHero : INamedObject
     {
-        [field: SerializeField] public string Name { get; set; }
-        [field: SerializeField] public GameObject EntityObj { get; set; }
-        
-        public HeroStats HeroStats;
-        public BaseHero HeroScript;
+        public HeroStats HeroStats {get; set;}
+        public BaseHero HeroScript {get; set;}
+        public AssetReference HeroStatsRef;
+        public AssetReference HeroScriptRef;
         public HeroEnum HeroEnum;
     }
 }

@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.Serialization;
 using Zenject;
 
@@ -11,23 +12,25 @@ namespace DuelGame
         [SerializeField] private Transform _screenCanvasParent;
         [SerializeField] private Transform _hudCanvasParent;
         
-        [SerializeField] private Panels _panels;
+        [FormerlySerializedAs("_panels")] [SerializeField] private AssetReference _panelsRef;
         
         public override void InstallBindings()
         {
             Debug.Log("Battle scene installer created");
+            
+            Container.BindInterfacesAndSelfTo<BattleSessionContext>().AsSingle();
             Container.BindInterfacesAndSelfTo<SceneLoaderService>().AsSingle();
             Container.BindInterfacesAndSelfTo<UIFactory>().AsSingle().WithArguments(
                 _screenCanvasParent,
-                _hudCanvasParent,
-                _panels);
+                _hudCanvasParent);
             
+            Container.BindInterfacesAndSelfTo<AnalyticsDataCollector>().AsSingle();
             Container.BindInterfacesAndSelfTo<BattleStateModel>().AsSingle();            
-            Container.BindInterfacesAndSelfTo<BattleSessionContext>().AsSingle().WithArguments(_battleFacade);
+            Container.BindInterfacesAndSelfTo<BattleSceneAssetsLoader>().AsSingle().WithArguments(_battleFacade, _panelsRef);
             Container.BindInterfacesAndSelfTo<HeroesLifecycleController>().AsSingle();
             Container.BindInterfacesAndSelfTo<BattleManager>().AsSingle();
             Container.BindInterfacesAndSelfTo<BattleDataController>().AsSingle();
-            Container.BindInterfacesAndSelfTo<AnalyticsDataCollector>().AsSingle();
+
             
             Container.BindInterfacesAndSelfTo<MediatorPresentation>().AsSingle();
         }

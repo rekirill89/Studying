@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7736938010831081958}
   - component: {fileID: 8066890019116493907}
   m_Layer: 0
-  m_Name: PosionSprite
+  m_Name: PoisonSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

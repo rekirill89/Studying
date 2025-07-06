@@ -14,7 +14,7 @@ namespace DuelGame
         [SerializeField] private Transform _arrowTrans;
         [SerializeField] private Arrow _arrow;
 
-        public override HeroEnum heroEnum { get; } = HeroEnum.Archer;
+        public override HeroEnum HeroEnum { get; } = HeroEnum.Archer;
 
         private const float ANGLE = 180;
         private readonly List<Arrow> _arrows = new List<Arrow>();

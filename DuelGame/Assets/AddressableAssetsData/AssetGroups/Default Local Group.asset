@@ -1,0 +1,118 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bbb281ee3bf0b054c82ac2347e9e782c, type: 3}
+  m_Name: Default Local Group
+  m_EditorClassIdentifier: 
+  m_GroupName: Default Local Group
+  m_GUID: 98ee9e3a5bac5404ca9baa8a8888e1c1
+  m_SerializeEntries:
+  - m_GUID: 028da5768e3ed6e4699fa5c0acd80d2e
+    m_Address: Assets/_Project/Prefabs/Heroes/Wizard.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 043ac425ca8104a4f9ef2276ad99ecfd
+    m_Address: Assets/_Project/Prefabs/UI/Reload Panel.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 058ea5683e5993046b6c07bf65899298
+    m_Address: Assets/_Project/Configs/WizardSO.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 108a2f04d3e026e4380afb4b4bb60da1
+    m_Address: Assets/_Project/Prefabs/BuffsSprites/DecreaseDamageSprite.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 133881b9e0628a143947dc25c7b23319
+    m_Address: Assets/_Project/Configs/BattleConfig.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1ae566a03d1a6ef4e8cc9ea18a622a08
+    m_Address: Assets/_Project/Prefabs/UI/LoadPanel.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 1e6ef223c9d9df3438f7180a27ac0f6e
+    m_Address: Assets/_Project/Configs/HeroesList.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 22fd02e04d8a427428444725c721cd60
+    m_Address: Assets/_Project/Prefabs/BuffsSprites/StunSprite.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 25686a083adf5344892c5db270f22f7d
+    m_Address: Assets/_Project/Prefabs/UI/Restart Panel.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2c1b71a3a0f456142bf05bf95f3a9b4b
+    m_Address: Assets/_Project/Prefabs/UI/SavePanel.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 2cd4abc16e4bb0642a253b41ae4ecac8
+    m_Address: Assets/_Project/Prefabs/BuffsSprites/PoisonSprite.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 47330c57ae6beb84daf0e45226726940
+    m_Address: Assets/_Project/Prefabs/Heroes/Warrior.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 4b57adb1955113e429c03d4bfc1b4c18
+    m_Address: Assets/_Project/Prefabs/UI/Continue Panel.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9fd27eb9768dba44a9b67d7775885313
+    m_Address: Assets/_Project/Prefabs/UI/Start Panel.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: abfaab04aa36367448ffe63643918f7c
+    m_Address: Assets/_Project/Prefabs/Heroes/Archer.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aff68e255f69e284fb5557fadb803e4b
+    m_Address: Assets/_Project/Prefabs/UI/Panels.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c5488a34a5ef23844a75141283b6c44f
+    m_Address: Assets/_Project/Configs/BuffsList.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cabae99bf2a81514b86e357458654659
+    m_Address: Assets/_Project/Configs/ArcherSO.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: d705cd97d5ddd07409e012bd1e15496b
+    m_Address: Assets/_Project/Configs/WarriorSO.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  m_ReadOnly: 0
+  m_Settings: {fileID: 11400000, guid: 99af41b54f2cb4f4e9eefc5b2bdacd57, type: 2}
+  m_SchemaSet:
+    m_Schemas:
+    - {fileID: 11400000, guid: 05b1e77c8d6516e40b96613247d7ebfd, type: 2}
+    - {fileID: 11400000, guid: bad6818a92fee7449970a20e3ed04346, type: 2}

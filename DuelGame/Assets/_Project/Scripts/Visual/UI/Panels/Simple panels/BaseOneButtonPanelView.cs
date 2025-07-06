@@ -11,7 +11,7 @@ namespace DuelGame
                 
         public event Action OnButtonClicked;
         
-        private void Awake()
+        public void Awake()
         {
             Button.onClick.AddListener(OnButtonClickedHandler);
         }

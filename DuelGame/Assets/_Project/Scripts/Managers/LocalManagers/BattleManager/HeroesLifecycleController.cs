@@ -13,25 +13,24 @@ namespace DuelGame
         private readonly PlayerSettings _player2Settings  = new PlayerSettings();
         
         private readonly EntityFactory _entityFactory;
+        private readonly BattleSessionContext _battleSessionContext;
         
         private PlayerDeath _onPlayerDeath ;
 
         public HeroesLifecycleController(EntityFactory entityFactory, BattleSessionContext battleSessionContext)
         {
             _entityFactory = entityFactory;
-            
-            _player1Settings.spawnTransform = battleSessionContext.FirstPlayerTrans;
-            _player1Settings.heroEnum = battleSessionContext.BattleData.Player1;
-            
-            _player2Settings.spawnTransform = battleSessionContext.SecondPlayerTrans;
-            _player2Settings.heroEnum = battleSessionContext.BattleData.Player2;
+            _battleSessionContext = battleSessionContext;
+
+            _battleSessionContext.OnSessionReady += Init;
         }
         
         public void Dispose()
         {
+            _battleSessionContext.OnSessionReady -= Init;
             DestroyHeroes();
         }
-        
+
         public (BaseHero, BaseHero) SpawnHeroes(PlayerDeath onPlayerDeath)
         {
             _onPlayerDeath = onPlayerDeath;
@@ -57,6 +56,15 @@ namespace DuelGame
             }
         }
 
+        private void Init()
+        {
+            _player1Settings.spawnTransform = _battleSessionContext.FirstPlayerTrans;
+            _player1Settings.heroEnum = _battleSessionContext.BattleData.Player1;
+            
+            _player2Settings.spawnTransform = _battleSessionContext.SecondPlayerTrans;
+            _player2Settings.heroEnum = _battleSessionContext.BattleData.Player2;
+        }
+        
         private BaseHero CreateHero(Transform trans, HeroEnum heroEnum)
         {
             var x = heroEnum == HeroEnum.Random

@@ -11,7 +11,7 @@ namespace DuelGame
     {
         public event Action OnAttackEnded;
 
-        public override HeroEnum heroEnum { get; } = HeroEnum.Wizard;
+        public override HeroEnum HeroEnum { get; } = HeroEnum.Wizard;
 
         private readonly float _attackDuration = 2.1f;
         private readonly float _attackInterval = 0.3f;

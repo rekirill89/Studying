@@ -498,7 +498,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 20d6f99078d54299b2514fafdda4ab3d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Root: {fileID: 4136690366271252397}
+  _root: {fileID: 4136690366271252397}
   <LoadAutoSaveButton>k__BackingField: {fileID: 5529688358989713078}
   <LoadManualSaveButton>k__BackingField: {fileID: 5215798858361491397}
 --- !u!1 &9136919738510960242

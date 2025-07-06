@@ -27,7 +27,7 @@ namespace DuelGame
 
         public HeroStats Hero { get; private set; }
         public BuffsList BuffList { get; private set; }
-        public abstract HeroEnum heroEnum { get; }// = HeroEnum.None;
+        public abstract HeroEnum HeroEnum { get; }// = HeroEnum.None;
 
         protected BaseHero EnemyHero;
         protected Players Player = default;

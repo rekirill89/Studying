@@ -1,21 +1,33 @@
+using System;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
 
 namespace DuelGame
 {
-    public class BootstrapEntryPoint : IInitializable
+    public class BootstrapEntryPoint : IDisposable
     {
         private readonly SceneLoaderService _sceneLoaderService;
+        private readonly GlobalAssetsLoader _globalAssetsLoader;
         
-        public BootstrapEntryPoint(SceneLoaderService sceneLoaderService)
+        public BootstrapEntryPoint(SceneLoaderService sceneLoaderService, GlobalAssetsLoader globalAssetsLoader)
         {
             _sceneLoaderService = sceneLoaderService;
+            _globalAssetsLoader = globalAssetsLoader;
+
+            _globalAssetsLoader.OnDataLoaded += Init;
         }
         
-        public void Initialize()
+        public void Dispose()
+        {
+            _globalAssetsLoader.OnDataLoaded -= Init;
+        }
+
+        private void Init(GameConfigs _)
         {
             Debug.Log("Loading next scene...");
+            
             _sceneLoaderService.LoadBattleScene();
         }
     }

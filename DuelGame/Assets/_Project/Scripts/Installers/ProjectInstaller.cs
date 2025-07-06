@@ -1,7 +1,9 @@
 //using UnityEditor.Overlays;
 
 using Firebase.Analytics;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.Serialization;
 using Zenject;
 
@@ -9,26 +11,20 @@ namespace DuelGame
 {
     public class ProjectInstaller : MonoInstaller
     {
-        [SerializeField] private BuffsList _buffs;
-        [SerializeField] private HeroesList _heroes;
-
+        [SerializeField] private AssetReference _buffsRef;
+        [SerializeField] private AssetReference _heroesRef; 
+        
         public override void InstallBindings()
         {
             Debug.Log("Project installer created");
-
-            var buffsList = Instantiate(_buffs);
-            var heroesList = Instantiate(_heroes);
-
-            Container.BindInterfacesAndSelfTo<FireBaseInit>().AsSingle();
-            Container.Bind<AnalyticService>().AsSingle();
             
-            Container.Bind<BuffsList>().FromInstance(buffsList).AsSingle();
-            Container.Bind<HeroesList>().FromInstance(heroesList).AsSingle();
-
-            Container.Bind<EntityFactory>().AsSingle();
+            Container.Bind<ILocalAssetLoader>().To<LocalAssetLoader>().AsSingle();
+            Container.BindInterfacesAndSelfTo<GlobalAssetsLoader>().AsSingle().WithArguments(_buffsRef, _heroesRef);
+            Container.Bind<IAnalyticService>().To<AnalyticService>().AsSingle();
+            Container.BindInterfacesAndSelfTo<EntityFactory>().AsSingle();
             Container.Bind<SceneLoaderService>().AsSingle();
             Container.Bind<SaveService>().AsSingle();
-            Container.Bind<BattleDataCache>().AsSingle();
+            Container.Bind<BattleDataCache>().AsSingle(); 
         }
     }
 }

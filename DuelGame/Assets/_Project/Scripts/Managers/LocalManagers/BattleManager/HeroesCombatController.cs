@@ -6,22 +6,37 @@ using UnityEngine;
 
 namespace DuelGame
 {
-    public class HeroesCombatController
+    public class HeroesCombatController : IDisposable
     {
+        private readonly AnalyticsDataCollector _analyticsDataCollector;
         private readonly CancellationTokenSource _cts;
         
         private readonly BaseHero _player1;
         private readonly BaseHero _player2;
 
-        public HeroesCombatController(BaseHero player1, Players player1ID, BaseHero player2, Players player2ID)
+        public HeroesCombatController(
+            AnalyticsDataCollector analyticsDataCollector, 
+            BaseHero player1, Players player1ID, 
+            BaseHero player2, Players player2ID)
         {
+            _analyticsDataCollector = analyticsDataCollector;
+            
             _player1 = player1;
             _player2 = player2;
             
             _player1.SetPlayerID(player1ID);
             _player2.SetPlayerID(player2ID);
+
+            _player1.OnAttack += Player1AttackHandler;
+            _player2.OnAttack += Player2AttackHandler;
             
             _cts = new CancellationTokenSource();
+        }
+        
+        public void Dispose()
+        {
+            _player1.OnAttack -= Player1AttackHandler;
+            _player2.OnAttack -= Player2AttackHandler;
         }
         
         public void ChangeAttackStatusToPlayers(bool isAttackable)
@@ -39,6 +54,16 @@ namespace DuelGame
         public void StopAllTasks()
         {
             _cts.Cancel();
+        }
+
+        private void Player1AttackHandler()
+        {
+            _analyticsDataCollector.AttackInvoked(_player1.HeroEnum);
+        }
+        
+        private void Player2AttackHandler()
+        {
+            _analyticsDataCollector.AttackInvoked(_player2.HeroEnum);
         }
         
         private async UniTask LetPlayerAttackInSeconds(BaseHero hero, float timeToAttack)
