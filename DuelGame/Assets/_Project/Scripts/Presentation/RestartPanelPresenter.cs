@@ -21,12 +21,14 @@ namespace DuelGame
             
             _restartPanelView.OnButtonClicked += _sceneLoaderService.LoadBattleScene;
             _battleManagerModel.OnBattleFinish += ShowView;
+            _battleManagerModel.BattleStateModel.OnStateChanged += StateChangedHandler;
         }
         
         public void Dispose()
         {
             _restartPanelView.OnButtonClicked -= _battleManagerModel.ContinueBattle;
             _battleManagerModel.OnBattleFinish -= ShowView;
+            _battleManagerModel.BattleStateModel.OnStateChanged -= StateChangedHandler;
         }
 
         public void ShowView(Players? playerWhoLost)
@@ -35,6 +37,12 @@ namespace DuelGame
             {
                 _restartPanelView.Show();
             }
+        }
+        
+        private void StateChangedHandler(BattleState state)
+        {
+            if(state == BattleState.Continued)
+                _restartPanelView.Hide();
         }
     }   
 }

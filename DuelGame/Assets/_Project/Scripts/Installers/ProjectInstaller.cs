@@ -19,12 +19,16 @@ namespace DuelGame
             Debug.Log("Project installer created");
             
             Container.Bind<ILocalAssetLoader>().To<LocalAssetLoader>().AsSingle();
-            Container.BindInterfacesAndSelfTo<GlobalAssetsLoader>().AsSingle().WithArguments(_buffsRef, _heroesRef);
+            //Container.Bind<AdConfig>().AsSingle();
+            Container.BindInterfacesAndSelfTo<GlobalAssetsLoader>().AsSingle().WithArguments(_buffsRef, _heroesRef);            
+            Container.Bind<IAdService>().To<AdService>().AsSingle();
             Container.Bind<IAnalyticService>().To<AnalyticService>().AsSingle();
             Container.BindInterfacesAndSelfTo<EntityFactory>().AsSingle();
             Container.Bind<SceneLoaderService>().AsSingle();
             Container.Bind<SaveService>().AsSingle();
             Container.Bind<BattleDataCache>().AsSingle(); 
+            
+
         }
     }
 }

@@ -1,6 +1,8 @@
-﻿namespace DuelGame
+﻿using System;
+
+namespace DuelGame
 {
-    public interface IPresenter
+    public interface IPresenter : IDisposable
     {
     }
 }

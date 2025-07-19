@@ -70,6 +70,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3dfc0544a6272344fb0d7d1955add49d
+    m_Address: Assets/_Project/Prefabs/UI/AdsPanelView.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 47330c57ae6beb84daf0e45226726940
     m_Address: Assets/_Project/Prefabs/Heroes/Warrior.prefab
     m_ReadOnly: 0

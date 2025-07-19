@@ -8,7 +8,7 @@ namespace DuelGame
 {
     public class FireBaseInit
     {
-        public FireBaseInit()
+        public void Initialize()
         {
             FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task => {
                 if (task.Result == DependencyStatus.Available) {

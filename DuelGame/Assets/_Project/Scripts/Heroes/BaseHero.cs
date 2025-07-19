@@ -10,16 +10,12 @@ namespace DuelGame
     public delegate void PlayerDeath(Players player);
     public abstract class BaseHero : MonoBehaviour
     {
-        public delegate void PlayerTakeHit(Players players);
-        public delegate void TakeDamage(float damage);
-        public delegate void PlayerHealthChanged(float currentHealth, float maxHealth);
+        public delegate void TakeDamage(float damage, float currentHealth, float maxHealth, bool isPhysicalDamage);
         public delegate void ApplyBuffToEnemy(BaseHero hero);
         public delegate void ReceiveBuff(BuffEnum buffEnum);
         
-        public event PlayerTakeHit OnTakeHit;
         public event TakeDamage OnTakeDamage;
         public event PlayerDeath OnDeath;
-        public event PlayerHealthChanged OnHealthChanged;
         public event Action OnAttack;
         public event Action OnPlayerStop;
         public event ReceiveBuff OnReceiveBuff;        
@@ -27,7 +23,7 @@ namespace DuelGame
 
         public HeroStats Hero { get; private set; }
         public BuffsList BuffList { get; private set; }
-        public abstract HeroEnum HeroEnum { get; }// = HeroEnum.None;
+        public abstract HeroEnum HeroEnum { get; }
 
         protected BaseHero EnemyHero;
         protected Players Player = default;
@@ -63,14 +59,14 @@ namespace DuelGame
             IsAttackable = isAttackable;
         }
         
-        public void ChangeCurrentHealth(float damage)
+        public void TakeHit(float damage, bool isPhysicalDamage)
         {
             if(isDead)
                 return;
 
-            _currentHealth -= damage;
-            OnTakeDamage?.Invoke(damage);
-            OnHealthChanged?.Invoke(_currentHealth, Hero.Health);
+            float realDamage = (damage - (damage * (Hero.Armor * ARMOR_COEFFICIENT)));
+            _currentHealth -= realDamage;
+            OnTakeDamage?.Invoke(damage, _currentHealth, Hero.Health, isPhysicalDamage);
             
             CheckDeath();
         }
@@ -85,16 +81,6 @@ namespace DuelGame
             OnReceiveBuff?.Invoke(buffEnum);
         }
         
-        public void TakeHit(float damage)
-        {
-            if(isDead)
-                return;
-            
-            float realDamage = (damage - (damage * (Hero.Armor * ARMOR_COEFFICIENT)));
-            OnTakeHit?.Invoke(Player);
-            ChangeCurrentHealth(realDamage);
-        }
-        
         public void SetPlayerID(Players player)
         {
             Player = player;
@@ -107,7 +93,7 @@ namespace DuelGame
 
         public virtual void DamageEnemy()
         {
-            EnemyHero.TakeHit(Hero.Damage);
+            EnemyHero.TakeHit(Hero.Damage, true);
             InvokeApplyBuffToEnemy(EnemyHero);
         }
 

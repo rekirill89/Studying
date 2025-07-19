@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
@@ -10,7 +12,7 @@ namespace DuelGame
     {
         private readonly Dictionary<AssetReference, AsyncOperationHandle> _loadedAssets = new();
         
-        public async Task<T> LoadAsset<T>(AssetReference assetReference) where T : Object
+        public async UniTask<T> LoadAsset<T>(AssetReference assetReference, CancellationToken token) where T : Object
         {
             if (_loadedAssets.TryGetValue(assetReference, out var handle))
             {
@@ -18,7 +20,7 @@ namespace DuelGame
             }
             
             var assetHandle = Addressables.LoadAssetAsync<T>(assetReference);
-            await assetHandle.Task;
+            await assetHandle.ToUniTask(cancellationToken:token);
 
             if (assetHandle.Status == AsyncOperationStatus.Failed)
             {
@@ -29,6 +31,22 @@ namespace DuelGame
             _loadedAssets.Add(assetReference, assetHandle);
 
             return (T)assetHandle.Result;
+        }
+
+        public async UniTask<HeroStats> LoadHeroStats(AssetReference assetReference, CancellationToken token)
+        {
+            return await LoadAsset<HeroStats>(assetReference, token);
+        }
+
+        public async UniTask<BaseHero> LoadHeroScript(AssetReference assetReference, CancellationToken token)
+        {
+            var x = await LoadAsset<GameObject>(assetReference, token);
+            return x.GetComponent<BaseHero>();
+        }
+
+        public async UniTask<GameObject> LoadBuffPrefab(AssetReference assetReference, CancellationToken token)
+        {
+            return await LoadAsset<GameObject>(assetReference, token);
         }
 
         public void UnloadAsset(AssetReference assetRef)

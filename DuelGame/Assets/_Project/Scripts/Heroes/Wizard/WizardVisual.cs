@@ -26,28 +26,20 @@ namespace DuelGame
         {
             _wizard.OnAttack += WizardAttackStartedAnim;
             _wizard.OnAttackEnded += WizardAttackEndAnim;
+            
             Hero.OnPlayerStop += StopAllTasks;
-
-            Hero.OnTakeDamage += ShowDamageText;
-            Hero.OnTakeHit += HeroTakeHit;
+            Hero.OnTakeDamage += DamageTaken;
             Hero.OnDeath += HeroDeath;
-            Hero.OnHealthChanged += ChangeHealthBar;
-
-            //Hero.OnBuffApplied += HeroBuffApplied;
         }
         
         protected override void UnsubscribeFromEvents()
         {
             _wizard.OnAttack -= WizardAttackStartedAnim;
             _wizard.OnAttackEnded -= WizardAttackEndAnim;
+            
             Hero.OnPlayerStop -= StopAllTasks;
-
-            Hero.OnTakeDamage -= ShowDamageText;
-            Hero.OnTakeHit -= HeroTakeHit;
+            Hero.OnTakeDamage -= DamageTaken;
             Hero.OnDeath -= HeroDeath;
-            Hero.OnHealthChanged -= ChangeHealthBar;
-
-            //Hero.OnBuffApplied -= HeroBuffApplied;
         }
 
         private void WizardAttackStartedAnim()

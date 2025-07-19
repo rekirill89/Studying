@@ -21,7 +21,6 @@ namespace DuelGame
         private BuffsList _buffList;
         private Dictionary<BuffEnum, Func<Buff>> _buffsDictionary;
 
-
         private void Start()
         {
             _buffList = _hero.BuffList;
@@ -49,6 +48,7 @@ namespace DuelGame
         {
             Buff currentBuff = _buffsDictionary[buffEnum]();
 
+            
             currentBuff.Execute(_hero).Forget();
             
             OnBuffReceived?.Invoke(

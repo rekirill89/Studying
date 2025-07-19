@@ -17,6 +17,7 @@ namespace DuelGame
             _continuePanelView.OnButtonClicked += _battleManagerModel.ContinueBattle;
             _battleManagerModel.OnBattleFinish += ShowView;
             _battleManagerModel.OnPlayersSpawned += HideView;
+            _battleManagerModel.BattleStateModel.OnStateChanged += StateChangedHandler; 
         }
         
         public void Dispose()
@@ -24,6 +25,7 @@ namespace DuelGame
             _continuePanelView.OnButtonClicked -= _battleManagerModel.ContinueBattle;
             _battleManagerModel.OnBattleFinish -= ShowView;
             _battleManagerModel.OnPlayersSpawned -= HideView;
+            _battleManagerModel.BattleStateModel.OnStateChanged -= StateChangedHandler; 
         }
 
         public void ShowView(Players? playerWhoLost)
@@ -33,7 +35,13 @@ namespace DuelGame
                 _continuePanelView.Show();
             }
         }
-
+        
+        private void StateChangedHandler(BattleState state)
+        {
+            if(state == BattleState.Continued)
+                _continuePanelView.Hide();
+        }
+        
         private void HideView(BattleState battleState)
         {
             if (battleState == BattleState.Continued)

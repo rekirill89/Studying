@@ -30,7 +30,7 @@ namespace DuelGame
             Container.BindInterfacesAndSelfTo<HeroesLifecycleController>().AsSingle();
             Container.BindInterfacesAndSelfTo<BattleManager>().AsSingle();
             Container.BindInterfacesAndSelfTo<BattleDataController>().AsSingle();
-
+            Container.BindInterfacesAndSelfTo<BattleSceneEntryPoint>().AsSingle();
             
             Container.BindInterfacesAndSelfTo<MediatorPresentation>().AsSingle();
         }

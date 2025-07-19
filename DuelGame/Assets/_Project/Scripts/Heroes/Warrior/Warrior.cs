@@ -24,7 +24,7 @@ namespace DuelGame
             {
                 InvokeApplyBuffToEnemy(EnemyHero);
             }                
-            EnemyHero.TakeHit(Hero.Damage);
+            EnemyHero.TakeHit(Hero.Damage, true);
         }
     }
 }

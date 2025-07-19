@@ -35,12 +35,12 @@ namespace DuelGame
         
         public void ManualSaveBattleData()
         {
-            _saveService.SaveData(_battleManager.CollectBattleData(), SaveType.Manual);
+            _saveService.ManualSave(_battleManager.CollectBattleData());
         }
 
         public void LoadManualSaveBattleData()
         {
-            var battleData = _saveService.LoadData(SaveType.Manual);
+            var battleData = _saveService.ManualLoad();
             
             _battleDataCache.SetBattleData(battleData);
             _battleDataCache.ChangeLoadingStatus(true);
@@ -50,7 +50,7 @@ namespace DuelGame
 
         public void LoadAutoSaveBattleData()
         {
-            var battleData = _saveService.LoadData(SaveType.Auto);
+            var battleData = _saveService.AutoLoad();
             
             _battleDataCache.SetBattleData(battleData);
             _battleDataCache.ChangeLoadingStatus(true);
@@ -60,10 +60,10 @@ namespace DuelGame
         
         private void AutoSaveBattleData(Players? playerWhoLost)
         {
-            var x = _battleManager.CollectBattleData(playerWhoLost);
-            Debug.Log(x.Player1 + " " + x.Player2 + " " + x.PlayerWhoWon);
+            var data = _battleManager.CollectBattleData(playerWhoLost);
+            Debug.Log(data.Player1 + " " + data.Player2 + " " + data.PlayerWhoWon);
             
-            _saveService.SaveData(x, SaveType.Auto);
+            _saveService.AutoSave(data);
         }
     }
     

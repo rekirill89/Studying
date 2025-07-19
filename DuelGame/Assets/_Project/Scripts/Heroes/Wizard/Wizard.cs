@@ -33,13 +33,13 @@ namespace DuelGame
             IsAttackable = false;
             while (currentAttackDuration < _attackDuration && !Cts.IsCancellationRequested)
             {
-                hero.TakeHit(Hero.Damage);
+                hero.TakeHit(Hero.Damage, true);
                 currentAttackDuration += _attackInterval;
 
                 await UniTask.Delay(TimeSpan.FromSeconds(_attackIntervalTimer), cancellationToken: Cts.Token);
             }
 
-            hero.TakeHit(Hero.Damage);
+            hero.TakeHit(Hero.Damage, true);
             InvokeApplyBuffToEnemy(hero);
             IsAttackable = true;
             OnAttackEnded?.Invoke();

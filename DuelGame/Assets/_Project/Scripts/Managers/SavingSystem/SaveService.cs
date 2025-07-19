@@ -7,30 +7,27 @@ namespace DuelGame
 {
     public class SaveService
     {
-        private readonly Dictionary<SaveType, string> _saveKeys = new Dictionary<SaveType, string>()
-        {
-            { SaveType.Auto, "Auto save" },
-            { SaveType.Manual, "Manual save" },
-        };
+        private const string AUTO_SAVE_KEY = "Auto save";
+        private const string MANUAL_SAVE_KEY = "Manual save";
+
+        public void ManualSave(BattleData data) => Save(data, MANUAL_SAVE_KEY);
+        public void AutoSave(BattleData data) => Save(data, AUTO_SAVE_KEY);
         
-        public void SaveData(BattleData data, SaveType saveType)
+        public BattleData ManualLoad() => Load(MANUAL_SAVE_KEY);
+        public BattleData AutoLoad() => Load(AUTO_SAVE_KEY);
+        
+        private void Save(BattleData data, string key)
         {
             string json = JsonUtility.ToJson(data);
             
-            PlayerPrefs.SetString(_saveKeys[saveType], json);
+            PlayerPrefs.SetString(key, json);
         }
         
-        public BattleData LoadData(SaveType saveType) 
+        private BattleData Load(string key) 
         {
-            string json = PlayerPrefs.GetString(_saveKeys[saveType]);
+            string json = PlayerPrefs.GetString(key);
             
             return JsonUtility.FromJson<BattleData>(json);
         }
-    }
-
-    public enum SaveType
-    {
-        Auto,
-        Manual
     }
 }

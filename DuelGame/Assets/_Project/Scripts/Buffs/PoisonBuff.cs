@@ -35,7 +35,7 @@ namespace DuelGame
             var intervalTimer = TimeSpan.FromSeconds(_tickInterval);
             while (_currenBuffDuration < BuffDuration && !_token.IsCancellationRequested)
             {
-                target.ChangeCurrentHealth(_poisonDamagePerTick);
+                target.TakeHit(_poisonDamagePerTick, false);
                 _currenBuffDuration += _tickInterval;
 
                 await UniTask.Delay(intervalTimer, cancellationToken: _token);

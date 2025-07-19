@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 
 namespace DuelGame
 {
@@ -16,6 +17,7 @@ namespace DuelGame
 
             _battleManager.OnBattleFinish += ShowView;
             _battleManager.OnPlayersSpawned += HideView;
+            _battleManager.BattleStateModel.OnStateChanged += StateChangedHandler;
             _loadPanelView.LoadAutoSaveButton.OnClick += _battleDataController.LoadAutoSaveBattleData;
             _loadPanelView.LoadManualSaveButton.OnClick += _battleDataController.LoadManualSaveBattleData;
         }
@@ -24,6 +26,7 @@ namespace DuelGame
         {
             _battleManager.OnBattleFinish -= ShowView;
             _battleManager.OnPlayersSpawned -= HideView;
+            _battleManager.BattleStateModel.OnStateChanged -= StateChangedHandler;
             _loadPanelView.LoadAutoSaveButton.OnClick -= _battleDataController.LoadAutoSaveBattleData;
             _loadPanelView.LoadManualSaveButton.OnClick -= _battleDataController.LoadManualSaveBattleData;
         }
@@ -37,5 +40,12 @@ namespace DuelGame
         {
             _loadPanelView.Hide();
         }
+                
+        private void StateChangedHandler(BattleState state)
+        {
+            if(state == BattleState.Continued)
+                _loadPanelView.Hide();
+        }
+
     }
 }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ArcherSO
   m_EditorClassIdentifier: 
   HeroName: Archer
-  Health: 95
+  Health: 50
   Damage: 25
   Armor: 1
   AttackRate: 3

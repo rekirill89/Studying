@@ -14,21 +14,24 @@ namespace DuelGame
         public Transform FirstPlayerTrans {get; private set;}
         public Transform SecondPlayerTrans {get; private set;}
 
+        public bool IsSystemReady { get; private set; } = false;
+
         private readonly BattleSettingsFacade _facade;
         private readonly BattleSceneAssetsLoader _battleSceneAssetsLoader;
         private readonly BattleDataCache _battleDataCache;
         
         public BattleSessionContext(BattleDataCache battleDataCache, BattleSceneAssetsLoader battleSceneAssetsLoader)
         {
+            Debug.Log("Context started");
             _battleDataCache = battleDataCache;
             _battleSceneAssetsLoader = battleSceneAssetsLoader;
 
-            _battleSceneAssetsLoader.OnBattleSceneAssetsPrepared += Init;
+            _battleSceneAssetsLoader.OnBattleSceneAssetsReady += Init;
         }
 
         public void Dispose()
         {
-            _battleSceneAssetsLoader.OnBattleSceneAssetsPrepared -= Init;
+            _battleSceneAssetsLoader.OnBattleSceneAssetsReady -= Init;
         }
         
         private void Init(BattleSettingsFacade facade, Panels _)
@@ -54,6 +57,7 @@ namespace DuelGame
                 BattleData = battleData;
             }
             OnSessionReady?.Invoke();
+            IsSystemReady = true;
         }
     }
 }

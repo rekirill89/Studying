@@ -85,6 +85,12 @@ MonoBehaviour:
     m_SubObjectGUID: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
+  AdsPanelViewRef:
+    m_AssetGUID: 3dfc0544a6272344fb0d7d1955add49d
+    m_SubObjectName: 
+    m_SubObjectGUID: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
 --- !u!1001 &369676605549142743
 PrefabInstance:
   m_ObjectHideFlags: 0

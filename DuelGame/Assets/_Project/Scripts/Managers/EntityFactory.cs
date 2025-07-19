@@ -1,7 +1,7 @@
 using System;
-using System.Threading.Tasks;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
-using Zenject;
 using Object = UnityEngine.Object;
 
 namespace DuelGame
@@ -11,30 +11,36 @@ namespace DuelGame
         private readonly GlobalAssetsLoader _globalAssetsLoader;
         
         private HeroesList _heroes; 
-        private BuffsList _buffs; 
+        private BuffsList _buffs;
+
+        private CancellationTokenSource _cts;
         
         public EntityFactory(GlobalAssetsLoader globalAssetsLoader)
         {
             _globalAssetsLoader = globalAssetsLoader;
+            
+            _cts = new CancellationTokenSource();
+            
             _globalAssetsLoader.OnDataLoaded += InitConfigs;
         }
 
         public void Dispose()
         {
+            _cts.Cancel();
             _globalAssetsLoader.OnDataLoaded -= InitConfigs;
         }
 
-        public BaseHero SpawnRandomHero(Transform trans)
+        public async UniTask<BaseHero> SpawnRandomHero(Transform trans)
         {
-            var entity = _heroes.GetRandomEntity();
+            var entity = await _heroes.GetRandomHero(_cts.Token);
             var x = Object.Instantiate(entity.HeroScript, trans);
             x.Initialize(entity.HeroStats, _buffs);
             return x;
         }
 
-        public BaseHero SpawnHeroByEnum(Transform trans, HeroEnum heroEnum)
+        public async UniTask<BaseHero> SpawnHeroByEnum(Transform trans, HeroEnum heroEnum)
         {
-            var entity = _heroes.GetHeroEntityByEnum(heroEnum);
+            var entity = await _heroes.GetHeroEntityByEnum(heroEnum, _cts.Token);
             var x = Object.Instantiate(entity.HeroScript, trans);
             x.Initialize(entity.HeroStats, _buffs);
             return x;

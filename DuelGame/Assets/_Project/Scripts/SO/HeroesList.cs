@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Serialization;
@@ -12,19 +13,36 @@ namespace DuelGame
     {
         [field:SerializeField] public override List<EntryHero> ListOfEntities { get; set; } = new List<EntryHero>();
 
-        public async Task Init(ILocalAssetLoader assetLoader)
+        private ILocalAssetLoader _localAssetLoader;
+        
+        public void Init(ILocalAssetLoader assetLoader)
         {
-            foreach (var hero in ListOfEntities)
-            {
-                var heroScript = await assetLoader.LoadAsset<GameObject>(hero.HeroScriptRef);
-                
-                hero.HeroStats = await assetLoader.LoadAsset<HeroStats>(hero.HeroStatsRef);
-                hero.HeroScript = heroScript.GetComponent<BaseHero>();
-            }
+            _localAssetLoader = assetLoader;
         }
-        public EntryHero GetHeroEntityByEnum(HeroEnum heroEnum)
+        
+        public async UniTask<EntryHero> GetHeroEntityByEnum(HeroEnum heroEnum, CancellationToken token)
         {
-            return ListOfEntities.First(x => x.HeroEnum == heroEnum);
+            var hero = ListOfEntities.First(x => x.HeroEnum == heroEnum);
+            if(!hero.IsLoaded)
+                await LoadHero(hero, token);
+            
+            return hero;
+        }
+        
+        public async UniTask<EntryHero> GetRandomHero(CancellationToken token)
+        {
+            var hero = ListOfEntities[Random.Range(0, ListOfEntities.Count)];
+            if (!hero.IsLoaded)
+                await LoadHero(hero, token);
+            
+            return hero;
+        }
+        
+        private async UniTask LoadHero(EntryHero hero, CancellationToken token)
+        {
+            hero.HeroScript = await _localAssetLoader.LoadHeroScript(hero.HeroScriptRef, token);
+            hero.HeroStats = await _localAssetLoader.LoadHeroStats(hero.HeroStatsRef, token);
+            hero.IsLoaded = true;
         }
     }    
     [System.Serializable]
@@ -32,6 +50,7 @@ namespace DuelGame
     {
         public HeroStats HeroStats {get; set;}
         public BaseHero HeroScript {get; set;}
+        public bool IsLoaded {get; set;} = false;
         public AssetReference HeroStatsRef;
         public AssetReference HeroScriptRef;
         public HeroEnum HeroEnum;

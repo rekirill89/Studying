@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Generic;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -6,7 +9,7 @@ namespace DuelGame
 {
     public class HeroesLifecycleController : IDisposable
     {
-        public BaseHero Player1 {get; private set;}
+        public BaseHero Player1 { get; private set; }
         public BaseHero Player2 {get; private set;}
         
         private readonly PlayerSettings _player1Settings = new PlayerSettings();
@@ -17,11 +20,19 @@ namespace DuelGame
         
         private PlayerDeath _onPlayerDeath ;
 
+        private Dictionary<Players, BaseHero> _playerHeroes;
+
         public HeroesLifecycleController(EntityFactory entityFactory, BattleSessionContext battleSessionContext)
         {
             _entityFactory = entityFactory;
             _battleSessionContext = battleSessionContext;
 
+            _playerHeroes = new Dictionary<Players, BaseHero>()
+            {
+                { Players.Player1, Player1 },
+                { Players.Player2, Player2 },
+            };
+            
             _battleSessionContext.OnSessionReady += Init;
         }
         
@@ -31,12 +42,12 @@ namespace DuelGame
             DestroyHeroes();
         }
 
-        public (BaseHero, BaseHero) SpawnHeroes(PlayerDeath onPlayerDeath)
+        public async UniTask<(BaseHero, BaseHero)> SpawnHeroes(PlayerDeath onPlayerDeath, CancellationToken token, HeroEnum player1EnumIfAlive = HeroEnum.None)
         {
             _onPlayerDeath = onPlayerDeath;
             
-            Player1 = CreateHero(_player1Settings.spawnTransform, _player1Settings.heroEnum);
-            Player2 = CreateHero(_player2Settings.spawnTransform, _player2Settings.heroEnum);
+            Player1 = await CreateHero(_player1Settings.spawnTransform, (player1EnumIfAlive == HeroEnum.None ? _player1Settings.heroEnum : player1EnumIfAlive), token);
+            Player2 = await CreateHero(_player2Settings.spawnTransform, _player2Settings.heroEnum, token);
             
             return (Player1, Player2);
         }
@@ -54,6 +65,14 @@ namespace DuelGame
                 Player2.OnDeath -= StopPlayers;
                 Object.Destroy(Player2.gameObject);
             }
+            /*else
+            {
+                if (_playerHeroes[playerToDestroy] != null)
+                {
+                    _playerHeroes[playerToDestroy].OnDeath -= StopPlayers;
+                    Object.Destroy(_playerHeroes[playerToDestroy].gameObject);
+                }
+            }*/
         }
 
         private void Init()
@@ -65,11 +84,11 @@ namespace DuelGame
             _player2Settings.heroEnum = _battleSessionContext.BattleData.Player2;
         }
         
-        private BaseHero CreateHero(Transform trans, HeroEnum heroEnum)
+        private async UniTask<BaseHero> CreateHero(Transform trans, HeroEnum heroEnum, CancellationToken token)
         {
             var x = heroEnum == HeroEnum.Random
-                ? _entityFactory.SpawnRandomHero(trans)
-                : _entityFactory.SpawnHeroByEnum(trans, heroEnum);
+                ? await _entityFactory.SpawnRandomHero(trans)
+                : await _entityFactory.SpawnHeroByEnum(trans, heroEnum);
             
             x.OnDeath += StopPlayers;
             return x;

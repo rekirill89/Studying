@@ -1,4 +1,5 @@
 using System;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
@@ -14,19 +15,24 @@ namespace DuelGame
             _battleManagerModel = battleManager;
             _startPanelView = startPanelView;
             
-            _startPanelView.OnButtonClicked += _battleManagerModel.RunBattle;
+            _startPanelView.OnButtonClicked += RunBattleHandler;
             _battleManagerModel.OnPlayersSpawned += HideView;
         }
 
         public void Dispose()
         {
-            _startPanelView.OnButtonClicked -= _battleManagerModel.RunBattle;
+            _startPanelView.OnButtonClicked -= RunBattleHandler;
             _battleManagerModel.OnPlayersSpawned -= HideView;
         }
 
         public void ShowView()
         {
             _startPanelView.Show();    
+        }
+
+        private void RunBattleHandler()
+        {
+            _battleManagerModel.RunBattle().Forget();
         }
         
         private void HideView(BattleState battleState)

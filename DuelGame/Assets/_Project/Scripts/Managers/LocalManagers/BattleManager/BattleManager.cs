@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Threading;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using Cysharp.Threading.Tasks;
@@ -8,7 +9,7 @@ using IInitializable = Zenject.IInitializable;
 
 namespace DuelGame
 {
-    public class BattleManager : IDisposable//, IInitializable
+    public class BattleManager : IDisposable
     {
         public delegate void BattleFinish(Players? playerWhoLost);
         public delegate void PlayerSpawned(BattleState battleState);
@@ -16,13 +17,15 @@ namespace DuelGame
         public event BattleFinish OnBattleFinish;
         public event PlayerSpawned OnPlayersSpawned;
         public event Action OnBattleReady;
-
+        
+        public readonly BattleStateModel BattleStateModel;
+        
         private readonly HeroesLifecycleController _heroesLifecycleController;
-        private readonly BattleStateModel _battleStateModel;
         private readonly IAnalyticService _analyticService;
         private readonly AnalyticsDataCollector _analyticsDataCollector;
         private readonly BattleSessionContext _battleSessionContext;
-        private readonly BattleSceneAssetsLoader _battleSceneAssetsLoader;
+        
+        private readonly CancellationTokenSource _cts;
 
         private float _attackDelayP1;
         private float _attackDelayP2;
@@ -34,18 +37,17 @@ namespace DuelGame
             AnalyticsDataCollector analyticsDataCollector,
             BattleStateModel battleStateModel, 
             HeroesLifecycleController heroesLifecycleController,
-            BattleSceneAssetsLoader battleSceneAssetsLoader,
             BattleSessionContext battleSessionContext)
         {
             _analyticService = analyticService;
             _analyticsDataCollector = analyticsDataCollector;
             _heroesLifecycleController = heroesLifecycleController;
-            _battleStateModel = battleStateModel;
-            _battleSceneAssetsLoader = battleSceneAssetsLoader;
+            BattleStateModel = battleStateModel;
             _battleSessionContext = battleSessionContext;
             
+            _cts = new CancellationTokenSource();
+            
             _battleSessionContext.OnSessionReady += Init;
-            _battleSceneAssetsLoader.OnReadyToStart += InvokeStartBattle;
 
             Debug.Log("Battle Manager created");
         }
@@ -53,18 +55,20 @@ namespace DuelGame
         public void Dispose()
         {
             _battleSessionContext.OnSessionReady -= Init;
-            _battleSceneAssetsLoader.OnReadyToStart -= InvokeStartBattle;
 
             _heroesCombatController?.StopAllTasks();
             _heroesLifecycleController?.DestroyHeroes();
+            Debug.Log("Battle Manager cleaned");
         }
 
-        public void RunBattle()
+        public async UniTask RunBattle(bool isContinue = false)
         {
-            if (_battleStateModel.CurrentBattleState == BattleState.NotStarted)
-                _battleStateModel.SetState(BattleState.Started);
+            if (BattleStateModel.CurrentBattleState == BattleState.NotStarted)
+                BattleStateModel.SetState(BattleState.Started);
 
-            var (player1, player2) = _heroesLifecycleController.SpawnHeroes(FinishBattle);
+            var (player1, player2) = await _heroesLifecycleController.SpawnHeroes(
+                FinishBattle, 
+                _cts.Token, (isContinue == true ? _heroesLifecycleController.Player1.HeroEnum : HeroEnum.None));
             
             _heroesCombatController?.StopAllTasks();
             _heroesCombatController = new HeroesCombatController(_analyticsDataCollector, player1, Players.Player1, player2, Players.Player2);
@@ -75,15 +79,15 @@ namespace DuelGame
             player2.SetEnemy(player1);
 
             _analyticService.LogBattleStarted();
-            OnPlayersSpawned?.Invoke(_battleStateModel.CurrentBattleState);
+            OnPlayersSpawned?.Invoke(BattleStateModel.CurrentBattleState);
         }
 
         public void ContinueBattle()
         {
-            _battleStateModel.SetState(BattleState.Continued);
+            BattleStateModel.SetState(BattleState.Continued);
             
             _heroesLifecycleController.DestroyHeroes();
-            RunBattle();
+            RunBattle(true).Forget();
         }
 
         public BattleData CollectBattleData(Players? playerWhoWon = null)
@@ -96,22 +100,22 @@ namespace DuelGame
                 PlayerWhoWon = playerWhoWon
             };
         }
-                
+               
+        public void InvokeStartBattle()
+        {
+            Debug.Log("Battle Ready invoked");
+            OnBattleReady?.Invoke();
+        }
+
         private void Init()
         {
             _attackDelayP1 = _battleSessionContext.AttackDelayP1;
             _attackDelayP2 = _battleSessionContext.AttackDelayP2;
         }
 
-        private void InvokeStartBattle()
-        {
-            Debug.Log("Battle Ready invoked");
-            OnBattleReady?.Invoke();
-        }
-        
         private void FinishBattle(Players playerWhoLost)
         {
-            _battleStateModel.SetState(BattleState.Finished);
+            BattleStateModel.SetState(BattleState.Finished);
             
             _heroesCombatController.ChangeAttackStatusToPlayers(false);
             

@@ -28,6 +28,9 @@ namespace DuelGame
         {
             Debug.Log("Loading next scene...");
             
+            var fireBaseInit = new FireBaseInit();
+            fireBaseInit.Initialize();
+            
             _sceneLoaderService.LoadBattleScene();
         }
     }

@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using Zenject;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -7,7 +9,7 @@ using Object = UnityEngine.Object;
 
 namespace DuelGame
 {
-    public class GlobalAssetsLoader : IInitializable
+    public class GlobalAssetsLoader : IInitializable, IDisposable
     {
         public delegate void ConfigsLoaded(GameConfigs configs);
         public event ConfigsLoaded OnDataLoaded;
@@ -17,6 +19,8 @@ namespace DuelGame
         
         private readonly DiContainer _diContainer;
         private readonly ILocalAssetLoader _localAssetLoader;
+        
+        private CancellationTokenSource _cts;
         
         public GlobalAssetsLoader(
             DiContainer diContainer, 
@@ -29,27 +33,33 @@ namespace DuelGame
             
             _buffsConfigRef = buffsConfigRef;
             _heroesConfigRef = heroesConfigRef;
+            
+            _cts = new CancellationTokenSource();
         }
         
         public void Initialize()
         {
-            var t = Load();
-            
-            _ = new FireBaseInit();
+            Load().Forget();
         }
 
-        private async Task Load()
+        public void Dispose()
         {
-            var buffsList = Object.Instantiate(await _localAssetLoader.LoadAsset<BuffsList>(_buffsConfigRef));
-            await buffsList.Init(_localAssetLoader);
+            _cts.Cancel();
+        }
+        
+        private async UniTask Load()
+        {
+            var buffsList = Object.Instantiate(await _localAssetLoader.LoadAsset<BuffsList>(_buffsConfigRef, _cts.Token));
+            await buffsList.Init(_localAssetLoader, _cts.Token);
             _diContainer.Bind<BuffsList>().FromInstance(buffsList).AsSingle();
             
-            var heroesList = Object.Instantiate(await  _localAssetLoader.LoadAsset<HeroesList>(_heroesConfigRef));
-            await heroesList.Init(_localAssetLoader);
+            var heroesList = Object.Instantiate(await  _localAssetLoader.LoadAsset<HeroesList>(_heroesConfigRef, _cts.Token));
+            heroesList.Init(_localAssetLoader);
             _diContainer.Bind<HeroesList>().FromInstance(heroesList).AsSingle();
 
             OnDataLoaded?.Invoke(new GameConfigs(heroesList, buffsList));
         }
+
     }
 
     public class GameConfigs

@@ -1,5 +1,8 @@
 using System;
+using System.Threading;
 using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Serialization;
@@ -16,15 +19,15 @@ namespace DuelGame
         public Transform SecondPlayerTrans;
         
         private ILocalAssetLoader _localAssetLoader;
-        
+
         public void Init(ILocalAssetLoader localAssetLoader)
         {
             _localAssetLoader = localAssetLoader;
         }
 
-        public async Task LoadAssets()
+        public async UniTask LoadAssets(CancellationToken token)
         {
-            BattleConfig = await _localAssetLoader.LoadAsset<BattleConfig>(BattleConfigRef);
+            BattleConfig = await _localAssetLoader.LoadAsset<BattleConfig>(BattleConfigRef, token);
             Debug.Log("Battle config initialized");
         }
     }
