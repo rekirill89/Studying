@@ -7,30 +7,34 @@ using UnityEngine;
 namespace DuelGame
 {
     public class PoisonBuff : Buff
-    {        
-        private const float POISON_BUFF_DURATION = 2.1f;
+    {
+        public override float BuffDuration { get; protected set; } = 2.1f;
         
-        private readonly float _poisonDamagePerTick = 3.5f;
-        private readonly float _startDelay = 0.3f;
-        private readonly float _tickInterval = 0.3f;
-        
-        private readonly CancellationToken _token;
+        private float _poisonDamagePerTick = 3.5f;
+        private float _startDelay = 0.3f;
+        private float _tickInterval = 0.3f;
         
         private float _currenBuffDuration;
         
-        public PoisonBuff(CancellationToken token) : base(POISON_BUFF_DURATION)
+        public PoisonBuff(PoisonBuffRemoteConfig config = null)
         {
-            _token = token;
             BuffEnum = BuffEnum.Poison;
-
             _currenBuffDuration = 0;
+            
+            if(config == null)
+                return;
+            
+            BuffDuration = config.Duration;
+            _poisonDamagePerTick = config.DamagePerTick;
+            _startDelay = config.StartDelay;
+            _tickInterval = config.TickInterval;
         }
         
-        public override async UniTask Execute(BaseHero target/*, Sprite sprite*/)
+        public override async UniTask Execute(BaseHero target)
         {
             await UniTask.Delay(TimeSpan.FromSeconds(_startDelay), cancellationToken: _token);
         
-            await base.Execute(target/*, sprite*/);
+            await base.Execute(target);
 
             var intervalTimer = TimeSpan.FromSeconds(_tickInterval);
             while (_currenBuffDuration < BuffDuration && !_token.IsCancellationRequested)

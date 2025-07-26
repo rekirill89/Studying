@@ -31,9 +31,6 @@ namespace DuelGame
         private void OnDestroy()
         {
             _buffReceiver.OnBuffReceived -= ShowBuffSprite;
-            /*_cts?.Cancel();
-            _cts?.Dispose();
-            _cts = null;*/
         }
 
         private void ShowBuffSprite(float duration, Sprite sprite)

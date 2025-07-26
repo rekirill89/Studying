@@ -1,31 +1,30 @@
 using System;
 using System.Collections.Generic;
-//using UnityEditor.Overlays;
 using UnityEngine;
 
 namespace DuelGame
 {
     public class SaveService
     {
-        private const string AUTO_SAVE_KEY = "Auto save";
-        private const string MANUAL_SAVE_KEY = "Manual save";
+        private const string SAVE_KEY = "Auto save";
+        /*private const string MANUAL_SAVE_KEY = "Manual save";*/
 
-        public void ManualSave(BattleData data) => Save(data, MANUAL_SAVE_KEY);
-        public void AutoSave(BattleData data) => Save(data, AUTO_SAVE_KEY);
+        //public void ManualSave(BattleData data) => Save(data, MANUAL_SAVE_KEY);
+        //public void AutoSave(BattleData data) => Save(data, SAVE_KEY);
         
-        public BattleData ManualLoad() => Load(MANUAL_SAVE_KEY);
-        public BattleData AutoLoad() => Load(AUTO_SAVE_KEY);
+        /*public BattleData ManualLoad() => Load(MANUAL_SAVE_KEY);
+        public BattleData AutoLoad() => Load(SAVE_KEY);*/
         
-        private void Save(BattleData data, string key)
+        public void Save(BattleData data/*, string key*/)
         {
             string json = JsonUtility.ToJson(data);
             
-            PlayerPrefs.SetString(key, json);
+            PlayerPrefs.SetString(SAVE_KEY, json);
         }
         
-        private BattleData Load(string key) 
+        public BattleData Load(/*string key*/) 
         {
-            string json = PlayerPrefs.GetString(key);
+            string json = PlayerPrefs.GetString(SAVE_KEY);
             
             return JsonUtility.FromJson<BattleData>(json);
         }

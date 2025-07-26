@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -15,6 +16,14 @@ namespace DuelGame
         [field:SerializeField] public override List<EntryBuff> ListOfEntities { get; set; } = new List<EntryBuff>();
         
         private ILocalAssetLoader _localAssetLoader;
+
+        private void OnDestroy()
+        {
+            foreach (var buff in ListOfEntities)
+            {
+                _localAssetLoader.UnloadAsset(buff.SpReference);
+            }
+        }
 
         public async UniTask Init(ILocalAssetLoader localAssetLoader, CancellationToken token)
         {

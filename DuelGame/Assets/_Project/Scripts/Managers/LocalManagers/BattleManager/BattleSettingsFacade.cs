@@ -20,6 +20,11 @@ namespace DuelGame
         
         private ILocalAssetLoader _localAssetLoader;
 
+        private void OnDestroy()
+        {
+            _localAssetLoader.UnloadAsset(BattleConfigRef);
+        }
+
         public void Init(ILocalAssetLoader localAssetLoader)
         {
             _localAssetLoader = localAssetLoader;
@@ -29,6 +34,11 @@ namespace DuelGame
         {
             BattleConfig = await _localAssetLoader.LoadAsset<BattleConfig>(BattleConfigRef, token);
             Debug.Log("Battle config initialized");
+        }
+
+        public void UnloadAssets()
+        {
+            _localAssetLoader.UnloadAsset(BattleConfigRef);
         }
     }
 }

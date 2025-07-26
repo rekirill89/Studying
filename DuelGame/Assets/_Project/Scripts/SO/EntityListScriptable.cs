@@ -9,8 +9,5 @@ namespace DuelGame
     {
         public abstract List<T> ListOfEntities { get; set; }
     }
-    public interface INamedObject
-    {
-        //public bool IsLoaded { get; set; }
-    }
+    public interface INamedObject { }
 }

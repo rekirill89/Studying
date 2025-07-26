@@ -74,6 +74,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a03fd7a0ac0955544a3512a59e2c15c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _battleConfigRef:
+    m_AssetGUID: 133881b9e0628a143947dc25c7b23319
+    m_SubObjectName: 
+    m_SubObjectGUID: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
   _buffsRef:
     m_AssetGUID: c5488a34a5ef23844a75141283b6c44f
     m_SubObjectName: 

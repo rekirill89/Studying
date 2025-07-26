@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using Zenject;
 
 namespace DuelGame
 {
@@ -7,7 +8,7 @@ namespace DuelGame
     {
         public event Action OnSessionReady;
         
-        public BattleData BattleData {get; private set; }
+        public BattleData BattleData {get; private set; } 
         public float AttackDelayP1 {get; private set;}
         public float AttackDelayP2 {get; private set;}
         
@@ -16,19 +17,20 @@ namespace DuelGame
 
         public bool IsSystemReady { get; private set; } = false;
 
-        private readonly BattleSettingsFacade _facade;
         private readonly BattleSceneAssetsLoader _battleSceneAssetsLoader;
         private readonly BattleDataCache _battleDataCache;
         
         public BattleSessionContext(BattleDataCache battleDataCache, BattleSceneAssetsLoader battleSceneAssetsLoader)
         {
-            Debug.Log("Context started");
             _battleDataCache = battleDataCache;
             _battleSceneAssetsLoader = battleSceneAssetsLoader;
-
-            _battleSceneAssetsLoader.OnBattleSceneAssetsReady += Init;
         }
 
+        public void Initialize()
+        {
+            _battleSceneAssetsLoader.OnBattleSceneAssetsReady += Init;
+        }
+        
         public void Dispose()
         {
             _battleSceneAssetsLoader.OnBattleSceneAssetsReady -= Init;
@@ -36,6 +38,7 @@ namespace DuelGame
         
         private void Init(BattleSettingsFacade facade, Panels _)
         {
+            Debug.Log("BattleSessionContext Init");
             FirstPlayerTrans = facade.FirstPlayerTrans;
             SecondPlayerTrans = facade.SecondPlayerTrans;
             
@@ -58,6 +61,7 @@ namespace DuelGame
             }
             OnSessionReady?.Invoke();
             IsSystemReady = true;
+            Debug.Log("BattleSessionContext Init end");
         }
     }
 }

@@ -19,7 +19,7 @@ MonoBehaviour:
       m_SubObjectGUID: 
       m_SubObjectType: 
       m_EditorAssetChanged: 0
-    HeroScriptRef:
+    HeroRef:
       m_AssetGUID: 47330c57ae6beb84daf0e45226726940
       m_SubObjectName: 
       m_SubObjectGUID: 
@@ -32,7 +32,7 @@ MonoBehaviour:
       m_SubObjectGUID: 
       m_SubObjectType: 
       m_EditorAssetChanged: 0
-    HeroScriptRef:
+    HeroRef:
       m_AssetGUID: abfaab04aa36367448ffe63643918f7c
       m_SubObjectName: 
       m_SubObjectGUID: 
@@ -45,7 +45,7 @@ MonoBehaviour:
       m_SubObjectGUID: 
       m_SubObjectType: 
       m_EditorAssetChanged: 0
-    HeroScriptRef:
+    HeroRef:
       m_AssetGUID: 028da5768e3ed6e4699fa5c0acd80d2e
       m_SubObjectName: 
       m_SubObjectGUID: 

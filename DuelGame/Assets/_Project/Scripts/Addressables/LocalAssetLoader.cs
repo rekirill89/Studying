@@ -22,6 +22,10 @@ namespace DuelGame
             var assetHandle = Addressables.LoadAssetAsync<T>(assetReference);
             await assetHandle.ToUniTask(cancellationToken:token);
 
+            if (token.IsCancellationRequested)
+            {
+                Debug.LogError("Loading asset stopped");
+            }
             if (assetHandle.Status == AsyncOperationStatus.Failed)
             {
                 Debug.LogError("Error loading asset");
@@ -38,7 +42,7 @@ namespace DuelGame
             return await LoadAsset<HeroStats>(assetReference, token);
         }
 
-        public async UniTask<BaseHero> LoadHeroScript(AssetReference assetReference, CancellationToken token)
+        public async UniTask<BaseHero> LoadHero(AssetReference assetReference, CancellationToken token)
         {
             var x = await LoadAsset<GameObject>(assetReference, token);
             return x.GetComponent<BaseHero>();

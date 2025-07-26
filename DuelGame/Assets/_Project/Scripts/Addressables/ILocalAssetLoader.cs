@@ -12,7 +12,7 @@ namespace DuelGame
 
         public UniTask<HeroStats> LoadHeroStats(AssetReference assetReference, CancellationToken token);
 
-        public UniTask<BaseHero> LoadHeroScript(AssetReference assetReference, CancellationToken token);
+        public UniTask<BaseHero> LoadHero(AssetReference assetReference, CancellationToken token);
         
         public UniTask<GameObject> LoadBuffPrefab(AssetReference assetReference, CancellationToken token);
         

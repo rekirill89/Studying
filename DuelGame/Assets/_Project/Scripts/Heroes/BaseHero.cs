@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Threading;
 using Cysharp.Threading.Tasks;
@@ -21,6 +22,7 @@ namespace DuelGame
         public event ReceiveBuff OnReceiveBuff;        
         public event ApplyBuffToEnemy OnApplyBuffToEnemy;
 
+        public Dictionary<BuffEnum, Func<Buff>> BuffsDictionary {get; private set;}
         public HeroStats Hero { get; private set; }
         public BuffsList BuffList { get; private set; }
         public abstract HeroEnum HeroEnum { get; }
@@ -37,6 +39,7 @@ namespace DuelGame
         private float _currenStunDuration = 0;
         private float _currentHealth = 0;
         
+        
         private void Start()
         {
             StartHandler();
@@ -48,10 +51,14 @@ namespace DuelGame
             Cts.Cancel();
         }
         
-        public void Initialize(HeroStats hero, BuffsList buffs)
+        public void Initialize(
+            HeroStats hero, 
+            BuffsList buffs, 
+            Dictionary<BuffEnum, Func<Buff>> buffsDictionary)
         {
             Hero = Instantiate(hero);
             BuffList = buffs;
+            BuffsDictionary = buffsDictionary;
         }
         
         public void ChangeAttackStatus(bool isAttackable)

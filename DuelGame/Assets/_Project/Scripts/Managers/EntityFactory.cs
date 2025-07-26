@@ -1,56 +1,74 @@
 using System;
+using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using Zenject;
 using Object = UnityEngine.Object;
 
 namespace DuelGame
 {
-    public class EntityFactory : IDisposable
+    public class EntityFactory : IDisposable/*, IInitializable*/
     {
+        public bool IsSystemReady { get; private set; } = false;
+        
         private readonly GlobalAssetsLoader _globalAssetsLoader;
+        private readonly IRemoteConfigsManager _remoteConfigsManager;
+        private readonly CancellationTokenSource _cts;
         
         private HeroesList _heroes; 
         private BuffsList _buffs;
 
-        private CancellationTokenSource _cts;
+        private Dictionary<BuffEnum, Func<Buff>> _buffsDictionary;
         
-        public EntityFactory(GlobalAssetsLoader globalAssetsLoader)
+        public EntityFactory(GlobalAssetsLoader globalAssetsLoader, IRemoteConfigsManager remoteConfigsManager)
         {
             _globalAssetsLoader = globalAssetsLoader;
+            _remoteConfigsManager = remoteConfigsManager;
             
             _cts = new CancellationTokenSource();
-            
-            _globalAssetsLoader.OnDataLoaded += InitConfigs;
         }
 
+        public void Init()
+        {
+            _remoteConfigsManager.OnRemoteConfigsApplied += InitConfigs;
+        }
+        
         public void Dispose()
         {
             _cts.Cancel();
-            _globalAssetsLoader.OnDataLoaded -= InitConfigs;
+            _remoteConfigsManager.OnRemoteConfigsApplied -= InitConfigs;
         }
 
         public async UniTask<BaseHero> SpawnRandomHero(Transform trans)
         {
             var entity = await _heroes.GetRandomHero(_cts.Token);
-            var x = Object.Instantiate(entity.HeroScript, trans);
-            x.Initialize(entity.HeroStats, _buffs);
+            var x = Object.Instantiate(entity.Hero, trans);
+            x.Initialize(entity.HeroStats, _buffs, _buffsDictionary);
             return x;
         }
 
         public async UniTask<BaseHero> SpawnHeroByEnum(Transform trans, HeroEnum heroEnum)
         {
             var entity = await _heroes.GetHeroEntityByEnum(heroEnum, _cts.Token);
-            var x = Object.Instantiate(entity.HeroScript, trans);
-            x.Initialize(entity.HeroStats, _buffs);
+            var x = Object.Instantiate(entity.Hero, trans);
+            x.Initialize(entity.HeroStats, _buffs, _buffsDictionary);
             return x;
         }        
         
-        private void InitConfigs(GameConfigs configs)
+        private void InitConfigs(GameLocalConfigs localConfigs, BuffsRemoteConfigs buffs)
         {
-            _heroes = configs.HeroesList;
-            _buffs = configs.BuffsList;
+            _heroes = localConfigs.HeroesList;
+            _buffs = localConfigs.BuffsList;
             
+            _buffsDictionary = new Dictionary<BuffEnum, Func<Buff>>()
+            {
+                { BuffEnum.Poison, () => new PoisonBuff(buffs.Poison) },
+                { BuffEnum.Stun, () => new StunBuff(buffs.Stun) },
+                { BuffEnum.DecreaseDamage, () => new DecreaseDamageBuff(buffs.DecreaseDamage) }
+            };
+
+            IsSystemReady = true;
             Debug.Log($"Factory initialized");
         }
     }

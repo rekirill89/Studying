@@ -7,19 +7,29 @@ namespace DuelGame
 {
     public class StunBuff : Buff
     {
-        private const float STUN_BUFF_DURATION = 4f;
-
-        public StunBuff() : base(STUN_BUFF_DURATION)
+        public override float BuffDuration { get; protected set; } = 4f;
+        
+        public StunBuff(StunBuffRemoteConfig config = null)
         {
             BuffEnum = BuffEnum.Stun;
+            
+            if(config == null)
+                return;
+            
+            BuffDuration = config.Duration;
         }
-        
-        public override async UniTask Execute(BaseHero target/*, Sprite sprite*/)
+
+        public override async UniTask Execute(BaseHero target)
         {
-            await base.Execute(target/*, sprite*/);
+            await base.Execute(target);
             
             target.GetStunned(BuffDuration);
             await UniTask.Yield();
         }
+        
+        /*public void SetBuffStats(StunBuffRemoteConfig config)
+        {
+            BuffDuration = config.Duration;
+        }*/
     }
 }

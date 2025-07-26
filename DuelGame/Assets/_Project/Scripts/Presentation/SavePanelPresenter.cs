@@ -1,8 +1,9 @@
 ﻿using System;
+using Zenject;
 
 namespace DuelGame
 {
-    public class SavePanelPresenter : IDisposable, IPresenter
+    public class SavePanelPresenter : IPresenter<SavePanelView>
     {
         private readonly BattleManager _battleManagerModel;
         private readonly BattleDataController _battleDataController;
@@ -16,15 +17,18 @@ namespace DuelGame
             _battleManagerModel = battleManagerModel;
             _battleDataController = battleDataController;
             _savePanelView = savePanelView;
-
-            _savePanelView.OnButtonClicked += _battleDataController.ManualSaveBattleData;
+        }
+                                               
+        public void Initialize()
+        {
+            _savePanelView.OnButtonClicked += ButtonClickedHandler;
             _battleManagerModel.OnPlayersSpawned += ShowView;
             _battleManagerModel.OnBattleFinish += HideView;
         }
-        
+
         public void Dispose()
         {
-            _savePanelView.OnButtonClicked -= _battleDataController.ManualSaveBattleData;
+            _savePanelView.OnButtonClicked -= ButtonClickedHandler;
             _battleManagerModel.OnPlayersSpawned -= ShowView;
             _battleManagerModel.OnBattleFinish -= HideView;
         }
@@ -42,6 +46,11 @@ namespace DuelGame
         private void HideView(Players? _)
         {
             _savePanelView.Hide();
+        }
+
+        private void ButtonClickedHandler()
+        {
+            _battleDataController.SaveBattleData(null);
         }
     }
 }

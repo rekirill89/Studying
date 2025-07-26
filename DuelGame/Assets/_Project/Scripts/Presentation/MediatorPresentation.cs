@@ -1,17 +1,18 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Zenject;
 
 namespace DuelGame
 {
-    public class MediatorPresentation : IDisposable
+    public class MediatorPresentation : IDisposable,IInitializable
     {
         private readonly IInstantiator _iInstantiator;
         private readonly UIFactory _uiFactory;
         private readonly BattleManager _battleManagerModel;
         private readonly Dictionary<Type, Action<Players?>> _presentersActions;
-        private readonly List<IPresenter> _presenters = new List<IPresenter>();
+        private readonly List<IPresenter<BasePanelView>> _presenters = new List<IPresenter<BasePanelView>>();
 
         private StartPanelPresenter _startPanelPresenter;
         private ContinuePanelPresenter _continuePanelPresenter;
@@ -34,15 +35,18 @@ namespace DuelGame
                 {typeof(SavePanelPresenter), _ => _savePanelPresenter?.ShowView()},
                 {typeof(RestartPanelPresenter), playerWhoLost => _restartPanelPresenter?.ShowView(playerWhoLost)},
                 {typeof(ContinuePanelPresenter), playerWhoLost => _continuePanelPresenter?.ShowView(playerWhoLost)},
-                {typeof(LoadPanelPresenter), playerWhoLost => _loadPanelPresenter?.ShowView(playerWhoLost)},
+                {typeof(LoadPanelPresenter), _ => _loadPanelPresenter?.ShowView()},
                 {typeof(AdsPanelPresenter), playerWhoLost => _adsPanelPresenter?.ShowView(playerWhoLost)}
             };
-
+        }
+                
+        public void Initialize()
+        {
             _battleManagerModel.OnBattleReady += BattleReadyHandler;
             _battleManagerModel.OnPlayersSpawned += PlayerSpawnedHandler;
             _battleManagerModel.OnBattleFinish += BattleFinishHandler;
         }
-        
+
         public void Dispose()
         {
             foreach (var presenter in _presenters)
@@ -65,6 +69,8 @@ namespace DuelGame
 
         private void PlayerSpawnedHandler(BattleState _)
         {
+            TryCreatePanel(ref _loadPanelPresenter, null);
+
             TryCreatePanel(ref _savePanelPresenter, null);
         }
 
@@ -79,20 +85,19 @@ namespace DuelGame
                 TryCreatePanel(ref _restartPanelPresenter, playerWhoLost);
             }
             
-            TryCreatePanel(ref _loadPanelPresenter, playerWhoLost);
-            
             TryCreatePanel(ref _adsPanelPresenter, playerWhoLost);
         }
         
         private bool TryCreatePanel<TPresenter>(
             ref TPresenter presenter,
             Players? playerWhoLost) 
-            where TPresenter : IPresenter
+            where TPresenter : IPresenter<BasePanelView>
         {
             if(presenter != null)
                 return false;
             presenter = _iInstantiator.Instantiate<TPresenter>(
                 new object[] { _uiFactory.CreatePanelView<TPresenter>() });
+            presenter.Initialize();
             _presenters.Add(presenter);
             
             _presentersActions[typeof(TPresenter)].Invoke(playerWhoLost);

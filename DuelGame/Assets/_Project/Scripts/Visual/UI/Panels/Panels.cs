@@ -28,7 +28,18 @@ namespace DuelGame
         public AdsPanelView AdsPanelView {get; private set;}
         
         private ILocalAssetLoader _localAssetLoader;
-        
+
+        private void OnDestroy()
+        {
+            _localAssetLoader.UnloadAsset(StartPanelViewRef);
+            _localAssetLoader.UnloadAsset(ContinuePanelViewRef);
+            _localAssetLoader.UnloadAsset(RestartPanelViewRef);
+            _localAssetLoader.UnloadAsset(ReloadPanelViewRef);
+            _localAssetLoader.UnloadAsset(SavePanelViewRef);
+            _localAssetLoader.UnloadAsset(LoadPanelViewRef);
+            _localAssetLoader.UnloadAsset(AdsPanelViewRef);
+        }
+
         public void Init(ILocalAssetLoader localAssetLoader)
         {
             _localAssetLoader = localAssetLoader;

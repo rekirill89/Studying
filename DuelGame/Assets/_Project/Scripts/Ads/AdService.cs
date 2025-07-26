@@ -3,10 +3,7 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using Unity.Services.LevelPlay;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 using Zenject;
-//using LevelPlayConfiguration = com.unity3d.mediation.LevelPlayConfiguration;
-//using LevelPlayInitError = com.unity3d.mediation.LevelPlayInitError;
 
 namespace DuelGame
 {
@@ -20,7 +17,7 @@ namespace DuelGame
         private LevelPlayRewardedAd _levelPlayRewardedAd;
         private LevelPlayInterstitialAd _levelPlayInterstitialAd;
         
-        private float _delay = 10f;
+        //private float _delay = 10f;
         
         private readonly CancellationTokenSource _cts = new CancellationTokenSource();
         
@@ -61,12 +58,12 @@ namespace DuelGame
 
         private void LevelPlayOnInitFailedHandler(LevelPlayInitError obj)
         {
-            Debug.Log("LevelPlayOnOnInitFailedHandler");
+            Debug.Log("LevelPlayOnInitFailedHandler");
         }
 
         private void LevelPlayOnInitSuccessHandler(LevelPlayConfiguration obj)
         {
-            Debug.Log("LevelPlayOnOnInitSuccessHandler");
+            Debug.Log("LevelPlayOnInitSuccessHandler");
             EnableAds();
         }
 
@@ -112,14 +109,14 @@ namespace DuelGame
         private async UniTask ReloadRewardedAd()
         {
             Debug.Log("Reloading Rewarded Ad");
-            await UniTask.Delay(TimeSpan.FromSeconds(_delay), cancellationToken: _cts.Token);
+            await UniTask.Yield(cancellationToken: _cts.Token);
             _levelPlayRewardedAd.LoadAd();
         }
 
         private async UniTask ReloadInterstitialAd()
         {
             Debug.Log("Reloading Interstatial Ad");
-            await UniTask.Delay(TimeSpan.FromSeconds(_delay), cancellationToken: _cts.Token);
+            await UniTask.Yield(cancellationToken: _cts.Token);
             _levelPlayInterstitialAd.LoadAd();
         }
     }

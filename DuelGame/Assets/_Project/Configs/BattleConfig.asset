@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <AttackDelayP1>k__BackingField: 2
   <AttackDelayP2>k__BackingField: 3
-  <FirstHero>k__BackingField: 0
-  <SecondHero>k__BackingField: 1
+  <FirstHero>k__BackingField: 3
+  <SecondHero>k__BackingField: 3

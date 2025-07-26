@@ -1,5 +1,6 @@
 using System;
 using System.Collections;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 
@@ -8,17 +9,18 @@ namespace DuelGame
     public abstract class Buff
     {
         public BuffEnum BuffEnum {get; protected set;}
-        public float BuffDuration {get; private set;}
+        public abstract float BuffDuration {get; protected set;}
+
+        protected CancellationToken _token; 
         
-        protected Buff(float buffDuration)
+        public virtual UniTask Execute(BaseHero target)
         {
-            BuffDuration = buffDuration;
-        }
-        
-        public virtual UniTask Execute(BaseHero target/*, Sprite sprite*/)
-        {
-            //target.BuffAppliedInvoke(/*sprite, */BuffDuration);
             return UniTask.CompletedTask;
+        }
+
+        public void SetCtsToken(CancellationToken ct)
+        {
+            _token = ct;
         }
     }
 }

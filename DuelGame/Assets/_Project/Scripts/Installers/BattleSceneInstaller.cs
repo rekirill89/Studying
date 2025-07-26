@@ -18,6 +18,8 @@ namespace DuelGame
         {
             Debug.Log("Battle scene installer created");
             
+            Container.BindInterfacesAndSelfTo<BattleSceneEntryPoint>().AsSingle();
+
             Container.BindInterfacesAndSelfTo<BattleSessionContext>().AsSingle();
             Container.BindInterfacesAndSelfTo<SceneLoaderService>().AsSingle();
             Container.BindInterfacesAndSelfTo<UIFactory>().AsSingle().WithArguments(
@@ -25,12 +27,11 @@ namespace DuelGame
                 _hudCanvasParent);
             
             Container.BindInterfacesAndSelfTo<AnalyticsDataCollector>().AsSingle();
-            Container.BindInterfacesAndSelfTo<BattleStateModel>().AsSingle();            
+            Container.BindInterfacesAndSelfTo<BattleStateModel>().AsSingle();
             Container.BindInterfacesAndSelfTo<BattleSceneAssetsLoader>().AsSingle().WithArguments(_battleFacade, _panelsRef);
             Container.BindInterfacesAndSelfTo<HeroesLifecycleController>().AsSingle();
             Container.BindInterfacesAndSelfTo<BattleManager>().AsSingle();
             Container.BindInterfacesAndSelfTo<BattleDataController>().AsSingle();
-            Container.BindInterfacesAndSelfTo<BattleSceneEntryPoint>().AsSingle();
             
             Container.BindInterfacesAndSelfTo<MediatorPresentation>().AsSingle();
         }

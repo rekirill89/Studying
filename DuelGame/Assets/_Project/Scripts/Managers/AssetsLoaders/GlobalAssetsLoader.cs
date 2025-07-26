@@ -9,10 +9,12 @@ using Object = UnityEngine.Object;
 
 namespace DuelGame
 {
-    public class GlobalAssetsLoader : IInitializable, IDisposable
+    public class GlobalAssetsLoader : IDisposable
     {
-        public delegate void ConfigsLoaded(GameConfigs configs);
+        public delegate void ConfigsLoaded(GameLocalConfigs localConfigs);
         public event ConfigsLoaded OnDataLoaded;
+
+        public bool IsSystemReady { get; private set; } = false; 
 
         private readonly AssetReference _buffsConfigRef;
         private readonly AssetReference _heroesConfigRef;
@@ -20,11 +22,11 @@ namespace DuelGame
         private readonly DiContainer _diContainer;
         private readonly ILocalAssetLoader _localAssetLoader;
         
-        private CancellationTokenSource _cts;
+        private readonly CancellationTokenSource _cts;
         
         public GlobalAssetsLoader(
             DiContainer diContainer, 
-            ILocalAssetLoader localAssetLoader, 
+            ILocalAssetLoader localAssetLoader,
             AssetReference buffsConfigRef, 
             AssetReference heroesConfigRef)
         {
@@ -37,14 +39,21 @@ namespace DuelGame
             _cts = new CancellationTokenSource();
         }
         
-        public void Initialize()
+        public void Init()
         {
-            Load().Forget();
+            LoadMethod();
         }
 
         public void Dispose()
         {
+            _localAssetLoader.UnloadAsset(_buffsConfigRef);
+            _localAssetLoader.UnloadAsset(_heroesConfigRef);
             _cts.Cancel();
+        }
+
+        private void LoadMethod()
+        {
+            Load().Forget();
         }
         
         private async UniTask Load()
@@ -57,17 +66,18 @@ namespace DuelGame
             heroesList.Init(_localAssetLoader);
             _diContainer.Bind<HeroesList>().FromInstance(heroesList).AsSingle();
 
-            OnDataLoaded?.Invoke(new GameConfigs(heroesList, buffsList));
+            IsSystemReady = true;
+            OnDataLoaded?.Invoke(new GameLocalConfigs(heroesList, buffsList));
+            Debug.Log("Global assets successfully loaded");
         }
-
     }
 
-    public class GameConfigs
+    public class GameLocalConfigs
     {
         public HeroesList HeroesList { get; private set; }
         public BuffsList BuffsList { get; private set; }
 
-        public GameConfigs(HeroesList heroesList, BuffsList buffsList)
+        public GameLocalConfigs(HeroesList heroesList, BuffsList buffsList)
         {
             HeroesList = heroesList;
             BuffsList = buffsList;

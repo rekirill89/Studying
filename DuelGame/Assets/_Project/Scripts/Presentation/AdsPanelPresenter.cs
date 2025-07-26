@@ -1,28 +1,32 @@
 ﻿using System;
 using UnityEngine;
+using Zenject;
 
 namespace DuelGame
 {
-    public class AdsPanelPresenter : IDisposable, IPresenter
+    public class AdsPanelPresenter : IPresenter<AdsPanelView>
     {
-        private BattleManager _battleManager;
-        private AdsPanelView _view;
-        private IAdService _adService;
+        private readonly BattleManager _battleManager;
+        private readonly AdsPanelView _view;
+        private readonly IAdService _adService;
 
         public AdsPanelPresenter(BattleManager battleManager, AdsPanelView view, IAdService adService)
         {
             _battleManager = battleManager;
             _view = view;
             _adService = adService;
-            
+        }
+        
+        public void Initialize()
+        {
             _battleManager.OnBattleFinish += ShowView;
             _battleManager.BattleStateModel.OnStateChanged += StateChangedHandler;
             _view.AcceptButton.OnClick += OnAcceptButtonClickedHandler;
             _view.CancelButton.OnClick += OnCancelButtonClickedHandler;
             _adService.OnRewardedAdClosed += _battleManager.ContinueBattle;
-            _adService.OnInterstiateAdClosed += HideView;
+            _adService.OnInterstiateAdClosed += HideView;        
         }
-
+        
         public void Dispose()
         {
             _battleManager.OnBattleFinish -= ShowView;

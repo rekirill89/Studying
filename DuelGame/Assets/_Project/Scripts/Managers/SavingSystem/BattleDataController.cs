@@ -1,14 +1,12 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Zenject;
 
 namespace DuelGame
 {
-    public class BattleDataController : IDisposable
+    public class BattleDataController : IDisposable, IInitializable
     {
-        /*private static string SAVE_AUTO = "Auto save";
-        private static string SAVE_MANUAL = "Manual save";*/
-        
         private readonly SaveService _saveService;
         private readonly BattleManager _battleManager;
         private readonly BattleDataCache _battleDataCache;
@@ -24,23 +22,32 @@ namespace DuelGame
             _battleManager = battleManager;
             _battleDataCache = battleDataCache;
             _sceneLoaderService = sceneLoaderService;
-
-            _battleManager.OnBattleFinish += AutoSaveBattleData;
         }
 
+        public void Initialize()
+        {
+            _battleManager.OnBattleFinish += SaveBattleData;
+        }
+        
         public void Dispose()
         {
-            _battleManager.OnBattleFinish -= AutoSaveBattleData;
+            _battleManager.OnBattleFinish -= SaveBattleData;
         }
         
-        public void ManualSaveBattleData()
+        public void SaveBattleData(Players? playerWhoLost)
         {
-            _saveService.ManualSave(_battleManager.CollectBattleData());
+            _saveService.Save(_battleManager.CollectBattleData(playerWhoLost));
         }
 
-        public void LoadManualSaveBattleData()
+        public void LoadBattleData()
         {
-            var battleData = _saveService.ManualLoad();
+            var battleData = _saveService.Load();
+
+            if (battleData == null)
+            {
+                Debug.LogWarning("Nothing to load");
+                return;
+            }
             
             _battleDataCache.SetBattleData(battleData);
             _battleDataCache.ChangeLoadingStatus(true);
@@ -48,23 +55,23 @@ namespace DuelGame
             _sceneLoaderService.LoadBattleScene();
         }
 
-        public void LoadAutoSaveBattleData()
+        /*public void LoadAutoSaveBattleData()
         {
-            var battleData = _saveService.AutoLoad();
+            var battleData = _saveService.Load();
             
             _battleDataCache.SetBattleData(battleData);
             _battleDataCache.ChangeLoadingStatus(true);
             
             _sceneLoaderService.LoadBattleScene();
-        }
+        }*/
         
-        private void AutoSaveBattleData(Players? playerWhoLost)
+        /*private void AutoSaveBattleData(Players? playerWhoLost)
         {
             var data = _battleManager.CollectBattleData(playerWhoLost);
             Debug.Log(data.Player1 + " " + data.Player2 + " " + data.PlayerWhoWon);
             
-            _saveService.AutoSave(data);
-        }
+            _saveService.Save(data);
+        }*/
     }
     
     public class BattleData

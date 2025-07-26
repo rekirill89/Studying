@@ -3,7 +3,7 @@ using Zenject;
 
 namespace DuelGame
 {
-    public class ReloadPanelPresenter : IDisposable, IPresenter
+    public class ReloadPanelPresenter : IPresenter<ReloadPanelView>
     {
         private readonly BaseOneButtonPanelView _reloadPanelView;
         private readonly SceneLoaderService _sceneLoaderService;
@@ -14,10 +14,13 @@ namespace DuelGame
         {
             _reloadPanelView = reloadPanelView;
             _sceneLoaderService = sceneLoaderService;
-            
+        }
+                               
+        public void Initialize()
+        {
             _reloadPanelView.OnButtonClicked += _sceneLoaderService.LoadBattleScene;
         }
-                
+ 
         public void Dispose()
         {
             _reloadPanelView.OnButtonClicked -= _sceneLoaderService.LoadBattleScene;

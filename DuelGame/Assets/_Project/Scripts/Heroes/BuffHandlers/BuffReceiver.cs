@@ -24,14 +24,15 @@ namespace DuelGame
         private void Start()
         {
             _buffList = _hero.BuffList;
+            _buffsDictionary = _hero.BuffsDictionary;
             Cts = new CancellationTokenSource();            
             
-            _buffsDictionary = new Dictionary<BuffEnum, Func<Buff>>()
+            /*_buffsDictionary = new Dictionary<BuffEnum, Func<Buff>>()
             {
                 { BuffEnum.Poison, () => new PoisonBuff(Cts.Token) },
                 { BuffEnum.Stun, () => new StunBuff() },
                 { BuffEnum.DecreaseDamage, () => new DecreaseDamageBuff(Cts.Token) }
-            };
+            };*/
 
             _hero.OnReceiveBuff += ReceiveBuffHandler;
         }

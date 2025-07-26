@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
@@ -5,6 +6,7 @@ using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.Serialization;
+using Random = UnityEngine.Random;
 
 namespace DuelGame
 {
@@ -14,7 +16,16 @@ namespace DuelGame
         [field:SerializeField] public override List<EntryHero> ListOfEntities { get; set; } = new List<EntryHero>();
 
         private ILocalAssetLoader _localAssetLoader;
-        
+
+        private void OnDestroy()
+        {
+            foreach (var hero in ListOfEntities)
+            {
+                _localAssetLoader.UnloadAsset(hero.HeroStatsRef);
+                _localAssetLoader.UnloadAsset(hero.HeroRef);
+            }
+        }
+
         public void Init(ILocalAssetLoader assetLoader)
         {
             _localAssetLoader = assetLoader;
@@ -37,22 +48,34 @@ namespace DuelGame
             
             return hero;
         }
+
+        public async UniTask LoadAllHeroes(CancellationToken token)
+        {
+            foreach (var hero in ListOfEntities)
+            {
+                if(!hero.IsLoaded)
+                    await LoadHero(hero, token);
+            }
+            Debug.Log("LoadAllHeroes success");
+        }
         
         private async UniTask LoadHero(EntryHero hero, CancellationToken token)
         {
-            hero.HeroScript = await _localAssetLoader.LoadHeroScript(hero.HeroScriptRef, token);
+            hero.Hero = await _localAssetLoader.LoadHero(hero.HeroRef, token);
             hero.HeroStats = await _localAssetLoader.LoadHeroStats(hero.HeroStatsRef, token);
             hero.IsLoaded = true;
+            
+            Debug.Log("LoadHero success");
         }
     }    
     [System.Serializable]
     public class EntryHero : INamedObject
     {
         public HeroStats HeroStats {get; set;}
-        public BaseHero HeroScript {get; set;}
+        public BaseHero Hero {get; set;}
         public bool IsLoaded {get; set;} = false;
         public AssetReference HeroStatsRef;
-        public AssetReference HeroScriptRef;
+        public AssetReference HeroRef;
         public HeroEnum HeroEnum;
     }
 }

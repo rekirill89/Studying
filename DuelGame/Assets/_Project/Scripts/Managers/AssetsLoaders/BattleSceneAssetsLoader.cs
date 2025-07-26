@@ -2,19 +2,17 @@
 using System.Threading;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
-using IInitializable = Zenject.IInitializable;
+using Zenject;
 
 namespace DuelGame
 {
-    public class BattleSceneAssetsLoader : IInitializable, IDisposable
+    public class BattleSceneAssetsLoader : IDisposable
     {
         public delegate void BattleSceneAssetsReady(BattleSettingsFacade facade, Panels panels);
         public event BattleSceneAssetsReady OnBattleSceneAssetsReady;
-        //public event Action OnReadyToStart;
         
         private readonly ILocalAssetLoader _localAssetLoader;
         private readonly BattleSettingsFacade _facade;
@@ -41,6 +39,7 @@ namespace DuelGame
         public void Dispose()
         {
             _cts.Cancel();
+            _localAssetLoader.UnloadAsset(_panelsRef);
         }
         
         private async UniTask Load()
@@ -54,7 +53,6 @@ namespace DuelGame
             await panels.LoadAssets(_cts.Token);
             
             OnBattleSceneAssetsReady?.Invoke(_facade, panels);
-            //OnReadyToStart?.Invoke();
         }
     }
 }

@@ -6,7 +6,7 @@ namespace DuelGame
 {
     public class LoadPanelView : BasePanelView
     {
-        [field:SerializeField] public BaseButton LoadAutoSaveButton { get;private set; }
-        [field:SerializeField] public BaseButton LoadManualSaveButton { get; private set; }
+        [field:SerializeField] public BaseButton LoadDataButton { get;private set; }
+        //[field:SerializeField] public BaseButton LoadManualSaveButton { get; private set; }
     }
 }

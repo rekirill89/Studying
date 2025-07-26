@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using Zenject;
 
 namespace DuelGame
 {
-    public class HeroesCombatController : IDisposable
+    public class HeroesCombatController : IDisposable, IInitializable
     {
         private readonly AnalyticsDataCollector _analyticsDataCollector;
         private readonly CancellationTokenSource _cts;
@@ -26,11 +27,14 @@ namespace DuelGame
             
             _player1.SetPlayerID(player1ID);
             _player2.SetPlayerID(player2ID);
-
-            _player1.OnAttack += Player1AttackHandler;
-            _player2.OnAttack += Player2AttackHandler;
             
             _cts = new CancellationTokenSource();
+        }
+        
+        public void Initialize()
+        {
+            _player1.OnAttack += Player1AttackHandler;
+            _player2.OnAttack += Player2AttackHandler;        
         }
         
         public void Dispose()

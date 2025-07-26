@@ -4,7 +4,7 @@ using Zenject;
 
 namespace DuelGame
 {
-    public class ContinuePanelPresenter : IDisposable, IPresenter
+    public class ContinuePanelPresenter : IPresenter<ContinuePanelView>
     {
         private readonly BattleManager _battleManagerModel;
         private readonly BaseOneButtonPanelView _continuePanelView;
@@ -13,11 +13,14 @@ namespace DuelGame
         {
             _battleManagerModel = battleManager;
             _continuePanelView = continuePanelView;
-            
+        }
+        
+        public void Initialize()
+        {
             _continuePanelView.OnButtonClicked += _battleManagerModel.ContinueBattle;
             _battleManagerModel.OnBattleFinish += ShowView;
             _battleManagerModel.OnPlayersSpawned += HideView;
-            _battleManagerModel.BattleStateModel.OnStateChanged += StateChangedHandler; 
+            _battleManagerModel.BattleStateModel.OnStateChanged += StateChangedHandler;      
         }
         
         public void Dispose()

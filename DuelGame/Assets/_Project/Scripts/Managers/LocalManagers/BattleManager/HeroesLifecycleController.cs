@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using Zenject;
 using Object = UnityEngine.Object;
 
 namespace DuelGame
@@ -19,23 +20,18 @@ namespace DuelGame
         private readonly BattleSessionContext _battleSessionContext;
         
         private PlayerDeath _onPlayerDeath ;
-
-        private Dictionary<Players, BaseHero> _playerHeroes;
-
+        
         public HeroesLifecycleController(EntityFactory entityFactory, BattleSessionContext battleSessionContext)
         {
             _entityFactory = entityFactory;
             _battleSessionContext = battleSessionContext;
+        }
 
-            _playerHeroes = new Dictionary<Players, BaseHero>()
-            {
-                { Players.Player1, Player1 },
-                { Players.Player2, Player2 },
-            };
-            
+        public void Initialize()
+        {
             _battleSessionContext.OnSessionReady += Init;
         }
-        
+
         public void Dispose()
         {
             _battleSessionContext.OnSessionReady -= Init;
@@ -65,23 +61,17 @@ namespace DuelGame
                 Player2.OnDeath -= StopPlayers;
                 Object.Destroy(Player2.gameObject);
             }
-            /*else
-            {
-                if (_playerHeroes[playerToDestroy] != null)
-                {
-                    _playerHeroes[playerToDestroy].OnDeath -= StopPlayers;
-                    Object.Destroy(_playerHeroes[playerToDestroy].gameObject);
-                }
-            }*/
         }
 
         private void Init()
         {
+            Debug.Log("LifeCycle init");
             _player1Settings.spawnTransform = _battleSessionContext.FirstPlayerTrans;
             _player1Settings.heroEnum = _battleSessionContext.BattleData.Player1;
             
             _player2Settings.spawnTransform = _battleSessionContext.SecondPlayerTrans;
             _player2Settings.heroEnum = _battleSessionContext.BattleData.Player2;
+            Debug.Log("LifeCycle init end");
         }
         
         private async UniTask<BaseHero> CreateHero(Transform trans, HeroEnum heroEnum, CancellationToken token)

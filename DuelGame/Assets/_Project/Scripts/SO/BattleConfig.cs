@@ -10,5 +10,11 @@ namespace DuelGame
         
         [field: SerializeField] public HeroEnum FirstHero {get; private set;}
         [field: SerializeField] public HeroEnum SecondHero {get; private set;}
+
+        public void SetRemoteConfigStats(BattleRemoteConfig remoteConfig)
+        {
+            AttackDelayP1 = remoteConfig.AttackDelayP1;
+            AttackDelayP2 = remoteConfig.AttackDelayP2;
+        }
     }
 }

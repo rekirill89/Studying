@@ -4,8 +4,7 @@ using System.Threading;
 using UnityEngine;
 using Object = UnityEngine.Object;
 using Cysharp.Threading.Tasks;
-using Unity.VisualScripting;
-using IInitializable = Zenject.IInitializable;
+using Zenject;
 
 namespace DuelGame
 {
@@ -21,7 +20,6 @@ namespace DuelGame
         public readonly BattleStateModel BattleStateModel;
         
         private readonly HeroesLifecycleController _heroesLifecycleController;
-        private readonly IAnalyticService _analyticService;
         private readonly AnalyticsDataCollector _analyticsDataCollector;
         private readonly BattleSessionContext _battleSessionContext;
         
@@ -33,13 +31,11 @@ namespace DuelGame
         private HeroesCombatController _heroesCombatController;
         
         public BattleManager(
-            IAnalyticService analyticService,
             AnalyticsDataCollector analyticsDataCollector,
             BattleStateModel battleStateModel, 
             HeroesLifecycleController heroesLifecycleController,
             BattleSessionContext battleSessionContext)
         {
-            _analyticService = analyticService;
             _analyticsDataCollector = analyticsDataCollector;
             _heroesLifecycleController = heroesLifecycleController;
             BattleStateModel = battleStateModel;
@@ -47,11 +43,15 @@ namespace DuelGame
             
             _cts = new CancellationTokenSource();
             
-            _battleSessionContext.OnSessionReady += Init;
-
             Debug.Log("Battle Manager created");
         }
 
+        public void Initialize()
+        {
+            Debug.Log("Battle Manager Initialized method");
+            _battleSessionContext.OnSessionReady += Init;
+        }
+        
         public void Dispose()
         {
             _battleSessionContext.OnSessionReady -= Init;
@@ -63,6 +63,7 @@ namespace DuelGame
 
         public async UniTask RunBattle(bool isContinue = false)
         {
+            Debug.Log("Battle is running");
             if (BattleStateModel.CurrentBattleState == BattleState.NotStarted)
                 BattleStateModel.SetState(BattleState.Started);
 
@@ -78,7 +79,7 @@ namespace DuelGame
             player1.SetEnemy(player2);
             player2.SetEnemy(player1);
 
-            _analyticService.LogBattleStarted();
+            _analyticsDataCollector.LogBattleStarted();
             OnPlayersSpawned?.Invoke(BattleStateModel.CurrentBattleState);
         }
 
@@ -109,8 +110,12 @@ namespace DuelGame
 
         private void Init()
         {
+            Debug.Log("BattleManager Init");
+
             _attackDelayP1 = _battleSessionContext.AttackDelayP1;
             _attackDelayP2 = _battleSessionContext.AttackDelayP2;
+            
+            Debug.Log("BattleManager Init end");
         }
 
         private void FinishBattle(Players playerWhoLost)

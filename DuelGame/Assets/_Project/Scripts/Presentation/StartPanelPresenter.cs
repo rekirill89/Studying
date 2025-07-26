@@ -5,7 +5,7 @@ using Zenject;
 
 namespace DuelGame
 {
-    public class StartPanelPresenter : IDisposable, IPresenter
+    public class StartPanelPresenter : IPresenter<StartPanelView>
     {
         private readonly BattleManager _battleManagerModel;
         private readonly BaseOneButtonPanelView _startPanelView;
@@ -14,7 +14,10 @@ namespace DuelGame
         {
             _battleManagerModel = battleManager;
             _startPanelView = startPanelView;
-            
+        }
+                                               
+        public void Initialize()
+        {
             _startPanelView.OnButtonClicked += RunBattleHandler;
             _battleManagerModel.OnPlayersSpawned += HideView;
         }
