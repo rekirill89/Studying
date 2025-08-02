@@ -7,7 +7,7 @@ using Zenject;
 
 namespace DuelGame
 {
-    public class HeroesCombatController : IDisposable, IInitializable
+    public class HeroesCombatController : IDisposable
     {
         private readonly AnalyticsDataCollector _analyticsDataCollector;
         private readonly CancellationTokenSource _cts;
@@ -33,6 +33,7 @@ namespace DuelGame
         
         public void Initialize()
         {
+            Debug.Log("Subscribe to attack event");
             _player1.OnAttack += Player1AttackHandler;
             _player2.OnAttack += Player2AttackHandler;        
         }

@@ -95,8 +95,23 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: ac5f9ba03e1eec64795204974f63ceb7
+    m_Address: Assets/_Project/Prefabs/UI/Canvas/HUDCanvas.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: aff68e255f69e284fb5557fadb803e4b
     m_Address: Assets/_Project/Prefabs/UI/Panels.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b6b2bb9d66a84a642ba42809739025f1
+    m_Address: Assets/_Project/Prefabs/UI/Canvas/Screen Canvas.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c32fe14cb27c91241853469d6ba26091
+    m_Address: Assets/_Project/Prefabs/UI/MenuPanel.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

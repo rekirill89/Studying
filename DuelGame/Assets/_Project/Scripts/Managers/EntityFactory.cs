@@ -8,12 +8,11 @@ using Object = UnityEngine.Object;
 
 namespace DuelGame
 {
-    public class EntityFactory : IDisposable/*, IInitializable*/
+    public class EntityFactory : IDisposable
     {
         public bool IsSystemReady { get; private set; } = false;
         
-        private readonly GlobalAssetsLoader _globalAssetsLoader;
-        private readonly IRemoteConfigsManager _remoteConfigsManager;
+        private readonly IRemoteConfigsLoader _remoteConfigsLoader;
         private readonly CancellationTokenSource _cts;
         
         private HeroesList _heroes; 
@@ -21,23 +20,22 @@ namespace DuelGame
 
         private Dictionary<BuffEnum, Func<Buff>> _buffsDictionary;
         
-        public EntityFactory(GlobalAssetsLoader globalAssetsLoader, IRemoteConfigsManager remoteConfigsManager)
+        public EntityFactory(IRemoteConfigsLoader remoteConfigsLoader)
         {
-            _globalAssetsLoader = globalAssetsLoader;
-            _remoteConfigsManager = remoteConfigsManager;
+            _remoteConfigsLoader = remoteConfigsLoader;
             
             _cts = new CancellationTokenSource();
         }
 
         public void Init()
         {
-            _remoteConfigsManager.OnRemoteConfigsApplied += InitConfigs;
+            _remoteConfigsLoader.OnRemoteConfigsApplied += InitConfigs;
         }
         
         public void Dispose()
         {
             _cts.Cancel();
-            _remoteConfigsManager.OnRemoteConfigsApplied -= InitConfigs;
+            _remoteConfigsLoader.OnRemoteConfigsApplied -= InitConfigs;
         }
 
         public async UniTask<BaseHero> SpawnRandomHero(Transform trans)

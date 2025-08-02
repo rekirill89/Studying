@@ -10,7 +10,7 @@ namespace DuelGame
     {        
         public override float BuffDuration { get; protected set; } = 5f;
 
-        private float _decreaseDamageMultiplier = 3f;
+        private readonly float _decreaseDamageMultiplier = 3f;
         
         public DecreaseDamageBuff(DecreaseDamageBuffRemoteConfig config = null)
         {
@@ -30,14 +30,8 @@ namespace DuelGame
             var defaultDamage = target.Hero.Damage;
             target.Hero.Damage = defaultDamage - (defaultDamage / _decreaseDamageMultiplier);
 
-            await UniTask.Delay(TimeSpan.FromSeconds(BuffDuration), cancellationToken: _token);
+            await UniTask.Delay(TimeSpan.FromSeconds(BuffDuration), cancellationToken: Token);
             target.Hero.Damage = defaultDamage;
         }
-
-        /*public void SetBuffStats(DecreaseDamageBuffRemoteConfig config)
-        {
-            BuffDuration = config.Duration;
-            _decreaseDamageMultiplier = config.DamageMultiplier;
-        }*/
     }
 }

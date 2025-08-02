@@ -8,6 +8,7 @@ namespace DuelGame
     {
         public event Action OnSessionReady;
         
+        public bool IsAdsRemoved { get; private set; }
         public BattleData BattleData {get; private set; } 
         public float AttackDelayP1 {get; private set;}
         public float AttackDelayP2 {get; private set;}
@@ -18,11 +19,11 @@ namespace DuelGame
         public bool IsSystemReady { get; private set; } = false;
 
         private readonly BattleSceneAssetsLoader _battleSceneAssetsLoader;
-        private readonly BattleDataCache _battleDataCache;
+        private readonly DataCache _dataCache;
         
-        public BattleSessionContext(BattleDataCache battleDataCache, BattleSceneAssetsLoader battleSceneAssetsLoader)
+        public BattleSessionContext(DataCache dataCache, BattleSceneAssetsLoader battleSceneAssetsLoader)
         {
-            _battleDataCache = battleDataCache;
+            _dataCache = dataCache;
             _battleSceneAssetsLoader = battleSceneAssetsLoader;
         }
 
@@ -36,7 +37,7 @@ namespace DuelGame
             _battleSceneAssetsLoader.OnBattleSceneAssetsReady -= Init;
         }
         
-        private void Init(BattleSettingsFacade facade, Panels _)
+        private void Init(BattleSettingsFacade facade)
         {
             Debug.Log("BattleSessionContext Init");
             FirstPlayerTrans = facade.FirstPlayerTrans;
@@ -45,7 +46,8 @@ namespace DuelGame
             AttackDelayP1 = facade.BattleConfig.AttackDelayP1;
             AttackDelayP2 = facade.BattleConfig.AttackDelayP2;
 
-            var battleData = _battleDataCache.ConsumeBattleData();
+            var battleData = _dataCache.ConsumeBattleData();
+            IsAdsRemoved = _dataCache.IsAdsRemoved;
             
             if (battleData == null)
             {

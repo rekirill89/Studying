@@ -91,6 +91,12 @@ MonoBehaviour:
     m_SubObjectGUID: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
+  MenuPanelViewRef:
+    m_AssetGUID: c32fe14cb27c91241853469d6ba26091
+    m_SubObjectName: 
+    m_SubObjectGUID: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
 --- !u!1001 &369676605549142743
 PrefabInstance:
   m_ObjectHideFlags: 0

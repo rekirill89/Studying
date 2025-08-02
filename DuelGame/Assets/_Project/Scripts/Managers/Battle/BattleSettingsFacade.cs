@@ -25,20 +25,25 @@ namespace DuelGame
             _localAssetLoader.UnloadAsset(BattleConfigRef);
         }
 
-        public void Init(ILocalAssetLoader localAssetLoader)
+        public async UniTask Init(ILocalAssetLoader localAssetLoader, CancellationToken token)
         {
             _localAssetLoader = localAssetLoader;
+
+            await LoadAssets(token);
         }
 
-        public async UniTask LoadAssets(CancellationToken token)
+        private async UniTask LoadAssets(CancellationToken token)
         {
-            BattleConfig = await _localAssetLoader.LoadAsset<BattleConfig>(BattleConfigRef, token);
-            Debug.Log("Battle config initialized");
-        }
-
-        public void UnloadAssets()
-        {
-            _localAssetLoader.UnloadAsset(BattleConfigRef);
+            try
+            {
+                BattleConfig = await _localAssetLoader.LoadAsset<BattleConfig>(BattleConfigRef, token);
+                Debug.Log("Battle config initialized");
+            }
+            catch (OperationCanceledException)
+            {
+                Debug.LogError("Loading asset cancelled");
+                throw;
+            }
         }
     }
 }

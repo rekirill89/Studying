@@ -26,10 +26,5 @@ namespace DuelGame
             target.GetStunned(BuffDuration);
             await UniTask.Yield();
         }
-        
-        /*public void SetBuffStats(StunBuffRemoteConfig config)
-        {
-            BuffDuration = config.Duration;
-        }*/
     }
 }

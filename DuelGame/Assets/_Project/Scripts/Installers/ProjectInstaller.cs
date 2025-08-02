@@ -13,23 +13,29 @@ namespace DuelGame
         [SerializeField] private AssetReference _buffsRef;
         [SerializeField] private AssetReference _heroesRef; 
         
+        [SerializeField] private AssetReference _panelsRef;
+        [SerializeField] private AssetReference _hudCanvasRef;
+        [SerializeField] private AssetReference _screenCanvasRef;
+        
         public override void InstallBindings()
         {
             Debug.Log("Project installer created");
 
+            Container.BindInterfacesAndSelfTo<PurchasesDataController>().AsSingle();
+            Container.BindInterfacesAndSelfTo<UIFactory>().AsSingle();
             Container.BindInterfacesAndSelfTo<GlobalBootstrap>().AsSingle();
-            Container.BindInterfacesAndSelfTo<RemoteConfigsManager>().AsSingle().WithArguments(_battleConfigRef);
+            Container.BindInterfacesAndSelfTo<RemoteConfigsLoader>().AsSingle().WithArguments(_battleConfigRef);
             Container.BindInterfacesAndSelfTo<FireBaseInit>().AsSingle();
-            Container.BindInterfacesAndSelfTo<GlobalAssetsLoader>().AsSingle().WithArguments(_buffsRef, _heroesRef);            
+            Container.BindInterfacesAndSelfTo<GlobalAssetsLoader>().AsSingle().WithArguments(
+                _buffsRef, _heroesRef, _panelsRef, _hudCanvasRef, _screenCanvasRef);            
             Container.BindInterfacesAndSelfTo<LocalAssetLoader>().AsSingle();
             Container.BindInterfacesAndSelfTo<AdService>().AsSingle();
             Container.BindInterfacesAndSelfTo<AnalyticService>().AsSingle();
             Container.BindInterfacesAndSelfTo<EntityFactory>().AsSingle();
+            Container.BindInterfacesAndSelfTo<InAppPurchaseService>().AsSingle();
             Container.Bind<SceneLoaderService>().AsSingle();
             Container.Bind<SaveService>().AsSingle();
-            Container.Bind<BattleDataCache>().AsSingle(); 
-            
-
+            Container.Bind<DataCache>().AsSingle(); 
         }
     }
 }

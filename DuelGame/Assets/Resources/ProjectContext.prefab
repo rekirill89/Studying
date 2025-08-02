@@ -92,3 +92,21 @@ MonoBehaviour:
     m_SubObjectGUID: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
+  _panelsRef:
+    m_AssetGUID: aff68e255f69e284fb5557fadb803e4b
+    m_SubObjectName: 
+    m_SubObjectGUID: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  _hudCanvasRef:
+    m_AssetGUID: ac5f9ba03e1eec64795204974f63ceb7
+    m_SubObjectName: 
+    m_SubObjectGUID: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  _screenCanvasRef:
+    m_AssetGUID: b6b2bb9d66a84a642ba42809739025f1
+    m_SubObjectName: 
+    m_SubObjectGUID: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0

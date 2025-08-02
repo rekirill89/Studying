@@ -10,7 +10,7 @@ using UnityEngine.AddressableAssets;
 
 namespace DuelGame
 {
-    public class RemoteConfigsManager : IDisposable, IRemoteConfigsManager
+    public class RemoteConfigsLoader : IDisposable, IRemoteConfigsLoader
     {
         public event RemoteConfigsApplied OnRemoteConfigsApplied;
 
@@ -27,7 +27,7 @@ namespace DuelGame
         
         private bool _isInitialized;
 
-        public RemoteConfigsManager(
+        public RemoteConfigsLoader(
             GlobalAssetsLoader globalAssetsLoader, 
             AssetReference battleConfigRef,
             ILocalAssetLoader localAssetLoader
@@ -50,7 +50,7 @@ namespace DuelGame
             _globalAssetsLoader.OnDataLoaded += OnDataLoadedHandler ;
         }
 
-        private void OnDataLoadedHandler(GameLocalConfigs gameLocalConfigs)
+        private void OnDataLoadedHandler(GameLocalConfigs gameLocalConfigs, UILocalConfigs _)
         {
             _gameLocalConfigs = gameLocalConfigs;
             FirebaseRemoteConfig.DefaultInstance.FetchAsync(System.TimeSpan.Zero)
@@ -91,11 +91,18 @@ namespace DuelGame
                 .ListOfEntities
                 .First(hero => hero.HeroEnum == HeroEnum.Wizard)
                 .HeroStats.UpdateStats(gameRemoteConfig.Heroes.Wizard);
-            
-            
-            var battleConfig = await _localAssetLoader.LoadAsset<BattleConfig>(_battleConfigRef, _cts.Token);
-            battleConfig.SetRemoteConfigStats(gameRemoteConfig.Battle);
-            _localAssetLoader.UnloadAsset(_battleConfigRef);
+
+            try
+            {
+                var battleConfig = await _localAssetLoader.LoadAsset<BattleConfig>(_battleConfigRef, _cts.Token);
+                battleConfig.SetRemoteConfigStats(gameRemoteConfig.Battle);
+                _localAssetLoader.UnloadAsset(_battleConfigRef);
+            }
+            catch (OperationCanceledException)
+            {
+                Debug.LogError("Loading asset cancelled");
+                throw;
+            }
             
             Debug.Log("RemoteConfigs applied successfully");
             IsSystemReady = true;

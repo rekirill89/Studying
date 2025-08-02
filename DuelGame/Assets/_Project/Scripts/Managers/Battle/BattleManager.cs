@@ -48,7 +48,6 @@ namespace DuelGame
 
         public void Initialize()
         {
-            Debug.Log("Battle Manager Initialized method");
             _battleSessionContext.OnSessionReady += Init;
         }
         
@@ -73,6 +72,7 @@ namespace DuelGame
             
             _heroesCombatController?.StopAllTasks();
             _heroesCombatController = new HeroesCombatController(_analyticsDataCollector, player1, Players.Player1, player2, Players.Player2);
+            _heroesCombatController.Initialize();
             
             _heroesCombatController.DelayPlayersAttack(_attackDelayP1, _attackDelayP2);
             

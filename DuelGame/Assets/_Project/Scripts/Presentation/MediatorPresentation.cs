@@ -11,6 +11,8 @@ namespace DuelGame
         private readonly IInstantiator _iInstantiator;
         private readonly UIFactory _uiFactory;
         private readonly BattleManager _battleManagerModel;
+        private readonly BattleSessionContext _battleSessionContext;
+        
         private readonly Dictionary<Type, Action<Players?>> _presentersActions;
         private readonly List<IPresenter<BasePanelView>> _presenters = new List<IPresenter<BasePanelView>>();
 
@@ -22,11 +24,16 @@ namespace DuelGame
         private LoadPanelPresenter _loadPanelPresenter;
         private AdsPanelPresenter _adsPanelPresenter;
         
-        public MediatorPresentation(IInstantiator iInstantiator, UIFactory uiFactory, BattleManager battleManagerModel)
+        public MediatorPresentation(
+            IInstantiator iInstantiator, 
+            UIFactory uiFactory, 
+            BattleManager battleManagerModel,
+            BattleSessionContext battleSessionContext)
         {
             _iInstantiator = iInstantiator;
             _uiFactory = uiFactory;
             _battleManagerModel = battleManagerModel;
+            _battleSessionContext = battleSessionContext;
             
             _presentersActions = new Dictionary<Type, Action<Players?>>()
             {
@@ -62,6 +69,8 @@ namespace DuelGame
 
         private void BattleReadyHandler()
         {
+            
+            
             TryCreatePanel(ref _startPanelPresenter, null);
             
             TryCreatePanel(ref _reloadPanelPresenter, null);
@@ -85,7 +94,8 @@ namespace DuelGame
                 TryCreatePanel(ref _restartPanelPresenter, playerWhoLost);
             }
             
-            TryCreatePanel(ref _adsPanelPresenter, playerWhoLost);
+            if(!_battleSessionContext.IsAdsRemoved)
+                TryCreatePanel(ref _adsPanelPresenter, playerWhoLost);
         }
         
         private bool TryCreatePanel<TPresenter>(

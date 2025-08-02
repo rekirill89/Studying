@@ -2,6 +2,7 @@
 using System.Threading;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using Zenject;
 
 namespace DuelGame
@@ -10,23 +11,30 @@ namespace DuelGame
     {
         public bool IsAllSystemReady { get; private set; } = false;
         
-        private readonly IRemoteConfigsManager _remoteConfigsManager;
+        private readonly IRemoteConfigsLoader _remoteConfigsLoader;
         private readonly GlobalAssetsLoader _globalAssetsLoader;
         private readonly FireBaseInit _fireBaseInit;
         private readonly EntityFactory _entityFactory;
+        private readonly UIFactory _uiFactory;
+        private readonly IInAppPurchaseService _inAppPurchaseService;
+        private readonly PurchasesDataController _purchasesDataController;
 
         private readonly CancellationTokenSource _cts;
 
         public GlobalBootstrap(
-            IRemoteConfigsManager remoteConfigsManager, 
+            IRemoteConfigsLoader remoteConfigsLoader, 
             GlobalAssetsLoader globalAssetsLoader, 
             FireBaseInit fireBaseInit,
-            EntityFactory entityFactory)
+            EntityFactory entityFactory,
+            UIFactory uiFactory,
+            IInAppPurchaseService inAppPurchaseService)
         {
-            _remoteConfigsManager = remoteConfigsManager;
+            _remoteConfigsLoader = remoteConfigsLoader;
             _globalAssetsLoader = globalAssetsLoader;
             _fireBaseInit = fireBaseInit;
             _entityFactory = entityFactory;
+            _uiFactory = uiFactory;
+            _inAppPurchaseService = inAppPurchaseService;
             
             _cts = new CancellationTokenSource();
         }
@@ -35,8 +43,10 @@ namespace DuelGame
         {
             _fireBaseInit.Init();
             _entityFactory.Init();
-            _remoteConfigsManager.Init();
+            _uiFactory.Init();
+            _remoteConfigsLoader.Init();
             _globalAssetsLoader.Init();
+            _inAppPurchaseService.Init();
             
             WaitUntilAllSystemsReady().Forget();
         }
@@ -51,8 +61,9 @@ namespace DuelGame
             await UniTask.WaitUntil(()=> 
                 (_fireBaseInit.IsSystemReady && 
                 _entityFactory.IsSystemReady && 
-                _remoteConfigsManager.IsSystemReady &&
-                _globalAssetsLoader.IsSystemReady) || 
+                _remoteConfigsLoader.IsSystemReady &&
+                _globalAssetsLoader.IsSystemReady && 
+                _inAppPurchaseService.IsSystemReady) || 
                 CheckTimeout(), 
                 cancellationToken: _cts.Token);
 

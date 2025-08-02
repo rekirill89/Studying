@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
+using Object = UnityEngine.Object;
 
 namespace DuelGame
 {
@@ -21,11 +23,7 @@ namespace DuelGame
             
             var assetHandle = Addressables.LoadAssetAsync<T>(assetReference);
             await assetHandle.ToUniTask(cancellationToken:token);
-
-            if (token.IsCancellationRequested)
-            {
-                Debug.LogError("Loading asset stopped");
-            }
+            
             if (assetHandle.Status == AsyncOperationStatus.Failed)
             {
                 Debug.LogError("Error loading asset");
@@ -39,18 +37,42 @@ namespace DuelGame
 
         public async UniTask<HeroStats> LoadHeroStats(AssetReference assetReference, CancellationToken token)
         {
-            return await LoadAsset<HeroStats>(assetReference, token);
+            try
+            {
+                return await LoadAsset<HeroStats>(assetReference, token);
+            }
+            catch (OperationCanceledException)
+            {
+                Debug.LogError("Loading asset cancelled");
+                throw;
+            }
         }
 
         public async UniTask<BaseHero> LoadHero(AssetReference assetReference, CancellationToken token)
         {
-            var x = await LoadAsset<GameObject>(assetReference, token);
-            return x.GetComponent<BaseHero>();
+            try
+            {
+                var x = await LoadAsset<GameObject>(assetReference, token);
+                return x.GetComponent<BaseHero>();
+            }
+            catch (OperationCanceledException)
+            {
+                Debug.LogError("Loading asset cancelled");
+                throw;
+            }
         }
 
         public async UniTask<GameObject> LoadBuffPrefab(AssetReference assetReference, CancellationToken token)
         {
-            return await LoadAsset<GameObject>(assetReference, token);
+            try
+            {
+                return await LoadAsset<GameObject>(assetReference, token);
+            }
+            catch (OperationCanceledException)
+            {
+                Debug.LogError("Loading asset cancelled");
+                throw;
+            }
         }
 
         public void UnloadAsset(AssetReference assetRef)

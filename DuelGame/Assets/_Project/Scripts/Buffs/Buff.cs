@@ -11,7 +11,7 @@ namespace DuelGame
         public BuffEnum BuffEnum {get; protected set;}
         public abstract float BuffDuration {get; protected set;}
 
-        protected CancellationToken _token; 
+        protected CancellationToken Token; 
         
         public virtual UniTask Execute(BaseHero target)
         {
@@ -20,7 +20,7 @@ namespace DuelGame
 
         public void SetCtsToken(CancellationToken ct)
         {
-            _token = ct;
+            Token = ct;
         }
     }
 }

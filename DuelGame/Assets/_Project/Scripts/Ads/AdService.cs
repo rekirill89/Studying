@@ -17,8 +17,6 @@ namespace DuelGame
         private LevelPlayRewardedAd _levelPlayRewardedAd;
         private LevelPlayInterstitialAd _levelPlayInterstitialAd;
         
-        //private float _delay = 10f;
-        
         private readonly CancellationTokenSource _cts = new CancellationTokenSource();
         
         public void Initialize()
@@ -85,7 +83,15 @@ namespace DuelGame
         private void InterstitialAdOnLoadFailedHandler(LevelPlayAdError error)
         {
             Debug.Log(error.ErrorMessage);
-            ReloadInterstitialAd().Forget();        
+            try
+            {
+                ReloadInterstitialAd().Forget();        
+            }
+            catch (OperationCanceledException)
+            {
+                Debug.LogError("Loading asset cancelled");
+                throw;
+            }
         }
 
         private void RewardedAdOnLoadFailedHandler(LevelPlayAdError error)
@@ -108,16 +114,32 @@ namespace DuelGame
 
         private async UniTask ReloadRewardedAd()
         {
-            Debug.Log("Reloading Rewarded Ad");
-            await UniTask.Yield(cancellationToken: _cts.Token);
-            _levelPlayRewardedAd.LoadAd();
+            try
+            {
+                Debug.Log("Reloading Rewarded Ad");
+                await UniTask.Yield(cancellationToken: _cts.Token);
+                _levelPlayRewardedAd.LoadAd();
+            }
+            catch (OperationCanceledException )
+            {
+                Debug.LogError("Loading ads cancelled");
+                throw;
+            }
         }
 
         private async UniTask ReloadInterstitialAd()
         {
-            Debug.Log("Reloading Interstatial Ad");
-            await UniTask.Yield(cancellationToken: _cts.Token);
-            _levelPlayInterstitialAd.LoadAd();
+            try
+            {
+                Debug.Log("Reloading Interstatial Ad");
+                await UniTask.Yield(cancellationToken: _cts.Token);
+                _levelPlayInterstitialAd.LoadAd();
+            }
+            catch (OperationCanceledException )
+            {
+                Debug.LogError("Loading ads cancelled");
+                throw;
+            }
         }
     }
 }

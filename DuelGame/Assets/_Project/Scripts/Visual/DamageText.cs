@@ -33,7 +33,6 @@ namespace DuelGame
         {
             _moveTween?.Kill();
             _fadeTween?.Kill();
-            //OnComplete.RemoveAllListeners();
         }
         
         public void Initialize(float damage)

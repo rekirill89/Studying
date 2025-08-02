@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 using Zenject;
 
 namespace DuelGame
@@ -50,6 +51,7 @@ namespace DuelGame
 
         private void ButtonClickedHandler()
         {
+            Debug.Log("Data saved");
             _battleDataController.SaveBattleData(null);
         }
     }

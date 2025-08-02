@@ -10,9 +10,9 @@ namespace DuelGame
     {
         public override float BuffDuration { get; protected set; } = 2.1f;
         
-        private float _poisonDamagePerTick = 3.5f;
-        private float _startDelay = 0.3f;
-        private float _tickInterval = 0.3f;
+        private readonly float _poisonDamagePerTick = 3.5f;
+        private readonly float _startDelay = 0.3f;
+        private readonly float _tickInterval = 0.3f;
         
         private float _currenBuffDuration;
         
@@ -32,17 +32,17 @@ namespace DuelGame
         
         public override async UniTask Execute(BaseHero target)
         {
-            await UniTask.Delay(TimeSpan.FromSeconds(_startDelay), cancellationToken: _token);
+            await UniTask.Delay(TimeSpan.FromSeconds(_startDelay), cancellationToken: Token);
         
             await base.Execute(target);
 
             var intervalTimer = TimeSpan.FromSeconds(_tickInterval);
-            while (_currenBuffDuration < BuffDuration && !_token.IsCancellationRequested)
+            while (_currenBuffDuration < BuffDuration && !Token.IsCancellationRequested)
             {
                 target.TakeHit(_poisonDamagePerTick, false);
                 _currenBuffDuration += _tickInterval;
 
-                await UniTask.Delay(intervalTimer, cancellationToken: _token);
+                await UniTask.Delay(intervalTimer, cancellationToken: Token);
             }
         }
     }

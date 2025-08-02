@@ -14,7 +14,6 @@ namespace DuelGame
         private readonly BattleSessionContext _battleSessionContext;
         private readonly HeroesLifecycleController _heroesLifecycleController;
         private readonly BattleSceneAssetsLoader _battleSceneAssetsLoader;
-        private readonly UIFactory _uiFactory;
         
         private readonly CancellationTokenSource _cts = new CancellationTokenSource();
         
@@ -23,29 +22,27 @@ namespace DuelGame
             BattleManager battleManager, 
             BattleSessionContext battleSessionContext, 
             HeroesLifecycleController heroesLifecycleController,
-            BattleSceneAssetsLoader battleSceneAssetsLoader,
-            UIFactory uiFactory)
+            BattleSceneAssetsLoader battleSceneAssetsLoader)
         {
             _globalBootstrap = globalBootstrap;
             _battleManager = battleManager;
             _heroesLifecycleController = heroesLifecycleController;
             _battleSessionContext = battleSessionContext;
             _battleSceneAssetsLoader = battleSceneAssetsLoader;
-            _uiFactory = uiFactory;
         }
 
         public void Initialize()
         {
+            Debug.Log("Wait for global systems ready");
             WaitForGlobalDataReady().Forget();
         }
 
         private void StartInitialization()
         {
-            
+            Debug.Log("Wait for local systems ready");
             _battleManager.Initialize();
             _heroesLifecycleController.Initialize();
             _battleSessionContext.Initialize();
-            _uiFactory.Initialize();
             _battleSceneAssetsLoader.Initialize();
             
             CheckSystemsInit().Forget();
@@ -73,7 +70,6 @@ namespace DuelGame
                 return;
             }
             
-            Debug.Log("Systems initialized");
             StartInitialization();
         }
         
@@ -85,7 +81,7 @@ namespace DuelGame
                 timeout.Status == UniTaskStatus.Canceled;
             
             await UniTask.WaitUntil(
-                () => (_uiFactory.IsSystemReady &&  _battleSessionContext.IsSystemReady) || 
+                () => (_battleSessionContext.IsSystemReady) || 
                       CheckTimeout(),
                 cancellationToken: _cts.Token);
             

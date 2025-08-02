@@ -9,9 +9,6 @@ namespace DuelGame
     {        
         [SerializeField] private BattleSettingsFacade _battleFacade;
         
-        [SerializeField] private Transform _screenCanvasParent;
-        [SerializeField] private Transform _hudCanvasParent;
-        
         [FormerlySerializedAs("_panels")] [SerializeField] private AssetReference _panelsRef;
         
         public override void InstallBindings()
@@ -22,13 +19,10 @@ namespace DuelGame
 
             Container.BindInterfacesAndSelfTo<BattleSessionContext>().AsSingle();
             Container.BindInterfacesAndSelfTo<SceneLoaderService>().AsSingle();
-            Container.BindInterfacesAndSelfTo<UIFactory>().AsSingle().WithArguments(
-                _screenCanvasParent,
-                _hudCanvasParent);
             
             Container.BindInterfacesAndSelfTo<AnalyticsDataCollector>().AsSingle();
             Container.BindInterfacesAndSelfTo<BattleStateModel>().AsSingle();
-            Container.BindInterfacesAndSelfTo<BattleSceneAssetsLoader>().AsSingle().WithArguments(_battleFacade, _panelsRef);
+            Container.BindInterfacesAndSelfTo<BattleSceneAssetsLoader>().AsSingle().WithArguments(_battleFacade);
             Container.BindInterfacesAndSelfTo<HeroesLifecycleController>().AsSingle();
             Container.BindInterfacesAndSelfTo<BattleManager>().AsSingle();
             Container.BindInterfacesAndSelfTo<BattleDataController>().AsSingle();

@@ -6,6 +6,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 using Zenject;
+using IInitializable = Zenject.IInitializable;
 using Object = UnityEngine.Object;
 
 namespace DuelGame
@@ -13,63 +14,82 @@ namespace DuelGame
     public class UIFactory : IDisposable
     {
         public bool IsSystemReady { get; private set; } = false;
+        
+        private readonly GlobalAssetsLoader _globalAssetsLoader; 
 
-        private readonly Transform _screenCanvasParent;
-        private readonly Transform _hudCanvasParent;
-        private readonly BattleSceneAssetsLoader _battleSceneAssetsLoader; 
-
+        private Panels _panels;
+        
+        private Canvas _screenCanvasPrefab;
+        private Canvas _hudCanvasPrefab;
+        private Canvas _screenCanvas;
+        private Canvas _hudCanvas;
+        
         private List<(BasePanelView viewPrefab, Transform parent)> _viewsCanvasList;
         
-        public UIFactory(
-            BattleSceneAssetsLoader battleSceneAssetsLoader,
-            Transform screenCanvasParent,
-            Transform hudCanvasParent)
+        public UIFactory(GlobalAssetsLoader globalAssetsLoader)
         { 
-            _screenCanvasParent = screenCanvasParent;
-            _hudCanvasParent = hudCanvasParent;
-            _battleSceneAssetsLoader = battleSceneAssetsLoader;
+            _globalAssetsLoader = globalAssetsLoader;
         }
 
-        public void Initialize()
-        {
-            _battleSceneAssetsLoader.OnBattleSceneAssetsReady += Init;
-        }
-        
         public void Dispose()
         {
-            _battleSceneAssetsLoader.OnBattleSceneAssetsReady -= Init;
+            _globalAssetsLoader.OnDataLoaded -= Initialize;
         }
         
-        private void Init(BattleSettingsFacade _, Panels panels)
+        public void Init()
         {
-            Debug.Log("Presenters view Init");
-            _viewsCanvasList = new List<(BasePanelView viewPrefab, Transform parent)>()
-            {
-                (panels.ContinuePanelView, _screenCanvasParent),
-                (panels.StartPanelView, _screenCanvasParent),
-                (panels.RestartPanelView, _screenCanvasParent),
-                (panels.SavePanelView, _screenCanvasParent),
-                (panels.LoadPanelView, _screenCanvasParent),
-                (panels.ReloadPanelView, _hudCanvasParent),
-                (panels.AdsPanelView, _screenCanvasParent)
-            };
-            IsSystemReady = true;
+            _globalAssetsLoader.OnDataLoaded += Initialize;
         }
         
         public BasePanelView CreatePanelView<T>() where T : IPresenter<BasePanelView>
         {
-            var (prefab, parent) = GetViewPrefabNParentPair<T>();
+            CheckCanvases();
+            var (prefab, parent) = GetViewPrefabAndParentPair<T>();
             return Object.Instantiate(prefab,  parent);
         }
+
+        private void Initialize(GameLocalConfigs _, UILocalConfigs uiLocalConfigs)
+        {
+            Debug.Log("Presenters view Init");
+
+            _screenCanvasPrefab = uiLocalConfigs.ScreenCanvas;
+            _hudCanvasPrefab = uiLocalConfigs.HudCanvas;
+            _panels = uiLocalConfigs.Panels;
+
+            IsSystemReady = true;
+            Debug.Log("Presenters view Init end");
+        }
         
-        private (BasePanelView prefab, Transform parent) GetViewPrefabNParentPair<TPresenter>() where TPresenter : IPresenter<BasePanelView>
+        private (BasePanelView prefab, Transform parent) GetViewPrefabAndParentPair<TPresenter>() where TPresenter : IPresenter<BasePanelView>
         {
             var type = typeof(TPresenter)
                 .GetInterfaces()
                 .First(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IPresenter<>))
                 ?.GetGenericArguments()[0];
             var view = _viewsCanvasList.First(x => x.viewPrefab.GetType() == type);
+            
             return (view.viewPrefab, view.parent);
+        }
+
+        private void CheckCanvases()
+        {
+            if (_hudCanvas == null && _screenCanvas == null)
+            {
+                _screenCanvas = Object.Instantiate(_screenCanvasPrefab);
+                _hudCanvas = Object.Instantiate(_hudCanvasPrefab);
+                
+                _viewsCanvasList = new List<(BasePanelView viewPrefab, Transform parent)>()
+                {
+                    (_panels.ContinuePanelView, _screenCanvas.transform),
+                    (_panels.StartPanelView, _screenCanvas.transform),
+                    (_panels.RestartPanelView, _screenCanvas.transform),
+                    (_panels.SavePanelView, _screenCanvas.transform),
+                    (_panels.LoadPanelView, _screenCanvas.transform),
+                    (_panels.ReloadPanelView, _hudCanvas.transform),
+                    (_panels.AdsPanelView, _screenCanvas.transform),
+                    (_panels.MenuPanelView, _screenCanvas.transform)
+                };
+            }
         }
     }
 }
