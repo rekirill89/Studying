@@ -97,6 +97,12 @@ MonoBehaviour:
     m_SubObjectGUID: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
+  SkinShopPanelViewRef:
+    m_AssetGUID: 3f661d467aff6d74c80267e13f5cb027
+    m_SubObjectName: 
+    m_SubObjectGUID: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
 --- !u!1001 &369676605549142743
 PrefabInstance:
   m_ObjectHideFlags: 0

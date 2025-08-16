@@ -13,6 +13,8 @@ namespace DuelGame
         
         private readonly IRemoteConfigsLoader _remoteConfigsLoader;
         private readonly GlobalAssetsLoader _globalAssetsLoader;
+        private readonly SkinAssetsLoader _skinAssetsLoader;
+        private readonly SkinsController _skinsController;
         private readonly FireBaseInit _fireBaseInit;
         private readonly EntityFactory _entityFactory;
         private readonly UIFactory _uiFactory;
@@ -24,6 +26,8 @@ namespace DuelGame
         public GlobalBootstrap(
             IRemoteConfigsLoader remoteConfigsLoader, 
             GlobalAssetsLoader globalAssetsLoader, 
+            SkinAssetsLoader skinAssetsLoader,
+            SkinsController skinsController,
             FireBaseInit fireBaseInit,
             EntityFactory entityFactory,
             UIFactory uiFactory,
@@ -31,6 +35,8 @@ namespace DuelGame
         {
             _remoteConfigsLoader = remoteConfigsLoader;
             _globalAssetsLoader = globalAssetsLoader;
+            _skinAssetsLoader = skinAssetsLoader;
+            _skinsController = skinsController;
             _fireBaseInit = fireBaseInit;
             _entityFactory = entityFactory;
             _uiFactory = uiFactory;
@@ -43,10 +49,13 @@ namespace DuelGame
         {
             _fireBaseInit.Init();
             _entityFactory.Init();
+            _skinsController.Init();
             _uiFactory.Init();
             _remoteConfigsLoader.Init();
+            
+            _skinAssetsLoader.Init();
+            
             _globalAssetsLoader.Init();
-            _inAppPurchaseService.Init();
             
             WaitUntilAllSystemsReady().Forget();
         }
@@ -62,7 +71,8 @@ namespace DuelGame
                 (_fireBaseInit.IsSystemReady && 
                 _entityFactory.IsSystemReady && 
                 _remoteConfigsLoader.IsSystemReady &&
-                _globalAssetsLoader.IsSystemReady && 
+                _globalAssetsLoader.IsSystemReady &&
+                _skinAssetsLoader.IsSystemReady &&
                 _inAppPurchaseService.IsSystemReady) || 
                 CheckTimeout(), 
                 cancellationToken: _cts.Token);

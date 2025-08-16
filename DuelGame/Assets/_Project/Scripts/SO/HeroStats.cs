@@ -13,7 +13,7 @@ namespace DuelGame
         public float Armor;
         public float AttackRate;
 
-        public void UpdateStats(HeroRemoteConfig hero)
+        public void UpdateStats(HeroConfig hero)
         {
             Health = hero.Health;
             Damage = hero.Damage;

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using UnityEditor.Animations;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -41,6 +42,10 @@ namespace DuelGame
         {
             _cts = new CancellationTokenSource();
             HealthBar.fillAmount = 1f;
+
+            if(Hero.SkinAoc != null)
+                Animator.runtimeAnimatorController = Hero.SkinAoc;
+            
             SubscribeToEvents();
         }
         
@@ -67,12 +72,21 @@ namespace DuelGame
 
         protected virtual void SubscribeToEvents()
         {
+            //Hero.OnInitialized += OnHeroInitialized;
+            
             Hero.OnTakeDamage += DamageTaken;
             Hero.OnPlayerStop += StopAllTasks;
 
             Hero.OnDeath += HeroDeath;
             Hero.OnAttack += HeroAttack;
         }
+
+        /*private void OnHeroInitialized(AnimatorOverrideController animatorOverrideController)
+        {
+            Debug.Log("BaseHeroVisual.OnHeroInitialized");
+            if(Hero.SkinAoc != null)
+                Animator.runtimeAnimatorController = Hero.SkinAoc;
+        }*/
 
         protected virtual void UnsubscribeFromEvents()
         {

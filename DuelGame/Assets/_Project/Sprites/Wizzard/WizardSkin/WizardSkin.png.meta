@@ -1,0 +1,864 @@
+fileFormatVersion: 2
+guid: fa9a475765e881841a527f93b9b8137b
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3999133369273138978
+    second: WizardSkin_0
+  - first:
+      213: 4944899278325556680
+    second: WizardSkin_1
+  - first:
+      213: -4730076006300377491
+    second: WizardSkin_2
+  - first:
+      213: 7030137931898264501
+    second: WizardSkin_3
+  - first:
+      213: -7299069305973917517
+    second: WizardSkin_4
+  - first:
+      213: 8312618549855311166
+    second: WizardSkin_5
+  - first:
+      213: 7614082609627241725
+    second: WizardSkin_6
+  - first:
+      213: -7455802772537383472
+    second: WizardSkin_7
+  - first:
+      213: -7455324611974488577
+    second: WizardSkin_8
+  - first:
+      213: 202816057137040601
+    second: WizardSkin_9
+  - first:
+      213: 700083923261143794
+    second: WizardSkin_10
+  - first:
+      213: -5824043846784510916
+    second: WizardSkin_11
+  - first:
+      213: 4996992632549813507
+    second: WizardSkin_12
+  - first:
+      213: -7326394030090885312
+    second: WizardSkin_13
+  - first:
+      213: -5136320871296916585
+    second: WizardSkin_14
+  - first:
+      213: -187724663697828390
+    second: WizardSkin_15
+  - first:
+      213: 7017620325561623104
+    second: WizardSkin_16
+  - first:
+      213: 6568419898313922554
+    second: WizardSkin_17
+  - first:
+      213: -8594683252812862408
+    second: WizardSkin_18
+  - first:
+      213: 5855726306607472078
+    second: WizardSkin_19
+  - first:
+      213: -1155238467136847082
+    second: WizardSkin_20
+  - first:
+      213: 6903668865931405760
+    second: WizardSkin_21
+  - first:
+      213: 5564922208216115549
+    second: WizardSkin_22
+  - first:
+      213: -5619340354810920606
+    second: WizardSkin_23
+  - first:
+      213: 4402372129534902854
+    second: WizardSkin_24
+  - first:
+      213: 6619429911913629203
+    second: WizardSkin_25
+  - first:
+      213: -324525083355669855
+    second: WizardSkin_26
+  - first:
+      213: 8535895737527757908
+    second: WizardSkin_27
+  - first:
+      213: 9060572789685965522
+    second: WizardSkin_28
+  - first:
+      213: -7025225753657700710
+    second: WizardSkin_29
+  - first:
+      213: -751468926246918712
+    second: WizardSkin_30
+  - first:
+      213: 8714868131684610706
+    second: WizardSkin_31
+  - first:
+      213: 8125382099075580020
+    second: WizardSkin_32
+  - first:
+      213: 2265014955146562840
+    second: WizardSkin_33
+  - first:
+      213: -2696996907238238320
+    second: WizardSkin_34
+  - first:
+      213: -8836946392353379445
+    second: WizardSkin_35
+  - first:
+      213: 2982793890048754557
+    second: WizardSkin_36
+  - first:
+      213: 1818018305125869885
+    second: WizardSkin_37
+  - first:
+      213: 587205147653066185
+    second: WizardSkin_38
+  - first:
+      213: -8439274733327268705
+    second: WizardSkin_39
+  - first:
+      213: 1190975463949098348
+    second: WizardSkin_40
+  - first:
+      213: -3956345302872676290
+    second: WizardSkin_41
+  - first:
+      213: 3874924872583606585
+    second: WizardSkin_42
+  - first:
+      213: 2601527445215045804
+    second: WizardSkin_43
+  - first:
+      213: -1307017706407781049
+    second: WizardSkin_44
+  - first:
+      213: 6314450500486820120
+    second: WizardSkin_45
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: WizardSkin_0
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 502
+        width: 38
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed0401393693088c0800000000000000
+      internalID: -3999133369273138978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WizardSkin_2
+      rect:
+        serializedVersion: 2
+        x: 201
+        y: 499
+        width: 49
+        height: 58
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6e1edbeee46b5eb0800000000000000
+      internalID: -4730076006300377491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WizardSkin_3
+      rect:
+        serializedVersion: 2
+        x: 351
+        y: 498
+        width: 53
+        height: 54
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5bb9bc8a331109160800000000000000
+      internalID: 7030137931898264501
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WizardSkin_4
+      rect:
+        serializedVersion: 2
+        x: 508
+        y: 497
+        width: 46
+        height: 27
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b8b77a632f74ba90800000000000000
+      internalID: -7299069305973917517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WizardSkin_5
+      rect:
+        serializedVersion: 2
+        x: 656
+        y: 497
+        width: 49
+        height: 29
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e35d279678a5c5370800000000000000
+      internalID: 8312618549855311166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WizardSkin_6
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 349
+        width: 34
+        height: 57
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dfc9f45dac7aaa960800000000000000
+      internalID: 7614082609627241725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WizardSkin_7
+      rect:
+        serializedVersion: 2
+        x: 198
+        y: 352
+        width: 41
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d5698381eaa78890800000000000000
+      internalID: -7455802772537383472
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WizardSkin_8
+      rect:
+        serializedVersion: 2
+        x: 359
+        y: 352
+        width: 33
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ffd9802f3cd598890800000000000000
+      internalID: -7455324611974488577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WizardSkin_9
+      rect:
+        serializedVersion: 2
+        x: 504
+        y: 352
+        width: 38
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9dc0660212c80d200800000000000000
+      internalID: 202816057137040601
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WizardSkin_10
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 199
+        width: 83
+        height: 51
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2fa31f67e9237b900800000000000000
+      internalID: 700083923261143794
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WizardSkin_14
+      rect:
+        serializedVersion: 2
+        x: 208
+        y: 198
+        width: 82
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7932ce5816f18b8b0800000000000000
+      internalID: -5136320871296916585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WizardSkin_16
+      rect:
+        serializedVersion: 2
+        x: 358
+        y: 198
+        width: 80
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04269a15188936160800000000000000
+      internalID: 7017620325561623104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WizardSkin_18
+      rect:
+        serializedVersion: 2
+        x: 508
+        y: 198
+        width: 78
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 83c271f3e1d89b880800000000000000
+      internalID: -8594683252812862408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WizardSkin_19
+      rect:
+        serializedVersion: 2
+        x: 658
+        y: 199
+        width: 83
+        height: 51
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ecd9f370d08b34150800000000000000
+      internalID: 5855726306607472078
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WizardSkin_23
+      rect:
+        serializedVersion: 2
+        x: 808
+        y: 198
+        width: 82
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2614a7748b71402b0800000000000000
+      internalID: -5619340354810920606
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WizardSkin_25
+      rect:
+        serializedVersion: 2
+        x: 958
+        y: 198
+        width: 80
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 31605330f60fcdb50800000000000000
+      internalID: 6619429911913629203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WizardSkin_27
+      rect:
+        serializedVersion: 2
+        x: 1108
+        y: 198
+        width: 78
+        height: 52
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45cec1bb2f7957670800000000000000
+      internalID: 8535895737527757908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WizardSkin_38
+      rect:
+        serializedVersion: 2
+        x: 56
+        y: 49
+        width: 34
+        height: 57
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9cd442c78fb262800800000000000000
+      internalID: 587205147653066185
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WizardSkin_39
+      rect:
+        serializedVersion: 2
+        x: 204
+        y: 48
+        width: 36
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f94491ed75ca1ea80800000000000000
+      internalID: -8439274733327268705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WizardSkin_40
+      rect:
+        serializedVersion: 2
+        x: 353
+        y: 47
+        width: 37
+        height: 56
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6d54e8dfd1378010800000000000000
+      internalID: 1190975463949098348
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WizardSkin_41
+      rect:
+        serializedVersion: 2
+        x: 506
+        y: 47
+        width: 34
+        height: 55
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e382d7d98ec3819c0800000000000000
+      internalID: -3956345302872676290
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WizardSkin_42
+      rect:
+        serializedVersion: 2
+        x: 656
+        y: 47
+        width: 34
+        height: 57
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 931fba134af76c530800000000000000
+      internalID: 3874924872583606585
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WizardSkin_43
+      rect:
+        serializedVersion: 2
+        x: 803
+        y: 48
+        width: 37
+        height: 55
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ca8e87d8d6b7a1420800000000000000
+      internalID: 2601527445215045804
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WizardSkin_44
+      rect:
+        serializedVersion: 2
+        x: 953
+        y: 48
+        width: 37
+        height: 58
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 74d1b66225a8cdde0800000000000000
+      internalID: -1307017706407781049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WizardSkin_45
+      rect:
+        serializedVersion: 2
+        x: 1104
+        y: 48
+        width: 36
+        height: 59
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 811fd49564f61a750800000000000000
+      internalID: 6314450500486820120
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 84d5ecfef914f884996944fe84a3e697
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      WizardSkin_0: -3999133369273138978
+      WizardSkin_1: 4944899278325556680
+      WizardSkin_10: 700083923261143794
+      WizardSkin_11: -5824043846784510916
+      WizardSkin_12: 4996992632549813507
+      WizardSkin_13: -7326394030090885312
+      WizardSkin_14: -5136320871296916585
+      WizardSkin_15: -187724663697828390
+      WizardSkin_16: 7017620325561623104
+      WizardSkin_17: 6568419898313922554
+      WizardSkin_18: -8594683252812862408
+      WizardSkin_19: 5855726306607472078
+      WizardSkin_2: -4730076006300377491
+      WizardSkin_20: -1155238467136847082
+      WizardSkin_21: 6903668865931405760
+      WizardSkin_22: 5564922208216115549
+      WizardSkin_23: -5619340354810920606
+      WizardSkin_24: 4402372129534902854
+      WizardSkin_25: 6619429911913629203
+      WizardSkin_26: -324525083355669855
+      WizardSkin_27: 8535895737527757908
+      WizardSkin_28: 9060572789685965522
+      WizardSkin_29: -7025225753657700710
+      WizardSkin_3: 7030137931898264501
+      WizardSkin_30: -751468926246918712
+      WizardSkin_31: 8714868131684610706
+      WizardSkin_32: 8125382099075580020
+      WizardSkin_33: 2265014955146562840
+      WizardSkin_34: -2696996907238238320
+      WizardSkin_35: -8836946392353379445
+      WizardSkin_36: 2982793890048754557
+      WizardSkin_37: 1818018305125869885
+      WizardSkin_38: 587205147653066185
+      WizardSkin_39: -8439274733327268705
+      WizardSkin_4: -7299069305973917517
+      WizardSkin_40: 1190975463949098348
+      WizardSkin_41: -3956345302872676290
+      WizardSkin_42: 3874924872583606585
+      WizardSkin_43: 2601527445215045804
+      WizardSkin_44: -1307017706407781049
+      WizardSkin_45: 6314450500486820120
+      WizardSkin_5: 8312618549855311166
+      WizardSkin_6: 7614082609627241725
+      WizardSkin_7: -7455802772537383472
+      WizardSkin_8: -7455324611974488577
+      WizardSkin_9: 202816057137040601
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

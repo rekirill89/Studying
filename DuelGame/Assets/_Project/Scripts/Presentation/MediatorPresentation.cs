@@ -69,8 +69,6 @@ namespace DuelGame
 
         private void BattleReadyHandler()
         {
-            
-            
             TryCreatePanel(ref _startPanelPresenter, null);
             
             TryCreatePanel(ref _reloadPanelPresenter, null);

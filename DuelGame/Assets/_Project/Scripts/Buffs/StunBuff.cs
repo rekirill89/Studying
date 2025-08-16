@@ -9,7 +9,7 @@ namespace DuelGame
     {
         public override float BuffDuration { get; protected set; } = 4f;
         
-        public StunBuff(StunBuffRemoteConfig config = null)
+        public StunBuff(StunBuffConfig config = null)
         {
             BuffEnum = BuffEnum.Stun;
             

@@ -518,7 +518,7 @@ Animator:
   m_GameObject: {fileID: 4923490167297993817}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 08170f94fe6a6ac41a06407f5f0d06cc, type: 2}
+  m_Controller: {fileID: 22100000, guid: eb27fb23901ecbb4eaf7c339a7723138, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -542,7 +542,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8c529d853fe59f44b8912d4b2931ffd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuffSprite: {fileID: 0}
   Hero: {fileID: 7161436639040551281}
   DamageTextPrefab: {fileID: 784887742528018441, guid: 80af0163d9438de4babdfe2fc5639466, type: 3}
   DamageTextPosition: {fileID: 4209336789553303854}

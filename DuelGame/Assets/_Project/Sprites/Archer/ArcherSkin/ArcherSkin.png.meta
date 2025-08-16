@@ -1,0 +1,944 @@
+fileFormatVersion: 2
+guid: 5c57e131dee3ed54985971bcda27038b
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -8366980800271708031
+    second: ArcherSkin_0
+  - first:
+      213: -7492774987869714572
+    second: ArcherSkin_1
+  - first:
+      213: -1523502244787783703
+    second: ArcherSkin_2
+  - first:
+      213: 2091098879792522666
+    second: ArcherSkin_3
+  - first:
+      213: 400899583615012704
+    second: ArcherSkin_4
+  - first:
+      213: 6687442401866079165
+    second: ArcherSkin_5
+  - first:
+      213: -1006890509234797227
+    second: ArcherSkin_6
+  - first:
+      213: 5980287577568280516
+    second: ArcherSkin_7
+  - first:
+      213: 5636585891003761238
+    second: ArcherSkin_8
+  - first:
+      213: -9191964712679592030
+    second: ArcherSkin_9
+  - first:
+      213: 2431635418785173721
+    second: ArcherSkin_10
+  - first:
+      213: -635767090911415774
+    second: ArcherSkin_11
+  - first:
+      213: -2127978005842963947
+    second: ArcherSkin_12
+  - first:
+      213: -4795954303894612677
+    second: ArcherSkin_13
+  - first:
+      213: -6053141900513350527
+    second: ArcherSkin_14
+  - first:
+      213: 5897618556609577180
+    second: ArcherSkin_15
+  - first:
+      213: -3168618537031747468
+    second: ArcherSkin_16
+  - first:
+      213: -5266748531797666612
+    second: ArcherSkin_17
+  - first:
+      213: -3839276678274491924
+    second: ArcherSkin_18
+  - first:
+      213: 7291534280724944329
+    second: ArcherSkin_19
+  - first:
+      213: 8433393157535345384
+    second: ArcherSkin_20
+  - first:
+      213: 8499538923038005098
+    second: ArcherSkin_21
+  - first:
+      213: -6919169322712037985
+    second: ArcherSkin_22
+  - first:
+      213: -4129152969026008200
+    second: ArcherSkin_23
+  - first:
+      213: 3722644868562862481
+    second: ArcherSkin_24
+  - first:
+      213: 2440741296257293300
+    second: ArcherSkin_25
+  - first:
+      213: 4858985880419676650
+    second: ArcherSkin_26
+  - first:
+      213: -4102940209360679571
+    second: ArcherSkin_27
+  - first:
+      213: 7022742291408056800
+    second: ArcherSkin_28
+  - first:
+      213: 8577690000140880108
+    second: ArcherSkin_29
+  - first:
+      213: -4284096447981763543
+    second: ArcherSkin_30
+  - first:
+      213: 2142958700639593941
+    second: ArcherSkin_31
+  - first:
+      213: 30408488351150712
+    second: ArcherSkin_32
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: ArcherSkin_0
+      rect:
+        serializedVersion: 2
+        x: 40
+        y: 432
+        width: 26
+        height: 43
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1809a45da4382eb80800000000000000
+      internalID: -8366980800271708031
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ArcherSkin_1
+      rect:
+        serializedVersion: 2
+        x: 140
+        y: 432
+        width: 27
+        height: 46
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4770812d8d0540890800000000000000
+      internalID: -7492774987869714572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ArcherSkin_2
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 432
+        width: 42
+        height: 47
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9e7f9ecb7ce6bdae0800000000000000
+      internalID: -1523502244787783703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ArcherSkin_3
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 432
+        width: 31
+        height: 47
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa520402a53150d10800000000000000
+      internalID: 2091098879792522666
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ArcherSkin_4
+      rect:
+        serializedVersion: 2
+        x: 435
+        y: 432
+        width: 35
+        height: 47
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06f89f71c08409500800000000000000
+      internalID: 400899583615012704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ArcherSkin_5
+      rect:
+        serializedVersion: 2
+        x: 535
+        y: 432
+        width: 34
+        height: 47
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dbbdc13de619ecc50800000000000000
+      internalID: 6687442401866079165
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ArcherSkin_6
+      rect:
+        serializedVersion: 2
+        x: 35
+        y: 332
+        width: 33
+        height: 36
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5550955aa6ec602f0800000000000000
+      internalID: -1006890509234797227
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ArcherSkin_7
+      rect:
+        serializedVersion: 2
+        x: 135
+        y: 333
+        width: 46
+        height: 34
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4cf73abeddf3ef250800000000000000
+      internalID: 5980287577568280516
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ArcherSkin_9
+      rect:
+        serializedVersion: 2
+        x: 235
+        y: 332
+        width: 55
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2afaec08bc49f6080800000000000000
+      internalID: -9191964712679592030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ArcherSkin_10
+      rect:
+        serializedVersion: 2
+        x: 335
+        y: 332
+        width: 65
+        height: 31
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9d0d2ffa787eeb120800000000000000
+      internalID: 2431635418785173721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ArcherSkin_11
+      rect:
+        serializedVersion: 2
+        x: 435
+        y: 332
+        width: 65
+        height: 32
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2227752033d4d27f0800000000000000
+      internalID: -635767090911415774
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ArcherSkin_13
+      rect:
+        serializedVersion: 2
+        x: 535
+        y: 332
+        width: 65
+        height: 29
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b351b5d78f8517db0800000000000000
+      internalID: -4795954303894612677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ArcherSkin_14
+      rect:
+        serializedVersion: 2
+        x: 635
+        y: 332
+        width: 65
+        height: 28
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18c6edc238beefba0800000000000000
+      internalID: -6053141900513350527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ArcherSkin_15
+      rect:
+        serializedVersion: 2
+        x: 735
+        y: 332
+        width: 65
+        height: 21
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cd0477f84dc88d150800000000000000
+      internalID: 5897618556609577180
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ArcherSkin_16
+      rect:
+        serializedVersion: 2
+        x: 835
+        y: 332
+        width: 65
+        height: 13
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 47831878a3ec604d0800000000000000
+      internalID: -3168618537031747468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ArcherSkin_17
+      rect:
+        serializedVersion: 2
+        x: 935
+        y: 332
+        width: 65
+        height: 9
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cc4d3e06d10c8e6b0800000000000000
+      internalID: -5266748531797666612
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ArcherSkin_18
+      rect:
+        serializedVersion: 2
+        x: 425
+        y: 231
+        width: 25
+        height: 42
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce9d105d33628bac0800000000000000
+      internalID: -3839276678274491924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ArcherSkin_19
+      rect:
+        serializedVersion: 2
+        x: 488
+        y: 231
+        width: 25
+        height: 42
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c5913ecbcbb03560800000000000000
+      internalID: 7291534280724944329
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ArcherSkin_20
+      rect:
+        serializedVersion: 2
+        x: 556
+        y: 231
+        width: 28
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8eaaa1e056e690570800000000000000
+      internalID: 8433393157535345384
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ArcherSkin_21
+      rect:
+        serializedVersion: 2
+        x: 633
+        y: 232
+        width: 32
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a6759463e9d64f570800000000000000
+      internalID: 8499538923038005098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ArcherSkin_22
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 132
+        width: 34
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9508fa092c2aff90800000000000000
+      internalID: -6919169322712037985
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ArcherSkin_23
+      rect:
+        serializedVersion: 2
+        x: 134
+        y: 132
+        width: 34
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 87b84f9704d42b6c0800000000000000
+      internalID: -4129152969026008200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ArcherSkin_24
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 132
+        width: 34
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 191ce97d8cd79a330800000000000000
+      internalID: 3722644868562862481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ArcherSkin_25
+      rect:
+        serializedVersion: 2
+        x: 334
+        y: 132
+        width: 34
+        height: 36
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4fbda0007414fd120800000000000000
+      internalID: 2440741296257293300
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ArcherSkin_26
+      rect:
+        serializedVersion: 2
+        x: 434
+        y: 132
+        width: 34
+        height: 36
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae1bd0b0ae59e6340800000000000000
+      internalID: 4858985880419676650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ArcherSkin_27
+      rect:
+        serializedVersion: 2
+        x: 534
+        y: 132
+        width: 34
+        height: 36
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6dc36e2e9d6f07c0800000000000000
+      internalID: -4102940209360679571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ArcherSkin_28
+      rect:
+        serializedVersion: 2
+        x: 634
+        y: 132
+        width: 34
+        height: 36
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e17d7ce7eac57160800000000000000
+      internalID: 7022742291408056800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ArcherSkin_29
+      rect:
+        serializedVersion: 2
+        x: 734
+        y: 132
+        width: 34
+        height: 37
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce841dbcb931a0770800000000000000
+      internalID: 8577690000140880108
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ArcherSkin_30
+      rect:
+        serializedVersion: 2
+        x: 834
+        y: 132
+        width: 34
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 924c88a8af4db84c0800000000000000
+      internalID: -4284096447981763543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ArcherSkin_31
+      rect:
+        serializedVersion: 2
+        x: 934
+        y: 132
+        width: 34
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5d5a4f795915dbd10800000000000000
+      internalID: 2142958700639593941
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ArcherSkin_32
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 32
+        width: 34
+        height: 38
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 872b35aeb580c6000800000000000000
+      internalID: 30408488351150712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: cbc99322ce635134680c563dfd571cb0
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      ArcherSkin_0: -8366980800271708031
+      ArcherSkin_1: -7492774987869714572
+      ArcherSkin_10: 2431635418785173721
+      ArcherSkin_11: -635767090911415774
+      ArcherSkin_12: -2127978005842963947
+      ArcherSkin_13: -4795954303894612677
+      ArcherSkin_14: -6053141900513350527
+      ArcherSkin_15: 5897618556609577180
+      ArcherSkin_16: -3168618537031747468
+      ArcherSkin_17: -5266748531797666612
+      ArcherSkin_18: -3839276678274491924
+      ArcherSkin_19: 7291534280724944329
+      ArcherSkin_2: -1523502244787783703
+      ArcherSkin_20: 8433393157535345384
+      ArcherSkin_21: 8499538923038005098
+      ArcherSkin_22: -6919169322712037985
+      ArcherSkin_23: -4129152969026008200
+      ArcherSkin_24: 3722644868562862481
+      ArcherSkin_25: 2440741296257293300
+      ArcherSkin_26: 4858985880419676650
+      ArcherSkin_27: -4102940209360679571
+      ArcherSkin_28: 7022742291408056800
+      ArcherSkin_29: 8577690000140880108
+      ArcherSkin_3: 2091098879792522666
+      ArcherSkin_30: -4284096447981763543
+      ArcherSkin_31: 2142958700639593941
+      ArcherSkin_32: 30408488351150712
+      ArcherSkin_4: 400899583615012704
+      ArcherSkin_5: 6687442401866079165
+      ArcherSkin_6: -1006890509234797227
+      ArcherSkin_7: 5980287577568280516
+      ArcherSkin_8: 5636585891003761238
+      ArcherSkin_9: -9191964712679592030
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

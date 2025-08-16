@@ -19,6 +19,7 @@ namespace DuelGame
         [SerializeField] public AssetReference LoadPanelViewRef;
         [SerializeField] public AssetReference AdsPanelViewRef;
         [SerializeField] public AssetReference MenuPanelViewRef;
+        [SerializeField] public AssetReference SkinShopPanelViewRef;
         
         public StartPanelView StartPanelView {get; private set;}
         public ContinuePanelView ContinuePanelView {get; private set;}
@@ -28,6 +29,8 @@ namespace DuelGame
         public LoadPanelView LoadPanelView {get; private set;}
         public AdsPanelView AdsPanelView {get; private set;}
         public MenuPanelView MenuPanelView {get; private set;}
+        public SkinShopPanelView SkinShopPanelView {get; private set;}
+
         
         private ILocalAssetLoader _localAssetLoader;
 
@@ -41,6 +44,7 @@ namespace DuelGame
             _localAssetLoader.UnloadAsset(LoadPanelViewRef);
             _localAssetLoader.UnloadAsset(AdsPanelViewRef);
             _localAssetLoader.UnloadAsset(MenuPanelViewRef);
+            _localAssetLoader.UnloadAsset(SkinShopPanelViewRef);
         }
 
         public async UniTask Init(ILocalAssetLoader localAssetLoader, CancellationToken token)
@@ -62,6 +66,7 @@ namespace DuelGame
                 var loadPanelViewObj  = await _localAssetLoader.LoadAsset<GameObject>(LoadPanelViewRef, token);
                 var adsPanelViewObj = await _localAssetLoader.LoadAsset<GameObject>(AdsPanelViewRef, token);
                 var menuPanelViewObj = await _localAssetLoader.LoadAsset<GameObject>(MenuPanelViewRef, token);
+                var skinShopPanelObj = await _localAssetLoader.LoadAsset<GameObject>(SkinShopPanelViewRef, token);
             
                 StartPanelView = startPanelViewObj.GetComponent<StartPanelView>();
                 ContinuePanelView = continuePanelViewObj.GetComponent<ContinuePanelView>();
@@ -71,9 +76,7 @@ namespace DuelGame
                 ReloadPanelView = reloadPanelViewObj.GetComponent<ReloadPanelView>();
                 AdsPanelView = adsPanelViewObj.GetComponent<AdsPanelView>();
                 MenuPanelView = menuPanelViewObj.GetComponent<MenuPanelView>();
-                
-                Debug.Log(AdsPanelView.name);
-                Debug.Log(MenuPanelView.name);
+                SkinShopPanelView = skinShopPanelObj.GetComponent<SkinShopPanelView>();
             
                 Debug.Log("Panels initialized");
             }

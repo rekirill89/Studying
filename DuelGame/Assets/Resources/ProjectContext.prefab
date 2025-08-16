@@ -92,6 +92,12 @@ MonoBehaviour:
     m_SubObjectGUID: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
+  _skinsRef:
+    m_AssetGUID: f154aee41c86cbe40a60ba4ddd81b562
+    m_SubObjectName: 
+    m_SubObjectGUID: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
   _panelsRef:
     m_AssetGUID: aff68e255f69e284fb5557fadb803e4b
     m_SubObjectName: 

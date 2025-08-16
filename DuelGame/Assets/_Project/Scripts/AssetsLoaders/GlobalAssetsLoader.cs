@@ -80,6 +80,7 @@ namespace DuelGame
                 var heroesList =
                     Object.Instantiate(await _localAssetLoader.LoadAsset<HeroesList>(_heroesConfigRef, _cts.Token));
                 heroesList.Init(_localAssetLoader);
+                await heroesList.LoadAllHeroes(_cts.Token);
                 _diContainer.Bind<HeroesList>().FromInstance(heroesList).AsSingle();
                 
                 var panelsObj = await _localAssetLoader.LoadAsset<GameObject>(_panelsRef, _cts.Token);

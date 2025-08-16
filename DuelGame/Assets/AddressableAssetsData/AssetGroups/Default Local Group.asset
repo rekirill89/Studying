@@ -70,8 +70,18 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 30fe1aa6827facc479b476a7c8402785
+    m_Address: Assets/_Project/Prefabs/UI/SkinSlot.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 3dfc0544a6272344fb0d7d1955add49d
     m_Address: Assets/_Project/Prefabs/UI/AdsPanelView.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 3f661d467aff6d74c80267e13f5cb027
+    m_Address: Assets/_Project/Prefabs/UI/SkinShopPanel.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -82,6 +92,21 @@ MonoBehaviour:
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4b57adb1955113e429c03d4bfc1b4c18
     m_Address: Assets/_Project/Prefabs/UI/Continue Panel.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 70ef4e4a441c8ef419f90ab40205eb2e
+    m_Address: Assets/_Project/Animations/Warrior/Skin/WarriorSkin.overrideController
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8cb227a4b53e7524dbacce3ba6bf5a68
+    m_Address: Assets/_Project/Animations/Archer/ArcherDefault.overrideController
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 9286d8cd1fbe70741a53b3348ce1721d
+    m_Address: Assets/_Project/Animations/Warrior/Default/WarriorDefault.overrideController
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -110,6 +135,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: b9b940ad86e410045a49375152d5e81a
+    m_Address: Assets/_Project/Animations/Archer/ArcherSkin/ArcherSkin.overrideController
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c32fe14cb27c91241853469d6ba26091
     m_Address: Assets/_Project/Prefabs/UI/MenuPanel.prefab
     m_ReadOnly: 0
@@ -125,8 +155,23 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: cd016981bee50f943848046ba5e242a4
+    m_Address: Assets/_Project/Animations/Wizzard/WizardSkin/WizardSkin.overrideController
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: d705cd97d5ddd07409e012bd1e15496b
     m_Address: Assets/_Project/Configs/WarriorSO.asset
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: eb27fb23901ecbb4eaf7c339a7723138
+    m_Address: Assets/_Project/Animations/Wizzard/WizardDefault.overrideController
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: f154aee41c86cbe40a60ba4ddd81b562
+    m_Address: Assets/_Project/Configs/SkinsList.asset
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

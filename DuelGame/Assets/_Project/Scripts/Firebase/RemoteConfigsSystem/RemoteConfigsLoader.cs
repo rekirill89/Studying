@@ -70,32 +70,30 @@ namespace DuelGame
         private async UniTask FetchRemoteConfigs()
         {
             string json = FirebaseRemoteConfig.DefaultInstance.GetValue(REMOTE_CONFIG_KEY).StringValue;
-            var gameRemoteConfig = JsonUtility.FromJson<GameRemoteConfig>(json);
+            var gameRemoteConfig = JsonUtility.FromJson<GameConfig>(json);
 
             await ApplyRemoteConfigs(gameRemoteConfig);
         }
 
-        private async UniTask ApplyRemoteConfigs(GameRemoteConfig gameRemoteConfig)
+        private async UniTask ApplyRemoteConfigs(GameConfig gameConfig)
         {
-            await _gameLocalConfigs.HeroesList.LoadAllHeroes(_cts.Token);
-            
             _gameLocalConfigs.HeroesList
                 .ListOfEntities
                 .First(hero => hero.HeroEnum == HeroEnum.Archer)
-                .HeroStats.UpdateStats(gameRemoteConfig.Heroes.Archer);
+                .HeroStats.UpdateStats(gameConfig.Heroes.Archer);
             _gameLocalConfigs.HeroesList
                 .ListOfEntities
                 .First(hero => hero.HeroEnum == HeroEnum.Warrior)
-                .HeroStats.UpdateStats(gameRemoteConfig.Heroes.Warrior);
+                .HeroStats.UpdateStats(gameConfig.Heroes.Warrior);
             _gameLocalConfigs.HeroesList
                 .ListOfEntities
                 .First(hero => hero.HeroEnum == HeroEnum.Wizard)
-                .HeroStats.UpdateStats(gameRemoteConfig.Heroes.Wizard);
+                .HeroStats.UpdateStats(gameConfig.Heroes.Wizard);
 
             try
             {
                 var battleConfig = await _localAssetLoader.LoadAsset<BattleConfig>(_battleConfigRef, _cts.Token);
-                battleConfig.SetRemoteConfigStats(gameRemoteConfig.Battle);
+                battleConfig.SetConfigStats(gameConfig.Battle);
                 _localAssetLoader.UnloadAsset(_battleConfigRef);
             }
             catch (OperationCanceledException)
@@ -106,7 +104,7 @@ namespace DuelGame
             
             Debug.Log("RemoteConfigs applied successfully");
             IsSystemReady = true;
-            OnRemoteConfigsApplied?.Invoke(_gameLocalConfigs, gameRemoteConfig.Buffs);
+            OnRemoteConfigsApplied?.Invoke(_gameLocalConfigs, gameConfig.Buffs);
         }
     }
 }

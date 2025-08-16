@@ -1,6 +1,6 @@
 ﻿namespace DuelGame
 {
-    public delegate void RemoteConfigsApplied(GameLocalConfigs localConfigs, BuffsRemoteConfigs buffsRemoteConfigs);
+    public delegate void RemoteConfigsApplied(GameLocalConfigs localConfigs, BuffsConfigs buffsConfigs);
     
     public interface IRemoteConfigsLoader
     {

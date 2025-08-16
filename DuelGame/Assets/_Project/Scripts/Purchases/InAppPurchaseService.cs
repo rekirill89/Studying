@@ -10,9 +10,9 @@ using Zenject;
 
 namespace DuelGame
 {
-    public class InAppPurchaseService :  IDetailedStoreListener, IInAppPurchaseService
+    public class InAppPurchaseService :  IDetailedStoreListener, IInAppPurchaseService, IInitializable
     {
-        public bool IsSystemReady { get; protected set; } = false;
+        public bool IsSystemReady { get; private set; } = false;
 
         private const string REMOVE_ADS_PRODUCT = "remove_ads";
         private readonly PurchasesDataController _purchasesDataController;
@@ -26,9 +26,25 @@ namespace DuelGame
             _purchasesDataController = purchasesDataController;
         }
 
-        public void Init()
+        public void Initialize()
         {
             InitAsync().Forget();
+        }
+
+        public void Init()
+        {
+            if (_storeController == null)
+            {
+                var module = StandardPurchasingModule.Instance();
+                module.useFakeStoreUIMode = FakeStoreUIMode.StandardUser;
+                
+                var builder = ConfigurationBuilder.Instance(module);
+                builder.AddProduct(REMOVE_ADS_PRODUCT, ProductType.NonConsumable);
+                
+                UnityPurchasing.Initialize(this, builder);
+
+                IsSystemReady = true;
+            }
         }
 
         public void BuyRemoveAds()
@@ -87,30 +103,14 @@ namespace DuelGame
         {
             Debug.LogWarning("Purchase failed: " + failureDescription.ToString());
         }
-        
-        private void Initialize()
-        {
-            if (_storeController == null)
-            {
-                var module = StandardPurchasingModule.Instance();
-                module.useFakeStoreUIMode = FakeStoreUIMode.StandardUser;
-                
-                var builder = ConfigurationBuilder.Instance(module);
-                builder.AddProduct(REMOVE_ADS_PRODUCT, ProductType.NonConsumable);
-                
-                UnityPurchasing.Initialize(this, builder);
 
-                IsSystemReady = true;
-            }
-        }
-        
         private async UniTask InitAsync()
         {
             var options = new InitializationOptions();
 
             await UnityServices.InitializeAsync(options);
 
-            Initialize();
+            Init();
         }
     }
 }

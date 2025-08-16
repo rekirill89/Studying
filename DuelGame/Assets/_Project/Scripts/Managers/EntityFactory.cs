@@ -42,7 +42,7 @@ namespace DuelGame
         {
             var entity = await _heroes.GetRandomHero(_cts.Token);
             var x = Object.Instantiate(entity.Hero, trans);
-            x.Initialize(entity.HeroStats, _buffs, _buffsDictionary);
+            x.Initialize(entity.HeroStats, _buffs, _buffsDictionary, entity.Aoc);
             return x;
         }
 
@@ -50,11 +50,11 @@ namespace DuelGame
         {
             var entity = await _heroes.GetHeroEntityByEnum(heroEnum, _cts.Token);
             var x = Object.Instantiate(entity.Hero, trans);
-            x.Initialize(entity.HeroStats, _buffs, _buffsDictionary);
+            x.Initialize(entity.HeroStats, _buffs, _buffsDictionary, entity.Aoc);
             return x;
         }        
         
-        private void InitConfigs(GameLocalConfigs localConfigs, BuffsRemoteConfigs buffs)
+        private void InitConfigs(GameLocalConfigs localConfigs, BuffsConfigs buffs)
         {
             _heroes = localConfigs.HeroesList;
             _buffs = localConfigs.BuffsList;

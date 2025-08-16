@@ -1,0 +1,1066 @@
+fileFormatVersion: 2
+guid: c337ec67d4e7d664f83ba363dc5a1f81
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -7008573393550920506
+    second: WarriorSkin_0
+  - first:
+      213: -6466083006661070765
+    second: WarriorSkin_1
+  - first:
+      213: -6181496056879861461
+    second: WarriorSkin_2
+  - first:
+      213: 8078194118665246725
+    second: WarriorSkin_3
+  - first:
+      213: -4802876785747698750
+    second: WarriorSkin_4
+  - first:
+      213: -7230735557179192089
+    second: WarriorSkin_5
+  - first:
+      213: 4909414290710379310
+    second: WarriorSkin_6
+  - first:
+      213: -8415536740788599842
+    second: WarriorSkin_7
+  - first:
+      213: -4460181006889930366
+    second: WarriorSkin_8
+  - first:
+      213: 1108761725274370433
+    second: WarriorSkin_9
+  - first:
+      213: -8111162224597923914
+    second: WarriorSkin_10
+  - first:
+      213: -8139405259041934146
+    second: WarriorSkin_11
+  - first:
+      213: -6271271639742758229
+    second: WarriorSkin_12
+  - first:
+      213: -4746166005289911269
+    second: WarriorSkin_13
+  - first:
+      213: 6019287308986729284
+    second: WarriorSkin_14
+  - first:
+      213: 9121594142920416720
+    second: WarriorSkin_15
+  - first:
+      213: 8646913929954062895
+    second: WarriorSkin_16
+  - first:
+      213: 2179116228237765996
+    second: WarriorSkin_17
+  - first:
+      213: -4245691815424351123
+    second: WarriorSkin_18
+  - first:
+      213: 6954174805047021732
+    second: WarriorSkin_19
+  - first:
+      213: -415914303866551762
+    second: WarriorSkin_20
+  - first:
+      213: -215749495931011480
+    second: WarriorSkin_21
+  - first:
+      213: 5260187981615433575
+    second: WarriorSkin_22
+  - first:
+      213: 7689218914254937157
+    second: WarriorSkin_23
+  - first:
+      213: 2137645389149655572
+    second: WarriorSkin_24
+  - first:
+      213: -7536200169786154615
+    second: WarriorSkin_25
+  - first:
+      213: 4518389526538046270
+    second: WarriorSkin_26
+  - first:
+      213: -5656673112329291118
+    second: WarriorSkin_27
+  - first:
+      213: -4710122081555192189
+    second: WarriorSkin_28
+  - first:
+      213: 1708006188030696566
+    second: WarriorSkin_29
+  - first:
+      213: 4414245137626331098
+    second: WarriorSkin_30
+  - first:
+      213: -7281965602012974477
+    second: WarriorSkin_31
+  - first:
+      213: -2311366556488979708
+    second: WarriorSkin_32
+  - first:
+      213: -3759996401066057046
+    second: WarriorSkin_33
+  - first:
+      213: -847463780589835963
+    second: WarriorSkin_34
+  - first:
+      213: -9131354370969448803
+    second: WarriorSkin_35
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: WarriorSkin_0
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 209
+        width: 28
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c4b42fa1ab8cbe90800000000000000
+      internalID: -7008573393550920506
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WarriorSkin_1
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 209
+        width: 28
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 350f6c3a3cbd346a0800000000000000
+      internalID: -6466083006661070765
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WarriorSkin_2
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 209
+        width: 28
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b21b235561ae63aa0800000000000000
+      internalID: -6181496056879861461
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WarriorSkin_3
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 209
+        width: 28
+        height: 39
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50811b530c28b1070800000000000000
+      internalID: 8078194118665246725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WarriorSkin_4
+      rect:
+        serializedVersion: 2
+        x: 197
+        y: 209
+        width: 35
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2cbd9859201c85db0800000000000000
+      internalID: -4802876785747698750
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WarriorSkin_5
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 209
+        width: 35
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ec4c81225447ab90800000000000000
+      internalID: -7230735557179192089
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WarriorSkin_6
+      rect:
+        serializedVersion: 2
+        x: 293
+        y: 209
+        width: 35
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2bb405494eb12440800000000000000
+      internalID: 4909414290710379310
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WarriorSkin_7
+      rect:
+        serializedVersion: 2
+        x: 341
+        y: 209
+        width: 35
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed30c03fbe1063b80800000000000000
+      internalID: -8415536740788599842
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WarriorSkin_8
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 161
+        width: 27
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 281b16a51014a12c0800000000000000
+      internalID: -4460181006889930366
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WarriorSkin_9
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 162
+        width: 31
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18137872aec136f00800000000000000
+      internalID: 1108761725274370433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WarriorSkin_10
+      rect:
+        serializedVersion: 2
+        x: 104
+        y: 161
+        width: 33
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6b706477eec5f6f80800000000000000
+      internalID: -8111162224597923914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WarriorSkin_11
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 160
+        width: 27
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb4fbd39a060b0f80800000000000000
+      internalID: -8139405259041934146
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WarriorSkin_12
+      rect:
+        serializedVersion: 2
+        x: 207
+        y: 161
+        width: 23
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ba2c6279ba7f7f8a0800000000000000
+      internalID: -6271271639742758229
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WarriorSkin_13
+      rect:
+        serializedVersion: 2
+        x: 246
+        y: 163
+        width: 33
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b1cf8a91a2b322eb0800000000000000
+      internalID: -4746166005289911269
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WarriorSkin_14
+      rect:
+        serializedVersion: 2
+        x: 293
+        y: 161
+        width: 33
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 443cb2d7aedc88350800000000000000
+      internalID: 6019287308986729284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WarriorSkin_15
+      rect:
+        serializedVersion: 2
+        x: 342
+        y: 161
+        width: 33
+        height: 38
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0dd1e027b89669e70800000000000000
+      internalID: 9121594142920416720
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WarriorSkin_16
+      rect:
+        serializedVersion: 2
+        x: 11
+        y: 113
+        width: 26
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f22f94ee762000870800000000000000
+      internalID: 8646913929954062895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WarriorSkin_17
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 113
+        width: 27
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6da6640aa6cd3e10800000000000000
+      internalID: 2179116228237765996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WarriorSkin_18
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 113
+        width: 27
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d6429dbd9c54415c0800000000000000
+      internalID: -4245691815424351123
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WarriorSkin_19
+      rect:
+        serializedVersion: 2
+        x: 154
+        y: 113
+        width: 26
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a09cc0f321328060800000000000000
+      internalID: 6954174805047021732
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WarriorSkin_20
+      rect:
+        serializedVersion: 2
+        x: 191
+        y: 113
+        width: 40
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e22c70de4206a3af0800000000000000
+      internalID: -415914303866551762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WarriorSkin_21
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 113
+        width: 38
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 86eff8ef9f0810df0800000000000000
+      internalID: -215749495931011480
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WarriorSkin_22
+      rect:
+        serializedVersion: 2
+        x: 292
+        y: 113
+        width: 35
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76787ff7911fff840800000000000000
+      internalID: 5260187981615433575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WarriorSkin_23
+      rect:
+        serializedVersion: 2
+        x: 349
+        y: 113
+        width: 26
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 54c51600dd795ba60800000000000000
+      internalID: 7689218914254937157
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WarriorSkin_24
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 65
+        width: 42
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 412540cd7217aad10800000000000000
+      internalID: 2137645389149655572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WarriorSkin_25
+      rect:
+        serializedVersion: 2
+        x: 54
+        y: 65
+        width: 39
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98168a3cfd90a6790800000000000000
+      internalID: -7536200169786154615
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WarriorSkin_26
+      rect:
+        serializedVersion: 2
+        x: 106
+        y: 65
+        width: 29
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3b452eb55b84be30800000000000000
+      internalID: 4518389526538046270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WarriorSkin_27
+      rect:
+        serializedVersion: 2
+        x: 155
+        y: 65
+        width: 28
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 29afb1156c57f71b0800000000000000
+      internalID: -5656673112329291118
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WarriorSkin_28
+      rect:
+        serializedVersion: 2
+        x: 203
+        y: 65
+        width: 28
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 386ed201ce842aeb0800000000000000
+      internalID: -4710122081555192189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WarriorSkin_29
+      rect:
+        serializedVersion: 2
+        x: 251
+        y: 65
+        width: 28
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67c1dbf149e04b710800000000000000
+      internalID: 1708006188030696566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WarriorSkin_30
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 65
+        width: 28
+        height: 33
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad776b3a09c824d30800000000000000
+      internalID: 4414245137626331098
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WarriorSkin_31
+      rect:
+        serializedVersion: 2
+        x: 349
+        y: 65
+        width: 25
+        height: 36
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3723761ddd241fa90800000000000000
+      internalID: -7281965602012974477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WarriorSkin_32
+      rect:
+        serializedVersion: 2
+        x: 13
+        y: 17
+        width: 28
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 40ba1ceec506cefd0800000000000000
+      internalID: -2311366556488979708
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WarriorSkin_33
+      rect:
+        serializedVersion: 2
+        x: 61
+        y: 17
+        width: 28
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa2e5bdc13fc1dbc0800000000000000
+      internalID: -3759996401066057046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WarriorSkin_34
+      rect:
+        serializedVersion: 2
+        x: 109
+        y: 17
+        width: 26
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 549eeed7e243d34f0800000000000000
+      internalID: -847463780589835963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: WarriorSkin_35
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 17
+        width: 46
+        height: 11
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9ec7206499e64180800000000000000
+      internalID: -9131354370969448803
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      WarriorSkin_0: -7008573393550920506
+      WarriorSkin_1: -6466083006661070765
+      WarriorSkin_10: -8111162224597923914
+      WarriorSkin_11: -8139405259041934146
+      WarriorSkin_12: -6271271639742758229
+      WarriorSkin_13: -4746166005289911269
+      WarriorSkin_14: 6019287308986729284
+      WarriorSkin_15: 9121594142920416720
+      WarriorSkin_16: 8646913929954062895
+      WarriorSkin_17: 2179116228237765996
+      WarriorSkin_18: -4245691815424351123
+      WarriorSkin_19: 6954174805047021732
+      WarriorSkin_2: -6181496056879861461
+      WarriorSkin_20: -415914303866551762
+      WarriorSkin_21: -215749495931011480
+      WarriorSkin_22: 5260187981615433575
+      WarriorSkin_23: 7689218914254937157
+      WarriorSkin_24: 2137645389149655572
+      WarriorSkin_25: -7536200169786154615
+      WarriorSkin_26: 4518389526538046270
+      WarriorSkin_27: -5656673112329291118
+      WarriorSkin_28: -4710122081555192189
+      WarriorSkin_29: 1708006188030696566
+      WarriorSkin_3: 8078194118665246725
+      WarriorSkin_30: 4414245137626331098
+      WarriorSkin_31: -7281965602012974477
+      WarriorSkin_32: -2311366556488979708
+      WarriorSkin_33: -3759996401066057046
+      WarriorSkin_34: -847463780589835963
+      WarriorSkin_35: -9131354370969448803
+      WarriorSkin_4: -4802876785747698750
+      WarriorSkin_5: -7230735557179192089
+      WarriorSkin_6: 4909414290710379310
+      WarriorSkin_7: -8415536740788599842
+      WarriorSkin_8: -4460181006889930366
+      WarriorSkin_9: 1108761725274370433
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

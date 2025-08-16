@@ -16,7 +16,7 @@ namespace DuelGame
         
         private float _currenBuffDuration;
         
-        public PoisonBuff(PoisonBuffRemoteConfig config = null)
+        public PoisonBuff(PoisonBuffConfig config = null)
         {
             BuffEnum = BuffEnum.Poison;
             _currenBuffDuration = 0;

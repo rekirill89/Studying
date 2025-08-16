@@ -48,7 +48,6 @@ namespace DuelGame
         private void ReceiveBuffHandler(BuffEnum buffEnum)
         {
             Buff currentBuff = _buffsDictionary[buffEnum]();
-
             
             currentBuff.Execute(_hero).Forget();
             

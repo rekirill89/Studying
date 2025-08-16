@@ -22,7 +22,10 @@ namespace DuelGame
         public event ReceiveBuff OnReceiveBuff;        
         public event ApplyBuffToEnemy OnApplyBuffToEnemy;
 
+        
+        public AnimatorOverrideController SkinAoc { get; private set; }
         public Dictionary<BuffEnum, Func<Buff>> BuffsDictionary {get; private set;}
+        
         public HeroStats Hero { get; private set; }
         public BuffsList BuffList { get; private set; }
         public abstract HeroEnum HeroEnum { get; }
@@ -54,12 +57,23 @@ namespace DuelGame
         public void Initialize(
             HeroStats hero, 
             BuffsList buffs, 
-            Dictionary<BuffEnum, Func<Buff>> buffsDictionary)
+            Dictionary<BuffEnum, Func<Buff>> buffsDictionary,
+            AnimatorOverrideController skinAoc = null)
         {
             Hero = Instantiate(hero);
             BuffList = buffs;
             BuffsDictionary = buffsDictionary;
+            SkinAoc = skinAoc;
+            
+            Debug.Log("BaseHero.Initialize");
+            //OnInitialized?.Invoke(SkinAoc);
         }
+
+        /*public void SetSkinAnimatorInvoke(AnimatorOverrideController animatorOverrideController)
+        {
+            Debug.Log("BaseHero");
+            //OnSetSkinAnimator?.Invoke(animatorOverrideController);
+        }*/
         
         public void ChangeAttackStatus(bool isAttackable)
         {

@@ -59,13 +59,26 @@ namespace DuelGame
             Debug.Log("LoadAllHeroes success");
         }
         
+        public async UniTask LoadHero(HeroEnum heroEnum, CancellationToken token)
+        {
+            var hero = ListOfEntities.First(x => x.HeroEnum == heroEnum);
+            if (!hero.IsLoaded)
+            {
+                hero.Hero = await _localAssetLoader.LoadHero(hero.HeroRef, token);
+                hero.HeroStats = await _localAssetLoader.LoadHeroStats(hero.HeroStatsRef, token);
+                hero.IsLoaded = true;
+                
+                Debug.Log($"LoadHero {hero.HeroEnum} success");
+            }
+        }
+        
         private async UniTask LoadHero(EntryHero hero, CancellationToken token)
         {
             hero.Hero = await _localAssetLoader.LoadHero(hero.HeroRef, token);
             hero.HeroStats = await _localAssetLoader.LoadHeroStats(hero.HeroStatsRef, token);
             hero.IsLoaded = true;
             
-            Debug.Log("LoadHero success");
+            Debug.Log($"LoadHero {hero.HeroEnum} success");
         }
     }    
     [System.Serializable]
@@ -74,6 +87,9 @@ namespace DuelGame
         public HeroStats HeroStats {get; set;}
         public BaseHero Hero {get; set;}
         public bool IsLoaded {get; set;} = false;
+        
+        public AnimatorOverrideController Aoc {get; set;}
+        
         public AssetReference HeroStatsRef;
         public AssetReference HeroRef;
         public HeroEnum HeroEnum;

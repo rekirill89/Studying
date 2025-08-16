@@ -22,6 +22,11 @@ namespace DuelGame
             _button.onClick.RemoveListener(OnClickHandler);
         }
 
+        public void SetInteractable(bool interactable)
+        {
+            _button.interactable = interactable;
+        }
+        
         private void OnClickHandler()
         {
             OnClick?.Invoke();

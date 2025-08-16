@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: WarriorDefault
+  m_Controller: {fileID: 9100000, guid: 7192624f361e08c44a9b9eda34696b34, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: e8156cb25dcf290439837e420f8fbdc8, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: e8156cb25dcf290439837e420f8fbdc8, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 33ff823b00ac2dc4dbde06ea526393ea, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 33ff823b00ac2dc4dbde06ea526393ea, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 5265a184fa2aa304c913c4bc9c9ed86f, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 5265a184fa2aa304c913c4bc9c9ed86f, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: fd24fa18d38aa3f42badc42190e28df5, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: fd24fa18d38aa3f42badc42190e28df5, type: 2}

@@ -12,7 +12,7 @@ namespace DuelGame
 
         private readonly float _decreaseDamageMultiplier = 3f;
         
-        public DecreaseDamageBuff(DecreaseDamageBuffRemoteConfig config = null)
+        public DecreaseDamageBuff(DecreaseDamageBuffConfig config = null)
         {
             BuffEnum = BuffEnum.DecreaseDamage;
             
