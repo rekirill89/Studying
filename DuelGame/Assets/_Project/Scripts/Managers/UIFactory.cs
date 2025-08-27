@@ -24,7 +24,7 @@ namespace DuelGame
         private Canvas _screenCanvas;
         private Canvas _hudCanvas;
         
-        private List<(BasePanelView viewPrefab, Transform parent)> _viewsCanvasList;
+        private List<(BaseView viewPrefab, Transform parent)> _viewsCanvasList;
         
         public UIFactory(GlobalAssetsLoader globalAssetsLoader)
         { 
@@ -41,7 +41,7 @@ namespace DuelGame
             _globalAssetsLoader.OnDataLoaded += Initialize;
         }
         
-        public BasePanelView CreatePanelView<T>() where T : IPresenter<BasePanelView>
+        public BaseView CreatePanelView<T>() where T : IPresenter<BaseView>
         {
             CheckCanvases();
             var (prefab, parent) = GetViewPrefabAndParentPair<T>();
@@ -50,17 +50,14 @@ namespace DuelGame
 
         private void Initialize(GameLocalConfigs _, UILocalConfigs uiLocalConfigs)
         {
-            Debug.Log("Presenters view Init");
-
             _screenCanvasPrefab = uiLocalConfigs.ScreenCanvas;
             _hudCanvasPrefab = uiLocalConfigs.HudCanvas;
             _panels = uiLocalConfigs.Panels;
 
             IsSystemReady = true;
-            Debug.Log("Presenters view Init end");
         }
         
-        private (BasePanelView prefab, Transform parent) GetViewPrefabAndParentPair<TPresenter>() where TPresenter : IPresenter<BasePanelView>
+        private (BaseView prefab, Transform parent) GetViewPrefabAndParentPair<TPresenter>() where TPresenter : IPresenter<BaseView>
         {
             var type = typeof(TPresenter)
                 .GetInterfaces()
@@ -78,17 +75,17 @@ namespace DuelGame
                 _screenCanvas = Object.Instantiate(_screenCanvasPrefab);
                 _hudCanvas = Object.Instantiate(_hudCanvasPrefab);
                 
-                _viewsCanvasList = new List<(BasePanelView viewPrefab, Transform parent)>()
+                _viewsCanvasList = new List<(BaseView viewPrefab, Transform parent)>()
                 {
-                    (_panels.ContinuePanelView, _screenCanvas.transform),
-                    (_panels.StartPanelView, _screenCanvas.transform),
-                    (_panels.RestartPanelView, _screenCanvas.transform),
-                    (_panels.SavePanelView, _screenCanvas.transform),
-                    (_panels.LoadPanelView, _screenCanvas.transform),
-                    (_panels.ReloadPanelView, _hudCanvas.transform),
-                    (_panels.AdsPanelView, _screenCanvas.transform),
-                    (_panels.MenuPanelView, _screenCanvas.transform),
-                    (_panels.SkinShopPanelView, _screenCanvas.transform)
+                    (_panels.ContinueView, _screenCanvas.transform),
+                    (_panels.StartView, _screenCanvas.transform),
+                    (_panels.RestartView, _screenCanvas.transform),
+                    (_panels.SaveView, _screenCanvas.transform),
+                    (_panels.LoadView, _screenCanvas.transform),
+                    (_panels.ReloadView, _hudCanvas.transform),
+                    (_panels.AdsView, _screenCanvas.transform),
+                    (_panels.MenuView, _screenCanvas.transform),
+                    (_panels.SkinShopView, _screenCanvas.transform)
                     //(_panels.SkinSlotView, _screenCanvas.transform)
                 };
             }

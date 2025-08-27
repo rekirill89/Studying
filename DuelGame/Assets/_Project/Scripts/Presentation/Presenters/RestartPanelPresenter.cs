@@ -4,32 +4,32 @@ using Zenject;
 
 namespace DuelGame
 {
-    public class RestartPanelPresenter : IPresenter<RestartPanelView>
+    public class RestartPanelPresenter : IPresenter<RestartView>
     {
         private readonly BattleManager _battleManagerModel;
-        private readonly BaseOneButtonPanelView _restartPanelView;
+        private readonly BaseOneButtonView _restartView;
         private readonly SceneLoaderService _sceneLoaderService;
 
         public RestartPanelPresenter(
             BattleManager battleManager, 
             SceneLoaderService sceneLoaderService, 
-            RestartPanelView restartPanelView)
+            RestartView restartView)
         {
             _battleManagerModel = battleManager;
-            _restartPanelView = restartPanelView;
+            _restartView = restartView;
             _sceneLoaderService = sceneLoaderService;
         }
                                        
         public void Initialize()
         {
-            _restartPanelView.OnButtonClicked += _sceneLoaderService.LoadBattleScene;
+            _restartView.OnButtonClicked += _sceneLoaderService.LoadBattleScene;
             _battleManagerModel.OnBattleFinish += ShowView;
             _battleManagerModel.BattleStateModel.OnStateChanged += StateChangedHandler;
         }
 
         public void Dispose()
         {
-            _restartPanelView.OnButtonClicked -= _battleManagerModel.ContinueBattle;
+            _restartView.OnButtonClicked -= _battleManagerModel.ContinueBattle;
             _battleManagerModel.OnBattleFinish -= ShowView;
             _battleManagerModel.BattleStateModel.OnStateChanged -= StateChangedHandler;
         }
@@ -38,14 +38,14 @@ namespace DuelGame
         {
             if (playerWhoLost == Players.Player1)
             {
-                _restartPanelView.Show();
+                _restartView.Show();
             }
         }
         
         private void StateChangedHandler(BattleState state)
         {
             if(state == BattleState.Continued)
-                _restartPanelView.Hide();
+                _restartView.Hide();
         }
     }   
 }

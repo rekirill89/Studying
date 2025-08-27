@@ -4,49 +4,49 @@ using Zenject;
 
 namespace DuelGame
 {
-    public class SavePanelPresenter : IPresenter<SavePanelView>
+    public class SavePanelPresenter : IPresenter<SaveView>
     {
         private readonly BattleManager _battleManagerModel;
         private readonly BattleDataController _battleDataController;
-        private readonly SavePanelView _savePanelView;
+        private readonly SaveView _saveView;
 
         public SavePanelPresenter(
             BattleManager battleManagerModel, 
             BattleDataController battleDataController, 
-            SavePanelView savePanelView)
+            SaveView saveView)
         {
             _battleManagerModel = battleManagerModel;
             _battleDataController = battleDataController;
-            _savePanelView = savePanelView;
+            _saveView = saveView;
         }
                                                
         public void Initialize()
         {
-            _savePanelView.OnButtonClicked += ButtonClickedHandler;
+            _saveView.OnButtonClicked += ButtonClickedHandler;
             _battleManagerModel.OnPlayersSpawned += ShowView;
             _battleManagerModel.OnBattleFinish += HideView;
         }
 
         public void Dispose()
         {
-            _savePanelView.OnButtonClicked -= ButtonClickedHandler;
+            _saveView.OnButtonClicked -= ButtonClickedHandler;
             _battleManagerModel.OnPlayersSpawned -= ShowView;
             _battleManagerModel.OnBattleFinish -= HideView;
         }
 
         public void ShowView()
         {
-            _savePanelView.Show();
+            _saveView.Show();
         }
         
         private void ShowView(BattleState _)
         {
-            _savePanelView.Show();
+            _saveView.Show();
         }
         
         private void HideView(Players? _)
         {
-            _savePanelView.Hide();
+            _saveView.Hide();
         }
 
         private void ButtonClickedHandler()

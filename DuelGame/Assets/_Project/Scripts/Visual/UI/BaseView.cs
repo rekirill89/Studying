@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace DuelGame
 {
-    public class BasePanelView : MonoBehaviour
+    public class BaseView : MonoBehaviour
     {
         [SerializeField] private GameObject _root;
         

@@ -14,7 +14,7 @@ namespace DuelGame
         private readonly BattleSessionContext _battleSessionContext;
         
         private readonly Dictionary<Type, Action<Players?>> _presentersActions;
-        private readonly List<IPresenter<BasePanelView>> _presenters = new List<IPresenter<BasePanelView>>();
+        private readonly List<IPresenter<BaseView>> _presenters = new List<IPresenter<BaseView>>();
 
         private StartPanelPresenter _startPanelPresenter;
         private ContinuePanelPresenter _continuePanelPresenter;
@@ -99,7 +99,7 @@ namespace DuelGame
         private bool TryCreatePanel<TPresenter>(
             ref TPresenter presenter,
             Players? playerWhoLost) 
-            where TPresenter : IPresenter<BasePanelView>
+            where TPresenter : IPresenter<BaseView>
         {
             if(presenter != null)
                 return false;

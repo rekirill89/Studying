@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace DuelGame
 {
-    public class BaseOneButtonPanelView : BasePanelView
+    public class BaseOneButtonView : BaseView
     {
         [SerializeField] protected Button Button;
                 

@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace DuelGame
 {
-    public class SkinSlotView : BasePanelView
+    public class SkinSlotView : BaseView
     {
         [field:SerializeField] public BaseButton EquipSkinButton { get; private set; }
         [field:SerializeField] public BaseButton UnEquipSkinButton { get; private set; }

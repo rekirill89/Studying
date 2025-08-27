@@ -4,13 +4,13 @@ using Zenject;
 
 namespace DuelGame
 {
-    public class AdsPanelPresenter : IPresenter<AdsPanelView>
+    public class AdsPanelPresenter : IPresenter<AdsView>
     {
         private readonly BattleManager _battleManager;
-        private readonly AdsPanelView _view;
+        private readonly AdsView _view;
         private readonly IAdService _adService;
 
-        public AdsPanelPresenter(BattleManager battleManager, AdsPanelView view, IAdService adService)
+        public AdsPanelPresenter(BattleManager battleManager, AdsView view, IAdService adService)
         {
             _battleManager = battleManager;
             _view = view;

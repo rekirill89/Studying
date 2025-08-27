@@ -4,16 +4,18 @@ using Zenject;
 
 namespace DuelGame
 {
-    public class MenuPanelPresenter : IPresenter<MenuPanelView>
+    public class MenuPanelPresenter : IPresenter<MenuView>
     {
         private readonly MenuSceneEntryPoint _menuSceneEntryPoint;
         private readonly IInAppPurchaseService _inAppPurchaseService;
         private readonly IInstantiator _instantiator;
         private readonly DataCache _dataCache;
-        private readonly MenuPanelView _menuPanelView;
+        private readonly MenuView _menuView;
         private readonly UIFactory _uiFactory;
         private readonly SaveService _saveService;
         private readonly SkinsController _skinsController;
+        
+        private readonly InternetConnector _internetConnector;
 
         private SkinShopPanelPresenter _skinShopPanelPresenter;
         private SkinSlotViewPresenter _skinSlotViewPresenter;
@@ -26,7 +28,8 @@ namespace DuelGame
             IInstantiator instantiator,
             SaveService saveService,
             SkinsController skinsController,
-            MenuPanelView menuPanelView)
+            InternetConnector internetConnector,
+            MenuView menuView)
         {
             _menuSceneEntryPoint = menuSceneEntryPoint;
             _inAppPurchaseService = inAppPurchaseService;
@@ -34,16 +37,17 @@ namespace DuelGame
             _uiFactory = uiFactory;
             _instantiator = instantiator;
             _saveService = saveService;
-            _menuPanelView = menuPanelView;
+            _menuView = menuView;
+            _internetConnector = internetConnector;
             _skinsController = skinsController;
         }
         
         public void Dispose()
         {
-            _menuPanelView.StartGameButton.OnClick -= _menuSceneEntryPoint.StartGame;
-            _menuPanelView.RemoveAdsButton.OnClick -= _inAppPurchaseService.BuyRemoveAds;
-            _menuPanelView.SkinShopButton.OnClick -= OpenSkinShop;
-            _menuPanelView.ClearSkinsData.OnClick -= _saveService.ClearSkinsData;
+            _menuView.StartGameButton.OnClick -= _menuSceneEntryPoint.StartGame;
+            _menuView.RemoveAdsButton.OnClick -= _inAppPurchaseService.BuyRemoveAds;
+            _menuView.SkinShopButton.OnClick -= OpenSkinShop;
+            _menuView.ClearSkinsData.OnClick -= _saveService.ClearSkinsData;
             
             if(_skinShopPanelPresenter != null)
                 _skinShopPanelPresenter.OnBackToMenuButtonClick -= OpenMenu;
@@ -54,25 +58,29 @@ namespace DuelGame
 
         public void Initialize()
         {
-            _menuPanelView.StartGameButton.OnClick += _menuSceneEntryPoint.StartGame;
-            _menuPanelView.RemoveAdsButton.OnClick += _inAppPurchaseService.BuyRemoveAds;
-            _menuPanelView.SkinShopButton.OnClick += OpenSkinShop;
-            _menuPanelView.ClearSkinsData.OnClick += _saveService.ClearSkinsData;
+            _menuView.StartGameButton.OnClick += _menuSceneEntryPoint.StartGame;
+            _menuView.RemoveAdsButton.OnClick += _inAppPurchaseService.BuyRemoveAds;
+            _menuView.SkinShopButton.OnClick += OpenSkinShop;
+            _menuView.ClearSkinsData.OnClick += _saveService.ClearSkinsData;
             
             if(_dataCache.IsAdsRemoved)
-                _menuPanelView.RemoveAdsButton.enabled = false;
+                _menuView.RemoveAdsButton.enabled = false;
+            if (!_internetConnector.IsConnected)
+            {
+                _menuView.RemoveAdsButton.SetInteractable(false);
+            }
 
             CheckDiscountSkin();
         }
 
         public void ShowView()
         {
-            _menuPanelView.Show();
+            _menuView.Show();
         }
 
         private void HideView()
         {
-            _menuPanelView.Hide();
+            _menuView.Hide();
         }
 
         private void OpenSkinShop()
@@ -96,7 +104,7 @@ namespace DuelGame
 
         private void CheckDiscountSkin()
         {
-            _skinSlotViewPresenter ??= new SkinSlotViewPresenter(_skinsController, _menuPanelView.DiscountSkinSlotView);
+            _skinSlotViewPresenter ??= new SkinSlotViewPresenter(_skinsController, _menuView.DiscountSkinSlotView);
             
             if (_skinsController.BoughtSkins.Contains(_skinSlotViewPresenter.SkinSlotView.SkinEnum))
             {

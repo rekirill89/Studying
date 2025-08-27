@@ -5,32 +5,32 @@ using Zenject;
 
 namespace DuelGame
 {
-    public class StartPanelPresenter : IPresenter<StartPanelView>
+    public class StartPanelPresenter : IPresenter<StartView>
     {
         private readonly BattleManager _battleManagerModel;
-        private readonly BaseOneButtonPanelView _startPanelView;
+        private readonly BaseOneButtonView _startView;
 
-        public StartPanelPresenter(BattleManager battleManager, StartPanelView startPanelView)
+        public StartPanelPresenter(BattleManager battleManager, StartView startView)
         {
             _battleManagerModel = battleManager;
-            _startPanelView = startPanelView;
+            _startView = startView;
         }
                                                
         public void Initialize()
         {
-            _startPanelView.OnButtonClicked += RunBattleHandler;
+            _startView.OnButtonClicked += RunBattleHandler;
             _battleManagerModel.OnPlayersSpawned += HideView;
         }
 
         public void Dispose()
         {
-            _startPanelView.OnButtonClicked -= RunBattleHandler;
+            _startView.OnButtonClicked -= RunBattleHandler;
             _battleManagerModel.OnPlayersSpawned -= HideView;
         }
 
         public void ShowView()
         {
-            _startPanelView.Show();    
+            _startView.Show();    
         }
 
         private void RunBattleHandler()
@@ -42,7 +42,7 @@ namespace DuelGame
         {
             if (battleState == BattleState.Started)
             {
-                _startPanelView.Hide();
+                _startView.Hide();
             }
         }
     }   

@@ -2,7 +2,7 @@
 
 namespace DuelGame
 {
-    public class MenuPanelView : BasePanelView
+    public class MenuView : BaseView
     {
         [field:SerializeField] public BaseButton StartGameButton { get;private set; }
         [field:SerializeField] public BaseButton RemoveAdsButton { get; private set; }

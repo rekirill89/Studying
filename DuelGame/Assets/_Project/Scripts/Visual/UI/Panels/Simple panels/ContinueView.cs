@@ -4,7 +4,7 @@ using UnityEngine.UI;
 
 namespace DuelGame
 {
-    public class ContinuePanelView : BaseOneButtonPanelView
+    public class ContinueView : BaseOneButtonView
     {
         
     }   

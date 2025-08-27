@@ -3,33 +3,33 @@ using Zenject;
 
 namespace DuelGame
 {
-    public class ReloadPanelPresenter : IPresenter<ReloadPanelView>
+    public class ReloadPanelPresenter : IPresenter<ReloadView>
     {
-        private readonly BaseOneButtonPanelView _reloadPanelView;
+        private readonly BaseOneButtonView _reloadView;
         private readonly SceneLoaderService _sceneLoaderService;
 
         public ReloadPanelPresenter(
-            ReloadPanelView reloadPanelView,
+            ReloadView reloadView,
             SceneLoaderService sceneLoaderService)
         {
-            _reloadPanelView = reloadPanelView;
+            _reloadView = reloadView;
             _sceneLoaderService = sceneLoaderService;
         }
                                
         public void Initialize()
         {
-            _reloadPanelView.OnButtonClicked += _sceneLoaderService.LoadBattleScene;
+            _reloadView.OnButtonClicked += _sceneLoaderService.LoadBattleScene;
         }
  
         public void Dispose()
         {
-            _reloadPanelView.OnButtonClicked -= _sceneLoaderService.LoadBattleScene;
+            _reloadView.OnButtonClicked -= _sceneLoaderService.LoadBattleScene;
 
         }
         
         public void ShowView()
         {
-            _reloadPanelView.Show();
+            _reloadView.Show();
         }
     }
 }

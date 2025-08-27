@@ -10,29 +10,33 @@ using Zenject;
 
 namespace DuelGame
 {
-    public class InAppPurchaseService :  IDetailedStoreListener, IInAppPurchaseService, IInitializable
+    public class InAppPurchaseService :  IDetailedStoreListener, IInAppPurchaseService
     {
         public bool IsSystemReady { get; private set; } = false;
 
         private const string REMOVE_ADS_PRODUCT = "remove_ads";
         private readonly PurchasesDataController _purchasesDataController;
+        private readonly InternetConnector _internetConnector;
 
         private IStoreController _storeController;
         private IExtensionProvider _extensionProvider;
         private bool _isSystemReady;
 
-        public InAppPurchaseService(PurchasesDataController purchasesDataController)
+        public InAppPurchaseService(PurchasesDataController purchasesDataController, InternetConnector internetConnector)
         {
             _purchasesDataController = purchasesDataController;
-        }
-
-        public void Initialize()
-        {
-            InitAsync().Forget();
+            _internetConnector = internetConnector;
         }
 
         public void Init()
         {
+            if (!_internetConnector.IsConnected)
+            {
+                Debug.LogWarning("Purchases are not available, no internet!");
+                IsSystemReady = true;
+
+                return;
+            }
             if (_storeController == null)
             {
                 var module = StandardPurchasingModule.Instance();
@@ -102,15 +106,6 @@ namespace DuelGame
         public void OnPurchaseFailed(Product product, PurchaseFailureDescription failureDescription)
         {
             Debug.LogWarning("Purchase failed: " + failureDescription.ToString());
-        }
-
-        private async UniTask InitAsync()
-        {
-            var options = new InitializationOptions();
-
-            await UnityServices.InitializeAsync(options);
-
-            Init();
         }
     }
 }

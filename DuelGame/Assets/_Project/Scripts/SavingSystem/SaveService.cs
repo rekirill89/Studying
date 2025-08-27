@@ -13,6 +13,7 @@ namespace DuelGame
 
         public void Save(UserData userData)
         {
+            userData.SaveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             string json = JsonUtility.ToJson(userData);
             
             PlayerPrefs.SetString(USER_DATA_SAVE_KEY, json);
@@ -29,6 +30,7 @@ namespace DuelGame
         
         public void SaveSkinsData(SkinsData skinsData)
         {
+            skinsData.SaveTime = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
             string json = JsonUtility.ToJson(skinsData);
             
             PlayerPrefs.SetString(SKINS_DATA_SAVE_KEY, json);

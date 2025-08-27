@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using Cysharp.Threading.Tasks;
+using Unity.Services.Core;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
@@ -20,6 +21,9 @@ namespace DuelGame
         private readonly UIFactory _uiFactory;
         private readonly IInAppPurchaseService _inAppPurchaseService;
         private readonly PurchasesDataController _purchasesDataController;
+        private readonly AuthService _authService;
+        
+        private readonly InternetConnector _internetConnector;
 
         private readonly CancellationTokenSource _cts;
 
@@ -31,7 +35,9 @@ namespace DuelGame
             FireBaseInit fireBaseInit,
             EntityFactory entityFactory,
             UIFactory uiFactory,
-            IInAppPurchaseService inAppPurchaseService)
+            AuthService authService,
+            IInAppPurchaseService inAppPurchaseService,
+            InternetConnector internetConnector)
         {
             _remoteConfigsLoader = remoteConfigsLoader;
             _globalAssetsLoader = globalAssetsLoader;
@@ -40,21 +46,35 @@ namespace DuelGame
             _fireBaseInit = fireBaseInit;
             _entityFactory = entityFactory;
             _uiFactory = uiFactory;
+            _authService = authService;
             _inAppPurchaseService = inAppPurchaseService;
+            
+            _internetConnector = internetConnector;
             
             _cts = new CancellationTokenSource();
         }
         
         public void Initialize()
         {
+            InitializeAsync().Forget();
+        }
+
+        private async UniTask InitializeAsync()
+        {
+            await _internetConnector.CheckInternetConnection();
+            
+            if(_internetConnector.IsConnected)
+                await UnityServices.InitializeAsync();
+            
+            _authService.Init();
             _fireBaseInit.Init();
             _entityFactory.Init();
             _skinsController.Init();
             _uiFactory.Init();
             _remoteConfigsLoader.Init();
+            _inAppPurchaseService.Init();
             
             _skinAssetsLoader.Init();
-            
             _globalAssetsLoader.Init();
             
             WaitUntilAllSystemsReady().Forget();
@@ -73,7 +93,8 @@ namespace DuelGame
                 _remoteConfigsLoader.IsSystemReady &&
                 _globalAssetsLoader.IsSystemReady &&
                 _skinAssetsLoader.IsSystemReady &&
-                _inAppPurchaseService.IsSystemReady) || 
+                _inAppPurchaseService.IsSystemReady &&
+                _authService.IsSystemReady) || 
                 CheckTimeout(), 
                 cancellationToken: _cts.Token);
 

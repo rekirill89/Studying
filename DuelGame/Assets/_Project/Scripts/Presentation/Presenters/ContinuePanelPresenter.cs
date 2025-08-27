@@ -4,20 +4,20 @@ using Zenject;
 
 namespace DuelGame
 {
-    public class ContinuePanelPresenter : IPresenter<ContinuePanelView>
+    public class ContinuePanelPresenter : IPresenter<ContinueView>
     {
         private readonly BattleManager _battleManagerModel;
-        private readonly BaseOneButtonPanelView _continuePanelView;
+        private readonly BaseOneButtonView _continueView;
 
-        public ContinuePanelPresenter(BattleManager battleManager, ContinuePanelView continuePanelView)
+        public ContinuePanelPresenter(BattleManager battleManager, ContinueView continueView)
         {
             _battleManagerModel = battleManager;
-            _continuePanelView = continuePanelView;
+            _continueView = continueView;
         }
         
         public void Initialize()
         {
-            _continuePanelView.OnButtonClicked += _battleManagerModel.ContinueBattle;
+            _continueView.OnButtonClicked += _battleManagerModel.ContinueBattle;
             _battleManagerModel.OnBattleFinish += ShowView;
             _battleManagerModel.OnPlayersSpawned += HideView;
             _battleManagerModel.BattleStateModel.OnStateChanged += StateChangedHandler;      
@@ -25,7 +25,7 @@ namespace DuelGame
         
         public void Dispose()
         {
-            _continuePanelView.OnButtonClicked -= _battleManagerModel.ContinueBattle;
+            _continueView.OnButtonClicked -= _battleManagerModel.ContinueBattle;
             _battleManagerModel.OnBattleFinish -= ShowView;
             _battleManagerModel.OnPlayersSpawned -= HideView;
             _battleManagerModel.BattleStateModel.OnStateChanged -= StateChangedHandler; 
@@ -35,21 +35,21 @@ namespace DuelGame
         {
             if (playerWhoLost == Players.Player2)
             {
-                _continuePanelView.Show();
+                _continueView.Show();
             }
         }
         
         private void StateChangedHandler(BattleState state)
         {
             if(state == BattleState.Continued)
-                _continuePanelView.Hide();
+                _continueView.Hide();
         }
         
         private void HideView(BattleState battleState)
         {
             if (battleState == BattleState.Continued)
             {
-                _continuePanelView.Hide();
+                _continueView.Hide();
             }
         }
     }

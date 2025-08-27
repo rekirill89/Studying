@@ -1,4 +1,5 @@
 using Firebase.Analytics;
+using Unity.Services.CloudSave;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -38,9 +39,12 @@ namespace DuelGame
             Container.BindInterfacesAndSelfTo<AnalyticService>().AsSingle();
             Container.BindInterfacesAndSelfTo<EntityFactory>().AsSingle();
             Container.BindInterfacesAndSelfTo<InAppPurchaseService>().AsSingle();
+            Container.BindInterfacesAndSelfTo<AuthService>().AsSingle();
             Container.Bind<SceneLoaderService>().AsSingle();
             Container.Bind<SaveService>().AsSingle();
+            Container.Bind<UnityCloudSaveService>().AsSingle();
             Container.Bind<DataCache>().AsSingle(); 
+            Container.Bind<InternetConnector>().AsSingle();
         }
     }
 }

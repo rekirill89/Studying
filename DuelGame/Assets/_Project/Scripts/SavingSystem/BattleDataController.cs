@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
@@ -8,18 +9,23 @@ namespace DuelGame
 {
     public class BattleDataController : IDisposable, IInitializable
     {
+        
         private readonly SaveService _saveService;
         private readonly BattleManager _battleManager;
         private readonly DataCache _dataCache;
         private readonly SceneLoaderService _sceneLoaderService;
+        private readonly UnityCloudSaveService _unityCloudSaveService;
+        
         
         public BattleDataController(
             SaveService saveService, 
+            UnityCloudSaveService unityCloudSaveService,
             BattleManager battleManager, 
             DataCache dataCache, 
             SceneLoaderService sceneLoaderService)
         {
             _saveService = saveService;
+            _unityCloudSaveService = unityCloudSaveService;
             _battleManager = battleManager;
             _dataCache = dataCache;
             _sceneLoaderService = sceneLoaderService;
@@ -41,9 +47,10 @@ namespace DuelGame
             var userData = new UserData()
             {
                 BattleData = battleData,
-                IsAdsRemoved = _dataCache.IsAdsRemoved
+                IsAdsRemoved = _dataCache.IsAdsRemoved,
             };
             _saveService.Save(userData);
+            _unityCloudSaveService.SaveUserDataAsync(userData).Forget();
         }
 
         public void LoadBattleData()
@@ -63,6 +70,22 @@ namespace DuelGame
             
             _sceneLoaderService.LoadBattleScene();
         }
+
+        public async UniTask LoadBattleDataAsync()
+        {
+            var userData = await _unityCloudSaveService.LoadUserDataAsync();
+            
+            if (userData.BattleData == null)
+            {
+                Debug.LogWarning("Nothing to load");
+                return;
+            }
+            
+            _dataCache.SetBattleData(userData.BattleData);
+            _dataCache.ChangeLoadingStatus(true);
+            
+            _sceneLoaderService.LoadBattleScene();
+        }
     }
     
     [System.Serializable]
@@ -74,9 +97,11 @@ namespace DuelGame
         public Players? PlayerWhoWon = Players.None;
     }
 
+    [System.Serializable]
     public class UserData
     {
         public BattleData BattleData;
         public bool IsAdsRemoved = false;
+        public string SaveTime;
     }
 }

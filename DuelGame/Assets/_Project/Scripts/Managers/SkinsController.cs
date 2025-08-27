@@ -141,6 +141,7 @@ namespace DuelGame
     public class SkinsData
     {
         [field:SerializeField]public List<SkinEnum> BoughtSkins { get; private set; }
+        public string SaveTime = null;
 
         public SkinsData()
         {
