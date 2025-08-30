@@ -42,7 +42,7 @@ namespace DuelGame
         
         private async UniTask WaitForGlobalDataReady()
         {
-            var timeout = UniTask.Delay(TimeSpan.FromSeconds(20), cancellationToken: _cts.Token);
+            var timeout = UniTask.Delay(TimeSpan.FromSeconds(40), cancellationToken: _cts.Token);
             bool CheckTimeout() => 
                 timeout.Status == UniTaskStatus.Succeeded || 
                 timeout.Status == UniTaskStatus.Canceled;
