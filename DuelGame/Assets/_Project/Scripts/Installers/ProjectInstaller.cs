@@ -40,11 +40,12 @@ namespace DuelGame
             Container.BindInterfacesAndSelfTo<EntityFactory>().AsSingle();
             Container.BindInterfacesAndSelfTo<InAppPurchaseService>().AsSingle();
             Container.BindInterfacesAndSelfTo<AuthService>().AsSingle();
+            Container.BindInterfacesAndSelfTo<InternetConnector>().AsSingle();
+
             Container.Bind<SceneLoaderService>().AsSingle();
             Container.Bind<SaveService>().AsSingle();
             Container.Bind<UnityCloudSaveService>().AsSingle();
             Container.Bind<DataCache>().AsSingle(); 
-            Container.Bind<InternetConnector>().AsSingle();
         }
     }
 }

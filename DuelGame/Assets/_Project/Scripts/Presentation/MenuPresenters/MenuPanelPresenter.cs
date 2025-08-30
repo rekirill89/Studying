@@ -15,7 +15,7 @@ namespace DuelGame
         private readonly SaveService _saveService;
         private readonly SkinsController _skinsController;
         
-        private readonly InternetConnector _internetConnector;
+        private readonly IInternetConnector _internetConnector;
 
         private SkinShopPanelPresenter _skinShopPanelPresenter;
         private SkinSlotViewPresenter _skinSlotViewPresenter;
@@ -28,7 +28,7 @@ namespace DuelGame
             IInstantiator instantiator,
             SaveService saveService,
             SkinsController skinsController,
-            InternetConnector internetConnector,
+            IInternetConnector internetConnector,
             MenuView menuView)
         {
             _menuSceneEntryPoint = menuSceneEntryPoint;
@@ -58,6 +58,11 @@ namespace DuelGame
 
         public void Initialize()
         {
+            if (!_inAppPurchaseService.IsSystemReady)
+            {
+                _menuView.RemoveAdsButton.SetInteractable(false);
+            }
+            
             _menuView.StartGameButton.OnClick += _menuSceneEntryPoint.StartGame;
             _menuView.RemoveAdsButton.OnClick += _inAppPurchaseService.BuyRemoveAds;
             _menuView.SkinShopButton.OnClick += OpenSkinShop;

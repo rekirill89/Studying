@@ -240,7 +240,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 5.95, y: 5.95, z: 1}
+  m_LocalScale: {x: 5.95, y: -5.95, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 761013201491488781}
@@ -506,7 +506,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cdcb16127c2e9d409a1dff5d86a1cc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BuffSprite: {fileID: 0}
   Hero: {fileID: 6849903626034991598}
   DamageTextPrefab: {fileID: 784887742528018441, guid: 80af0163d9438de4babdfe2fc5639466, type: 3}
   DamageTextPosition: {fileID: 5336570650401655883}

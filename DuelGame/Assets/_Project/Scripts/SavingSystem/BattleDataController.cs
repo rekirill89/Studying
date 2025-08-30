@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Cysharp.Threading.Tasks;
+using Unity.Services.Core;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
@@ -73,7 +74,15 @@ namespace DuelGame
 
         public async UniTask LoadBattleDataAsync()
         {
-            var userData = await _unityCloudSaveService.LoadUserDataAsync();
+            UserData userData = new UserData();
+            try
+            {
+                userData = await _unityCloudSaveService.LoadUserDataAsync();
+            }
+            catch (RequestFailedException)
+            {
+                return;
+            } 
             
             if (userData.BattleData == null)
             {

@@ -55,6 +55,8 @@ namespace DuelGame
             _skinsList.Initialize(_localAssetLoader);
 
             OnSkinsAocLoaded?.Invoke(_skinsList);
+            
+            Debug.Log($"{this} is ready");
             IsSystemReady = true;
         }
     }

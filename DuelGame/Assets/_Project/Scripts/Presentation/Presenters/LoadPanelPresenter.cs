@@ -14,7 +14,7 @@ namespace DuelGame
         private readonly LoadView _loadView;
         private readonly ChooseSaveView _chooseSaveView;
         
-        private readonly InternetConnector _internetConnector;
+        private readonly IInternetConnector _internetConnector;
         
         private UserData _localUserData;
         private UserData _cloudUserData;
@@ -24,7 +24,7 @@ namespace DuelGame
             SaveService saveService,
             UnityCloudSaveService unityCloudSaveService,
             LoadView loadView,
-            InternetConnector internetConnector)
+            IInternetConnector internetConnector)
         {
             _battleDataController = battleDataController;
             _saveService = saveService;

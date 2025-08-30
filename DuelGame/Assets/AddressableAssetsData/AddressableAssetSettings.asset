@@ -15,20 +15,20 @@ MonoBehaviour:
   m_DefaultGroup: 98ee9e3a5bac5404ca9baa8a8888e1c1
   m_currentHash:
     serializedVersion: 2
-    Hash: 00000000000000000000000000000000
+    Hash: 0531fdda378026f797a2c5d7ce78ed7b
   m_OptimizeCatalogSize: 0
-  m_BuildRemoteCatalog: 0
+  m_BuildRemoteCatalog: 1
   m_CatalogRequestsTimeout: 0
   m_DisableCatalogUpdateOnStart: 0
   m_InternalIdNamingMode: 0
   m_InternalBundleIdMode: 1
   m_AssetLoadMode: 0
   m_BundledAssetProviderType:
-    m_AssemblyName: 
-    m_ClassName: 
+    m_AssemblyName: Unity.ResourceManager, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    m_ClassName: UnityEngine.ResourceManagement.ResourceProviders.BundledAssetProvider
   m_AssetBundleProviderType:
-    m_AssemblyName: 
-    m_ClassName: 
+    m_AssemblyName: Unity.ResourceManager, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    m_ClassName: UnityEngine.ResourceManagement.ResourceProviders.AssetBundleProvider
   m_IgnoreUnsupportedFilesInBuild: 0
   m_UniqueBundleIds: 0
   m_EnableJsonCatalog: 0
@@ -50,27 +50,42 @@ MonoBehaviour:
   m_CheckForContentUpdateRestrictionsOption: 0
   m_MonoScriptBundleCustomNaming: 
   m_RemoteCatalogBuildPath:
-    m_Id: 
+    m_Id: 4f2901b0b6e157841887ed31ef537b5d
   m_RemoteCatalogLoadPath:
-    m_Id: 
-  m_ContentStateBuildPathProfileVariableName: 
+    m_Id: 4bef2234676af5e438c97f840be5c0ab
+  m_ContentStateBuildPathProfileVariableName: <default settings path>
   m_CustomContentStateBuildPath: 
   m_ContentStateBuildPath: 
   m_BuildAddressablesWithPlayerBuild: 0
   m_overridePlayerVersion: '[UnityEditor.PlayerSettings.bundleVersion]'
   m_GroupAssets:
   - {fileID: 11400000, guid: 6a3dafabb4bf57e42b8e1b69f6529b1d, type: 2}
+  - {fileID: 11400000, guid: f47e4e12eccd19240a731751f047c8a3, type: 2}
   m_BuildSettings:
     m_LogResourceManagerExceptions: 1
     m_BundleBuildPath: Temp/com.unity.addressables/AssetBundles
   m_ProfileSettings:
     m_Profiles:
     - m_InheritedParent: 
+      m_Id: 4cceabbaa5abf804883464ba2dfb4cc3
+      m_ProfileName: New Profile
+      m_Values:
+      - m_Id: 4bef2234676af5e438c97f840be5c0ab
+        m_Value: 'https://storage.googleapis.com/duel_game_bucket/[BuildTarget]'
+      - m_Id: 4f2901b0b6e157841887ed31ef537b5d
+        m_Value: 'ServerData/[BuildTarget]'
+      - m_Id: 9b33926d1cc3ba142bee3a060b43114b
+        m_Value: '[UnityEditor.EditorUserBuildSettings.activeBuildTarget]'
+      - m_Id: e568d9b3314550948912c7283a42da57
+        m_Value: '[UnityEngine.AddressableAssets.Addressables.BuildPath]/[BuildTarget]'
+      - m_Id: e6dbabf3e90bc2e4d8115463faa39316
+        m_Value: '{UnityEngine.AddressableAssets.Addressables.RuntimePath}/[BuildTarget]'
+    - m_InheritedParent: 
       m_Id: c19900bf5d1e4bd43af3c3189973e95f
       m_ProfileName: Default
       m_Values:
       - m_Id: 4bef2234676af5e438c97f840be5c0ab
-        m_Value: <undefined>
+        m_Value: 'https://storage.googleapis.com/duel_game_bucket/[BuildTarget]'
       - m_Id: 4f2901b0b6e157841887ed31ef537b5d
         m_Value: 'ServerData/[BuildTarget]'
       - m_Id: 9b33926d1cc3ba142bee3a060b43114b
@@ -111,4 +126,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 04944ce3748d79d43b850f8d933627a0, type: 2}
   - {fileID: 11400000, guid: ee71c4d85cf511948ae5e88684085797, type: 2}
   - {fileID: 11400000, guid: 0bb7c4b151dc1b54b9ac99913d25e0f4, type: 2}
-  m_ActiveProfileId: c19900bf5d1e4bd43af3c3189973e95f
+  m_ActiveProfileId: 4cceabbaa5abf804883464ba2dfb4cc3

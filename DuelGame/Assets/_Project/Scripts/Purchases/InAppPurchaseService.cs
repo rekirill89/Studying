@@ -16,13 +16,13 @@ namespace DuelGame
 
         private const string REMOVE_ADS_PRODUCT = "remove_ads";
         private readonly PurchasesDataController _purchasesDataController;
-        private readonly InternetConnector _internetConnector;
+        private readonly IInternetConnector _internetConnector;
 
         private IStoreController _storeController;
         private IExtensionProvider _extensionProvider;
         private bool _isSystemReady;
 
-        public InAppPurchaseService(PurchasesDataController purchasesDataController, InternetConnector internetConnector)
+        public InAppPurchaseService(PurchasesDataController purchasesDataController, IInternetConnector internetConnector)
         {
             _purchasesDataController = purchasesDataController;
             _internetConnector = internetConnector;
@@ -33,6 +33,8 @@ namespace DuelGame
             if (!_internetConnector.IsConnected)
             {
                 Debug.LogWarning("Purchases are not available, no internet!");
+                
+                Debug.Log($"{this} is ready");
                 IsSystemReady = true;
 
                 return;
@@ -47,6 +49,7 @@ namespace DuelGame
                 
                 UnityPurchasing.Initialize(this, builder);
 
+                Debug.Log($"{this} is ready");
                 IsSystemReady = true;
             }
         }

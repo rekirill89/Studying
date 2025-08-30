@@ -8,8 +8,6 @@ namespace DuelGame
 {
     public class FireBaseInit
     {
-        public event Action OnInitSuccess;
-
         public bool IsSystemReady { get; private set; } = false;
         
         public void Init()
@@ -18,11 +16,12 @@ namespace DuelGame
                 if (task.Result == DependencyStatus.Available) {
                     FirebaseAnalytics.SetAnalyticsCollectionEnabled(true);
                     Debug.Log("Firebase ready!");
-                    OnInitSuccess?.Invoke();
+                    //OnInitSuccess?.Invoke();
                 } else {
                     Debug.LogError("Error Firebase: " + task.Result);
                 }
             });
+            Debug.Log($"{this} is ready");
             IsSystemReady = true;
         }
     }

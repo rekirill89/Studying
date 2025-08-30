@@ -22,6 +22,7 @@ namespace DuelGame
             }
             
             var assetHandle = Addressables.LoadAssetAsync<T>(assetReference);
+            
             await assetHandle.ToUniTask(cancellationToken:token);
             
             if (assetHandle.Status == AsyncOperationStatus.Failed)
@@ -29,9 +30,9 @@ namespace DuelGame
                 Debug.LogError("Error loading asset");
                 return null;
             }
-
+            
             _loadedAssets.Add(assetReference, assetHandle);
-
+            
             return (T)assetHandle.Result;
         }
 

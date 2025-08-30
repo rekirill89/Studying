@@ -103,6 +103,7 @@ namespace DuelGame
                 throw;
             }
 
+            Debug.Log($"{this} is ready");
             IsSystemReady = true;
             Debug.Log("Global assets successfully loaded");
         }

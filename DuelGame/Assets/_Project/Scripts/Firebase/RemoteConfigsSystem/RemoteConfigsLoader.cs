@@ -102,9 +102,11 @@ namespace DuelGame
                 throw;
             }
             
-            Debug.Log("RemoteConfigs applied successfully");
-            IsSystemReady = true;
             OnRemoteConfigsApplied?.Invoke(_gameLocalConfigs, gameConfig.Buffs);
+            Debug.Log("RemoteConfigs applied successfully");
+            
+            Debug.Log($"{this} is ready");
+            IsSystemReady = true;
         }
     }
 }

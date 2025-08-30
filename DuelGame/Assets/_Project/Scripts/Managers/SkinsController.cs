@@ -133,7 +133,6 @@ namespace DuelGame
                 .Aoc = aoc;
             
             OnSkinEquipped?.Invoke(skinEnum);
-            Debug.Log($"Skin {skinEnum} has been equiped");
         }
     }
 

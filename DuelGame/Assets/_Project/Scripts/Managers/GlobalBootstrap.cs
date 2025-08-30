@@ -3,6 +3,8 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using Unity.Services.Core;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
+using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using Zenject;
 
@@ -21,9 +23,9 @@ namespace DuelGame
         private readonly UIFactory _uiFactory;
         private readonly IInAppPurchaseService _inAppPurchaseService;
         private readonly PurchasesDataController _purchasesDataController;
-        private readonly AuthService _authService;
+        private readonly IAuthService _authService;
         
-        private readonly InternetConnector _internetConnector;
+        private readonly IInternetConnector _internetConnector;
 
         private readonly CancellationTokenSource _cts;
 
@@ -35,9 +37,9 @@ namespace DuelGame
             FireBaseInit fireBaseInit,
             EntityFactory entityFactory,
             UIFactory uiFactory,
-            AuthService authService,
+            IAuthService authService,
             IInAppPurchaseService inAppPurchaseService,
-            InternetConnector internetConnector)
+            IInternetConnector internetConnector)
         {
             _remoteConfigsLoader = remoteConfigsLoader;
             _globalAssetsLoader = globalAssetsLoader;
@@ -56,23 +58,27 @@ namespace DuelGame
         
         public void Initialize()
         {
+            _internetConnector.OnConnected += OnInternetConnected;
+            
             InitializeAsync().Forget();
         }
 
+        public void Dispose()
+        {
+            _cts.Cancel();
+        }
+        
         private async UniTask InitializeAsync()
         {
             await _internetConnector.CheckInternetConnection();
             
-            if(_internetConnector.IsConnected)
-                await UnityServices.InitializeAsync();
+            _internetConnector.MonitorInternetConnection().Forget();
             
-            _authService.Init();
             _fireBaseInit.Init();
             _entityFactory.Init();
             _skinsController.Init();
             _uiFactory.Init();
             _remoteConfigsLoader.Init();
-            _inAppPurchaseService.Init();
             
             _skinAssetsLoader.Init();
             _globalAssetsLoader.Init();
@@ -92,9 +98,7 @@ namespace DuelGame
                 _entityFactory.IsSystemReady && 
                 _remoteConfigsLoader.IsSystemReady &&
                 _globalAssetsLoader.IsSystemReady &&
-                _skinAssetsLoader.IsSystemReady &&
-                _inAppPurchaseService.IsSystemReady &&
-                _authService.IsSystemReady) || 
+                _skinAssetsLoader.IsSystemReady) || 
                 CheckTimeout(), 
                 cancellationToken: _cts.Token);
 
@@ -107,10 +111,21 @@ namespace DuelGame
             Debug.Log("Global systems initialized");
             IsAllSystemReady = true;
         }
-
-        public void Dispose()
+        
+        private void OnInternetConnected()
         {
-            _cts.Cancel();
+            OnInternetConnectedAsync().Forget();
+        }
+        
+        private async UniTask OnInternetConnectedAsync()
+        {
+            await UnityServices.InitializeAsync();
+            
+            _authService.Init();
+            _inAppPurchaseService.Init();
+            
+            _internetConnector.OnConnected -= OnInternetConnected;
+
         }
     }
 }

@@ -66,6 +66,7 @@ namespace DuelGame
                 { BuffEnum.DecreaseDamage, () => new DecreaseDamageBuff(buffs.DecreaseDamage) }
             };
 
+            Debug.Log($"{this} is ready");
             IsSystemReady = true;
             Debug.Log($"Factory initialized");
         }
