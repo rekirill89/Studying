@@ -24,7 +24,7 @@ namespace DuelGame
         {
             using (var request = UnityWebRequest.Get("https://www.google.com"))
             {
-                request.timeout = 1;
+                request.timeout = 5;
 
                 try
                 {
