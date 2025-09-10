@@ -14,6 +14,7 @@ namespace DuelGame
         public delegate void PlayerSpawned(BattleState battleState);
         
         public event BattleFinish OnBattleFinish;
+        public event BattleFinish OnPlayerDead;
         public event PlayerSpawned OnPlayersSpawned;
         public event Action OnBattleReady;
         
@@ -29,6 +30,10 @@ namespace DuelGame
         private float _attackDelayP2;
 
         private HeroesCombatController _heroesCombatController;
+
+        private float _playerDeathDelay = 7f;
+        public BaseHero Player1() => _heroesLifecycleController.Player1;
+        public BaseHero Player2() => _heroesLifecycleController.Player2;
         
         public BattleManager(
             AnalyticsDataCollector analyticsDataCollector,
@@ -67,11 +72,14 @@ namespace DuelGame
                 BattleStateModel.SetState(BattleState.Started);
 
             var (player1, player2) = await _heroesLifecycleController.SpawnHeroes(
-                FinishBattle, 
+                PlayerDeadHandler, 
                 _cts.Token, (isContinue == true ? _heroesLifecycleController.Player1.HeroEnum : HeroEnum.None));
             
             _heroesCombatController?.StopAllTasks();
-            _heroesCombatController = new HeroesCombatController(_analyticsDataCollector, player1, Players.Player1, player2, Players.Player2);
+            _heroesCombatController = new HeroesCombatController(
+                _analyticsDataCollector, 
+                player1, Players.Player1, 
+                player2, Players.Player2);
             _heroesCombatController.Initialize();
             
             _heroesCombatController.DelayPlayersAttack(_attackDelayP1, _attackDelayP2);
@@ -118,11 +126,24 @@ namespace DuelGame
             Debug.Log("BattleManager Init end");
         }
 
-        private void FinishBattle(Players playerWhoLost)
+        private void PlayerDeadHandler(BaseHero _, Players playerWhoLost)
+        {
+            PlayerDeadHandlerAsync(_, playerWhoLost).Forget();
+        }
+        
+        private async UniTask PlayerDeadHandlerAsync(BaseHero _, Players playerWhoLost)
+        {
+            _heroesCombatController.ChangeAttackStatusToPlayers(false);
+            OnPlayerDead?.Invoke(playerWhoLost);
+            
+            await UniTask.Delay(TimeSpan.FromSeconds(_playerDeathDelay), cancellationToken: _cts.Token);
+
+            FinishBattle(_, playerWhoLost);
+        }
+        
+        private void FinishBattle(BaseHero _, Players playerWhoLost)
         {
             BattleStateModel.SetState(BattleState.Finished);
-            
-            _heroesCombatController.ChangeAttackStatusToPlayers(false);
             
             _analyticsDataCollector.LogBattleFinished();
             OnBattleFinish?.Invoke(playerWhoLost);

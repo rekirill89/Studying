@@ -18,12 +18,12 @@ namespace DuelGame
         
         private readonly AssetReference _skinsRef;
         
+        private readonly CancellationTokenSource _cts = new CancellationTokenSource();
+
         private SkinsList _skinsList;
 
         private Dictionary<HeroEnum, AnimatorOverrideController> _skinsAocDictionary;
         
-        private CancellationTokenSource _cts = new CancellationTokenSource();
-
         public SkinAssetsLoader(
             ILocalAssetLoader localAssetLoader,
             GlobalAssetsLoader globalAssetsLoader,

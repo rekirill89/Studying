@@ -21,9 +21,6 @@ namespace DuelGame
                 return (T)handle.Result;
             }
             
-            //var status = Addressables.GetDownloadSizeAsync(assetReference);
-            //Debug.Log("Download size: " + status.Result);
-            
             var assetHandle = Addressables.LoadAssetAsync<T>(assetReference);
             
             await assetHandle.ToUniTask(cancellationToken:token);

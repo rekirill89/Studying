@@ -37,7 +37,7 @@ namespace DuelGame
             _battleSceneAssetsLoader.OnBattleSceneAssetsReady -= Init;
         }
         
-        private void Init(BattleSettingsFacade facade)
+        private void Init(BattleSettingsFacade facade, BloodParticle _, DeathEffect __)
         {
             Debug.Log("BattleSessionContext Init");
             FirstPlayerTrans = facade.FirstPlayerTrans;

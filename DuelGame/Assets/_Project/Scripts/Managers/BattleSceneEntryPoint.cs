@@ -14,6 +14,8 @@ namespace DuelGame
         private readonly BattleSessionContext _battleSessionContext;
         private readonly HeroesLifecycleController _heroesLifecycleController;
         private readonly BattleSceneAssetsLoader _battleSceneAssetsLoader;
+        private readonly BattleVFXController _battleVFXController;
+        private readonly SceneState _sceneState;
         
         private readonly CancellationTokenSource _cts = new CancellationTokenSource();
         
@@ -22,24 +24,31 @@ namespace DuelGame
             BattleManager battleManager, 
             BattleSessionContext battleSessionContext, 
             HeroesLifecycleController heroesLifecycleController,
-            BattleSceneAssetsLoader battleSceneAssetsLoader)
+            BattleSceneAssetsLoader battleSceneAssetsLoader,
+            BattleVFXController battleVFXController,
+            SceneState sceneState)
         {
             _globalBootstrap = globalBootstrap;
             _battleManager = battleManager;
             _heroesLifecycleController = heroesLifecycleController;
             _battleSessionContext = battleSessionContext;
             _battleSceneAssetsLoader = battleSceneAssetsLoader;
+            _battleVFXController = battleVFXController;
+            
+            _sceneState = sceneState;
         }
 
         public void Initialize()
         {
             Debug.Log("Wait for global systems ready");
             WaitForGlobalDataReady().Forget();
+            _sceneState.ChangeScene(SceneEnum.BattleScene);
         }
 
         private void StartInitialization()
         {
             Debug.Log("Wait for local systems ready");
+            _battleVFXController.Init();
             _battleManager.Initialize();
             _heroesLifecycleController.Initialize();
             _battleSessionContext.Initialize();

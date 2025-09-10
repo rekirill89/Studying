@@ -74,45 +74,64 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a03fd7a0ac0955544a3512a59e2c15c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _battleConfigRef:
-    m_AssetGUID: 133881b9e0628a143947dc25c7b23319
-    m_SubObjectName: 
-    m_SubObjectGUID: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
-  _buffsRef:
-    m_AssetGUID: c5488a34a5ef23844a75141283b6c44f
-    m_SubObjectName: 
-    m_SubObjectGUID: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
-  _heroesRef:
-    m_AssetGUID: 1e6ef223c9d9df3438f7180a27ac0f6e
-    m_SubObjectName: 
-    m_SubObjectGUID: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
-  _skinsRef:
-    m_AssetGUID: f154aee41c86cbe40a60ba4ddd81b562
-    m_SubObjectName: 
-    m_SubObjectGUID: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
-  _panelsRef:
-    m_AssetGUID: aff68e255f69e284fb5557fadb803e4b
-    m_SubObjectName: 
-    m_SubObjectGUID: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
-  _hudCanvasRef:
-    m_AssetGUID: ac5f9ba03e1eec64795204974f63ceb7
-    m_SubObjectName: 
-    m_SubObjectGUID: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
-  _screenCanvasRef:
-    m_AssetGUID: b6b2bb9d66a84a642ba42809739025f1
-    m_SubObjectName: 
-    m_SubObjectGUID: 
-    m_SubObjectType: 
-    m_EditorAssetChanged: 0
+  _assetReferenceContainer:
+    BattleConfigRef:
+      m_AssetGUID: 133881b9e0628a143947dc25c7b23319
+      m_SubObjectName: 
+      m_SubObjectGUID: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    BuffsRef:
+      m_AssetGUID: c5488a34a5ef23844a75141283b6c44f
+      m_SubObjectName: 
+      m_SubObjectGUID: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    HeroesRef:
+      m_AssetGUID: 1e6ef223c9d9df3438f7180a27ac0f6e
+      m_SubObjectName: 
+      m_SubObjectGUID: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    SkinsRef:
+      m_AssetGUID: f154aee41c86cbe40a60ba4ddd81b562
+      m_SubObjectName: 
+      m_SubObjectGUID: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    PanelsRef:
+      m_AssetGUID: aff68e255f69e284fb5557fadb803e4b
+      m_SubObjectName: 
+      m_SubObjectGUID: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    SoundEffectsRef:
+      m_AssetGUID: aec257041231fbe41bf2b6e7c8e19424
+      m_SubObjectName: 
+      m_SubObjectGUID: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    MusicsRef:
+      m_AssetGUID: c3f27e3ae6eaab747a37315d3f01880f
+      m_SubObjectName: 
+      m_SubObjectGUID: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    MusicPlayerRef:
+      m_AssetGUID: bdb849df9e740db45ba042918c334457
+      m_SubObjectName: 
+      m_SubObjectGUID: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    HUDCanvasRef:
+      m_AssetGUID: ac5f9ba03e1eec64795204974f63ceb7
+      m_SubObjectName: 
+      m_SubObjectGUID: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0
+    ScreenCanvasRef:
+      m_AssetGUID: b6b2bb9d66a84a642ba42809739025f1
+      m_SubObjectName: 
+      m_SubObjectGUID: 
+      m_SubObjectType: 
+      m_EditorAssetChanged: 0

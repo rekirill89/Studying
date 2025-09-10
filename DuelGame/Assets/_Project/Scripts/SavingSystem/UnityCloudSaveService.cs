@@ -35,7 +35,6 @@ namespace DuelGame
             
             userData.SaveTime = DateTime.Now.ToString(DateTimeConfig.DATE_TIME_FORMAT);
             string json = JsonConvert.SerializeObject(userData);
-            //string json = JsonUtility.ToJson(userData);
 
             var saveData = new Dictionary<string, object>
             {
@@ -51,7 +50,6 @@ namespace DuelGame
             catch (RequestFailedException)
             {
                 Debug.LogWarning("Failed to save data in cloud, no internet. Try again later");
-                //throw;
             }
         }
 

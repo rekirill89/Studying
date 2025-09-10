@@ -11,15 +11,19 @@ namespace DuelGame
 {
     public class Panels : MonoBehaviour
     {        
-        [SerializeField] public AssetReference StartPanelViewRef;
-        [SerializeField] public AssetReference ContinuePanelViewRef;
-        [SerializeField] public AssetReference RestartPanelViewRef;
-        [SerializeField] public AssetReference ReloadPanelViewRef;
-        [SerializeField] public AssetReference SavePanelViewRef;
-        [SerializeField] public AssetReference LoadPanelViewRef;
-        [SerializeField] public AssetReference AdsPanelViewRef;
-        [SerializeField] public AssetReference MenuPanelViewRef;
-        [SerializeField] public AssetReference SkinShopPanelViewRef;
+        [SerializeField] private AssetReference _startPanelViewRef;
+        [SerializeField] private AssetReference _continuePanelViewRef;
+        [SerializeField] private AssetReference _restartPanelViewRef;
+        [SerializeField] private AssetReference _reloadPanelViewRef;
+        [SerializeField] private AssetReference _savePanelViewRef;
+        [SerializeField] private AssetReference _loadPanelViewRef;
+        [SerializeField] private AssetReference _adsPanelViewRef;
+        [SerializeField] private AssetReference _menuPanelViewRef;
+        [SerializeField] private AssetReference _skinShopPanelViewRef;
+        [SerializeField] private AssetReference _battleFinishPanelViewRef;
+        
+        //[SerializeField] private AssetReference _youDiedPanelRef; 
+        //[SerializeField] private AssetReference _enemyFelledPanelRef; 
         
         public StartView StartView {get; private set;}
         public ContinueView ContinueView {get; private set;}
@@ -29,22 +33,29 @@ namespace DuelGame
         public LoadView LoadView {get; private set;}
         public AdsView AdsView {get; private set;}
         public MenuView MenuView {get; private set;}
-        public SkinShopView SkinShopView {get; private set;}
-
+        public SkinShopView SkinShopView { get; private set; }
+        public BattleFinishView BattleFinishView { get; private set; } 
+        
+        //public YouDiedView YouDiedView { get; private set; }
+        //public EnemyFelledView EnemyFelledView { get; private set; }
         
         private ILocalAssetLoader _localAssetLoader;
 
         private void OnDestroy()
         {
-            _localAssetLoader.UnloadAsset(StartPanelViewRef);
-            _localAssetLoader.UnloadAsset(ContinuePanelViewRef);
-            _localAssetLoader.UnloadAsset(RestartPanelViewRef);
-            _localAssetLoader.UnloadAsset(ReloadPanelViewRef);
-            _localAssetLoader.UnloadAsset(SavePanelViewRef);
-            _localAssetLoader.UnloadAsset(LoadPanelViewRef);
-            _localAssetLoader.UnloadAsset(AdsPanelViewRef);
-            _localAssetLoader.UnloadAsset(MenuPanelViewRef);
-            _localAssetLoader.UnloadAsset(SkinShopPanelViewRef);
+            _localAssetLoader.UnloadAsset(_startPanelViewRef);
+            _localAssetLoader.UnloadAsset(_continuePanelViewRef);
+            _localAssetLoader.UnloadAsset(_restartPanelViewRef);
+            _localAssetLoader.UnloadAsset(_reloadPanelViewRef);
+            _localAssetLoader.UnloadAsset(_savePanelViewRef);
+            _localAssetLoader.UnloadAsset(_loadPanelViewRef);
+            _localAssetLoader.UnloadAsset(_adsPanelViewRef);
+            _localAssetLoader.UnloadAsset(_menuPanelViewRef);
+            _localAssetLoader.UnloadAsset(_skinShopPanelViewRef);
+            _localAssetLoader.UnloadAsset(_battleFinishPanelViewRef);
+            
+            //_localAssetLoader.UnloadAsset(_youDiedPanelRef);
+            //_localAssetLoader.UnloadAsset(_enemyFelledPanelRef);
         }
 
         public async UniTask Init(ILocalAssetLoader localAssetLoader, CancellationToken token)
@@ -58,15 +69,19 @@ namespace DuelGame
         {
             try
             {
-                var startPanelViewObj = await _localAssetLoader.LoadAsset<GameObject>(StartPanelViewRef, token);
-                var continuePanelViewObj  = await _localAssetLoader.LoadAsset<GameObject>(ContinuePanelViewRef, token);
-                var restartPanelViewObj  = await _localAssetLoader.LoadAsset<GameObject>(RestartPanelViewRef, token);
-                var reloadPanelViewObj  = await _localAssetLoader.LoadAsset<GameObject>(ReloadPanelViewRef, token);
-                var savePanelViewObj  = await _localAssetLoader.LoadAsset<GameObject>(SavePanelViewRef, token);
-                var loadPanelViewObj  = await _localAssetLoader.LoadAsset<GameObject>(LoadPanelViewRef, token);
-                var adsPanelViewObj = await _localAssetLoader.LoadAsset<GameObject>(AdsPanelViewRef, token);
-                var menuPanelViewObj = await _localAssetLoader.LoadAsset<GameObject>(MenuPanelViewRef, token);
-                var skinShopPanelObj = await _localAssetLoader.LoadAsset<GameObject>(SkinShopPanelViewRef, token);
+                var startPanelViewObj = await _localAssetLoader.LoadAsset<GameObject>(_startPanelViewRef, token);
+                var continuePanelViewObj  = await _localAssetLoader.LoadAsset<GameObject>(_continuePanelViewRef, token);
+                var restartPanelViewObj  = await _localAssetLoader.LoadAsset<GameObject>(_restartPanelViewRef, token);
+                var reloadPanelViewObj  = await _localAssetLoader.LoadAsset<GameObject>(_reloadPanelViewRef, token);
+                var savePanelViewObj  = await _localAssetLoader.LoadAsset<GameObject>(_savePanelViewRef, token);
+                var loadPanelViewObj  = await _localAssetLoader.LoadAsset<GameObject>(_loadPanelViewRef, token);
+                var adsPanelViewObj = await _localAssetLoader.LoadAsset<GameObject>(_adsPanelViewRef, token);
+                var menuPanelViewObj = await _localAssetLoader.LoadAsset<GameObject>(_menuPanelViewRef, token);
+                var skinShopPanelObj = await _localAssetLoader.LoadAsset<GameObject>(_skinShopPanelViewRef, token);
+                var battleFinishPanelViewObj = await _localAssetLoader.LoadAsset<GameObject>(_battleFinishPanelViewRef, token);
+                
+                //var youDiedViewObj = await _localAssetLoader.LoadAsset<GameObject>(_youDiedPanelRef, token);
+                //var enemyFelledViewObj = await _localAssetLoader.LoadAsset<GameObject>(_enemyFelledPanelRef, token);
             
                 StartView = startPanelViewObj.GetComponent<StartView>();
                 ContinueView = continuePanelViewObj.GetComponent<ContinueView>();
@@ -77,6 +92,10 @@ namespace DuelGame
                 AdsView = adsPanelViewObj.GetComponent<AdsView>();
                 MenuView = menuPanelViewObj.GetComponent<MenuView>();
                 SkinShopView = skinShopPanelObj.GetComponent<SkinShopView>();
+                BattleFinishView = battleFinishPanelViewObj.GetComponent<BattleFinishView>();
+                
+                //YouDiedView = youDiedViewObj.GetComponent<YouDiedView>();
+                //EnemyFelledView = enemyFelledViewObj.GetComponent<EnemyFelledView>();
             
                 Debug.Log("Panels initialized");
             }

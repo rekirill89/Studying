@@ -42,7 +42,7 @@ namespace DuelGame
             Hero.OnDeath -= HeroDeath;
         }
 
-        private void WizardAttackStartedAnim()
+        private void WizardAttackStartedAnim(BaseHero _)
         {
             _attacking = true;
             _wizard.DamageEnemy();

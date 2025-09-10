@@ -57,12 +57,12 @@ namespace DuelGame
             _cts.Cancel();
         }
         
-        protected void HeroDeath(Players _)
+        protected void HeroDeath(BaseHero _, Players __)
         { 
             Animator.SetTrigger(DEATH);
         }
         
-        protected void DamageTaken(float damage, float currentHealth, float maxHealth, bool isPhysicalDamage)
+        protected void DamageTaken(BaseHero _, float damage, float currentHealth, float maxHealth, bool isPhysicalDamage)
         {
             ShowDamageText(damage);
             ChangeHealthBar(currentHealth, maxHealth);
@@ -72,21 +72,12 @@ namespace DuelGame
 
         protected virtual void SubscribeToEvents()
         {
-            //Hero.OnInitialized += OnHeroInitialized;
-            
             Hero.OnTakeDamage += DamageTaken;
             Hero.OnPlayerStop += StopAllTasks;
 
             Hero.OnDeath += HeroDeath;
             Hero.OnAttack += HeroAttack;
         }
-
-        /*private void OnHeroInitialized(AnimatorOverrideController animatorOverrideController)
-        {
-            Debug.Log("BaseHeroVisual.OnHeroInitialized");
-            if(Hero.SkinAoc != null)
-                Animator.runtimeAnimatorController = Hero.SkinAoc;
-        }*/
 
         protected virtual void UnsubscribeFromEvents()
         {
@@ -131,7 +122,7 @@ namespace DuelGame
             _activeDamageTexts.Remove(damageText);
         }
 
-        private void HeroAttack()
+        private void HeroAttack(BaseHero _)
         {
             Animator.SetTrigger(ATTACK);
         }

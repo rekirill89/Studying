@@ -38,7 +38,10 @@ namespace DuelGame
             DestroyHeroes();
         }
 
-        public async UniTask<(BaseHero, BaseHero)> SpawnHeroes(PlayerDeath onPlayerDeath, CancellationToken token, HeroEnum player1EnumIfAlive = HeroEnum.None)
+        public async UniTask<(BaseHero, BaseHero)> SpawnHeroes(
+            PlayerDeath onPlayerDeath, 
+            CancellationToken token, 
+            HeroEnum player1EnumIfAlive = HeroEnum.None)
         {
             _onPlayerDeath = onPlayerDeath;
             
@@ -84,11 +87,11 @@ namespace DuelGame
             return x;
         }
 
-        private void StopPlayers(Players playerWhoLost)
+        private void StopPlayers(BaseHero hero, Players playerWhoLost)
         {
             Player1.StopAllTasks();
             Player2.StopAllTasks();
-            _onPlayerDeath?.Invoke(playerWhoLost);
+            _onPlayerDeath?.Invoke(hero, playerWhoLost);
         }
     }
 

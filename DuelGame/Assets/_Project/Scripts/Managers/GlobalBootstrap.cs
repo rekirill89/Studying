@@ -15,8 +15,11 @@ namespace DuelGame
         public bool IsAllSystemReady { get; private set; } = false;
         
         private readonly IRemoteConfigsLoader _remoteConfigsLoader;
+        
         private readonly GlobalAssetsLoader _globalAssetsLoader;
         private readonly SkinAssetsLoader _skinAssetsLoader;
+        private readonly AudioAssetsLoader _audioAssetsLoader;
+        
         private readonly SkinsController _skinsController;
         private readonly FireBaseInit _fireBaseInit;
         private readonly EntityFactory _entityFactory;
@@ -24,6 +27,7 @@ namespace DuelGame
         private readonly IInAppPurchaseService _inAppPurchaseService;
         private readonly PurchasesDataController _purchasesDataController;
         private readonly IAuthService _authService;
+        private readonly BackgroundMusicController _backgroundMusicController;
         
         private readonly IInternetConnector _internetConnector;
 
@@ -33,21 +37,27 @@ namespace DuelGame
             IRemoteConfigsLoader remoteConfigsLoader, 
             GlobalAssetsLoader globalAssetsLoader, 
             SkinAssetsLoader skinAssetsLoader,
+            AudioAssetsLoader audioAssetsLoader,
             SkinsController skinsController,
             FireBaseInit fireBaseInit,
             EntityFactory entityFactory,
             UIFactory uiFactory,
+            BackgroundMusicController backgroundMusicController,
             IAuthService authService,
             IInAppPurchaseService inAppPurchaseService,
             IInternetConnector internetConnector)
         {
             _remoteConfigsLoader = remoteConfigsLoader;
+            
             _globalAssetsLoader = globalAssetsLoader;
             _skinAssetsLoader = skinAssetsLoader;
+            _audioAssetsLoader = audioAssetsLoader;
+            
             _skinsController = skinsController;
             _fireBaseInit = fireBaseInit;
             _entityFactory = entityFactory;
             _uiFactory = uiFactory;
+            _backgroundMusicController = backgroundMusicController;
             _authService = authService;
             _inAppPurchaseService = inAppPurchaseService;
             
@@ -74,6 +84,7 @@ namespace DuelGame
             
             _internetConnector.MonitorInternetConnection().Forget();
             
+            _backgroundMusicController.Init();
             _fireBaseInit.Init();
             _entityFactory.Init();
             _skinsController.Init();
@@ -81,6 +92,7 @@ namespace DuelGame
             _remoteConfigsLoader.Init();
             
             _skinAssetsLoader.Init();
+            _audioAssetsLoader.Init();
             _globalAssetsLoader.Init();
             
             WaitUntilAllSystemsReady().Forget();
@@ -98,7 +110,8 @@ namespace DuelGame
                 _entityFactory.IsSystemReady && 
                 _remoteConfigsLoader.IsSystemReady &&
                 _globalAssetsLoader.IsSystemReady &&
-                _skinAssetsLoader.IsSystemReady) || 
+                _skinAssetsLoader.IsSystemReady && 
+                _audioAssetsLoader.IsSystemReady) || 
                 CheckTimeout(), 
                 cancellationToken: _cts.Token);
 

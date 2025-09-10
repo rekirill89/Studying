@@ -15,8 +15,23 @@ MonoBehaviour:
   m_GroupName: Local
   m_GUID: 98ee9e3a5bac5404ca9baa8a8888e1c1
   m_SerializeEntries:
+  - m_GUID: 00935663e3081fb4180eecda04b9278a
+    m_Address: Assets/_Project/Prefabs/UI/Panels/YouDiedPanel.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 043ac425ca8104a4f9ef2276ad99ecfd
     m_Address: Reload Panel
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 0cc30460c7053db4e80d932698f0b0c1
+    m_Address: Assets/_Project/SFX/Enemy felled.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 10bf8f4d43589f04294ca87be786c6a4
+    m_Address: Assets/_Project/Prefabs/BloodParticles.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -30,6 +45,11 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 27d0a76922c5afc4cbb43f173aff9aab
+    m_Address: Assets/_Project/SFX/You died.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 2c1b71a3a0f456142bf05bf95f3a9b4b
     m_Address: SavePanel
     m_ReadOnly: 0
@@ -40,8 +60,13 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 323e15cfe809e114ab92c9f4b25e8bc2
+    m_Address: Assets/_Project/SFX/56_Attack_03.wav
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 3dfc0544a6272344fb0d7d1955add49d
-    m_Address: AdsPanelView
+    m_Address: AdsPanel
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -50,13 +75,43 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 463b4bfc6704d064cb10691c063d9905
+    m_Address: Assets/_Project/Prefabs/UI/Panels/BattleFinishPanel.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 4b57adb1955113e429c03d4bfc1b4c18
-    m_Address: Continue Panel
+    m_Address: ContinuePanel
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 548d989e47d287149879ed82b1393fa8
+    m_Address: Assets/_Project/Musics/The Battle.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 566d2ea6240b489479a6e9fd608c2621
+    m_Address: Assets/_Project/SFX/69_Enemy_death_01.wav
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 70ef4e4a441c8ef419f90ab40205eb2e
     m_Address: WarriorSkin
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 7d66dc9451f36f441aa9d8d027d77518
+    m_Address: Assets/_Project/Prefabs/UI/Panels/EnemyFelledPanel.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 88b1cbe3caa3fee4b8b103b5edd7aba9
+    m_Address: Assets/_Project/SFX/22_Slash_04.wav
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 8b23b175a78d6b5458322e3a6c9905d0
+    m_Address: Assets/_Project/SFX/61_Hit_03.wav
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -71,12 +126,17 @@ MonoBehaviour:
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: 9fd27eb9768dba44a9b67d7775885313
-    m_Address: Start Panel
+    m_Address: StartPanel
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: ac5f9ba03e1eec64795204974f63ceb7
     m_Address: HUDCanvas
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: aec257041231fbe41bf2b6e7c8e19424
+    m_Address: Assets/_Project/Prefabs/SoundEffects.prefab
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
@@ -95,8 +155,33 @@ MonoBehaviour:
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: bdb849df9e740db45ba042918c334457
+    m_Address: Assets/_Project/Prefabs/MusicPlayer.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
   - m_GUID: c32fe14cb27c91241853469d6ba26091
     m_Address: MenuPanel
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c3f27e3ae6eaab747a37315d3f01880f
+    m_Address: Assets/_Project/Prefabs/Musics.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c50ae381a4ca56441bfbad27f1bb3c22
+    m_Address: Assets/_Project/Prefabs/Death effect.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c585296e9c3c9da4193c8f6cfaa354fb
+    m_Address: Assets/_Project/Musics/Wicked Game.mp3
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: c619008f1efb180488a78e4a966a3e16
+    m_Address: Assets/_Project/SFX/26_Swim_Submerged_02.wav
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0

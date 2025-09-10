@@ -16,7 +16,6 @@ namespace DuelGame
                 if (task.Result == DependencyStatus.Available) {
                     FirebaseAnalytics.SetAnalyticsCollectionEnabled(true);
                     Debug.Log("Firebase ready!");
-                    //OnInitSuccess?.Invoke();
                 } else {
                     Debug.LogError("Error Firebase: " + task.Result);
                 }

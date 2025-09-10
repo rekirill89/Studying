@@ -19,8 +19,10 @@ namespace DuelGame
         private readonly AssetReference _buffsConfigRef;
         private readonly AssetReference _heroesConfigRef;
         private readonly AssetReference _panelsRef;
+        private readonly AssetReference _soundEffectsRef;
         private readonly AssetReference _hudCanvasRef;
         private readonly AssetReference _screenCanvasRef;
+        private readonly AssetReference _musicPlayerRef;
         
         private readonly DiContainer _diContainer;
         private readonly ILocalAssetLoader _localAssetLoader;
@@ -28,29 +30,27 @@ namespace DuelGame
         private readonly CancellationTokenSource _cts;
         
         public GlobalAssetsLoader(
-            DiContainer diContainer, 
-            ILocalAssetLoader localAssetLoader,
-            AssetReference buffsConfigRef, 
-            AssetReference heroesConfigRef,
-            AssetReference panelsRef,
-            AssetReference hudCanvasRef,
-            AssetReference screenCanvasRef)
+                DiContainer diContainer,
+                ILocalAssetLoader localAssetLoader,
+                AssetReferenceContainer referenceContainer)
         {
             _diContainer = diContainer;
             _localAssetLoader = localAssetLoader;
             
-            _buffsConfigRef = buffsConfigRef;
-            _heroesConfigRef = heroesConfigRef;
-            _panelsRef = panelsRef;
-            _hudCanvasRef = hudCanvasRef;
-            _screenCanvasRef = screenCanvasRef;
+            _buffsConfigRef = referenceContainer.BuffsRef;
+            _heroesConfigRef = referenceContainer.HeroesRef;
+            _panelsRef = referenceContainer.PanelsRef;
+            _soundEffectsRef = referenceContainer.SoundEffectsRef;
+            _hudCanvasRef = referenceContainer.HUDCanvasRef;
+            _screenCanvasRef = referenceContainer.ScreenCanvasRef;
+            _musicPlayerRef = referenceContainer.MusicPlayerRef;
             
             _cts = new CancellationTokenSource();
         }
         
         public void Init()
         {
-            Load();
+            LoadAsync().Forget();
         }
 
         public void Dispose()
@@ -61,11 +61,6 @@ namespace DuelGame
             _localAssetLoader.UnloadAsset(_hudCanvasRef);
             _localAssetLoader.UnloadAsset(_screenCanvasRef);
             _cts.Cancel();
-        }
-
-        private void Load()
-        {
-            LoadAsync().Forget();
         }
         
         private async UniTask LoadAsync()
@@ -86,13 +81,13 @@ namespace DuelGame
                 var panelsObj = await _localAssetLoader.LoadAsset<GameObject>(_panelsRef, _cts.Token);
                 var panels = panelsObj.GetComponent<Panels>();
                 await panels.Init(_localAssetLoader, _cts.Token);
-                
+   
                 var screenCanvasObj = await _localAssetLoader.LoadAsset<GameObject>(_screenCanvasRef, _cts.Token);
                 var screenCanvas = screenCanvasObj.GetComponent<Canvas>();
                 
                 var hudCanvasObj = await _localAssetLoader.LoadAsset<GameObject>(_hudCanvasRef, _cts.Token);
                 var hudCanvas = hudCanvasObj.GetComponent<Canvas>();
-
+                
                 OnDataLoaded?.Invoke(
                     new GameLocalConfigs(heroesList, buffsList), 
                     new UILocalConfigs(panels, screenCanvas, hudCanvas));

@@ -85,8 +85,8 @@ namespace DuelGame
                     (_panels.ReloadView, _hudCanvas.transform),
                     (_panels.AdsView, _screenCanvas.transform),
                     (_panels.MenuView, _screenCanvas.transform),
-                    (_panels.SkinShopView, _screenCanvas.transform)
-                    //(_panels.SkinSlotView, _screenCanvas.transform)
+                    (_panels.SkinShopView, _screenCanvas.transform),
+                    (_panels.BattleFinishView, _screenCanvas.transform)
                 };
             }
         }

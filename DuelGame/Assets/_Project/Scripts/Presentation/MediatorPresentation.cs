@@ -23,6 +23,7 @@ namespace DuelGame
         private SavePanelPresenter _savePanelPresenter;
         private LoadPanelPresenter _loadPanelPresenter;
         private AdsPanelPresenter _adsPanelPresenter;
+        private BattleFinishPanelPresenter _battleFinishViewPresenter;
         
         public MediatorPresentation(
             IInstantiator iInstantiator, 
@@ -43,7 +44,8 @@ namespace DuelGame
                 {typeof(RestartPanelPresenter), playerWhoLost => _restartPanelPresenter?.ShowView(playerWhoLost)},
                 {typeof(ContinuePanelPresenter), playerWhoLost => _continuePanelPresenter?.ShowView(playerWhoLost)},
                 {typeof(LoadPanelPresenter), _ => _loadPanelPresenter?.ShowView()},
-                {typeof(AdsPanelPresenter), playerWhoLost => _adsPanelPresenter?.ShowView(playerWhoLost)}
+                {typeof(AdsPanelPresenter), playerWhoLost => _adsPanelPresenter?.ShowView(playerWhoLost)},
+                {typeof(BattleFinishPanelPresenter), playerWhoLost => _battleFinishViewPresenter?.ShowView(playerWhoLost)}
             };
         }
                 
@@ -51,6 +53,7 @@ namespace DuelGame
         {
             _battleManagerModel.OnBattleReady += BattleReadyHandler;
             _battleManagerModel.OnPlayersSpawned += PlayerSpawnedHandler;
+            _battleManagerModel.OnPlayerDead += PlayerDeadHandler;
             _battleManagerModel.OnBattleFinish += BattleFinishHandler;
         }
 
@@ -63,6 +66,7 @@ namespace DuelGame
             
             _battleManagerModel.OnBattleReady -= BattleReadyHandler;
             _battleManagerModel.OnPlayersSpawned -= PlayerSpawnedHandler;
+            _battleManagerModel.OnPlayerDead -= PlayerDeadHandler;
             _battleManagerModel.OnBattleFinish -= BattleFinishHandler;
             Debug.Log("Presenter cleaned");
         }
@@ -81,6 +85,11 @@ namespace DuelGame
             TryCreatePanel(ref _savePanelPresenter, null);
         }
 
+        private void PlayerDeadHandler(Players? playerWhoLost)
+        {
+            TryCreatePanel(ref _battleFinishViewPresenter, playerWhoLost);
+        }
+        
         private void BattleFinishHandler(Players? playerWhoLost)
         {
             if (playerWhoLost == Players.Player2)

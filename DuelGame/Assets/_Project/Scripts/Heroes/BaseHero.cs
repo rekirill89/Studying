@@ -8,20 +8,20 @@ using UnityEngine.UI;
 
 namespace DuelGame
 {
-    public delegate void PlayerDeath(Players player);
+    public delegate void PlayerDeath(BaseHero heroWhoDie, Players player);
     public abstract class BaseHero : MonoBehaviour
     {
-        public delegate void TakeDamage(float damage, float currentHealth, float maxHealth, bool isPhysicalDamage);
+        public delegate void TakeDamage(BaseHero heroWhoTakeHit, float damage, float currentHealth, float maxHealth, bool isPhysicalDamage);
         public delegate void ApplyBuffToEnemy(BaseHero hero);
         public delegate void ReceiveBuff(BuffEnum buffEnum);
+        public delegate void AttackEvent(BaseHero heroWhoAttack);
         
         public event TakeDamage OnTakeDamage;
         public event PlayerDeath OnDeath;
-        public event Action OnAttack;
+        public event AttackEvent OnAttack;
         public event Action OnPlayerStop;
         public event ReceiveBuff OnReceiveBuff;        
         public event ApplyBuffToEnemy OnApplyBuffToEnemy;
-
         
         public AnimatorOverrideController SkinAoc { get; private set; }
         public Dictionary<BuffEnum, Func<Buff>> BuffsDictionary {get; private set;}
@@ -66,14 +66,7 @@ namespace DuelGame
             SkinAoc = skinAoc;
             
             Debug.Log("BaseHero.Initialize");
-            //OnInitialized?.Invoke(SkinAoc);
-        }
-
-        /*public void SetSkinAnimatorInvoke(AnimatorOverrideController animatorOverrideController)
-        {
-            Debug.Log("BaseHero");
-            //OnSetSkinAnimator?.Invoke(animatorOverrideController);
-        }*/
+         }
         
         public void ChangeAttackStatus(bool isAttackable)
         {
@@ -87,7 +80,7 @@ namespace DuelGame
 
             float realDamage = (damage - (damage * (Hero.Armor * ARMOR_COEFFICIENT)));
             _currentHealth -= realDamage;
-            OnTakeDamage?.Invoke(damage, _currentHealth, Hero.Health, isPhysicalDamage);
+            OnTakeDamage?.Invoke(this,damage, _currentHealth, Hero.Health, isPhysicalDamage);
             
             CheckDeath();
         }
@@ -150,7 +143,7 @@ namespace DuelGame
                     continue;
                 }
 
-                OnAttack?.Invoke();
+                OnAttack?.Invoke(this);
 
                 await UniTask.Delay(TimeSpan.FromSeconds(Hero.AttackRate), cancellationToken: Cts.Token);
             }
@@ -186,7 +179,7 @@ namespace DuelGame
             {
                 isDead = true;
                 
-                OnDeath?.Invoke(Player);
+                OnDeath?.Invoke(this, Player);
                 TurnOffBodyCollider();
             }
         }

@@ -7,7 +7,7 @@ namespace  DuelGame
     {
         public override void InstallBindings()
         {
-            Container.BindInterfacesTo<MenuSceneEntryPoint>().AsCached();
+            Container.BindInterfacesAndSelfTo<MenuSceneEntryPoint>().AsCached();
         }
     }   
 }

@@ -1177,6 +1177,18 @@ MonoBehaviour:
     m_SubObjectGUID: 
     m_SubObjectType: 
     m_EditorAssetChanged: 0
+  _bloodPrefabRef:
+    m_AssetGUID: 10bf8f4d43589f04294ca87be786c6a4
+    m_SubObjectName: 
+    m_SubObjectGUID: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
+  _deathEffectRef:
+    m_AssetGUID: c50ae381a4ca56441bfbad27f1bb3c22
+    m_SubObjectName: 
+    m_SubObjectGUID: 
+    m_SubObjectType: 
+    m_EditorAssetChanged: 0
 --- !u!114 &1489952811
 MonoBehaviour:
   m_ObjectHideFlags: 0

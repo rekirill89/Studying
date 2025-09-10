@@ -14,6 +14,7 @@ namespace DuelGame
         private readonly GlobalBootstrap _globalBootstrap;
         private readonly UIFactory _uiFactory;
         private readonly IInstantiator _instantiator;
+        private readonly SceneState _sceneState;
         
         private readonly CancellationTokenSource _cts = new CancellationTokenSource();
         
@@ -21,17 +22,21 @@ namespace DuelGame
             SceneLoaderService sceneLoaderService, 
             GlobalBootstrap globalBootstrap,
             UIFactory uiFactory,
-            IInstantiator instantiator)
+            IInstantiator instantiator,
+            SceneState sceneState)
         {
             _sceneLoaderService = sceneLoaderService;
             _globalBootstrap = globalBootstrap;
             _uiFactory = uiFactory;
             _instantiator = instantiator;
+            
+            _sceneState = sceneState;
         }
         
         public void Initialize()
         {
             WaitForGlobalDataReady().Forget();
+            _sceneState.ChangeScene(SceneEnum.MenuScene);
         }
 
         public void StartGame()

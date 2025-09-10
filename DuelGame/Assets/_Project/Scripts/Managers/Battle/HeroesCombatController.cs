@@ -61,12 +61,12 @@ namespace DuelGame
             _cts.Cancel();
         }
 
-        private void Player1AttackHandler()
+        private void Player1AttackHandler(BaseHero _)
         {
             _analyticsDataCollector.AttackInvoked(_player1.HeroEnum);
         }
         
-        private void Player2AttackHandler()
+        private void Player2AttackHandler(BaseHero _)
         {
             _analyticsDataCollector.AttackInvoked(_player2.HeroEnum);
         }

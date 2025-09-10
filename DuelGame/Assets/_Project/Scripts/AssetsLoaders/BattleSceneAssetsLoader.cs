@@ -11,7 +11,7 @@ namespace DuelGame
 {
     public class BattleSceneAssetsLoader : IDisposable
     {
-        public delegate void BattleSceneAssetsReady(BattleSettingsFacade facade);
+        public delegate void BattleSceneAssetsReady(BattleSettingsFacade facade, BloodParticle bloodPrefab, DeathEffect deathEffectPrefab);
         public event BattleSceneAssetsReady OnBattleSceneAssetsReady;
         
         private readonly ILocalAssetLoader _localAssetLoader;
@@ -19,11 +19,21 @@ namespace DuelGame
 
         private readonly CancellationTokenSource _cts;
 
-        public BattleSceneAssetsLoader(ILocalAssetLoader localAssetLoader, BattleSettingsFacade facade)
+        private readonly AssetReference _bloodPrefabRef;
+        private readonly AssetReference _deathEffectPrefabRef;
+
+        public BattleSceneAssetsLoader(
+            ILocalAssetLoader localAssetLoader, 
+            BattleSettingsFacade facade, 
+            AssetReference bloodPrefabRef, 
+            AssetReference deathEffectPrefabRef)
         {
             Debug.Log("Battle asset loader started");
             _localAssetLoader = localAssetLoader;
             _facade = facade;
+            
+            _bloodPrefabRef = bloodPrefabRef;
+            _deathEffectPrefabRef = deathEffectPrefabRef;
             
             _cts = new CancellationTokenSource();
         }
@@ -45,7 +55,13 @@ namespace DuelGame
             {
                 await _facade.Init(_localAssetLoader, _cts.Token);
 
-                OnBattleSceneAssetsReady?.Invoke(_facade);
+                var bloodPrefabObj = await _localAssetLoader.LoadAsset<GameObject>(_bloodPrefabRef, _cts.Token);
+                var bloodPrefab = bloodPrefabObj.GetComponent<BloodParticle>();
+                
+                var deathEffectPrefabObj = await _localAssetLoader.LoadAsset<GameObject>(_deathEffectPrefabRef, _cts.Token);
+                var deathEffectPrefab = deathEffectPrefabObj.GetComponent<DeathEffect>();
+                
+                OnBattleSceneAssetsReady?.Invoke(_facade, bloodPrefab, deathEffectPrefab);
             }
             catch (OperationCanceledException)
             {
